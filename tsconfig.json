@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["node", "@playwright/test"],
+    "outDir": "dist"
+  },
+  "include": [
+    "exercise-1-llm-evaluation/**/*.ts",
+    "exercise-2-api-testing/**/*.ts",
+    "exercise-3-chatbot-testing/**/*.ts",
+    "exercise-5-consolidated-report/**/*.ts",
+    "src/**/*.ts"
+  ],
+  "exclude": ["node_modules", "dist", "output"]
+}
