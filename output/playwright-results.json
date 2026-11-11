@@ -4,7 +4,7 @@
       "/usr/bin/node",
       "/home/mario/projects/QA-engineer-technical-test/node_modules/.bin/playwright",
       "test",
-      "exercise-2-api-testing/tests/status.spec.ts"
+      "exercise-3-chatbot-testing/tests/chatbot.spec.ts"
     ],
     "configFile": "/home/mario/projects/QA-engineer-technical-test/playwright.config.ts",
     "rootDir": "/home/mario/projects/QA-engineer-technical-test",
@@ -118,35 +118,26 @@
   },
   "suites": [
     {
-      "title": "exercise-2-api-testing/tests/status.spec.ts",
-      "file": "exercise-2-api-testing/tests/status.spec.ts",
+      "title": "exercise-3-chatbot-testing/tests/chatbot.spec.ts",
+      "file": "exercise-3-chatbot-testing/tests/chatbot.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Exercise 2 - Goal Tracker API",
-          "file": "exercise-2-api-testing/tests/status.spec.ts",
-          "line": 49,
-          "column": 15,
+          "title": "Exercise 3 - Botpress Docs chatbot",
+          "file": "exercise-3-chatbot-testing/tests/chatbot.spec.ts",
+          "line": 9,
+          "column": 6,
           "specs": [
             {
-              "title": "API-001: Verify API operational status",
+              "title": "CHATBOT-001: Load documentation page and verify chatbot widget",
               "ok": true,
               "tags": [],
               "tests": [
                 {
                   "timeout": 30000,
-                  "annotations": [
-                    {
-                      "type": "serial",
-                      "location": {
-                        "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                        "line": 49,
-                        "column": 15
-                      }
-                    }
-                  ],
+                  "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "chromium",
                   "projectName": "chromium",
@@ -155,50 +146,32 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 542,
+                      "duration": 1261,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-11T04:19:31.353Z",
-                      "annotations": [
-                        {
-                          "type": "serial",
-                          "location": {
-                            "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                            "line": 49,
-                            "column": 15
-                          }
-                        }
-                      ],
+                      "startTime": "2026-11-11T05:42:37.808Z",
+                      "annotations": [],
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "97b19a3cba185e65fd13-a40fb5e001699c0bb10f",
-              "file": "exercise-2-api-testing/tests/status.spec.ts",
-              "line": 52,
+              "id": "37345de3365e63d32bb1-223077e2945bdc6bd7d9",
+              "file": "exercise-3-chatbot-testing/tests/chatbot.spec.ts",
+              "line": 11,
               "column": 3
             },
             {
-              "title": "API-002: Register a new user",
+              "title": "CHATBOT-002: Open and close the chatbot panel",
               "ok": true,
               "tags": [],
               "tests": [
                 {
                   "timeout": 30000,
-                  "annotations": [
-                    {
-                      "type": "serial",
-                      "location": {
-                        "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                        "line": 49,
-                        "column": 15
-                      }
-                    }
-                  ],
+                  "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "chromium",
                   "projectName": "chromium",
@@ -207,35 +180,26 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 605,
+                      "duration": 2501,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-11T04:19:31.944Z",
-                      "annotations": [
-                        {
-                          "type": "serial",
-                          "location": {
-                            "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                            "line": 49,
-                            "column": 15
-                          }
-                        }
-                      ],
+                      "startTime": "2026-11-11T05:42:39.546Z",
+                      "annotations": [],
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "97b19a3cba185e65fd13-95aa197403c2a51b659b",
-              "file": "exercise-2-api-testing/tests/status.spec.ts",
-              "line": 67,
+              "id": "37345de3365e63d32bb1-5e28a5a581a3ae7eefb6",
+              "file": "exercise-3-chatbot-testing/tests/chatbot.spec.ts",
+              "line": 25,
               "column": 3
             },
             {
-              "title": "API-003: Login with valid credentials",
+              "title": "CHATBOT-003: Validate the chatbot name",
               "ok": true,
               "tags": [],
               "tests": [
@@ -243,66 +207,57 @@
                   "timeout": 30000,
                   "annotations": [
                     {
-                      "type": "serial",
+                      "type": "skip",
                       "location": {
-                        "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                        "line": 49,
-                        "column": 15
+                        "file": "/home/mario/projects/QA-engineer-technical-test/exercise-3-chatbot-testing/tests/chatbot.spec.ts",
+                        "line": 47,
+                        "column": 8
                       }
                     }
                   ],
-                  "expectedStatus": "passed",
+                  "expectedStatus": "skipped",
                   "projectId": "chromium",
                   "projectName": "chromium",
                   "results": [
                     {
                       "workerIndex": 0,
                       "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 775,
+                      "status": "skipped",
+                      "duration": 0,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-11T04:19:32.569Z",
+                      "startTime": "2026-11-11T05:42:42.061Z",
                       "annotations": [
                         {
-                          "type": "serial",
+                          "type": "skip",
                           "location": {
-                            "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                            "line": 49,
-                            "column": 15
+                            "file": "/home/mario/projects/QA-engineer-technical-test/exercise-3-chatbot-testing/tests/chatbot.spec.ts",
+                            "line": 47,
+                            "column": 8
                           }
                         }
                       ],
                       "attachments": []
                     }
                   ],
-                  "status": "expected"
+                  "status": "skipped"
                 }
               ],
-              "id": "97b19a3cba185e65fd13-563a6785e15ff61ded02",
-              "file": "exercise-2-api-testing/tests/status.spec.ts",
-              "line": 89,
-              "column": 3
+              "id": "37345de3365e63d32bb1-1272d55b63e8ed42c79c",
+              "file": "exercise-3-chatbot-testing/tests/chatbot.spec.ts",
+              "line": 47,
+              "column": 8
             },
             {
-              "title": "API-004: Reject login with invalid credentials",
+              "title": "CHATBOT-004: Send Hola, validate response and measure latency",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 30000,
-                  "annotations": [
-                    {
-                      "type": "serial",
-                      "location": {
-                        "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                        "line": 49,
-                        "column": 15
-                      }
-                    }
-                  ],
+                  "timeout": 90000,
+                  "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "chromium",
                   "projectName": "chromium",
@@ -311,395 +266,26 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 587,
+                      "duration": 3821,
                       "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-11-11T04:19:33.356Z",
-                      "annotations": [
+                      "stdout": [
                         {
-                          "type": "serial",
-                          "location": {
-                            "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                            "line": 49,
-                            "column": 15
-                          }
+                          "text": "CHATBOT-004 response time: 1104 ms\n"
                         }
                       ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-11T05:42:42.062Z",
+                      "annotations": [],
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "97b19a3cba185e65fd13-08fddd5fc8d962cf13a5",
-              "file": "exercise-2-api-testing/tests/status.spec.ts",
-              "line": 112,
-              "column": 3
-            },
-            {
-              "title": "API-005: Create the first goal",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [
-                    {
-                      "type": "serial",
-                      "location": {
-                        "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                        "line": 49,
-                        "column": 15
-                      }
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 502,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-11-11T04:19:33.958Z",
-                      "annotations": [
-                        {
-                          "type": "serial",
-                          "location": {
-                            "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                            "line": 49,
-                            "column": 15
-                          }
-                        }
-                      ],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "97b19a3cba185e65fd13-f568ae325589b574197e",
-              "file": "exercise-2-api-testing/tests/status.spec.ts",
-              "line": 133,
-              "column": 3
-            },
-            {
-              "title": "API-006: Create a second goal with a different ID",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [
-                    {
-                      "type": "serial",
-                      "location": {
-                        "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                        "line": 49,
-                        "column": 15
-                      }
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 709,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-11-11T04:19:34.480Z",
-                      "annotations": [
-                        {
-                          "type": "serial",
-                          "location": {
-                            "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                            "line": 49,
-                            "column": 15
-                          }
-                        }
-                      ],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "97b19a3cba185e65fd13-9a3d300d38d57085cea9",
-              "file": "exercise-2-api-testing/tests/status.spec.ts",
-              "line": 183,
-              "column": 3
-            },
-            {
-              "title": "API-007: Retrieve the first goal by ID",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [
-                    {
-                      "type": "serial",
-                      "location": {
-                        "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                        "line": 49,
-                        "column": 15
-                      }
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 474,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-11-11T04:19:35.205Z",
-                      "annotations": [
-                        {
-                          "type": "serial",
-                          "location": {
-                            "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                            "line": 49,
-                            "column": 15
-                          }
-                        }
-                      ],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "97b19a3cba185e65fd13-dae722286bdf5a7f6f26",
-              "file": "exercise-2-api-testing/tests/status.spec.ts",
-              "line": 236,
-              "column": 3
-            },
-            {
-              "title": "API-008: Retrieve the second goal by ID",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [
-                    {
-                      "type": "serial",
-                      "location": {
-                        "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                        "line": 49,
-                        "column": 15
-                      }
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 659,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-11-11T04:19:35.693Z",
-                      "annotations": [
-                        {
-                          "type": "serial",
-                          "location": {
-                            "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                            "line": 49,
-                            "column": 15
-                          }
-                        }
-                      ],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "97b19a3cba185e65fd13-6fbd31e4cac7cfb3ec82",
-              "file": "exercise-2-api-testing/tests/status.spec.ts",
-              "line": 261,
-              "column": 3
-            },
-            {
-              "title": "API-009: Retrieve the complete list of created goals",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [
-                    {
-                      "type": "serial",
-                      "location": {
-                        "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                        "line": 49,
-                        "column": 15
-                      }
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 728,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-11-11T04:19:36.364Z",
-                      "annotations": [
-                        {
-                          "type": "serial",
-                          "location": {
-                            "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                            "line": 49,
-                            "column": 15
-                          }
-                        }
-                      ],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "97b19a3cba185e65fd13-5b29426814e4d08dcb29",
-              "file": "exercise-2-api-testing/tests/status.spec.ts",
-              "line": 286,
-              "column": 3
-            },
-            {
-              "title": "API-010: Delete the first goal",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [
-                    {
-                      "type": "serial",
-                      "location": {
-                        "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                        "line": 49,
-                        "column": 15
-                      }
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 626,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-11-11T04:19:37.105Z",
-                      "annotations": [
-                        {
-                          "type": "serial",
-                          "location": {
-                            "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                            "line": 49,
-                            "column": 15
-                          }
-                        }
-                      ],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "97b19a3cba185e65fd13-04642667c99b3345d6f1",
-              "file": "exercise-2-api-testing/tests/status.spec.ts",
-              "line": 314,
-              "column": 3
-            },
-            {
-              "title": "API-011: Verify the deleted goal cannot be retrieved",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [
-                    {
-                      "type": "serial",
-                      "location": {
-                        "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                        "line": 49,
-                        "column": 15
-                      }
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 400,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-11-11T04:19:37.741Z",
-                      "annotations": [
-                        {
-                          "type": "serial",
-                          "location": {
-                            "file": "/home/mario/projects/QA-engineer-technical-test/exercise-2-api-testing/tests/status.spec.ts",
-                            "line": 49,
-                            "column": 15
-                          }
-                        }
-                      ],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "97b19a3cba185e65fd13-7d0bb28e86e97a32750d",
-              "file": "exercise-2-api-testing/tests/status.spec.ts",
-              "line": 332,
+              "id": "37345de3365e63d32bb1-1b775627cffd13a054bc",
+              "file": "exercise-3-chatbot-testing/tests/chatbot.spec.ts",
+              "line": 57,
               "column": 3
             }
           ]
@@ -709,10 +295,10 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-11T04:19:30.591Z",
-    "duration": 7588.626,
-    "expected": 11,
-    "skipped": 0,
+    "startTime": "2026-11-11T05:42:37.019Z",
+    "duration": 8946.945,
+    "expected": 3,
+    "skipped": 1,
     "unexpected": 0,
     "flaky": 0
   }
