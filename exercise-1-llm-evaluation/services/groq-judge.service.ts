@@ -2,6 +2,7 @@ import Groq from 'groq-sdk';
 
 import { knowledgeBase } from '../config/knowledge-base.js';
 import { modelConfig } from '../config/models.js';
+import { withRetry } from '../utils/retry.js';
 
 import type { Scenario } from '../scenarios/scenarios.js';
 import type { ConversationMessage } from './gemini.service.js';
@@ -90,7 +91,6 @@ const evaluationSchema = {
 
     errors: {
       type: 'array',
-
       items: {
         type: 'string',
       },
@@ -210,46 +210,61 @@ There is not enough evidence for a reliable PASS or FAIL decision.
 Return only the structured JSON response.
 `;
 
-  const response =
-    await groq.chat.completions.create({
-      model: modelConfig.groq.evaluatorModel,
+  return withRetry(
+    async () => {
+      const response =
+        await groq.chat.completions.create({
+          model:
+            modelConfig.groq.evaluatorModel,
 
-      messages: [
-        {
-          role: 'system',
-          content:
-            'You are an independent QA evaluator. Return only the requested structured evaluation.',
-        },
+          messages: [
+            {
+              role: 'system',
+              content:
+                'You are an independent QA evaluator. Return only the requested structured evaluation.',
+            },
+            {
+              role: 'user',
+              content: prompt,
+            },
+          ],
 
-        {
-          role: 'user',
-          content: prompt,
-        },
-      ],
+          temperature: 0.1,
 
-      temperature: 0.1,
+          response_format: {
+            type: 'json_schema',
 
-      response_format: {
-        type: 'json_schema',
+            json_schema: {
+              name: 'turn_evaluation',
+              strict: true,
+              schema: evaluationSchema,
+            },
+          },
+        });
 
-        json_schema: {
-          name: 'turn_evaluation',
+      const content =
+        response.choices[0]?.message?.content;
 
-          strict: true,
+      if (!content) {
+        throw new Error(
+          `Groq returned an empty evaluation for turn ${turnNumber}.`,
+        );
+      }
 
-          schema: evaluationSchema,
-        },
-      },
-    });
-
-  const content =
-    response.choices[0]?.message?.content;
-
-  if (!content) {
-    throw new Error(
-      `Groq returned an empty evaluation for turn ${turnNumber}.`,
-    );
-  }
-
-  return JSON.parse(content) as TurnEvaluation;
+      try {
+        return JSON.parse(
+          content,
+        ) as TurnEvaluation;
+      } catch {
+        throw new Error(
+          `Groq returned invalid JSON for turn ${turnNumber}.`,
+        );
+      }
+    },
+    {
+      maxAttempts: 3,
+      label:
+        `Groq Evaluator - Turn ${turnNumber}`,
+    },
+  );
 }

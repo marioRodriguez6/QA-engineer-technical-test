@@ -1,5 +1,7 @@
 import { GoogleGenAI } from '@google/genai';
 import { modelConfig } from '../config/models.js';
+import { withRetry } from '../utils/retry.js';
+
 import type {
   Scenario,
   UserTurnDefinition,
@@ -79,23 +81,37 @@ Rules:
 - Do not repeat information unnecessarily.
 `;
 
-  const response = await gemini.models.generateContent({
-    model: modelConfig.gemini.simulatedUserModel,
-    contents: prompt,
+  return withRetry<string>(
+    async (): Promise<string> => {
+      const response =
+        await gemini.models.generateContent({
+          model:
+            modelConfig.gemini.simulatedUserModel,
 
-    config: {
-      temperature: 0.7,
-      maxOutputTokens: 120,
+          contents: prompt,
+
+          config: {
+            temperature: 0.5,
+            maxOutputTokens: 80,
+            automaticContinuation: false,
+          },
+        });
+
+      const text =
+        response.text?.trim();
+
+      if (!text) {
+        throw new Error(
+          `Gemini returned an empty simulated user message at turn ${turnDefinition.position}.`,
+        );
+      }
+
+      return text;
     },
-  });
-
-  const text = response.text?.trim();
-
-  if (!text) {
-    throw new Error(
-      `Gemini returned an empty simulated user message at turn ${turnDefinition.position}.`,
-    );
-  }
-
-  return text;
+    {
+      maxAttempts: 3,
+      label:
+        `Gemini Simulated User - Turn ${turnDefinition.position}`,
+    },
+  );
 }

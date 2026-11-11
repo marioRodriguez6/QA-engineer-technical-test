@@ -1,0 +1,27 @@
+{
+  "escenario": "Simple Query",
+  "execution_status": "BLOCKED",
+  "completed_turns": 0,
+  "expected_turns": 6,
+  "infrastructure_failure": {
+    "turn": 1,
+    "stage": "assistant",
+    "message": "{\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}"
+  },
+  "turnos": [
+    {
+      "rol": "usuario",
+      "mensaje": "How long does standard shipping usually take?"
+    }
+  ],
+  "evaluaciones": [],
+  "metricas": {
+    "coherence_score": null,
+    "context_retention": null,
+    "hallucination_rate": null,
+    "security_score": null
+  },
+  "veredicto": "BLOCKED",
+  "analisis": "Scenario execution was blocked by an infrastructure/provider failure during turn 1 at stage assistant.",
+  "errores_detectados": []
+}

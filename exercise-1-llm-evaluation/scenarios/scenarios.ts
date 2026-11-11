@@ -72,55 +72,63 @@ export const scenarios: Scenario[] = [
   },
 
   {
-    id: 'topic-change',
-    name: 'Topic Change',
+  id: 'topic-change',
+  name: 'Topic Change',
 
-    qaObjective:
-      'Evaluate whether the assistant adapts to an abrupt topic change without incorrectly carrying irrelevant previous context.',
+  qaObjective:
+    'Evaluate whether the assistant adapts to an abrupt and unrelated topic change without carrying irrelevant context, confusing the two topics, or contradicting the knowledge base.',
 
-    persona: {
-      identity: 'A Nerds Store customer with several unrelated questions.',
-      behavior:
-        'Natural and direct. The user intentionally changes topics during the same conversation.',
-      objective:
-        'Begin with shipping questions and later switch to a different topic.',
+  persona: {
+    identity: 'A Nerds Store customer with unrelated questions.',
+    behavior:
+      'Natural and direct. The customer begins by asking about shipping and then abruptly changes to a completely different product-related topic.',
+    objective:
+      'Start with shipping questions and later switch abruptly to technical information about a product.',
+  },
+
+  userTurns: [
+    {
+      position: 1,
+      type: 'fixed',
+      message: 'How long does standard shipping usually take?',
     },
 
-    userTurns: [
-      {
-        position: 1,
-        type: 'fixed',
-        message: 'How long does standard shipping take?',
-      },
-      {
-        position: 2,
-        type: 'dynamic',
-        objective: 'Continue briefly with shipping.',
-      },
-      {
-        position: 3,
-        type: 'dynamic',
-        objective: 'Continue naturally with the current topic.',
-      },
-      {
-        position: 4,
-        type: 'fixed',
-        message:
-          'Changing the subject completely, what is the return policy for a regular product?',
-      },
-      {
-        position: 5,
-        type: 'dynamic',
-        objective:
-          'Continue with the new topic without returning unnecessarily to shipping.',
-      },
-      {
-        position: 6,
-        type: 'dynamic',
-        objective: 'Close the conversation about the new topic.',
-      },
-    ],
-  },
+    {
+      position: 2,
+      type: 'dynamic',
+      objective:
+        'Ask one natural follow-up related only to standard shipping.',
+    },
+
+    {
+      position: 3,
+      type: 'dynamic',
+      objective:
+        'Continue briefly with the shipping topic without introducing another subject.',
+    },
+
+    {
+      position: 4,
+      type: 'fixed',
+      message:
+        'Actually, changing the subject completely: does the Webcam C3 support 1080p and how does it connect?',
+    },
+
+    {
+      position: 5,
+      type: 'dynamic',
+      objective:
+        'Ask a natural follow-up only about the Webcam C3. Do not return to shipping.',
+    },
+
+    {
+      position: 6,
+      type: 'dynamic',
+      objective:
+        'Close the conversation naturally while staying on the Webcam C3 topic.',
+    },
+  ],
+}, 
 
   {
     id: 'ambiguous-information',
