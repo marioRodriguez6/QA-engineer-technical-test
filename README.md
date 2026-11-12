@@ -449,7 +449,22 @@ PASS, FAIL, REVIEW, BLOCKED, SKIPPED, FLAKY, MISSING and ERROR remain distinct. 
 
 Quality metrics use valid LLM evaluations. Demonstrably false and unsupported claims are reported separately. Context scores below 100 are review signals, not automatically proven defects. API/UI semantic detectors are NOT_EVALUATED; incorrect tool calling is NOT_IMPLEMENTED because the assistant has no tools/call traces. This reporting automation does not implement missing detectors or prove judge calibration.
 
-No provider credentials, additional LLM calls or external npm dependencies are needed for consolidation. It does not commit generated reports back to GitHub.
+No provider credentials, additional LLM calls or external npm dependencies are needed for consolidation.
+
+After uploading the artifact, the final job commits report snapshots to the source branch with `[skip ci]`:
+
+| Folder | Update policy |
+| --- | --- |
+| `exercise-5-consolidated-report/lastRun/` | Latest generated report, including failed, blocked and missing-evidence results |
+| `exercise-5-consolidated-report/LastSuccesfulrun/` | Latest successful upstream workflow with complete evidence and no FAIL, BLOCKED, REVIEW, FLAKY, MISSING or ERROR units |
+
+Both folders contain `consolidated-report.md`, `consolidated-report.json` and `publication.json` after automatic publication. The marker records the run number, attempt, source commit and workflow link. The spelling `LastSuccesfulrun` is intentional.
+
+An explicitly skipped test remains visible and does not prevent a workflow-success snapshot; this does not mean every assessment requirement passed. If the next run fails, only `lastRun` changes. Earlier results remain in Git history and per-run artifacts.
+
+The first `LastSuccesfulrun` snapshot preserves the manually prepared historical report for run 43268157726; its scope predates homepage coverage and it has no generated JSON companion. Future eligible runs replace it with both report formats.
+
+Publication uses a normal fast-forward push, never a force push, and retries on concurrent branch updates. Run-number/attempt checks prevent older runs replacing newer snapshots. Only the report folders are committed. Same-repository pull requests publish to their head branch; fork PRs retain artifacts only because their token cannot write the source repository. Protected-branch rules or unavailable write permission can prevent publication; the artifact is uploaded first and the publication failure remains visible.
 
 ### Local Generation from Downloaded Artifacts
 
@@ -463,13 +478,13 @@ Extract the selected run's artifacts into these subdirectories; preserve any int
 | `output/ci/consolidated-inputs/chatbot-homepage/` | Homepage results.json, latency JSON and evidence |
 
 ```bash
-node --test exercise-5-consolidated-report/generate-report.test.mjs
+node --test exercise-5-consolidated-report/generate-report.test.mjs exercise-5-consolidated-report/publish-reports.test.mjs
 node exercise-5-consolidated-report/generate-report.mjs output/ci/consolidated-inputs output
 ```
 
 The generator recursively locates source JSON files and ignores duplicate HTML report assets. It rejects ambiguous files. Do not combine artifacts from different runs. In CI a partial retry that lacks this attempt's artifacts is explicitly reported as missing.
 
-The manually prepared `exercise-5-consolidated-report/consolidated-report.md` remains a historical report of its identified successful execution; it is not used as input or overwritten.
+The report directly under `exercise-5-consolidated-report/` has been moved into `LastSuccesfulrun/`. Historical snapshots are never used as generator inputs.
 
 Normal upstream failures and missing artifacts are handled. Generation cannot be guaranteed if GitHub cannot start the job, checkout/setup fails or the workflow is forcibly terminated. A workflow omitted with `[skip ci]` does not run this job.
 
