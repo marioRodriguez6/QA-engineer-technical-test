@@ -391,25 +391,83 @@ It performs:
 
 After TypeScript validation, the API, chatbot, and LLM jobs can run independently. The five LLM scenarios run sequentially within their job.
 
-### GitHub Actions Secret
+### GitHub Actions Provider Selection and Secrets
 
-Configure the repository Actions secret:
+Local execution and GitHub Actions have separate configuration:
 
-```text
-GROQ_API_KEY
+| Execution | Provider/model configuration | Credentials |
+| --- | --- | --- |
+| Local terminal | Private `.env` in the repository root | Provider keys in that same `.env` |
+| GitHub Actions | Workflow role variables and manual `llm_provider` input | Repository Actions secrets |
+
+Cloning or forking does not copy the original repository's secrets. A reviewer running locally needs only their own `.env`. A reviewer running Actions in their own fork/copy must add their own secrets there. An authorized person dispatching this repository's workflow uses its configured secrets.
+
+Add secrets in **Settings → Secrets and variables → Actions → New repository secret**:
+
+| Provider | Secret name |
+| --- | --- |
+| Groq | `GROQ_API_KEY` |
+| Anthropic | `ANTHROPIC_API_KEY` |
+| OpenAI | `OPENAI_API_KEY` |
+| Gemini | `GEMINI_API_KEY` |
+| Ollama | No API key required by this adapter; the runner must reach the Ollama server and installed model |
+
+Only selected providers need credentials. The current workflow forwards Groq and Anthropic keys to the LLM step. Other providers additionally require their secret to be forwarded in the workflow; creating a secret alone does not configure a role.
+
+**Current manual workflow:** choose `groq` or `anthropic` in `llm_provider`. That ONE selection applies to all three roles. Groq uses Qwen for user/assistant and GPT-OSS for evaluator; Anthropic uses Haiku 5.5 for all three. Push/PR events default to Groq. This selector does not currently offer a mixed-provider mode.
+
+Both `GROQ_API_KEY` and `ANTHROPIC_API_KEY` can coexist. Merely storing two keys does not call both providers, switch models, or enable fallback.
+
+### Using Two Providers in the Same Execution
+
+The application selects a provider/model independently for each role. For example, keep user/assistant on Groq and evaluate with Anthropic:
+
+| Role | Provider | Model |
+| --- | --- | --- |
+| Simulated User | Groq | `qwen/qwen3.8-27b` |
+| Assistant under test | Groq | `qwen/qwen3.8-27b` |
+| Evaluator | Anthropic | `claude-haiku-5-5` |
+
+For a **local mixed-provider run**, set:
+
+```dotenv
+SIMULATED_USER_PROVIDER=groq
+SIMULATED_USER_MODEL=qwen/qwen3.8-27b
+ASSISTANT_PROVIDER=groq
+ASSISTANT_MODEL=qwen/qwen3.8-27b
+EVALUATOR_PROVIDER=anthropic
+EVALUATOR_MODEL=claude-haiku-5-5
+
+GROQ_API_KEY=your_private_groq_key
+ANTHROPIC_API_KEY=your_private_anthropic_key
 ```
 
-Repository settings location:
+Run the five scenarios with:
 
-```text
-Settings → Secrets and variables → Actions → New repository secret
+```bash
+node exercise-4-cicd/run-llm-ci.mjs
 ```
 
-The current workflow selects Groq for all three LLM roles and defines their model identifiers directly in the workflow.
+For the **same mixture in GitHub Actions**, customize `.github/workflows/qa.yml` before running it:
 
-Changing the local `.env` does not change those CI selections. To use another provider in CI, update the workflow configuration and its required secrets.
+1. Add both Actions secrets.
+2. Replace the six role variables in `jobs.llm.env` with the explicit values in the example above, or implement independent inputs for each role. They must no longer all derive from the single `llm_provider` selector.
+3. Update `Validate selected provider secret` to check BOTH selected providers. Its current assistant-only check assumes all roles share one provider.
+4. Keep both secret mappings in the LLM execution step:
 
-The LLM job is skipped for pull requests from forks because those executions do not receive the repository secret.
+```yaml
+env:
+  GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+  ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+```
+
+These are customization instructions, not a mixed mode already enabled in the current workflow. Never paste real keys into YAML. A local `.env` change does not change CI.
+
+During each conversation turn, the configured user produces its message, the configured assistant responds, and the configured evaluator judges that response with history. Each role uses its own provider's key; repeated roles on the same provider share that key and provider-account quota. Providers are not automatically run twice for comparison and there is no automatic fallback if one runs out of quota.
+
+Reports preserve provider/model metadata for each role. A quota/timeout in either selected service remains a technical blocker; it is not reclassified as an assistant semantic defect. Costs are charged separately by each provider.
+
+LLM jobs on fork-origin pull requests are skipped because repository secrets are unavailable. Ollama on a reviewer's computer is not reachable as `localhost` from a GitHub-hosted runner; use a reachable server or an appropriate self-hosted runner.
 
 ### Local Checks Before Publishing Changes
 
