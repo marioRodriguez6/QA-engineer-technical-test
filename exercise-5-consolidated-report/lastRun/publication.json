@@ -1,15 +1,15 @@
 {
-  "runId": "43327492976",
-  "runNumber": 15,
+  "runId": "43329409269",
+  "runNumber": 16,
   "attempt": 1,
-  "sourceCommit": "4e2ec179134e5d5ccd236465612f2251c99f15bf",
-  "workflowCommit": "4e2ec179134e5d5ccd236465612f2251c99f15bf",
-  "runUrl": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43327492976",
-  "evaluationExecutionComplete": true,
+  "sourceCommit": "9bb442e6ee5ccdc112a8f9fb316a862da6275c92",
+  "workflowCommit": "9bb442e6ee5ccdc112a8f9fb316a862da6275c92",
+  "runUrl": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43329409269",
+  "evaluationExecutionComplete": false,
   "upstreamJobResults": {
     "typecheck": "success",
     "playwright": "success",
-    "llm": "success"
+    "llm": "failure"
   },
   "policy": "Complete LLM evaluation: five scenarios, six responses and six available valid judgments each. Semantic LLM FAIL/REVIEW verdicts are retained and eligible; provider/timeouts, unavailable evaluations, invalid evidence and failed API/UI jobs are not. Workflow conclusions are unchanged."
 }
