@@ -1,0 +1,77 @@
+{
+  "runId": "43332618484",
+  "runNumber": 18,
+  "attempt": 1,
+  "sourceCommit": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+  "workflowCommit": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+  "runUrl": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43332618484",
+  "evaluationExecutionComplete": true,
+  "upstreamJobResults": {
+    "typecheck": "success",
+    "playwright": "success",
+    "llm": "success"
+  },
+  "policy": "Complete LLM evaluation: five scenarios, six responses and six available valid judgments each. Semantic LLM FAIL/REVIEW verdicts are retained and eligible; provider/timeouts, unavailable evaluations, invalid evidence and failed API/UI jobs are not. Workflow conclusions are unchanged.",
+  "suite": "api",
+  "evidenceStatus": "AVAILABLE",
+  "downloadOutcome": "success",
+  "sourceReportAvailable": true,
+  "results": [
+    {
+      "suite": "api",
+      "id": "API-001",
+      "status": "PASS"
+    },
+    {
+      "suite": "api",
+      "id": "API-002",
+      "status": "PASS"
+    },
+    {
+      "suite": "api",
+      "id": "API-003",
+      "status": "PASS"
+    },
+    {
+      "suite": "api",
+      "id": "API-004",
+      "status": "PASS"
+    },
+    {
+      "suite": "api",
+      "id": "API-005",
+      "status": "PASS"
+    },
+    {
+      "suite": "api",
+      "id": "API-006",
+      "status": "PASS"
+    },
+    {
+      "suite": "api",
+      "id": "API-007",
+      "status": "PASS"
+    },
+    {
+      "suite": "api",
+      "id": "API-008",
+      "status": "PASS"
+    },
+    {
+      "suite": "api",
+      "id": "API-009",
+      "status": "PASS"
+    },
+    {
+      "suite": "api",
+      "id": "API-010",
+      "status": "PASS"
+    },
+    {
+      "suite": "api",
+      "id": "API-011",
+      "status": "PASS"
+    }
+  ],
+  "fileCount": 43
+}

@@ -19,24 +19,24 @@
     "maxFailures": 0,
     "metadata": {
       "ci": {
-        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/4e2ec179134e5d5ccd236465612f2251c99f15bf",
-        "commitHash": "4e2ec179134e5d5ccd236465612f2251c99f15bf",
-        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43327492976"
+        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+        "commitHash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43332618484"
       },
       "gitCommit": {
-        "shortHash": "4e2ec17",
-        "hash": "4e2ec179134e5d5ccd236465612f2251c99f15bf",
-        "subject": "chore: limpiar comentarios redundantes y archivos sin uso [skip ci]",
-        "body": "chore: limpiar comentarios redundantes y archivos sin uso [skip ci]",
+        "shortHash": "f4b0a17",
+        "hash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+        "subject": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+        "body": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
         "author": {
           "name": "Mario Rodriguez",
           "email": "54407177+marioRodriguez6@users.noreply.github.com",
-          "time": 1794525082000
+          "time": 1794527464000
         },
         "committer": {
           "name": "Mario Rodriguez",
           "email": "54407177+marioRodriguez6@users.noreply.github.com",
-          "time": 1794525082000
+          "time": 1794527464000
         },
         "branch": "master"
       },
@@ -45,29 +45,29 @@
     "preserveOutput": "always",
     "projects": [
       {
-        "outputDir": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/ci/api/test-results",
+        "outputDir": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/4e2ec179134e5d5ccd236465612f2251c99f15bf",
-            "commitHash": "4e2ec179134e5d5ccd236465612f2251c99f15bf",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43327492976"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+            "commitHash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43332618484"
           },
           "gitCommit": {
-            "shortHash": "4e2ec17",
-            "hash": "4e2ec179134e5d5ccd236465612f2251c99f15bf",
-            "subject": "chore: limpiar comentarios redundantes y archivos sin uso [skip ci]",
-            "body": "chore: limpiar comentarios redundantes y archivos sin uso [skip ci]",
+            "shortHash": "f4b0a17",
+            "hash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+            "subject": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+            "body": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
             "author": {
               "name": "Mario Rodriguez",
               "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794525082000
+              "time": 1794527464000
             },
             "committer": {
               "name": "Mario Rodriguez",
               "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794525082000
+              "time": 1794527464000
             },
             "branch": "master"
           },
@@ -88,29 +88,29 @@
       {
         "grep": {},
         "grepInvert": null,
-        "outputDir": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/ci/api/test-results",
+        "outputDir": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/4e2ec179134e5d5ccd236465612f2251c99f15bf",
-            "commitHash": "4e2ec179134e5d5ccd236465612f2251c99f15bf",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43327492976"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+            "commitHash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43332618484"
           },
           "gitCommit": {
-            "shortHash": "4e2ec17",
-            "hash": "4e2ec179134e5d5ccd236465612f2251c99f15bf",
-            "subject": "chore: limpiar comentarios redundantes y archivos sin uso [skip ci]",
-            "body": "chore: limpiar comentarios redundantes y archivos sin uso [skip ci]",
+            "shortHash": "f4b0a17",
+            "hash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+            "subject": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+            "body": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
             "author": {
               "name": "Mario Rodriguez",
               "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794525082000
+              "time": 1794527464000
             },
             "committer": {
               "name": "Mario Rodriguez",
               "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794525082000
+              "time": 1794527464000
             },
             "branch": "master"
           },
@@ -157,14 +157,14 @@
       [
         "html",
         {
-          "outputFolder": "output/ci/api/html",
+          "outputFolder": "output/exercise2API-Reports/html",
           "open": "never"
         }
       ],
       [
         "json",
         {
-          "outputFile": "output/ci/api/results.json"
+          "outputFile": "output/exercise2API-Reports/results.json"
         }
       ]
     ],
@@ -219,12 +219,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 333,
+                      "duration": 318,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:17:22.924Z",
+                      "startTime": "2026-11-12T23:54:06.210Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -239,7 +239,7 @@
                         {
                           "name": "trace",
                           "contentType": "application/zip",
-                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/ci/api/test-results/exercise-2-api-testing-tes-d7a01-rify-API-operational-status-chromium/trace.zip"
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-d7a01-rify-API-operational-status-chromium/trace.zip"
                         }
                       ]
                     }
@@ -277,12 +277,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 355,
+                      "duration": 769,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:17:23.301Z",
+                      "startTime": "2026-11-12T23:54:06.586Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -297,7 +297,7 @@
                         {
                           "name": "trace",
                           "contentType": "application/zip",
-                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/ci/api/test-results/exercise-2-api-testing-tes-2621a-API-002-Register-a-new-user-chromium/trace.zip"
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-2621a-API-002-Register-a-new-user-chromium/trace.zip"
                         }
                       ]
                     }
@@ -335,12 +335,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 337,
+                      "duration": 344,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:17:23.671Z",
+                      "startTime": "2026-11-12T23:54:07.385Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -355,7 +355,7 @@
                         {
                           "name": "trace",
                           "contentType": "application/zip",
-                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/ci/api/test-results/exercise-2-api-testing-tes-44801-ogin-with-valid-credentials-chromium/trace.zip"
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-44801-ogin-with-valid-credentials-chromium/trace.zip"
                         }
                       ]
                     }
@@ -393,12 +393,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 312,
+                      "duration": 333,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:17:24.018Z",
+                      "startTime": "2026-11-12T23:54:07.748Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -413,7 +413,7 @@
                         {
                           "name": "trace",
                           "contentType": "application/zip",
-                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/ci/api/test-results/exercise-2-api-testing-tes-22eb1-in-with-invalid-credentials-chromium/trace.zip"
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-22eb1-in-with-invalid-credentials-chromium/trace.zip"
                         }
                       ]
                     }
@@ -451,12 +451,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 465,
+                      "duration": 254,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:17:24.341Z",
+                      "startTime": "2026-11-12T23:54:08.100Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -471,7 +471,7 @@
                         {
                           "name": "trace",
                           "contentType": "application/zip",
-                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/ci/api/test-results/exercise-2-api-testing-tes-bdf16-I-005-Create-the-first-goal-chromium/trace.zip"
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-bdf16-I-005-Create-the-first-goal-chromium/trace.zip"
                         }
                       ]
                     }
@@ -509,12 +509,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 231,
+                      "duration": 248,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:17:24.816Z",
+                      "startTime": "2026-11-12T23:54:08.371Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -529,7 +529,7 @@
                         {
                           "name": "trace",
                           "contentType": "application/zip",
-                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/ci/api/test-results/exercise-2-api-testing-tes-07d6a-nd-goal-with-a-different-ID-chromium/trace.zip"
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-07d6a-nd-goal-with-a-different-ID-chromium/trace.zip"
                         }
                       ]
                     }
@@ -567,12 +567,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 220,
+                      "duration": 269,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:17:25.057Z",
+                      "startTime": "2026-11-12T23:54:08.637Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -587,7 +587,7 @@
                         {
                           "name": "trace",
                           "contentType": "application/zip",
-                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/ci/api/test-results/exercise-2-api-testing-tes-b0782-trieve-the-first-goal-by-ID-chromium/trace.zip"
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-b0782-trieve-the-first-goal-by-ID-chromium/trace.zip"
                         }
                       ]
                     }
@@ -625,12 +625,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 214,
+                      "duration": 233,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:17:25.285Z",
+                      "startTime": "2026-11-12T23:54:08.921Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -645,7 +645,7 @@
                         {
                           "name": "trace",
                           "contentType": "application/zip",
-                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/ci/api/test-results/exercise-2-api-testing-tes-4d0bb-rieve-the-second-goal-by-ID-chromium/trace.zip"
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-4d0bb-rieve-the-second-goal-by-ID-chromium/trace.zip"
                         }
                       ]
                     }
@@ -683,12 +683,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 214,
+                      "duration": 255,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:17:25.508Z",
+                      "startTime": "2026-11-12T23:54:09.170Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -703,7 +703,7 @@
                         {
                           "name": "trace",
                           "contentType": "application/zip",
-                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/ci/api/test-results/exercise-2-api-testing-tes-16379-plete-list-of-created-goals-chromium/trace.zip"
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-16379-plete-list-of-created-goals-chromium/trace.zip"
                         }
                       ]
                     }
@@ -741,12 +741,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 243,
+                      "duration": 261,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:17:25.732Z",
+                      "startTime": "2026-11-12T23:54:09.441Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -761,7 +761,7 @@
                         {
                           "name": "trace",
                           "contentType": "application/zip",
-                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/ci/api/test-results/exercise-2-api-testing-tes-7706e-I-010-Delete-the-first-goal-chromium/trace.zip"
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-7706e-I-010-Delete-the-first-goal-chromium/trace.zip"
                         }
                       ]
                     }
@@ -799,12 +799,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 235,
+                      "duration": 533,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:17:25.984Z",
+                      "startTime": "2026-11-12T23:54:09.716Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -819,7 +819,7 @@
                         {
                           "name": "trace",
                           "contentType": "application/zip",
-                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/ci/api/test-results/exercise-2-api-testing-tes-5a4df-ed-goal-cannot-be-retrieved-chromium/trace.zip"
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-5a4df-ed-goal-cannot-be-retrieved-chromium/trace.zip"
                         }
                       ]
                     }
@@ -839,8 +839,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-12T23:17:22.579Z",
-    "duration": 3664.05,
+    "startTime": "2026-11-12T23:54:05.631Z",
+    "duration": 4654.329,
     "expected": 11,
     "skipped": 0,
     "unexpected": 0,

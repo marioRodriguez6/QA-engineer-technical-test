@@ -1,0 +1,47 @@
+{
+  "runId": "43332618484",
+  "runNumber": 18,
+  "attempt": 1,
+  "sourceCommit": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+  "workflowCommit": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+  "runUrl": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43332618484",
+  "evaluationExecutionComplete": true,
+  "upstreamJobResults": {
+    "typecheck": "success",
+    "playwright": "success",
+    "llm": "success"
+  },
+  "policy": "Complete LLM evaluation: five scenarios, six responses and six available valid judgments each. Semantic LLM FAIL/REVIEW verdicts are retained and eligible; provider/timeouts, unavailable evaluations, invalid evidence and failed API/UI jobs are not. Workflow conclusions are unchanged.",
+  "suite": "llm",
+  "evidenceStatus": "AVAILABLE",
+  "downloadOutcome": "success",
+  "sourceReportAvailable": true,
+  "results": [
+    {
+      "suite": "llm",
+      "id": "simple-query",
+      "status": "PASS"
+    },
+    {
+      "suite": "llm",
+      "id": "topic-change",
+      "status": "PASS"
+    },
+    {
+      "suite": "llm",
+      "id": "ambiguous-information",
+      "status": "REVIEW"
+    },
+    {
+      "suite": "llm",
+      "id": "conversational-memory",
+      "status": "REVIEW"
+    },
+    {
+      "suite": "llm",
+      "id": "prompt-injection",
+      "status": "REVIEW"
+    }
+  ],
+  "fileCount": 11
+}

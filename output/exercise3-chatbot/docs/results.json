@@ -1,0 +1,438 @@
+{
+  "config": {
+    "argv": [
+      "/opt/hostedtoolcache/node/22.23.4/x64/bin/node",
+      "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/node_modules/.bin/playwright",
+      "test",
+      "exercise-3-chatbot-testing/tests/botpress-docs/"
+    ],
+    "configFile": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/playwright.config.ts",
+    "rootDir": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+        "commitHash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43332618484"
+      },
+      "gitCommit": {
+        "shortHash": "f4b0a17",
+        "hash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+        "subject": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+        "body": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+        "author": {
+          "name": "Mario Rodriguez",
+          "email": "54407177+marioRodriguez6@users.noreply.github.com",
+          "time": 1794527464000
+        },
+        "committer": {
+          "name": "Mario Rodriguez",
+          "email": "54407177+marioRodriguez6@users.noreply.github.com",
+          "time": 1794527464000
+        },
+        "branch": "master"
+      },
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/docs/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+            "commitHash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43332618484"
+          },
+          "gitCommit": {
+            "shortHash": "f4b0a17",
+            "hash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+            "subject": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+            "body": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+            "author": {
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794527464000
+            },
+            "committer": {
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794527464000
+            },
+            "branch": "master"
+          },
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test",
+        "testIgnore": [],
+        "testMatch": [
+          "exercise-2-api-testing/**/*.spec.ts",
+          "exercise-3-chatbot-testing/**/*.spec.ts"
+        ],
+        "timeout": 150000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/docs/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+            "commitHash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43332618484"
+          },
+          "gitCommit": {
+            "shortHash": "f4b0a17",
+            "hash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+            "subject": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+            "body": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+            "author": {
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794527464000
+            },
+            "committer": {
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794527464000
+            },
+            "branch": "master"
+          },
+          "actualWorkers": 1
+        },
+        "name": "chromium",
+        "testDir": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test",
+        "snapshotDir": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test",
+        "testIgnore": [],
+        "testMatch": [
+          "exercise-2-api-testing/**/*.spec.ts",
+          "exercise-3-chatbot-testing/**/*.spec.ts"
+        ],
+        "timeout": 150000,
+        "use": {
+          "trace": "on",
+          "screenshot": "on",
+          "video": "on",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.8127.18 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "chromium"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "output/exercise3-chatbot/docs/html",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "output/exercise3-chatbot/docs/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "exercise-3-chatbot-testing/tests/botpress-docs/chatbot.spec.ts",
+      "file": "exercise-3-chatbot-testing/tests/botpress-docs/chatbot.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Exercise 3 - Botpress Docs chatbot",
+          "file": "exercise-3-chatbot-testing/tests/botpress-docs/chatbot.spec.ts",
+          "line": 176,
+          "column": 6,
+          "specs": [
+            {
+              "title": "CHATBOT-001: Load documentation page and verify chatbot widget",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1271,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-12T23:54:18.800Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/docs/test-results/exercise-3-chatbot-testing-7fc41-e-and-verify-chatbot-widget-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/docs/test-results/exercise-3-chatbot-testing-7fc41-e-and-verify-chatbot-widget-chromium/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/docs/test-results/exercise-3-chatbot-testing-7fc41-e-and-verify-chatbot-widget-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5279d8c0b366e846c917-bb02db9a3553db7c06bb",
+              "file": "exercise-3-chatbot-testing/tests/botpress-docs/chatbot.spec.ts",
+              "line": 179,
+              "column": 5
+            },
+            {
+              "title": "CHATBOT-002: Open and close the chatbot panel",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1491,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Chatbot state: current=true, requested=false\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Establish a closed initial state",
+                          "duration": 263
+                        },
+                        {
+                          "title": "Open the panel using Ask Docs",
+                          "duration": 96
+                        },
+                        {
+                          "title": "Close the panel using Ask Docs",
+                          "duration": 78
+                        }
+                      ],
+                      "startTime": "2026-11-12T23:54:20.595Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/docs/test-results/exercise-3-chatbot-testing-d8980-and-close-the-chatbot-panel-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/docs/test-results/exercise-3-chatbot-testing-d8980-and-close-the-chatbot-panel-chromium/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/docs/test-results/exercise-3-chatbot-testing-d8980-and-close-the-chatbot-panel-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5279d8c0b366e846c917-f044e93e0ebc96883291",
+              "file": "exercise-3-chatbot-testing/tests/botpress-docs/chatbot.spec.ts",
+              "line": 186,
+              "column": 5
+            },
+            {
+              "title": "CHATBOT-003: Validate the chatbot name",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "location": {
+                        "file": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/exercise-3-chatbot-testing/tests/botpress-docs/chatbot.spec.ts",
+                        "line": 216,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-12T23:54:22.381Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "location": {
+                            "file": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/exercise-3-chatbot-testing/tests/botpress-docs/chatbot.spec.ts",
+                            "line": 216,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "5279d8c0b366e846c917-d097c48dae67d996ab2f",
+              "file": "exercise-3-chatbot-testing/tests/botpress-docs/chatbot.spec.ts",
+              "line": 216,
+              "column": 10
+            },
+            {
+              "title": "CHATBOT-004: Send Hola, validate response and measure latency",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2915,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Chatbot state: current=true, requested=true\n"
+                        },
+                        {
+                          "text": "CHATBOT-004 response time: 1099 ms\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-12T23:54:22.382Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/docs/test-results/exercise-3-chatbot-testing-4e104-esponse-and-measure-latency-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/docs/test-results/exercise-3-chatbot-testing-4e104-esponse-and-measure-latency-chromium/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/docs/test-results/exercise-3-chatbot-testing-4e104-esponse-and-measure-latency-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5279d8c0b366e846c917-7e8373af69549b6bb327",
+              "file": "exercise-3-chatbot-testing/tests/botpress-docs/chatbot.spec.ts",
+              "line": 229,
+              "column": 5
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-12T23:54:18.293Z",
+    "duration": 7428.880999999999,
+    "expected": 3,
+    "skipped": 1,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

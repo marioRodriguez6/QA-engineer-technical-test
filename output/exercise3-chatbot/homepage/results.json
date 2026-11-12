@@ -1,0 +1,512 @@
+{
+  "config": {
+    "argv": [
+      "/opt/hostedtoolcache/node/22.23.4/x64/bin/node",
+      "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/node_modules/.bin/playwright",
+      "test",
+      "exercise-3-chatbot-testing/tests/botpress-homepage/"
+    ],
+    "configFile": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/playwright.config.ts",
+    "rootDir": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+        "commitHash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43332618484"
+      },
+      "gitCommit": {
+        "shortHash": "f4b0a17",
+        "hash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+        "subject": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+        "body": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+        "author": {
+          "name": "Mario Rodriguez",
+          "email": "54407177+marioRodriguez6@users.noreply.github.com",
+          "time": 1794527464000
+        },
+        "committer": {
+          "name": "Mario Rodriguez",
+          "email": "54407177+marioRodriguez6@users.noreply.github.com",
+          "time": 1794527464000
+        },
+        "branch": "master"
+      },
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/homepage/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+            "commitHash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43332618484"
+          },
+          "gitCommit": {
+            "shortHash": "f4b0a17",
+            "hash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+            "subject": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+            "body": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+            "author": {
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794527464000
+            },
+            "committer": {
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794527464000
+            },
+            "branch": "master"
+          },
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test",
+        "testIgnore": [],
+        "testMatch": [
+          "exercise-2-api-testing/**/*.spec.ts",
+          "exercise-3-chatbot-testing/**/*.spec.ts"
+        ],
+        "timeout": 150000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/homepage/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+            "commitHash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43332618484"
+          },
+          "gitCommit": {
+            "shortHash": "f4b0a17",
+            "hash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
+            "subject": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+            "body": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+            "author": {
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794527464000
+            },
+            "committer": {
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794527464000
+            },
+            "branch": "master"
+          },
+          "actualWorkers": 1
+        },
+        "name": "chromium",
+        "testDir": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test",
+        "snapshotDir": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test",
+        "testIgnore": [],
+        "testMatch": [
+          "exercise-2-api-testing/**/*.spec.ts",
+          "exercise-3-chatbot-testing/**/*.spec.ts"
+        ],
+        "timeout": 150000,
+        "use": {
+          "trace": "on",
+          "screenshot": "on",
+          "video": "on",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.8127.18 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "chromium"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "output/exercise3-chatbot/homepage/html",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "output/exercise3-chatbot/homepage/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "exercise-3-chatbot-testing/tests/botpress-homepage/chatbot.spec.ts",
+      "file": "exercise-3-chatbot-testing/tests/botpress-homepage/chatbot.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Exercise 3 - Botpress homepage chatbot",
+          "file": "exercise-3-chatbot-testing/tests/botpress-homepage/chatbot.spec.ts",
+          "line": 55,
+          "column": 6,
+          "specs": [
+            {
+              "title": "HOME-001: Load homepage and verify floating launcher",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5785,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Homepage DOM ready after 1896 ms\n"
+                        },
+                        {
+                          "text": "Homepage load event observed after 3165 ms\n"
+                        },
+                        {
+                          "text": "Chatbot launcher visible 1849 ms after load\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Wait for window.load, which starts the webchat loader",
+                          "duration": 1268
+                        },
+                        {
+                          "title": "Wait for the floating launcher after page load",
+                          "duration": 1848
+                        }
+                      ],
+                      "startTime": "2026-11-12T23:54:14.215Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-cdefc-nd-verify-floating-launcher-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-cdefc-nd-verify-floating-launcher-chromium/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-cdefc-nd-verify-floating-launcher-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "207e7f4cbe8b1ca6058c-6a04e5bab0a936944f28",
+              "file": "exercise-3-chatbot-testing/tests/botpress-homepage/chatbot.spec.ts",
+              "line": 56,
+              "column": 3
+            },
+            {
+              "title": "HOME-002: Open, close and reopen the chatbot",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9098,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Homepage DOM ready after 1398 ms\n"
+                        },
+                        {
+                          "text": "Homepage load event observed after 3083 ms\n"
+                        },
+                        {
+                          "text": "Chatbot launcher visible 1196 ms after load\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Wait for window.load, which starts the webchat loader",
+                          "duration": 1685
+                        },
+                        {
+                          "title": "Wait for the floating launcher after page load",
+                          "duration": 1195
+                        },
+                        {
+                          "title": "Close using the real header control",
+                          "duration": 1146
+                        },
+                        {
+                          "title": "Reopen using the floating launcher",
+                          "duration": 1232
+                        }
+                      ],
+                      "startTime": "2026-11-12T23:54:20.505Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-ad68e-lose-and-reopen-the-chatbot-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-ad68e-lose-and-reopen-the-chatbot-chromium/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-ad68e-lose-and-reopen-the-chatbot-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "207e7f4cbe8b1ca6058c-6cccdb6834b8f47a8ea3",
+              "file": "exercise-3-chatbot-testing/tests/botpress-homepage/chatbot.spec.ts",
+              "line": 60,
+              "column": 3
+            },
+            {
+              "title": "HOME-003: Validate the displayed bot name",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5940,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Homepage DOM ready after 1068 ms\n"
+                        },
+                        {
+                          "text": "Homepage load event observed after 2602 ms\n"
+                        },
+                        {
+                          "text": "Chatbot launcher visible 1253 ms after load\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Wait for window.load, which starts the webchat loader",
+                          "duration": 1535
+                        },
+                        {
+                          "title": "Wait for the floating launcher after page load",
+                          "duration": 1253
+                        }
+                      ],
+                      "startTime": "2026-11-12T23:54:30.009Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-2f0e4-date-the-displayed-bot-name-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-2f0e4-date-the-displayed-bot-name-chromium/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-2f0e4-date-the-displayed-bot-name-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "207e7f4cbe8b1ca6058c-1820453c9b6c109cfc91",
+              "file": "exercise-3-chatbot-testing/tests/botpress-homepage/chatbot.spec.ts",
+              "line": 79,
+              "column": 3
+            },
+            {
+              "title": "HOME-004: Send Hola and record a new bot response and latency",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 11678,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Homepage DOM ready after 1138 ms\n"
+                        },
+                        {
+                          "text": "Homepage load event observed after 3065 ms\n"
+                        },
+                        {
+                          "text": "Chatbot launcher visible 1274 ms after load\n"
+                        },
+                        {
+                          "text": "{\"testId\":\"HOME-004\",\"pageUrl\":\"https://botpress.com/\",\"widgetStructure\":\"Shadow DOM\",\"botName\":\"Botpress\",\"userMessage\":\"Hola\",\"assistantResponse\":\"Te leo en español. Soy el asistente de Botpress y puedo ayudarte con cosas como planes, demos o cómo usar la plataforma.\",\"responseTimeMs\":4196,\"measuredAt\":\"2026-11-12T23:54:46.922Z\",\"measurement\":\"From immediately before pressing Enter until a new, loaded bot message with visible text is observed. Includes UI and assertion overhead.\"}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Wait for window.load, which starts the webchat loader",
+                          "duration": 1927
+                        },
+                        {
+                          "title": "Wait for the floating launcher after page load",
+                          "duration": 1274
+                        }
+                      ],
+                      "startTime": "2026-11-12T23:54:36.229Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "Homepage conversation and latency",
+                          "contentType": "application/json",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-9838e-ew-bot-response-and-latency-chromium/attachments/Homepage-conversation-and-latency-2f85376dc999defaeeee1a99e3c73e89e127004f.json"
+                        },
+                        {
+                          "name": "Homepage conversation",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-9838e-ew-bot-response-and-latency-chromium/attachments/Homepage-conversation-6072ce1ffa5f61fb65efc7e28bccecd03b3d718d.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-9838e-ew-bot-response-and-latency-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-9838e-ew-bot-response-and-latency-chromium/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-9838e-ew-bot-response-and-latency-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "207e7f4cbe8b1ca6058c-067e968e1ececa245c70",
+              "file": "exercise-3-chatbot-testing/tests/botpress-homepage/chatbot.spec.ts",
+              "line": 85,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-12T23:54:13.921Z",
+    "duration": 34505.672000000006,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
