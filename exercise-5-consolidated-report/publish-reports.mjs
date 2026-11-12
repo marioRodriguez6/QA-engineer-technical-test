@@ -36,7 +36,11 @@ export function successfulRun(report) {
   if (report.units.filter(unit => unit.suite === 'llm').length !== 5 ||
       report.units.some(unit => unit.suite !== 'llm' && !['PASS', 'SKIPPED'].includes(unit.status)) ||
       report.counts.FAIL !== semanticFailures) return false;
-  return report.metadata?.needs?.llm?.result === (semanticFailures ? 'failure' : 'success');
+  const llmResult = report.metadata?.needs?.llm?.result;
+  // New CI succeeds on complete evaluations. Accept verdict-based legacy reports only
+  // when they predate the explicit execution status. Never mask a new technical failure.
+  return llmResult === 'success' ||
+    (report.executionStatus == null && semanticFailures > 0 && llmResult === 'failure');
 }
 
 function newer(candidate, current) {
@@ -112,3 +116,4 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     attempt: Number(process.env.GITHUB_RUN_ATTEMPT),
   });
 }
+

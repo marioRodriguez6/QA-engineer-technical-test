@@ -44,7 +44,9 @@ jobs:
         run: npm run test:evaluator
 
       - name: Check CI runner syntax
-        run: node --check exercise-4-cicd/run-llm-ci.mjs
+        run: |
+          node --check exercise-4-cicd/run-llm-ci.mjs
+          node --test exercise-4-cicd/inspect-report.test.mjs
 
       - name: Test consolidated report generator
         run: node --test exercise-5-consolidated-report/generate-report.test.mjs exercise-5-consolidated-report/publish-reports.test.mjs
@@ -286,4 +288,5 @@ jobs:
           (github.event_name != 'pull_request' ||
            github.event.pull_request.head.repo.full_name == github.repository)
         run: node exercise-5-consolidated-report/publish-reports.mjs output
+
 

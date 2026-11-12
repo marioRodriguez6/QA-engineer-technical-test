@@ -117,3 +117,13 @@ test('partial conversation, missing scenario and failed API/UI job are not compl
     r => { r.counts.REVIEW = 1; },
   ]) { const r = withSemanticFailure(); mutate(r); assert.equal(successfulRun(r), false); }
 });
+
+
+test('new complete evaluation with functional FAIL and successful job updates both snapshots', t => {
+  const root = temporary(t); const r = withSemanticFailure();
+  r.metadata.needs.llm.result = 'success'; r.executionStatus = 'COMPLETED';
+  assert.equal(successfulRun(r), true);
+  assert.deepEqual(writeSnapshots(root, 'Complete evaluation with findings', r, marker(1)), ['lastRun', 'LastSuccesfulrun']);
+  r.metadata.needs.llm.result = 'failure'; r.executionStatus = 'FAILED';
+  assert.equal(successfulRun(r), false);
+});

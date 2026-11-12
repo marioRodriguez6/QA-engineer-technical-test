@@ -136,3 +136,25 @@ test('new UX fields and scenario analysis are consolidated while historical omis
   assert.match(renderMarkdown(r), /Turn 1: clarification/);
 });
 
+
+
+test('functional FAIL preserves quality findings while execution can complete successfully', t => {
+  const f = fixture(t); const report = f.reports['conversational-memory'];
+  report.veredicto = 'FAIL';
+  Object.assign(report.evaluaciones[1].evaluation, { verdict: 'FAIL', contextIssueDetected: true, errors: ['Irrelevant order details'] });
+  Object.assign(f.summary.results[3], { ciStatus: 'FAIL', verdict: 'FAIL', exitCode: 1, evaluationCompleted: true });
+  f.flush(); const r = f.read({ needs: { llm: { result: 'success' }, playwright: { result: 'success' } } });
+  assert.equal(r.executionStatus, 'COMPLETED'); assert.equal(r.overall, 'FAIL');
+  assert.equal(r.metrics.flaggedTurns, 1); assert.equal(r.metrics.flaggedTurnRatePercent, 3.33);
+  const md = renderMarkdown(r);
+  assert.match(md, /Evaluation execution: COMPLETED/); assert.match(md, /Observed quality: FAIL/);
+  assert.match(md, /Irrelevant order details/);
+});
+
+test('synthesis keeps verbose evidence inside disclosures and exposes required summary dimensions', t => {
+  const f = fixture(t); f.reports['simple-query'].analisis = 'VERBOSE_ORIGINAL_ANALYSIS'; f.flush();
+  const md = renderMarkdown(f.read()); const location = md.indexOf('VERBOSE_ORIGINAL_ANALYSIS');
+  assert.ok(md.lastIndexOf('<details>', location) > md.lastIndexOf('</details>', location));
+  for (const label of ['Coherence /100', 'Hallucination flags', 'Security %', 'Completion', 'Incorrect tool calling', 'Prompt injection', 'Toxic responses', 'Average timings', 'API and chatbot']) assert.ok(md.includes(label), label);
+  assert.match(md, /Original scenario analysis \(preserved\)/);
+});

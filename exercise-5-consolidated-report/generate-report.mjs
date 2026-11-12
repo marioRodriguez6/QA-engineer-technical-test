@@ -164,7 +164,7 @@ export function buildReport(inputRoot, metadata = {}) {
   }
   const counts = Object.fromEntries(states.map(state => [state, units.filter(unit => unit.status === state).length]));
   const executed = counts.PASS + counts.FAIL + counts.REVIEW + counts.FLAKY;
-  const qualityFlags = validTurns.filter(e => e.hallucinationDetected || e.hallucinationType !== 'none' || e.securityIssueDetected || e.toxicityDetected);
+  const qualityFlags = validTurns.filter(e => e.hallucinationDetected || e.hallucinationType !== 'none' || e.securityIssueDetected || e.toxicityDetected || e.contextIssueDetected === true);
   const injections = validTurns.filter(e => e.scenario === 'prompt-injection');
   const scoreDeviations = validTurns.filter(e => e.contextRetentionScore < 100);
   const bonus = {
@@ -186,7 +186,10 @@ export function buildReport(inputRoot, metadata = {}) {
   const failedJobs = Object.values(jobs).some(result => ['failure', 'cancelled'].includes(result));
   const overall = counts.FAIL || failedJobs ? 'FAIL' : incomplete || counts.BLOCKED || counts.REVIEW || counts.FLAKY || counts.SKIPPED ? 'INCOMPLETE' : 'PASS';
   return {
-    generatedAt: new Date().toISOString(), metadata, jobs, overall, evidenceComplete: !incomplete,
+    generatedAt: new Date().toISOString(), metadata, jobs, overall,
+    executionStatus: failedJobs || units.some(u => u.suite !== 'llm' && ['FAIL', 'FLAKY'].includes(u.status)) ? 'FAILED' :
+      incomplete || scenarioReports.some(s => !['PASS', 'FAIL'].includes(s.status) || s.completedTurns !== 6 || s.validEvaluations !== 6 || s.turnEvaluations?.some(t => t.evaluation_status !== 'COMPLETED' || !['PASS', 'FAIL'].includes(t.evaluation?.verdict))) ? 'INCOMPLETE' : 'COMPLETED',
+    evidenceComplete: !incomplete,
     units, counts, plannedUnits: units.length, executedUnits: executed,
     metrics: { passedPlannedPercent: pct(counts.PASS, units.length), passExecutedPercent: pct(counts.PASS, executed), failExecutedPercent: pct(counts.FAIL, executed),
       completedConversationsPercent: pct(scenarioReports.filter(s => s.completedTurns === 6).length, 5),
@@ -201,52 +204,96 @@ export function buildReport(inputRoot, metadata = {}) {
 
 export function renderMarkdown(r) {
   const m = r.metrics;
+  const labels = { 'simple-query': '1 · Simple query', 'topic-change': '2 · Topic change', 'ambiguous-information': '3 · Ambiguous information', 'conversational-memory': '4 · Conversational memory', 'prompt-injection': '5 · Security & prompt injection' };
+  const scope = { llm: 'Exercise 1 · LLM', api: 'Exercise 2 · API', 'chatbot-docs': 'Exercise 3 · Docs chatbot', 'chatbot-homepage': 'Exercise 3 · Homepage chatbot (additional)' };
+  const safe = value => cell(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+  const value = (n, suffix = '') => n == null ? 'N/A' : `${n}${suffix}`;
+  const details = (title, body) => ['<details>', `<summary>${safe(title)}</summary>`, '', ...body, '', '</details>', ''];
+  const historicalCompletion = r.evidenceComplete && ['typecheck', 'playwright'].every(job => r.jobs?.[job] === 'success') && r.scenarios.length === 5 && r.scenarios.every(s => ['PASS', 'FAIL'].includes(s.status) && s.completedTurns === 6 && s.validEvaluations === 6 && s.turnEvaluations?.every(t => t.evaluation_status === 'COMPLETED' && ['PASS', 'FAIL'].includes(t.evaluation?.verdict)));
+  const execution = r.executionStatus ?? (historicalCompletion ? 'COMPLETED' : 'UNKNOWN (historical report)');
   const lines = [
     '# Consolidated QA Report', '',
-    `Generated: ${r.generatedAt} | Overall assessment: **${r.overall}**`, '',
-    `Run: ${r.metadata.runUrl ?? 'Local input'} | Attempt: ${r.metadata.attempt ?? 'N/A'} | Commit: ${r.metadata.commit ?? 'Not supplied'}`, '',
-    '## Global assessment', '',
-    `${r.counts.PASS}/${r.plannedUnits} planned units passed. ${r.counts.FAIL} failed, ${r.counts.SKIPPED} skipped, ${r.counts.BLOCKED} blocked, ${r.counts.REVIEW} review, ${r.counts.FLAKY} flaky, ${r.counts.MISSING} missing and ${r.counts.ERROR} invalid/error.`, '',
-    'One unit is one LLM scenario or one API/UI case. These heterogeneous units are an execution summary, not a product quality score. Homepage is additional coverage; it does not replace Docs requirements.', '',
-    table(['Scope', ...states], ['llm', ...Object.keys(inventories)].map(suite => [suite, ...states.map(state => r.units.filter(u => u.suite === suite && u.status === state).length)])), '',
-    table(['Metric', 'Value'], [
-      ['PASS / planned (%)', m.passedPlannedPercent], ['PASS / executed (%)', m.passExecutedPercent], ['FAIL / executed (%)', m.failExecutedPercent],
-      ['Completed LLM conversations / 5 (%)', m.completedConversationsPercent], ['Valid LLM evaluations / 30 (%)', m.llmEvaluationCoveragePercent],
-      ['Mean coherence /100', m.meanCoherence], ['Mean context /100', m.meanContext], ['Mean usefulness /100', m.meanUsefulness], ['User needs resolved (scenarios)', m.resolution.resolved], ['User needs unresolved (scenarios)', m.resolution.unresolved], ['Resolution unavailable (scenarios)', m.resolution.unknown], ['Judge-flagged turns / valid evaluations (%)', m.flaggedTurnRatePercent],
+    `**Evaluation execution: ${execution}** · **Observed quality: ${r.overall}**`, '',
+    `Run: ${r.metadata.runUrl ?? 'Local input'} · Attempt: ${r.metadata.attempt ?? 'N/A'}`, '',
+    `Commit: \`${r.metadata.commit ?? 'Not supplied'}\` · Generated: ${r.generatedAt}`, '',
+    '## At a glance', '',
+    `**${r.counts.PASS} PASS · ${r.counts.FAIL} FAIL · ${r.counts.SKIPPED} SKIPPED** across ${r.plannedUnits} planned units.`, '',
+    `${r.counts.BLOCKED} blocked, ${r.counts.REVIEW} review, ${r.counts.FLAKY} flaky, ${r.counts.MISSING} missing and ${r.counts.ERROR} invalid/error.`, '',
+    'A completed evaluation can contain functional FAIL findings. Execution status describes whether the evaluation ran; observed quality preserves the original findings and coverage gaps.', '',
+    table(['Scope', 'PASS', 'FAIL', 'Skipped', 'Other / incomplete'], ['llm', ...Object.keys(inventories)].map(suite => {
+      const count = status => r.units.filter(u => u.suite === suite && u.status === status).length;
+      return [scope[suite], count('PASS'), count('FAIL'), count('SKIPPED'), ['BLOCKED', 'REVIEW', 'FLAKY', 'MISSING', 'ERROR'].reduce((n, s) => n + count(s), 0)];
+    })), '',
+    '## Global metrics', '',
+    table(['Metric', 'Result'], [
+      ['PASS / executed units', value(m.passExecutedPercent, '%')], ['FAIL / executed units', value(m.failExecutedPercent, '%')],
+      ['PASS / all planned units', value(m.passedPlannedPercent, '%')],
+      ['Complete LLM conversations', `${r.scenarios.filter(s => s.completedTurns === 6).length}/5 (${value(m.completedConversationsPercent, '%')})`],
+      ['Available LLM judgments', `${m.validEvaluations}/30 (${value(m.llmEvaluationCoveragePercent, '%')})`],
+      ['Turns with judge-reported problems', `${m.flaggedTurns}/${m.validEvaluations} (${value(m.flaggedTurnRatePercent, '%')})`],
+      ['Mean coherence / context / usefulness', `${value(m.meanCoherence)} / ${value(m.meanContext)} / ${value(m.meanUsefulness)} out of 100`],
+      ['User-need resolution', `${m.resolution.resolved} resolved · ${m.resolution.partial} partial · ${m.resolution.unresolved} unresolved · ${m.resolution.notApplicable} not applicable · ${m.resolution.unknown} unknown`],
     ]), '',
-    'Executed denominator includes PASS, FAIL, REVIEW and FLAKY. Skipped, blocked, missing and invalid/error units are excluded and listed separately. N/A means no valid samples; it never means zero errors.', '',
-    '## Exercise 1 - Five LLM scenarios', '',
-    table(['Scenario', 'Status', 'Coherence', 'Context', 'False %', 'Unsupported %', 'Security %', 'Exchanges', 'Valid evaluations', 'Usefulness', 'Need resolution'], r.llmRows), '',
-    'Quality metrics are recalculated from valid per-turn judge outputs. False and unsupported claims remain distinct. Security % uses all valid turns, not only attacks. Original verdicts, per-turn evaluations and errors are preserved in the JSON companion.', '',
-    ...r.scenarios.flatMap(s => [`### ${s.id} - evaluation synthesis`, '', cell(s.analysis ?? 'No scenario-level synthesis available in this source report.'), '']),
-    'User-need resolution is distinct from technical completion. Historical reports without these fields remain unknown, not retroactively resolved.', '',
-    '## Exercises 2 and 3 - API and chatbot', '',
+    'Units are five LLM scenarios plus API/UI cases, not individual turns. Executed units include PASS, FAIL, REVIEW and FLAKY; other states are excluded. These mixed units are not a product quality score. Judge-flagged rate counts a turn once across factual, security, toxicity and explicit context flags; it is not measured detector accuracy. N/A means unavailable evidence, never zero errors.', '',
+    '## Exercise 1 · Five conversational scenarios', '',
+    table(['Scenario', 'Verdict', 'Coherence /100', 'Hallucination flags', 'Security %', 'Completion'], r.scenarios.map(s => {
+      const valid = (s.turnEvaluations ?? []).filter(t => t.evaluation_status === 'COMPLETED' && t.evaluation);
+      const hallucinations = valid.filter(t => t.evaluation.hallucinationDetected || t.evaluation.hallucinationType !== 'none').length;
+      return [labels[s.id] ?? s.id, s.status, s.quality.coherence, s.validEvaluations ? `${hallucinations}/${s.validEvaluations}` : 'N/A', s.quality.security, `${s.completedTurns ?? '?'}/6 replies · ${s.validEvaluations}/6 judgments`];
+    })), '',
+    'Security % is the share of available judgments without a security flag, including benign turns. Hallucination flags are judge classifications, not independently confirmed facts. Completing six exchanges does not imply the user need was resolved.', '',
   ];
-  for (const suite of r.suites) lines.push(`### ${suite.suite}`, '', table(['Case', 'Status', 'Test duration ms', 'Attempts'], suite.tests.map(t => [t.id, t.status, t.durationMs, t.attempts])), '');
-  lines.push('## Timing', '', table(['Measurement', 'Mean ms', 'Samples'], Object.entries(m.meanTimesMs).map(([key, value]) => [key, value.mean, value.samples])), '',
-    'LLM timings include wrapper/retry overhead. API/UI test duration includes assertions and setup; it is not endpoint response latency. Chatbot response timings are separate measurements to the first visible reply text, not necessarily the entire answer. No average combines these unlike measurements.', '',
-    '## Automated findings and bonus coverage', '',
-    table(['Dimension', 'Evidence', 'Limit'], [
-      ['Hallucinations', `${r.bonus.hallucinations.detectedTurns}/${m.validEvaluations} flagged; ${r.bonus.hallucinations.demonstrablyFalse} false, ${r.bonus.hallucinations.unsupported} unsupported`, 'LLM judge only; no evidence is not a PASS'],
-      ['Prompt injection', `${r.bonus.promptInjection.securityFailures} security failures / ${r.bonus.promptInjection.evaluatedScenarioTurns} valid scenario turns`, r.bonus.promptInjection.limitation],
-      ['Toxicity', `${r.bonus.toxicity.detectedTurns}/${m.validEvaluations} flagged`, 'No positive detector calibration demonstrated'],
-      ['Context retention', `${r.bonus.context.meanScore ?? 'N/A'}/100 mean; ${r.bonus.context.materialContextFailures} explicit material context flags (${r.bonus.context.explicitDetectorCoverage} explicit judgments); ${r.bonus.context.scoreDeviations} scores below 100`, r.bonus.context.limitation],
-      ['Incorrect tool calling', 'NOT_IMPLEMENTED; 0 observed calls', r.bonus.toolCalling.limitation],
-      ['API/UI semantic detectors', 'NOT_EVALUATED', r.bonus.apiAndUi],
-    ]), '', r.bonus.calibration, '',
-    '## Errors and evidence gaps', '');
-  const findings = [...r.issues, ...r.scenarios.flatMap(s => s.findings.map(f => `${s.id}: ${f}`)), ...r.suites.flatMap(s => s.tests.flatMap(t => t.errors.map(e => `${s.suite}/${t.id}: ${e}`)))];
-  lines.push(findings.length ? findings.map(f => `- ${cell(f)}`).join('\n') : 'No execution errors or judge findings were recorded in the available reports. This does not establish unimplemented or uncalibrated bonus coverage.', '',
-    '## Workflow and provenance', '', table(['Job', 'Result'], Object.entries(r.jobs)), '',
-    `Artifact download outcomes: ${cell(JSON.stringify(r.metadata.downloads ?? {}))}`, '',
-    'Only the supplied input directory is read. CI populates it with artifact names scoped to the current run ID and attempt. Tracked historical reports are never used as fallback. A retry without artifacts from successful earlier attempts is marked missing rather than silently mixed.', '',
-    ...r.sources.map(source => `- ${cell(source)}`), '',
-    '## Limitations and follow-up', '',
-    '- CHATBOT-003 remains a Docs coverage gap when skipped. A passing homepage name case does not close it.',
-    '- Inspect failed assertions and judge errors before changing expectations. BLOCKED provider failures are separate from assistant quality findings.',
-    '- Preserve the downloaded evidence before artifact retention expires. Review detector calibration and implement real tool instrumentation before claiming all bonuses complete.',
-    '- No report can be guaranteed if GitHub cannot start this job, checkout/setup fails, or the workflow is forcibly terminated. Normal upstream failures/skips are handled by always().', '',
+  for (const s of r.scenarios) {
+    const turns = s.turnEvaluations ?? [];
+    lines.push(`### ${labels[s.id] ?? s.id} · ${s.status}`, '',
+      `**Context:** ${value(s.quality.context, '/100')} · **Usefulness:** ${value(s.quality.usefulness, '/100')} · **Need resolution:** ${safe(s.experience?.resolutionStatus ?? 'unknown')}`, '',
+      `**Judge classifications:** ${value(s.quality.falseRate, '%')} demonstrably false · ${value(s.quality.unsupportedRate, '%')} unsupported.`, '',
+      '**Recorded findings**', '',
+      ...(s.findings.length ? s.findings.map(f => `- ${safe(f)}`) : ['No findings recorded in the available evidence.']), '');
+    const body = [];
+    for (const t of turns) {
+      const e = t.evaluation;
+      body.push(`#### Turn ${t.turn} · ${safe(e?.verdict ?? t.evaluation_status ?? 'UNAVAILABLE')}`, '',
+        `**User:** ${safe(t.userMessage ?? 'Not stored in this source')}`, '',
+        `**Assistant:** ${safe(t.assistantMessage ?? 'Not stored in this source')}`, '',
+        `**Judge reasoning:** ${safe(e?.analysis ?? t.evaluator_failure?.message ?? 'Unavailable')}`, '',
+        `**User experience:** ${safe(e?.uxAnalysis ?? 'Unavailable in this source')}`, '');
+    }
+    if (!turns.length) body.push('No per-turn evidence available.');
+    lines.push(...details(`Inspect ${s.id}: conversation and per-turn judgments`, body));
+    if (s.analysis) lines.push(...details('Original scenario analysis (preserved)', [safe(s.analysis)]));
+  }
+  lines.push('## Exercises 2 and 3 · API and chatbot', '');
+  for (const suite of r.suites) {
+    const n = state => suite.tests.filter(t => t.status === state).length;
+    lines.push(`### ${scope[suite.suite]}`, '', `**${n('PASS')} PASS · ${n('FAIL')} FAIL · ${n('SKIPPED')} SKIPPED** · ${suite.tests.length} planned cases.`, '');
+    lines.push(...details('Inspect case results and assertion evidence', [
+      table(['Case', 'Result', 'Duration ms', 'Attempts'], suite.tests.map(t => [t.id, t.status, t.durationMs, t.attempts])), '',
+      ...suite.tests.flatMap(t => t.errors.map(e => `- **${t.id}:** ${safe(e)}`)),
+    ]));
+  }
+  const timingLabels = { llmAssistantMs: 'LLM assistant response', llmEvaluatorMs: 'LLM judge response', apiTestMs: 'API test (setup + assertions)', docsTestMs: 'Docs UI test', homepageTestMs: 'Homepage UI test', docsResponseMs: 'Docs first visible reply', homepageResponseMs: 'Homepage first visible reply' };
+  lines.push('## Average timings', '', table(['Measurement', 'Mean ms', 'Samples'], Object.entries(m.meanTimesMs).map(([key, v]) => [timingLabels[key] ?? key, v.mean, v.samples])), '',
+    'LLM timings include wrapper/retry overhead. Test duration is not endpoint response latency. Chatbot reply timing measures first visible text, not a complete answer. Unlike measurements are not combined.', '',
+    '## Automatic detection · Cross-exercise coverage', '',
+    table(['Detector', 'LLM evidence', 'API / chatbot coverage'], [
+      ['Hallucinations', `${r.bonus.hallucinations.detectedTurns}/${m.validEvaluations} flagged; ${r.bonus.hallucinations.demonstrablyFalse} false, ${r.bonus.hallucinations.unsupported} unsupported`, 'NOT_EVALUATED'],
+      ['Prompt injection', `${r.bonus.promptInjection.securityFailures} security failures / ${r.bonus.promptInjection.evaluatedScenarioTurns} scenario judgments`, 'NOT_EVALUATED'],
+      ['Toxic responses', `${r.bonus.toxicity.detectedTurns}/${m.validEvaluations} flagged`, 'NOT_EVALUATED'],
+      ['Context loss / irrelevant context', `${r.bonus.context.materialContextFailures} explicit flags / ${r.bonus.context.explicitDetectorCoverage} explicit judgments`, 'NOT_EVALUATED'],
+      ['Incorrect tool calling', 'NOT_IMPLEMENTED · 0 instrumented calls', 'NOT_EVALUATED'],
+    ]), '',
+    'Zero flags means none were reported, not proven absence. Prompt-injection counts include the benign opening turn. Context scores below 100 alone are not confirmed defects. Tool calling has no configured tools or recorded traces and is never counted as PASS. Cross-exercise results are consolidated, but semantic detector coverage currently comes from the LLM exercise only.', '',
+    r.bonus.calibration, '',
+    '## Evidence gaps and follow-up', '',
+    ...r.issues.map(issue => `- ${safe(issue)}`),
+    '- CHATBOT-003 remains a documented Docs coverage gap when skipped; homepage coverage is additional.',
+    '- Review judge classifications against the source evidence; a functional FAIL is preserved even when evaluation execution succeeds.',
+    '- Historical UX fields remain unknown. The JSON companion retains original analyses, messages, metrics and judgments.', '',
   );
+  lines.push(...details('Workflow provenance and input files', [table(['Job', 'Result'], Object.entries(r.jobs)), '',
+    `Artifact downloads: ${safe(JSON.stringify(r.metadata.downloads ?? {}))}`, '',
+    'Only this run/attempt input directory is read. Historical snapshots are never used as fallback. Report generation makes no provider calls.', '', ...r.sources.map(source => `- ${safe(source)}`)]));
   return lines.join('\n');
 }
 
@@ -274,4 +321,5 @@ export function main() {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) main();
+
 
