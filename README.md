@@ -8,7 +8,7 @@ Technical assessment covering conversational AI evaluation, API testing, chatbot
 | --- | --- |
 | `exercise-1-llm-evaluation/` | Multi-provider conversational AI evaluation |
 | `exercise-2-api-testing/` | Goal Tracker API automated tests |
-| `exercise-3-chatbot-testing/` | Botpress documentation chatbot automated tests |
+| `exercise-3-chatbot-testing/` | Botpress Docs and homepage chatbot automated tests |
 | `exercise-4-cicd/` | CI runner for the five LLM scenarios |
 | `exercise-5-consolidated-report/` | Intended location for the consolidated report |
 | `.github/workflows/qa.yml` | GitHub Actions workflow |
@@ -270,79 +270,75 @@ npx playwright show-report output/ci/api/html
 
 ## Exercise 3 — Chatbot Testing
 
-Target page:
+The exercise contains two independent suites:
 
-```text
-https://botpress.com/docs
-```
+| Suite | Target | Coverage |
+| --- | --- | --- |
+| `tests/botpress-docs/chatbot.spec.ts` | https://botpress.com/docs/ | Assessment target: page load, panel open/close, Hola and latency; CHATBOT-003 remains skipped |
+| `tests/botpress-homepage/chatbot.spec.ts` | https://botpress.com/ | Additional coverage: floating launcher, open/close/reopen, name Botpress, Hola and latency |
 
-The suite covers:
+The observed homepage chat uses an open Shadow DOM, not a chat iframe. Playwright locators traverse open shadow roots. Its loader starts on `window.load`; the suite waits for that event before checking the launcher and logs both timings.
 
-- Loading the documentation page and locating the chatbot control.
-- Opening and closing the chatbot panel.
-- Chatbot name validation.
-- Sending `Hola`, checking the conversation, and measuring response latency.
+### Run Each Suite
 
-Run the chatbot suite:
+Docs:
 
 ```bash
-QA_REPORT_DIR=output/ci/chatbot npx playwright test exercise-3-chatbot-testing/tests/chatbot.spec.ts
+QA_REPORT_DIR=output/ci/chatbot-docs npx playwright test exercise-3-chatbot-testing/tests/botpress-docs/
 ```
 
-Run with a visible browser:
+Homepage:
 
 ```bash
-QA_REPORT_DIR=output/ci/chatbot npx playwright test exercise-3-chatbot-testing/tests/chatbot.spec.ts --headed
+QA_REPORT_DIR=output/ci/chatbot-homepage npx playwright test exercise-3-chatbot-testing/tests/botpress-homepage/
 ```
 
-Run only the open/close test:
+Add `--headed` to either command to use a visible browser.
+
+Run only the Docs open/close case:
 
 ```bash
-QA_REPORT_DIR=output/ci/chatbot npx playwright test exercise-3-chatbot-testing/tests/chatbot.spec.ts --grep CHATBOT-002
+QA_REPORT_DIR=output/ci/chatbot-docs npx playwright test exercise-3-chatbot-testing/tests/botpress-docs/ --grep CHATBOT-002
 ```
 
-`QA_REPORT_DIR` changes the Playwright report and artifact locations. It does not change the test assertions.
-
-### Chatbot Reports and Evidence
-
-With the commands above, Playwright saves:
-
-```text
-output/ci/chatbot/html/
-output/ci/chatbot/results.json
-output/ci/chatbot/test-results/
-```
-
-The conversation test also saves:
-
-```text
-output/chatbot/chatbot-conversation.png
-output/chatbot/chatbot-response-time.json
-```
-
-Open the HTML report:
+Run both suites in one local report:
 
 ```bash
-npx playwright show-report output/ci/chatbot/html
+QA_REPORT_DIR=output/ci/chatbot npx playwright test exercise-3-chatbot-testing/tests/
 ```
 
-The current Playwright configuration enables screenshots, videos, and traces for successful and failed browser tests.
+These suites do not require Groq credentials. Each test has an isolated browser context. `QA_REPORT_DIR` changes evidence locations, not assertions.
 
-To inspect a trace, replace the example path with the generated file:
+### Reports and Evidence
+
+Each report directory contains `html/`, `results.json` and `test-results/`:
+
+| Suite | Report directory |
+| --- | --- |
+| Docs | `output/ci/chatbot-docs/` |
+| Homepage | `output/ci/chatbot-homepage/` |
+| Combined local run | `output/ci/chatbot/` |
+
+Open either separate report:
 
 ```bash
-npx playwright show-trace output/ci/chatbot/test-results/<test-directory>/trace.zip
+npx playwright show-report output/ci/chatbot-docs/html
+npx playwright show-report output/ci/chatbot-homepage/html
 ```
 
-API-only tests do not open browser pages and therefore do not generate browser videos.
+Screenshots, videos and traces are retained for executed browser tests regardless of outcome. API-only tests do not generate browser videos. Inspect a trace by passing its actual path to `npx playwright show-trace`.
+
+The Docs conversation also writes `output/chatbot/chatbot-conversation.png` and `output/chatbot/chatbot-response-time.json`. These fixed paths are overwritten on a later run.
+
+HOME-004 saves and attaches `homepage-conversation.png` and `homepage-response-time.json` in its own test-results directory. It waits for the welcome message before taking a baseline, then requires a new incoming message after Hola. Latency measures time until the first new loaded message has visible text, including UI/assertion overhead; it does not measure all subsequent bot messages or enforce an undocumented SLA.
+
+The verified local homepage execution passed all four cases without skips or retries and recorded 5,114 ms to the first new response. This describes that execution only. Preserve its original report separately.
 
 ### Known Coverage Limitation
 
-`CHATBOT-003`, chatbot name validation, is currently skipped because the inspected interface does not expose the expected distinct bot name.
+CHATBOT-003 remains skipped because the inspected Docs interface does not expose a distinct bot name. A homepage name validation does not replace or pass that Docs requirement. The homepage suite is complementary coverage on a different target.
 
-A skipped test is not a passed test and must remain visible in the consolidated report.
-
-The chatbot tests depend on a live external website. Changes to its interface or response content can affect the assertions and require evidence-based review.
+Both suites depend on live external pages. Review interface or response changes against execution evidence before modifying assertions.
 
 ## Exercise 4 — CI/CD
 
@@ -407,7 +403,7 @@ QA_REPORT_DIR=output/ci/api npx playwright test exercise-2-api-testing/tests/sta
 Chatbot suite:
 
 ```bash
-QA_REPORT_DIR=output/ci/chatbot npx playwright test exercise-3-chatbot-testing/tests/chatbot.spec.ts
+QA_REPORT_DIR=output/ci/chatbot npx playwright test exercise-3-chatbot-testing/tests/
 ```
 
 LLM scenarios, when credentials and quota are available:
@@ -424,7 +420,8 @@ Open the workflow execution under the repository's **Actions** tab and download 
 
 ```text
 qa-api-<run-id>-<attempt>
-qa-chatbot-<run-id>-<attempt>
+qa-chatbot-docs-<run-id>-<attempt>
+qa-chatbot-homepage-<run-id>-<attempt>
 qa-llm-<run-id>-<attempt>
 ```
 
@@ -475,7 +472,7 @@ Playwright report locations may be overwritten by subsequent executions using th
 For an execution that must be preserved, use a unique report directory:
 
 ```bash
-QA_REPORT_DIR=output/runs/chatbot-$(date -u +%Y%m%dT%H%M%SZ) npx playwright test exercise-3-chatbot-testing/tests/chatbot.spec.ts
+QA_REPORT_DIR=output/runs/chatbot-$(date -u +%Y%m%dT%H%M%SZ) npx playwright test exercise-3-chatbot-testing/tests/
 ```
 
 The custom chatbot conversation screenshot and latency JSON still use their fixed paths under `output/chatbot/`; preserve copies separately when retaining multiple runs.
