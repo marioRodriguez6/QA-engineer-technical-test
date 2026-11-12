@@ -127,3 +127,18 @@ test('new complete evaluation with functional FAIL and successful job updates bo
   r.metadata.needs.llm.result = 'failure'; r.executionStatus = 'FAILED';
   assert.equal(successfulRun(r), false);
 });
+
+
+test('available semantic REVIEW updates both snapshots; unavailable REVIEW does not', t => {
+  const root = temporary(t); const r = report(); r.executionStatus = 'COMPLETED';
+  r.counts.PASS--; r.counts.REVIEW++;
+  r.units[0].status = 'REVIEW';
+  r.scenarios[0].status = 'REVIEW'; r.scenarios[0].reportedVerdict = 'REVIEW';
+  r.scenarios[0].turnEvaluations[2].evaluation.verdict = 'REVIEW';
+  assert.equal(successfulRun(r), true);
+  assert.deepEqual(writeSnapshots(root, 'Quality needs review; execution complete', r, marker(1)), ['lastRun', 'LastSuccesfulrun']);
+  r.scenarios[0].turnEvaluations[2].evaluation_status = 'UNAVAILABLE';
+  r.scenarios[0].turnEvaluations[2].evaluation = null;
+  assert.equal(successfulRun(r), false);
+  assert.deepEqual(writeSnapshots(root, 'Judge timeout', r, marker(2)), ['lastRun']);
+});

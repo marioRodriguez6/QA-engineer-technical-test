@@ -191,7 +191,7 @@ The individual scenario runner returns:
 - `1` for `FAIL`, `REVIEW`, or an unexpected execution error.
 - `2` for `BLOCKED`.
 
-The all-scenarios CI wrapper returns `0` when all five scenarios have six complete exchanges and six available PASS/FAIL evaluations, and pass report/child-exit consistency checks. Functional FAIL findings remain unchanged in the reports and do not fail the LLM job. Missing/invalid reports, REVIEW/unavailable judgments, quota, authentication, timeouts and execution errors return `1`. Individual scenario exit codes remain verdict-based as listed above. API/UI and TypeScript failures still fail their own jobs.
+The all-scenarios CI wrapper returns `0` when all five scenarios have six complete exchanges and six available PASS/FAIL/REVIEW evaluations, and pass report/child-exit consistency checks. Functional FAIL and available REVIEW findings remain unchanged in the reports and do not fail the LLM job. Missing/invalid reports, unavailable judgments, quota, authentication, timeouts and execution errors return `1`. Individual scenario exit codes remain verdict-based as listed above. API/UI and TypeScript failures still fail their own jobs.
 
 ### Provider Limitations
 
@@ -544,9 +544,9 @@ After uploading the artifact, the final job commits report snapshots to the sour
 
 Both folders contain `consolidated-report.md`, `consolidated-report.json` and `publication.json` after automatic publication. The marker records the run number, attempt, source commit and workflow link. The spelling `LastSuccesfulrun` is intentional.
 
-Here, successful means the evaluation ran completely, not that the assistant had no defects. All five LLM scenarios must contain six responses and six valid PASS/FAIL judgments. A documented hallucination or security FAIL is eligible for both folders, while the LLM job succeeds if every evaluation completed without technical blockers. Original verdicts and findings are never changed.
+Here, successful means the evaluation ran completely, not that the assistant had no defects. All five LLM scenarios must contain six responses and six valid available PASS/FAIL/REVIEW judgments. A documented hallucination or security FAIL is eligible for both folders, while the LLM job succeeds if every evaluation completed without technical blockers. Original verdicts and findings are never changed.
 
-Quota exhaustion, timeout, an unavailable evaluator, incomplete conversation, REVIEW, missing/invalid evidence or an unexplained execution failure updates only `lastRun`. TypeScript and API/UI jobs must still succeed; API/UI failures are not reclassified by the LLM exception. Explicit skipped cases remain visible and do not mean all assessment requirements passed. Earlier reports remain in Git history and per-run artifacts.
+Quota exhaustion, timeout, an unavailable evaluator, incomplete conversation, missing/invalid evidence or an unexplained execution failure updates only `lastRun`. TypeScript and API/UI jobs must still succeed; API/UI failures are not reclassified by the LLM exception. Explicit skipped cases remain visible and do not mean all assessment requirements passed. Earlier reports remain in Git history and per-run artifacts.
 
 The first `LastSuccesfulrun` snapshot preserves the manually prepared historical report for run 43268157726; its scope predates homepage coverage and it has no generated JSON companion. Future eligible runs replace it with both report formats.
 
@@ -629,3 +629,8 @@ For Haiku 5.5 only, the provider options omit sampling parameters and explicitly
 ### Reading the consolidated synthesis
 
 The Markdown starts with separate execution and observed-quality statuses, global PASS/FAIL metrics and a compact five-scenario table. API and both chatbot suites have count summaries and expandable case evidence. Scenario details show material findings first; full turn judgments and UX explanations are expandable. The JSON retains original analysis, messages, verdicts and timing evidence. A green evaluation job means evaluation completed, not that every assistant response passed or every judge classification is correct. Tool calling and cross-suite semantic detector gaps remain explicitly unimplemented/not evaluated. Report formatting makes no new provider calls.
+
+
+An available `REVIEW` judgment is part of the evaluation flow, like `FAIL`; it does not fail CI or prevent `LastSuccesfulrun` publication when every exchange and judgment completed. A scenario-level REVIEW caused by an unavailable judgment is still a technical blocker. The judge verdict is never rewritten.
+
+Exercise 5 generates exactly two report formats: `consolidated-report.json` and `consolidated-report.md`. It does not generate an HTML report. HTML artifacts from Playwright belong to Exercises 2/3 and are separate from the consolidated report; `publication.json` is snapshot audit metadata, not another report.

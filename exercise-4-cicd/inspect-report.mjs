@@ -99,7 +99,8 @@ export function inspectReport(report, execution) {
 // Child exit codes remain verdict-based; the CI wrapper separately checks completion.
 export function evaluationCompleted(report, execution) {
   const verdict = inspectReport(report, execution);
-  return ['PASS', 'FAIL'].includes(verdict) && report.evaluaciones.every(turn =>
+  return ['PASS', 'FAIL', 'REVIEW'].includes(verdict) && report.evaluaciones.every(turn =>
     turn.evaluation_status === 'COMPLETED' && turn.evaluator_failure === null &&
-    ['PASS', 'FAIL'].includes(turn.evaluation?.verdict));
+    ['PASS', 'FAIL', 'REVIEW'].includes(turn.evaluation?.verdict));
 }
+

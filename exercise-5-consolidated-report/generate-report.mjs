@@ -188,7 +188,7 @@ export function buildReport(inputRoot, metadata = {}) {
   return {
     generatedAt: new Date().toISOString(), metadata, jobs, overall,
     executionStatus: failedJobs || units.some(u => u.suite !== 'llm' && ['FAIL', 'FLAKY'].includes(u.status)) ? 'FAILED' :
-      incomplete || scenarioReports.some(s => !['PASS', 'FAIL'].includes(s.status) || s.completedTurns !== 6 || s.validEvaluations !== 6 || s.turnEvaluations?.some(t => t.evaluation_status !== 'COMPLETED' || !['PASS', 'FAIL'].includes(t.evaluation?.verdict))) ? 'INCOMPLETE' : 'COMPLETED',
+      incomplete || scenarioReports.some(s => !['PASS', 'FAIL', 'REVIEW'].includes(s.status) || s.completedTurns !== 6 || s.validEvaluations !== 6 || s.turnEvaluations?.some(t => t.evaluation_status !== 'COMPLETED' || !['PASS', 'FAIL', 'REVIEW'].includes(t.evaluation?.verdict))) ? 'INCOMPLETE' : 'COMPLETED',
     evidenceComplete: !incomplete,
     units, counts, plannedUnits: units.length, executedUnits: executed,
     metrics: { passedPlannedPercent: pct(counts.PASS, units.length), passExecutedPercent: pct(counts.PASS, executed), failExecutedPercent: pct(counts.FAIL, executed),
@@ -209,7 +209,7 @@ export function renderMarkdown(r) {
   const safe = value => cell(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
   const value = (n, suffix = '') => n == null ? 'N/A' : `${n}${suffix}`;
   const details = (title, body) => ['<details>', `<summary>${safe(title)}</summary>`, '', ...body, '', '</details>', ''];
-  const historicalCompletion = r.evidenceComplete && ['typecheck', 'playwright'].every(job => r.jobs?.[job] === 'success') && r.scenarios.length === 5 && r.scenarios.every(s => ['PASS', 'FAIL'].includes(s.status) && s.completedTurns === 6 && s.validEvaluations === 6 && s.turnEvaluations?.every(t => t.evaluation_status === 'COMPLETED' && ['PASS', 'FAIL'].includes(t.evaluation?.verdict)));
+  const historicalCompletion = r.evidenceComplete && ['typecheck', 'playwright'].every(job => r.jobs?.[job] === 'success') && r.scenarios.length === 5 && r.scenarios.every(s => ['PASS', 'FAIL', 'REVIEW'].includes(s.status) && s.completedTurns === 6 && s.validEvaluations === 6 && s.turnEvaluations?.every(t => t.evaluation_status === 'COMPLETED' && ['PASS', 'FAIL', 'REVIEW'].includes(t.evaluation?.verdict)));
   const execution = r.executionStatus ?? (historicalCompletion ? 'COMPLETED' : 'UNKNOWN (historical report)');
   const lines = [
     '# Consolidated QA Report', '',
@@ -219,10 +219,10 @@ export function renderMarkdown(r) {
     '## At a glance', '',
     `**${r.counts.PASS} PASS · ${r.counts.FAIL} FAIL · ${r.counts.SKIPPED} SKIPPED** across ${r.plannedUnits} planned units.`, '',
     `${r.counts.BLOCKED} blocked, ${r.counts.REVIEW} review, ${r.counts.FLAKY} flaky, ${r.counts.MISSING} missing and ${r.counts.ERROR} invalid/error.`, '',
-    'A completed evaluation can contain functional FAIL findings. Execution status describes whether the evaluation ran; observed quality preserves the original findings and coverage gaps.', '',
-    table(['Scope', 'PASS', 'FAIL', 'Skipped', 'Other / incomplete'], ['llm', ...Object.keys(inventories)].map(suite => {
+    'A completed evaluation can contain functional FAIL or REVIEW findings. REVIEW is technical incompleteness only when a judgment is unavailable; an available REVIEW verdict remains a quality finding. Execution status describes whether the evaluation ran; observed quality preserves the original findings and coverage gaps.', '',
+    table(['Scope', 'PASS', 'FAIL', 'REVIEW', 'Skipped', 'Other / incomplete'], ['llm', ...Object.keys(inventories)].map(suite => {
       const count = status => r.units.filter(u => u.suite === suite && u.status === status).length;
-      return [scope[suite], count('PASS'), count('FAIL'), count('SKIPPED'), ['BLOCKED', 'REVIEW', 'FLAKY', 'MISSING', 'ERROR'].reduce((n, s) => n + count(s), 0)];
+      return [scope[suite], count('PASS'), count('FAIL'), count('REVIEW'), count('SKIPPED'), ['BLOCKED', 'FLAKY', 'MISSING', 'ERROR'].reduce((n, s) => n + count(s), 0)];
     })), '',
     '## Global metrics', '',
     table(['Metric', 'Result'], [
@@ -321,5 +321,6 @@ export function main() {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) main();
+
 
 

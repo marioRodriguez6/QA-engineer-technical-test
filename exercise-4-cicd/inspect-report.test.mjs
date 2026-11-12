@@ -18,12 +18,12 @@ test('complete PASS and functional FAIL are successful evaluation executions, pr
   assert.equal(r.veredicto, 'FAIL'); assert.deepEqual(r.evaluaciones[1].evaluation.errors, ['Irrelevant context']);
 });
 
-test('a functional FAIL cannot hide an unavailable judgment or REVIEW', () => {
+test('a functional FAIL cannot hide an unavailable judgment', () => {
   const r = fixture(); r.veredicto = 'FAIL'; r.evaluaciones[0].evaluation.verdict = 'FAIL';
   r.evaluaciones[2].evaluation_status = 'UNAVAILABLE'; r.evaluaciones[2].evaluation = null;
   assert.equal(evaluationCompleted(r, processResult(1)), false);
   r.evaluaciones[2].evaluation_status = 'COMPLETED'; r.evaluaciones[2].evaluation = { verdict: 'REVIEW' };
-  assert.equal(evaluationCompleted(r, processResult(1)), false);
+  assert.equal(evaluationCompleted(r, processResult(1)), true);
 });
 
 test('quota/authentication blocker never succeeds', () => {
@@ -35,4 +35,14 @@ test('missing exchanges, inconsistent exit codes and killed children remain erro
   const r = fixture(); assert.throws(() => evaluationCompleted(r, processResult(1)), /exit code/);
   assert.throws(() => evaluationCompleted(r, { status: null, signal: 'SIGTERM' }), /normal exit/);
   r.turnos.pop(); assert.throws(() => evaluationCompleted(r, processResult(0)), /six complete/);
+});
+
+
+test('six available judgments including a semantic REVIEW complete successfully without changing the verdict', () => {
+  const r = fixture(); r.veredicto = 'REVIEW'; r.evaluaciones[2].evaluation.verdict = 'REVIEW';
+  r.evaluaciones[2].evaluation.errors = ['Answer ends mid-sentence'];
+  assert.equal(evaluationCompleted(r, processResult(1)), true);
+  assert.equal(r.veredicto, 'REVIEW');
+  r.evaluaciones[2].evaluator_failure = { message: 'timeout' };
+  assert.equal(evaluationCompleted(r, processResult(1)), false);
 });

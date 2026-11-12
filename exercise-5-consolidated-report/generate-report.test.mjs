@@ -158,3 +158,27 @@ test('synthesis keeps verbose evidence inside disclosures and exposes required s
   for (const label of ['Coherence /100', 'Hallucination flags', 'Security %', 'Completion', 'Incorrect tool calling', 'Prompt injection', 'Toxic responses', 'Average timings', 'API and chatbot']) assert.ok(md.includes(label), label);
   assert.match(md, /Original scenario analysis \(preserved\)/);
 });
+
+
+test('available REVIEW is a quality result, while missing REVIEW judgments are incomplete', t => {
+  const f = fixture(t); const s = f.reports['ambiguous-information'];
+  s.veredicto = 'REVIEW'; s.evaluaciones[2].evaluation.verdict = 'REVIEW';
+  Object.assign(f.summary.results[2], { ciStatus: 'REVIEW', verdict: 'REVIEW', exitCode: 1 }); f.flush();
+  const r = f.read({ needs: { llm: { result: 'success' }, playwright: { result: 'success' } } });
+  assert.equal(r.executionStatus, 'COMPLETED'); assert.equal(r.scenarios[2].status, 'REVIEW');
+  assert.match(renderMarkdown(r), /REVIEW is technical incompleteness only when a judgment is unavailable/);
+  s.evaluaciones[2].evaluation_status = 'UNAVAILABLE'; s.evaluaciones[2].evaluation = null; f.flush();
+  assert.equal(f.read().executionStatus, 'INCOMPLETE');
+});
+
+test('Exercise 5 CLI emits only JSON and Markdown report files, never HTML', async t => {
+  const { spawnSync } = await import('node:child_process');
+  const { readdirSync } = await import('node:fs');
+  const { fileURLToPath } = await import('node:url');
+  const f = fixture(t); const output = join(f.root, 'generated');
+  const result = spawnSync(process.execPath, [fileURLToPath(new URL('./generate-report.mjs', import.meta.url)), f.root, output], {
+    encoding: 'utf8', env: { ...process.env, GITHUB_SHA: 'current', GITHUB_STEP_SUMMARY: '' },
+  });
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(readdirSync(output).sort(), ['consolidated-report.json', 'consolidated-report.md']);
+});
