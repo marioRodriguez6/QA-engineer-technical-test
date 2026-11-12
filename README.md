@@ -70,14 +70,14 @@ cp .env.example .env
 Si ya existe `.env`, edítalo sin sobrescribirlo. La plantilla contiene:
 
 ```dotenv
-SIMULATED_USER_PROVIDER=groq
-SIMULATED_USER_MODEL=qwen/qwen3.8-27b
+SIMULATED_USER_PROVIDER='LLM-Preferido'
+SIMULATED_USER_MODEL='Modelo-Preferido'
 
-ASSISTANT_PROVIDER=groq
-ASSISTANT_MODEL=qwen/qwen3.8-27b
+ASSISTANT_PROVIDER='LLM-Preferido'
+ASSISTANT_MODEL='Modelo-Preferido'
 
-EVALUATOR_PROVIDER=groq
-EVALUATOR_MODEL=openai/gpt-oss-20b
+EVALUATOR_PROVIDER='LLM-Preferido'
+EVALUATOR_MODEL='Modelo-Preferido'
 
 GROQ_API_KEY=
 OPENAI_API_KEY=
