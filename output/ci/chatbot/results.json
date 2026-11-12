@@ -1,0 +1,374 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/mario/projects/QA-engineer-technical-test/node_modules/.bin/playwright",
+      "test",
+      "exercise-3-chatbot-testing/tests/chatbot.spec.ts"
+    ],
+    "configFile": "/home/mario/projects/QA-engineer-technical-test/playwright.config.ts",
+    "rootDir": "/home/mario/projects/QA-engineer-technical-test",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/mario/projects/QA-engineer-technical-test",
+        "testIgnore": [],
+        "testMatch": [
+          "exercise-1-llm-evaluation/**/*.spec.ts",
+          "exercise-2-api-testing/**/*.spec.ts",
+          "exercise-3-chatbot-testing/**/*.spec.ts"
+        ],
+        "timeout": 150000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "chromium",
+        "testDir": "/home/mario/projects/QA-engineer-technical-test",
+        "snapshotDir": "/home/mario/projects/QA-engineer-technical-test",
+        "testIgnore": [],
+        "testMatch": [
+          "exercise-1-llm-evaluation/**/*.spec.ts",
+          "exercise-2-api-testing/**/*.spec.ts",
+          "exercise-3-chatbot-testing/**/*.spec.ts"
+        ],
+        "timeout": 150000,
+        "use": {
+          "trace": "on",
+          "screenshot": "on",
+          "video": "on",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.8127.18 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "chromium"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "output/ci/chatbot/html",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "output/ci/chatbot/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "exercise-3-chatbot-testing/tests/chatbot.spec.ts",
+      "file": "exercise-3-chatbot-testing/tests/chatbot.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Exercise 3 - Botpress Docs chatbot",
+          "file": "exercise-3-chatbot-testing/tests/chatbot.spec.ts",
+          "line": 181,
+          "column": 6,
+          "specs": [
+            {
+              "title": "CHATBOT-001: Load documentation page and verify chatbot widget",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1368,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-12T07:33:13.766Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot/test-results/exercise-3-chatbot-testing-13d25-e-and-verify-chatbot-widget-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot/test-results/exercise-3-chatbot-testing-13d25-e-and-verify-chatbot-widget-chromium/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot/test-results/exercise-3-chatbot-testing-13d25-e-and-verify-chatbot-widget-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "37345de3365e63d32bb1-223077e2945bdc6bd7d9",
+              "file": "exercise-3-chatbot-testing/tests/chatbot.spec.ts",
+              "line": 184,
+              "column": 5
+            },
+            {
+              "title": "CHATBOT-002: Open and close the chatbot panel",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3170,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Chatbot state: current=true, requested=false\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Establish a closed initial state",
+                          "duration": 1058
+                        },
+                        {
+                          "title": "Open the panel using Ask Docs",
+                          "duration": 127
+                        },
+                        {
+                          "title": "Close the panel using Ask Docs",
+                          "duration": 124
+                        }
+                      ],
+                      "startTime": "2026-11-12T07:33:15.694Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot/test-results/exercise-3-chatbot-testing-1924f-and-close-the-chatbot-panel-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot/test-results/exercise-3-chatbot-testing-1924f-and-close-the-chatbot-panel-chromium/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot/test-results/exercise-3-chatbot-testing-1924f-and-close-the-chatbot-panel-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "37345de3365e63d32bb1-5e28a5a581a3ae7eefb6",
+              "file": "exercise-3-chatbot-testing/tests/chatbot.spec.ts",
+              "line": 191,
+              "column": 5
+            },
+            {
+              "title": "CHATBOT-003: Validate the chatbot name",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "location": {
+                        "file": "/home/mario/projects/QA-engineer-technical-test/exercise-3-chatbot-testing/tests/chatbot.spec.ts",
+                        "line": 222,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-12T07:33:19.265Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "location": {
+                            "file": "/home/mario/projects/QA-engineer-technical-test/exercise-3-chatbot-testing/tests/chatbot.spec.ts",
+                            "line": 222,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "37345de3365e63d32bb1-1272d55b63e8ed42c79c",
+              "file": "exercise-3-chatbot-testing/tests/chatbot.spec.ts",
+              "line": 222,
+              "column": 10
+            },
+            {
+              "title": "CHATBOT-004: Send Hola, validate response and measure latency",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4640,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Chatbot state: current=true, requested=true\n"
+                        },
+                        {
+                          "text": "CHATBOT-004 response time: 1469 ms\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-12T07:33:19.265Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot/test-results/exercise-3-chatbot-testing-3dc6e-esponse-and-measure-latency-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot/test-results/exercise-3-chatbot-testing-3dc6e-esponse-and-measure-latency-chromium/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot/test-results/exercise-3-chatbot-testing-3dc6e-esponse-and-measure-latency-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "37345de3365e63d32bb1-1b775627cffd13a054bc",
+              "file": "exercise-3-chatbot-testing/tests/chatbot.spec.ts",
+              "line": 235,
+              "column": 5
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-12T07:33:13.039Z",
+    "duration": 11442.032000000001,
+    "expected": 3,
+    "skipped": 1,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

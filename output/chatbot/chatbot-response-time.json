@@ -1,12 +1,12 @@
 {
   "testId": "CHATBOT-004",
-  "pageUrl": "https://botpress.com/docs",
+  "pageUrl": "https://botpress.com/docs/",
   "userMessage": "Hola",
   "assistantResponse": [
     "I'm here specifically for Botpress documentation questions.",
     "Ask me about Studio, the ADK, Webchat, the HTTP APIs, integrations, or Desk and I can help."
   ],
-  "responseTimeMs": 1104,
-  "measuredAt": "2026-11-11T05:42:45.656Z",
+  "responseTimeMs": 1469,
+  "measuredAt": "2026-11-12T07:33:23.304Z",
   "measurement": "Time from immediately before clicking Send until the first assistant response paragraph is visible."
 }
