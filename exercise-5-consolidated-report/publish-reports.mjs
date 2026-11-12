@@ -4,13 +4,39 @@ import { spawnSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 
 const folders = ['lastRun', 'LastSuccesfulrun'];
-const problematic = ['FAIL', 'REVIEW', 'BLOCKED', 'MISSING', 'ERROR', 'FLAKY'];
+const problematic = ['REVIEW', 'BLOCKED', 'MISSING', 'ERROR', 'FLAKY'];
+const scenarioIds = ['simple-query', 'topic-change', 'ambiguous-information', 'conversational-memory', 'prompt-injection'];
 
 export function successfulRun(report) {
-  return report.evidenceComplete === true &&
-    ['typecheck', 'playwright', 'llm'].every(job => report.metadata?.needs?.[job]?.result === 'success') &&
-    problematic.every(status => report.counts?.[status] === 0) &&
-    report.units?.filter(unit => unit.suite === 'llm' && unit.status === 'PASS').length === 5;
+  // Successful means a complete, valid evaluation, not an assistant with no defects.
+  if (report.evidenceComplete !== true ||
+      (report.issues ?? []).length > 0 ||
+      !['typecheck', 'playwright'].every(job => report.metadata?.needs?.[job]?.result === 'success') ||
+      !problematic.every(status => report.counts?.[status] === 0)) return false;
+
+  if (!Array.isArray(report.scenarios) || report.scenarios.length !== 5 ||
+      !Array.isArray(report.units)) return false;
+  for (const id of scenarioIds) {
+    const scenarios = report.scenarios.filter(s => s.id === id);
+    const units = report.units.filter(unit => unit.suite === 'llm' && unit.id === id);
+    const scenario = scenarios[0];
+    if (scenarios.length !== 1 || units.length !== 1 ||
+        !['PASS', 'FAIL'].includes(scenario.status) ||
+        scenario.reportedVerdict !== scenario.status || units[0].status !== scenario.status ||
+        scenario.completedTurns !== 6 || scenario.validEvaluations !== 6 ||
+        !Array.isArray(scenario.turnEvaluations) || scenario.turnEvaluations.length !== 6 ||
+        !scenario.turnEvaluations.every((turn, index) =>
+          turn.turn === index + 1 && turn.evaluation_status === 'COMPLETED' &&
+          turn.evaluator_failure == null &&
+          ['PASS', 'FAIL'].includes(turn.evaluation?.verdict))) return false;
+  }
+  const semanticFailures = report.scenarios.filter(s => s.status === 'FAIL').length;
+  // Every failed unit must be a fully evaluated LLM scenario, not an API/UI
+  // failure or an unexplained job execution failure.
+  if (report.units.filter(unit => unit.suite === 'llm').length !== 5 ||
+      report.units.some(unit => unit.suite !== 'llm' && !['PASS', 'SKIPPED'].includes(unit.status)) ||
+      report.counts.FAIL !== semanticFailures) return false;
+  return report.metadata?.needs?.llm?.result === (semanticFailures ? 'failure' : 'success');
 }
 
 function newer(candidate, current) {
@@ -52,8 +78,9 @@ export function publishReports({ cwd, sourceRoot, branch, sourceSha, runId, runN
   const publication = {
     runId: String(runId), runNumber, attempt, sourceCommit: sourceSha,
     workflowCommit: report.metadata.commit, runUrl: report.metadata.runUrl,
-    successfulWorkflow: successfulRun(report),
-    policy: 'Successful upstream jobs and complete evidence; no failed, blocked, review, flaky, missing or invalid units. Explicit skips remain visible.',
+    evaluationExecutionComplete: successfulRun(report),
+    upstreamJobResults: Object.fromEntries(Object.entries(report.metadata.needs ?? {}).map(([name, job]) => [name, job.result])),
+    policy: 'Complete LLM evaluation: five scenarios, six responses and six valid judgments each. Semantic LLM FAIL verdicts are retained and eligible; provider/timeouts, unavailable evaluations, invalid evidence and failed API/UI jobs are not. Workflow conclusions are unchanged.',
   };
   for (let retry = 0; retry < 3; retry++) {
     git(['fetch', 'origin', `+refs/heads/${branch}:refs/remotes/origin/${branch}`]);
