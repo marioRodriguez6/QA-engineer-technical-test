@@ -36,6 +36,9 @@ jobs:
       - name: Check CI runner syntax
         run: node --check exercise-4-cicd/run-llm-ci.mjs
 
+      - name: Test consolidated report generator
+        run: node --test exercise-5-consolidated-report/generate-report.test.mjs
+
   playwright:
     name: Playwright - ${{ matrix.suite }}
     needs: typecheck
@@ -71,31 +74,31 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
 
+      - name: Remove previous suite evidence
+        id: clean_evidence
+        run: |
+          node --input-type=module <<'NODE'
+          import { rmSync } from 'node:fs';
+          rmSync(process.env.QA_REPORT_DIR, { recursive: true, force: true });
+          if (process.env.QA_REPORT_DIR.endsWith('/chatbot-docs')) {
+            for (const path of [
+              'output/chatbot/chatbot-conversation.png',
+              'output/chatbot/chatbot-response-time.json',
+            ]) rmSync(path, { force: true });
+          }
+          NODE
+
       - run: npm ci
 
       - name: Install Chromium
         if: startsWith(matrix.suite, 'chatbot-')
         run: npx playwright install --with-deps chromium
 
-      - name: Remove previous chatbot evidence
-        if: matrix.suite == 'chatbot-docs'
-        run: |
-          node --input-type=module <<'NODE'
-          import { rmSync } from 'node:fs';
-
-          for (const path of [
-            'output/chatbot/chatbot-conversation.png',
-            'output/chatbot/chatbot-response-time.json',
-          ]) {
-            rmSync(path, { force: true });
-          }
-          NODE
-
       - name: Run tests
         run: npx playwright test "${{ matrix.test_path }}"
 
       - name: Upload reports and evidence
-        if: always()
+        if: always() && steps.clean_evidence.outcome == 'success'
         uses: actions/upload-artifact@v7
         with:
           name: qa-${{ matrix.suite }}-${{ github.run_id }}-${{ github.run_attempt }}
@@ -137,6 +140,14 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
 
+      - name: Remove previous LLM artifact evidence
+        id: clean_evidence
+        run: |
+          node --input-type=module <<'NODE'
+          import { rmSync } from 'node:fs';
+          rmSync('output/ci/llm', { recursive: true, force: true });
+          NODE
+
       - run: npm ci
 
       - name: Validate Groq secret
@@ -154,10 +165,92 @@ jobs:
         run: node exercise-4-cicd/run-llm-ci.mjs
 
       - name: Upload LLM reports and logs
-        if: always()
+        if: always() && steps.clean_evidence.outcome == 'success'
         uses: actions/upload-artifact@v7
         with:
           name: qa-llm-${{ github.run_id }}-${{ github.run_attempt }}
           path: output/ci/llm/
           if-no-files-found: warn
+          retention-days: 30
+
+  consolidated:
+    name: Exercise 5 - consolidated report
+    needs: [typecheck, playwright, llm]
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    env:
+      REPORT_INPUT_DIR: ${{ runner.temp }}/consolidated-inputs
+      WORKFLOW_NEEDS: ${{ toJSON(needs) }}
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Prepare isolated report inputs
+        id: prepare_report
+        run: |
+          node --input-type=module <<'NODE'
+          import { mkdirSync, rmSync } from 'node:fs';
+          rmSync(process.env.REPORT_INPUT_DIR, { recursive: true, force: true });
+          mkdirSync(process.env.REPORT_INPUT_DIR, { recursive: true });
+          for (const path of ['output/consolidated-report.md', 'output/consolidated-report.json']) {
+            rmSync(path, { force: true });
+          }
+          NODE
+
+      - name: Download llm evidence
+        id: llm
+        continue-on-error: true
+        uses: actions/download-artifact@v8.0.2
+        with:
+          name: qa-llm-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ env.REPORT_INPUT_DIR }}/llm
+
+      - name: Download api evidence
+        id: api
+        continue-on-error: true
+        uses: actions/download-artifact@v8.0.2
+        with:
+          name: qa-api-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ env.REPORT_INPUT_DIR }}/api
+
+      - name: Download chatbot-docs evidence
+        id: docs
+        continue-on-error: true
+        uses: actions/download-artifact@v8.0.2
+        with:
+          name: qa-chatbot-docs-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ env.REPORT_INPUT_DIR }}/chatbot-docs
+
+      - name: Download chatbot-homepage evidence
+        id: homepage
+        continue-on-error: true
+        uses: actions/download-artifact@v8.0.2
+        with:
+          name: qa-chatbot-homepage-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ env.REPORT_INPUT_DIR }}/chatbot-homepage
+
+      - name: Generate consolidated report
+        if: always()
+        env:
+          DOWNLOAD_OUTCOMES: >-
+            {"llm":"${{ steps.llm.outcome }}","api":"${{ steps.api.outcome }}","chatbot-docs":"${{ steps.docs.outcome }}","chatbot-homepage":"${{ steps.homepage.outcome }}"}
+        run: node exercise-5-consolidated-report/generate-report.mjs "$REPORT_INPUT_DIR" output
+
+      - name: Upload consolidated report
+        if: always() && steps.prepare_report.outcome == 'success'
+        uses: actions/upload-artifact@v7
+        with:
+          name: qa-consolidated-report-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            output/consolidated-report.md
+            output/consolidated-report.json
+          if-no-files-found: error
           retention-days: 30
