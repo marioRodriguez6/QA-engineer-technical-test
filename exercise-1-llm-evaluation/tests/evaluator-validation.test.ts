@@ -57,3 +57,20 @@ test('reference set has positive and negative controls in every detector categor
   assert.equal(detectorFlag('context', evaluation({ contextIssueDetected: true })), true);
   assert.equal(detectorFlag('hallucination', evaluation({ hallucinationType: 'unsupported' })), true);
 });
+
+test('Haiku 5.5 request omits temperature and forwards disabled thinking without an external call', async () => {
+  const { createAnthropic } = await import('@ai-sdk/anthropic');
+  const { generateText } = await import('ai');
+  const { generationOptions } = await import('../providers/generation-options.js');
+  let body: Record<string, unknown> | undefined;
+  const provider = createAnthropic({ apiKey: 'fixture-not-a-real-key', fetch: async (_url, init) => {
+    body = JSON.parse(String(init?.body));
+    return new Response(JSON.stringify({ id: 'fixture', type: 'message', role: 'assistant', model: 'claude-haiku-5-5', content: [{ type: 'text', text: 'Fixture reply' }], stop_reason: 'end_turn', stop_sequence: null, usage: { input_tokens: 1, output_tokens: 1 } }), { status: 200, headers: { 'content-type': 'application/json' } });
+  } });
+  const config = { provider: 'anthropic' as const, model: 'claude-haiku-5-5' };
+  const result = await generateText({ model: provider(config.model), prompt: 'Fixture only', maxOutputTokens: 100, ...generationOptions(config, 0.1) });
+  assert.equal(result.text, 'Fixture reply');
+  assert.equal(Object.hasOwn(body!, 'temperature'), false);
+  assert.deepEqual(body!.thinking, { type: 'disabled' });
+  assert.deepEqual(generationOptions({ provider: 'groq', model: 'fixture' }, 0.2), { temperature: 0.2 });
+});
