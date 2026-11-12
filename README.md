@@ -456,11 +456,13 @@ After uploading the artifact, the final job commits report snapshots to the sour
 | Folder | Update policy |
 | --- | --- |
 | `exercise-5-consolidated-report/lastRun/` | Latest generated report, including failed, blocked and missing-evidence results |
-| `exercise-5-consolidated-report/LastSuccesfulrun/` | Latest successful upstream workflow with complete evidence and no FAIL, BLOCKED, REVIEW, FLAKY, MISSING or ERROR units |
+| `exercise-5-consolidated-report/LastSuccesfulrun/` | Latest complete LLM evaluation, including documented semantic FAIL findings; excludes quota/timeouts, unavailable judgments and other technical blockers |
 
 Both folders contain `consolidated-report.md`, `consolidated-report.json` and `publication.json` after automatic publication. The marker records the run number, attempt, source commit and workflow link. The spelling `LastSuccesfulrun` is intentional.
 
-An explicitly skipped test remains visible and does not prevent a workflow-success snapshot; this does not mean every assessment requirement passed. If the next run fails, only `lastRun` changes. Earlier results remain in Git history and per-run artifacts.
+Here, successful means the evaluation ran completely, not that the assistant had no defects. All five LLM scenarios must contain six responses and six valid PASS/FAIL judgments. A documented hallucination or security FAIL is eligible for both folders, even though the LLM job and workflow remain failed. Original verdicts and findings are never changed.
+
+Quota exhaustion, timeout, an unavailable evaluator, incomplete conversation, REVIEW, missing/invalid evidence or an unexplained execution failure updates only `lastRun`. TypeScript and API/UI jobs must still succeed; API/UI failures are not reclassified by the LLM exception. Explicit skipped cases remain visible and do not mean all assessment requirements passed. Earlier reports remain in Git history and per-run artifacts.
 
 The first `LastSuccesfulrun` snapshot preserves the manually prepared historical report for run 43268157726; its scope predates homepage coverage and it has no generated JSON companion. Future eligible runs replace it with both report formats.
 
