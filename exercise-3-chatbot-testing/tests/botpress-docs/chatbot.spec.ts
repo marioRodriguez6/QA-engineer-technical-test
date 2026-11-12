@@ -14,7 +14,7 @@ import { join } from 'node:path';
 const DOCS_URL = 'https://botpress.com/docs';
 
 const OUTPUT_DIR = process.env.QA_REPORT_DIR?.trim() ||
-  join(process.cwd(), 'exercise-3-chatbot-testing', 'output', 'docs');
+  join(process.cwd(), 'output', 'exercise3-chatbot', 'docs');
 
 const UI_TIMEOUT_MS = 30_000;
 
@@ -335,4 +335,5 @@ test.describe(
     );
   },
 );
+
 

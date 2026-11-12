@@ -23,7 +23,7 @@ function temporary(t) {
   t.after(() => rmSync(dir, { recursive: true, force: true })); return dir;
 }
 const marker = (runNumber, attempt = 1) => ({ runNumber, attempt });
-const destination = (root, folder, name = 'consolidated-report.md') => join(root, 'exercise-5-consolidated-report', folder, name);
+const destination = (root, folder, name = 'consolidated-report.md') => join(root, 'output', 'reporte-consolidado', folder, name);
 
 test('a successful workflow updates both snapshots while preserving the explicit skipped case', t => {
   const root = temporary(t); assert.equal(successfulRun(report()), true);
@@ -67,7 +67,7 @@ test('publisher commits only report snapshots to a real branch and retains unrel
   const options = { cwd, sourceRoot: source, branch: 'feature', sourceSha: sha, runId: '10', runNumber: 2, attempt: 1 };
   assert.deepEqual(publishReports(options), ['lastRun']);
   const files = git(cwd, ['show', '--format=', '--name-only', 'HEAD']).split('\n');
-  assert.equal(files.length, 3); assert.ok(files.every(path => path.startsWith('exercise-5-consolidated-report/lastRun/')));
+  assert.equal(files.length, 3); assert.ok(files.every(path => path.startsWith('output/reporte-consolidado/lastRun/')));
   assert.match(git(cwd, ['log', '-1', '--format=%s']), /\[skip ci\]/);
   assert.equal(readFileSync(join(cwd, 'source.txt'), 'utf8'), 'unchanged');
   assert.equal(existsSync(destination(cwd, 'LastSuccesfulrun')), false);
@@ -142,3 +142,4 @@ test('available semantic REVIEW updates both snapshots; unavailable REVIEW does 
   assert.equal(successfulRun(r), false);
   assert.deepEqual(writeSnapshots(root, 'Judge timeout', r, marker(2)), ['lastRun']);
 });
+

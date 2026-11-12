@@ -54,7 +54,7 @@ export function writeSnapshots(cwd, markdown, report, publication) {
   const changed = [];
   for (const folder of folders) {
     if (folder === 'LastSuccesfulrun' && !successfulRun(report)) continue;
-    const destination = join(cwd, 'exercise-5-consolidated-report', folder);
+    const destination = join(cwd, 'output', 'reporte-consolidado', folder);
     const marker = join(destination, 'publication.json');
     let previous = null;
     if (existsSync(marker)) previous = JSON.parse(readFileSync(marker, 'utf8'));
@@ -97,7 +97,7 @@ export function publishReports({ cwd, sourceRoot, branch, sourceSha, runId, runN
     git(['checkout', '--detach', `refs/remotes/origin/${branch}`]);
     const changed = writeSnapshots(cwd, markdown, report, publication);
     if (!changed.length) { console.log('Newer or identical report snapshots already exist. Artifact retained.'); return []; }
-    git(['add', '--', ...changed.map(folder => `exercise-5-consolidated-report/${folder}`)]);
+    git(['add', '--', ...changed.map(folder => `output/reporte-consolidado/${folder}`)]);
     git(['-c', 'user.name=github-actions[bot]', '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com',
       'commit', '-m', `docs: publish QA report for run ${runId} attempt ${attempt} [skip ci]`]);
     const pushed = git(['push', 'origin', `HEAD:refs/heads/${branch}`], true);
@@ -111,12 +111,13 @@ export function publishReports({ cwd, sourceRoot, branch, sourceSha, runId, runN
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   publishReports({
-    cwd: process.cwd(), sourceRoot: resolve(process.argv[2] ?? 'exercise-5-consolidated-report/output'),
+    cwd: process.cwd(), sourceRoot: resolve(process.argv[2] ?? 'output/reporte-consolidado'),
     branch: process.env.REPORT_BRANCH, sourceSha: process.env.REPORT_SOURCE_SHA,
     runId: process.env.GITHUB_RUN_ID, runNumber: Number(process.env.GITHUB_RUN_NUMBER),
     attempt: Number(process.env.GITHUB_RUN_ATTEMPT),
   });
 }
+
 
 
 

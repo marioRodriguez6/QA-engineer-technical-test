@@ -6,7 +6,7 @@
   "scripts": {
     "test": "node exercise-4-cicd/run-playwright.mjs",
     "test:api": "playwright test exercise-2-api-testing/tests/status.spec.ts",
-    "test:api:report": "playwright show-report exercise-2-api-testing/output/html",
+    "test:api:report": "playwright show-report output/exercise2API-Reports/html",
     "test:evaluator": "node --import tsx --test exercise-1-llm-evaluation/tests/evaluator-validation.test.ts",
     "validate:evaluator": "tsx exercise-1-llm-evaluation/validate-evaluator.ts",
     "test:chatbot:docs": "playwright test exercise-3-chatbot-testing/tests/botpress-docs/",
@@ -32,3 +32,4 @@
     "zod": "^4.6.7"
   }
 }
+

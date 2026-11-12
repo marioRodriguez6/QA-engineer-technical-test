@@ -1,0 +1,146 @@
+STDOUT:
+
+Scenario: Conversational Memory
+
+--- Turn 1 ---
+USER: Hi, my name is Mario.
+USER MODEL: fixed message
+[timer] anthropic Assistant: 0s / 30s
+[timer] anthropic Assistant: 1s / 30s
+[timer] anthropic Assistant: 1.18s - completed
+ASSISTANT: Hi Mario, welcome to Nerds Store! How can I help you today? I can help with order status, product details, shipping, returns, warranties, or troubleshooting for your products.
+ASSISTANT MODEL: anthropic / claude-haiku-5-5
+[timer] anthropic Evaluator - Turn 1: 0s / 30s
+[timer] anthropic Evaluator - Turn 1: 1s / 30s
+[timer] anthropic Evaluator - Turn 1: 1.71s - completed
+EVALUATOR: PASS
+EVALUATOR MODEL: anthropic / claude-haiku-5-5
+TIMING: user=0ms | assistant=1181ms | evaluator=1709ms | total=2890ms
+
+--- Turn 2 ---
+[timer] anthropic Simulated User - Turn 2: 0s / 30s
+[timer] anthropic Simulated User - Turn 2: 1s / 30s
+[timer] anthropic Simulated User - Turn 2: 1.16s - completed
+USER: Hey, thanks! I'm trying to figure out if the wireless keyboard I ordered works with a Mac. Is there a way to check compatibility before I buy another one?
+USER MODEL: anthropic / claude-haiku-5-5
+[timer] anthropic Assistant: 0s / 30s
+[timer] anthropic Assistant: 1s / 30s
+[timer] anthropic Assistant: 1.78s - completed
+ASSISTANT: Happy to help, Mario. Our records show your order #1001 is for the Wireless Headphones X1, not a keyboard. The keyboard we carry is the Mechanical Keyboard K2 (order #1002 is for this item, currently processing). Please note that the K2 is listed as connecting through USB-C, and I don't have any information in our knowledge base about Mac compatibility.
+
+Here's what I can tell you:
+- **Mechanical Keyboard K2:** red switches, USB-C connection, 24-month warranty, $74.50, 6 in stock.
+- **Compatibility with macOS:** not listed in our product information. For a definite answer, you can email support@nerdsstore.example.
+
+Could you confirm which keyboard you're thinking of, or whether you want
+ASSISTANT MODEL: anthropic / claude-haiku-5-5
+[timer] anthropic Evaluator - Turn 2: 0s / 30s
+[timer] anthropic Evaluator - Turn 2: 0s / 30s
+[timer] anthropic Evaluator - Turn 2: 1s / 30s
+[timer] anthropic Evaluator - Turn 2: 3s / 30s
+[timer] anthropic Evaluator - Turn 2: 3.12s - completed
+EVALUATOR: REVIEW
+EVALUATOR MODEL: anthropic / claude-haiku-5-5
+TIMING: user=1161ms | assistant=1781ms | evaluator=3124ms | total=6066ms
+
+--- Turn 3 ---
+[timer] anthropic Simulated User - Turn 3: 0s / 30s
+[timer] anthropic Simulated User - Turn 3: 0.99s - completed
+USER: Oh, right, I think I might have mixed up my orders. I was thinking of the keyboard, not headphones. Yes, I'm talking about the K2 then. Does it work with a Mac? I'd rather not buy another one if it won't connect properly
+USER MODEL: anthropic / claude-haiku-5-5
+[timer] anthropic Assistant: 0s / 30s
+[timer] anthropic Assistant: 1s / 30s
+[timer] anthropic Assistant: 1.90s - completed
+ASSISTANT: No problem, Mario. Unfortunately, our knowledge base doesn't include Mac compatibility information for the Mechanical Keyboard K2, so I can't confirm whether it will work with your Mac.
+
+What I can confirm about the K2:
+- It connects through USB-C, so it will need a USB-C port on your Mac (or an adapter).
+- It has red mechanical switches.
+- It comes with a 24-month warranty.
+
+To get a definite answer before buying, please email support@nerdsstore.example. Our support team is available Monday to Friday, 8:00 AM to 6:00 PM.
+
+Also, if you'd like, I can check the status of your order #1002, which is currently processing.
+ASSISTANT MODEL: anthropic / claude-haiku-5-5
+[timer] anthropic Evaluator - Turn 3: 0s / 30s
+[timer] anthropic Evaluator - Turn 3: 1s / 30s
+[timer] anthropic Evaluator - Turn 3: 2s / 30s
+[timer] anthropic Evaluator - Turn 3: 2.06s - completed
+EVALUATOR: PASS
+EVALUATOR MODEL: anthropic / claude-haiku-5-5
+TIMING: user=986ms | assistant=1897ms | evaluator=2061ms | total=4944ms
+
+--- Turn 4 ---
+[timer] anthropic Simulated User - Turn 4: 0s / 30s
+[timer] anthropic Simulated User - Turn 4: 0.94s - completed
+USER: Okay, thanks. Yeah, I'm pretty sure I'm talking about the K2. Quick question though: my Mac has USB-A ports and a bit of an older setup. Would I need a specific adapter, or is USB-C enough? And if
+USER MODEL: anthropic / claude-haiku-5-5
+[timer] anthropic Assistant: 0s / 30s
+[timer] anthropic Assistant: 1s / 30s
+[timer] anthropic Assistant: 2s / 30s
+[timer] anthropic Assistant: 2.06s - completed
+ASSISTANT: Thanks for the details, Mario. The K2 connects through USB-C, so if your Mac only has USB-A ports, you would need a USB-C to USB-A adapter (or a USB-C to USB-A cable) to connect it. I can't confirm from our product information whether a specific adapter is required, or whether the K2 will work properly with your older setup.
+
+Our USB-C Hub H7 ($49.99, 22 in stock) has 2x USB-A ports and a USB-C Power Delivery port, but it's a hub, not a simple adapter, and I can't confirm it's compatible with your Mac either.
+
+For a definite answer on compatibility with your specific Mac, please contact support@nerdsstore.example.
+
+You also mentioned "and if..." at the end. What were you
+ASSISTANT MODEL: anthropic / claude-haiku-5-5
+[timer] anthropic Evaluator - Turn 4: 0s / 30s
+[timer] anthropic Evaluator - Turn 4: 0s / 30s
+[timer] anthropic Evaluator - Turn 4: 2s / 30s
+[timer] anthropic Evaluator - Turn 4: 2s / 30s
+[timer] anthropic Evaluator - Turn 4: 3.55s - completed
+EVALUATOR: REVIEW
+EVALUATOR MODEL: anthropic / claude-haiku-5-5
+TIMING: user=938ms | assistant=2061ms | evaluator=3553ms | total=6552ms
+
+--- Turn 5 ---
+[timer] anthropic Simulated User - Turn 5: 0s / 30s
+[timer] anthropic Simulated User - Turn 5: 0s / 30s
+[timer] anthropic Simulated User - Turn 5: 1.52s - completed
+USER: Sorry, I got cut off there. What I was going to ask: if I go ahead and order the K2 and it doesn't work with my Mac, is there a way to return it? And do you remember my name, by the way?
+USER MODEL: anthropic / claude-haiku-5-5
+[timer] anthropic Assistant: 0s / 30s
+[timer] anthropic Assistant: 0s / 30s
+[timer] anthropic Assistant: 1s / 30s
+[timer] anthropic Assistant: 2.25s - completed
+ASSISTANT: Yes, Mario, I remember your name.
+
+On returns: our standard return window is 15 days. Items must be returned within that period, and the policy doesn't list any exception for the K2. Keep in mind that the knowledge base doesn't specify the exact return conditions beyond that, so for details on the process, please email support@nerdsstore.example. Also, if the K2 is damaged on arrival, customers must report it within 7 days of delivery.
+
+Also, if you decide to cancel your K2 order (#1002) before it ships, cancellations are allowed. Once it has shipped, they are not.
+ASSISTANT MODEL: anthropic / claude-haiku-5-5
+[timer] anthropic Evaluator - Turn 5: 0s / 30s
+[timer] anthropic Evaluator - Turn 5: 0s / 30s
+[timer] anthropic Evaluator - Turn 5: 2s / 30s
+[timer] anthropic Evaluator - Turn 5: 2.50s - completed
+EVALUATOR: PASS
+EVALUATOR MODEL: anthropic / claude-haiku-5-5
+TIMING: user=1525ms | assistant=2247ms | evaluator=2499ms | total=6271ms
+
+--- Turn 6 ---
+USER: By the way, do you remember my name?
+USER MODEL: fixed message
+[timer] anthropic Assistant: 0s / 30s
+[timer] anthropic Assistant: 0.98s - completed
+ASSISTANT: Yes, your name is Mario. I also noticed that earlier you said "Mario" when you introduced yourself, and our order records list Mario as the customer on order #1001.
+ASSISTANT MODEL: anthropic / claude-haiku-5-5
+[timer] anthropic Evaluator - Turn 6: 0s / 30s
+[timer] anthropic Evaluator - Turn 6: 0s / 30s
+[timer] anthropic Evaluator - Turn 6: 2s / 30s
+[timer] anthropic Evaluator - Turn 6: 2.10s - completed
+EVALUATOR: PASS
+EVALUATOR MODEL: anthropic / claude-haiku-5-5
+TIMING: user=0ms | assistant=977ms | evaluator=2099ms | total=3076ms
+
+Result saved to output/llm/conversational-memory.json
+Execution status: COMPLETED
+Completed turns: 6/6
+Final verdict: REVIEW
+
+STDERR:
+
+PROCESS ERROR:
+none

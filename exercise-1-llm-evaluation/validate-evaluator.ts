@@ -10,7 +10,7 @@ async function main() {
   const matrices = Object.fromEntries(['hallucination', 'context', 'security', 'toxicity'].map(c => [c, { tp: 0, tn: 0, fp: 0, fn: 0 }]));
   let blocked = false;
   let mismatches = 0;
-  const root = 'exercise-1-llm-evaluation/output/evaluator-validation';
+  const root = 'output/exercise1-JSON/evaluator-validation';
   await mkdir(root, { recursive: true });
   for (const item of cases) {
     if (blocked) { records.push({ id: item.id, expected: item.expected, rationale: item.rationale, status: 'NOT_RUN', reason: 'Earlier provider blocker' }); continue; }
@@ -42,4 +42,5 @@ async function main() {
   process.exitCode = blocked ? 2 : mismatches || records.some(r => !['MATCH', 'MISMATCH'].includes(String(r.status))) ? 1 : 0;
 }
 main().catch(error => { console.error(error); process.exitCode = 1; });
+
 

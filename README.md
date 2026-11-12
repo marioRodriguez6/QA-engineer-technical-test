@@ -12,7 +12,7 @@ Evaluación técnica de agentes conversacionales, pruebas de API y de interfaz d
 | `exercise-4-cicd/` | Ejecutor de CI para los cinco escenarios de LLM |
 | `exercise-5-consolidated-report/` | Generador, pruebas y reportes consolidados conservados |
 | `.github/workflows/qa.yml` | Workflow de GitHub Actions |
-| `exercise-*/output/` | Resultados de cada ejercicio dentro de su carpeta |
+| `output/` | Entregables y evidencias agrupados por ejercicio, según el PDF |
 
 Ejecuta todos los comandos desde la raíz del repositorio. Los ejemplos utilizan Bash en Linux o Ubuntu WSL. Los nombres de archivos, variables, comandos, campos JSON y estados del código se conservan en inglés.
 
@@ -67,7 +67,7 @@ Para la primera configuración, copia la plantilla:
 cp .env.example .env
 ```
 
-Si ya existe `.env`, edítalo sin sobrescribirlo. La plantilla contiene:
+Si ya existe `.env`, edítalo sin sobrescribirlo. Configura los tres roles con esta estructura; sustituye `LLM-Preferido` por un proveedor admitido y `Modelo-Preferido` por un identificador válido. `.env.example` contiene un ejemplo concreto:
 
 ```dotenv
 SIMULATED_USER_PROVIDER='LLM-Preferido'
@@ -122,7 +122,7 @@ npx tsx exercise-1-llm-evaluation/runner.ts prompt-injection
 Cada escenario busca completar seis intercambios de usuario y asistente, conservando el historial. Su reporte se guarda en:
 
 ```text
-exercise-1-llm-evaluation/output/scenarios/<scenario-id>.json
+output/exercise1-JSON/<scenario-id>.json
 ```
 
 Volver a ejecutar un escenario reemplaza su reporte en esa ruta. Conserva copias de las evidencias anteriores si necesitas comparar ejecuciones.
@@ -133,7 +133,7 @@ Volver a ejecutar un escenario reemplaza su reporte en esa ruta. Conserva copias
 node exercise-4-cicd/run-llm-ci.mjs
 ```
 
-Los escenarios se ejecutan secuencialmente. Los reportes, registros y resumen quedan en `exercise-1-llm-evaluation/output/ci/`; el resumen es `exercise-1-llm-evaluation/output/ci/execution-summary.json`.
+Los escenarios se ejecutan secuencialmente. Los reportes, registros y resumen quedan en `output/exercise1-JSON/ci/`; el resumen es `output/exercise1-JSON/ci/execution-summary.json`.
 
 Antes de cada escenario, el ejecutor elimina el reporte previo para evitar aceptar resultados antiguos.
 
@@ -198,7 +198,7 @@ npm run validate:evaluator
 
 Este último comando consume tokens del evaluador. Utiliza diez casos fijos, con controles positivos y negativos de exactitud factual, memoria, seguridad y toxicidad. Las expectativas y justificaciones se definen antes de ejecutar en `exercise-1-llm-evaluation/tests/evaluator-cases.ts`. Estos casos validan al evaluador; no reemplazan las conversaciones reales ni exigen puntuaciones numéricas exactas.
 
-Los resultados quedan en `exercise-1-llm-evaluation/output/evaluator-validation/validation-results.json` y `.md`. Conservan resultados esperados/observados, discrepancias, cobertura y conteos TP/TN/FP/FN por categoría. La tasa de falsos positivos es FP/(FP+TN) y la de falsos negativos FN/(FN+TP); sin muestras válidas se utiliza `null`. Un bloqueo del proveedor detiene las llamadas restantes y registra `NOT_RUN`, separado de una falla del detector. Este conjunto pequeño no demuestra sensibilidad o especificidad universales.
+Los resultados quedan en `output/exercise1-JSON/evaluator-validation/validation-results.json` y `.md`. Conservan resultados esperados/observados, discrepancias, cobertura y conteos TP/TN/FP/FN por categoría. La tasa de falsos positivos es FP/(FP+TN) y la de falsos negativos FN/(FN+TP); sin muestras válidas se utiliza `null`. Un bloqueo del proveedor detiene las llamadas restantes y registra `NOT_RUN`, separado de una falla del detector. Este conjunto pequeño no demuestra sensibilidad o especificidad universales.
 
 CI ejecuta automáticamente solo las pruebas sin llamadas al proveedor. La calibración real permanece separada para evitar consumo adicional y sus métricas no se mezclan con las de los cinco escenarios. Si una respuesta nueva del juez omite campos requeridos o contiene valores inválidos, la evaluación queda no disponible; no se inventan valores para cumplir el esquema.
 
@@ -231,8 +231,8 @@ Las pruebas crean un usuario y datos nuevos en el servicio seleccionado. Compart
 Rutas predeterminadas:
 
 ```text
-exercise-2-api-testing/output/html/
-exercise-2-api-testing/output/results.json
+output/exercise2API-Reports/html/
+output/exercise2API-Reports/results.json
 ```
 
 Abre el reporte de Playwright:
@@ -244,8 +244,8 @@ npm run test:api:report
 Para separar las evidencias de API:
 
 ```bash
-QA_REPORT_DIR=exercise-2-api-testing/output npx playwright test exercise-2-api-testing/tests/status.spec.ts
-npx playwright show-report exercise-2-api-testing/output/html
+QA_REPORT_DIR=output/exercise2API-Reports npx playwright test exercise-2-api-testing/tests/status.spec.ts
+npx playwright show-report output/exercise2API-Reports/html
 ```
 
 Este HTML pertenece al ejercicio 2; no es el reporte consolidado del ejercicio 5.
@@ -266,25 +266,25 @@ La página principal observada utiliza un Shadow DOM abierto, no un iframe de ch
 Docs:
 
 ```bash
-QA_REPORT_DIR=exercise-3-chatbot-testing/output/docs npx playwright test exercise-3-chatbot-testing/tests/botpress-docs/
+QA_REPORT_DIR=output/exercise3-chatbot/docs npx playwright test exercise-3-chatbot-testing/tests/botpress-docs/
 ```
 
 Página principal:
 
 ```bash
-QA_REPORT_DIR=exercise-3-chatbot-testing/output/homepage npx playwright test exercise-3-chatbot-testing/tests/botpress-homepage/
+QA_REPORT_DIR=output/exercise3-chatbot/homepage npx playwright test exercise-3-chatbot-testing/tests/botpress-homepage/
 ```
 
 Agrega `--headed` para ver el navegador. Para ejecutar solamente el caso de apertura/cierre de Docs:
 
 ```bash
-QA_REPORT_DIR=exercise-3-chatbot-testing/output/docs npx playwright test exercise-3-chatbot-testing/tests/botpress-docs/ --grep CHATBOT-002
+QA_REPORT_DIR=output/exercise3-chatbot/docs npx playwright test exercise-3-chatbot-testing/tests/botpress-docs/ --grep CHATBOT-002
 ```
 
 Para reunir ambas suites en un reporte local:
 
 ```bash
-QA_REPORT_DIR=exercise-3-chatbot-testing/output/combined npx playwright test exercise-3-chatbot-testing/tests/
+QA_REPORT_DIR=output/exercise3-chatbot/combined npx playwright test exercise-3-chatbot-testing/tests/
 ```
 
 No requieren credenciales de Groq. Cada prueba tiene un contexto aislado del navegador. `QA_REPORT_DIR` cambia las rutas de evidencias, no las aserciones.
@@ -295,18 +295,18 @@ Cada directorio de Playwright contiene `html/`, `results.json` y `test-results/`
 
 | Suite | Directorio |
 | --- | --- |
-| Docs | `exercise-3-chatbot-testing/output/docs/` |
-| Página principal | `exercise-3-chatbot-testing/output/homepage/` |
-| Ejecución local conjunta | `exercise-3-chatbot-testing/output/combined/` |
+| Docs | `output/exercise3-chatbot/docs/` |
+| Página principal | `output/exercise3-chatbot/homepage/` |
+| Ejecución local conjunta | `output/exercise3-chatbot/combined/` |
 
 ```bash
-npx playwright show-report exercise-3-chatbot-testing/output/docs/html
-npx playwright show-report exercise-3-chatbot-testing/output/homepage/html
+npx playwright show-report output/exercise3-chatbot/docs/html
+npx playwright show-report output/exercise3-chatbot/homepage/html
 ```
 
 Se conservan capturas, videos y trazas de las pruebas de navegador ejecutadas, independientemente del resultado. Las pruebas de API no generan videos de navegador. Para inspeccionar una traza, pasa su ruta real a `npx playwright show-trace`.
 
-La conversación de Docs también escribe `exercise-3-chatbot-testing/output/docs/chatbot-conversation.png` y `exercise-3-chatbot-testing/output/docs/chatbot-response-time.json`; estas rutas fijas se sobrescriben en ejecuciones posteriores.
+La conversación de Docs también escribe `output/exercise3-chatbot/docs/chatbot-conversation.png` y `output/exercise3-chatbot/docs/chatbot-response-time.json`; estas rutas fijas se sobrescriben en ejecuciones posteriores.
 
 `HOME-004` guarda y adjunta `homepage-conversation.png` y `homepage-response-time.json` en su directorio de resultados. Espera el mensaje de bienvenida antes de establecer la línea base y exige un mensaje entrante nuevo después de Hola. La latencia llega hasta el primer texto visible de la nueva respuesta, incluye sobrecarga de interfaz/aserciones y no mide todos los mensajes posteriores ni impone un SLA no documentado.
 
@@ -413,8 +413,8 @@ git diff --check
 Pruebas de servicios externos:
 
 ```bash
-QA_REPORT_DIR=exercise-2-api-testing/output npx playwright test exercise-2-api-testing/tests/status.spec.ts
-QA_REPORT_DIR=exercise-3-chatbot-testing/output/combined npx playwright test exercise-3-chatbot-testing/tests/
+QA_REPORT_DIR=output/exercise2API-Reports npx playwright test exercise-2-api-testing/tests/status.spec.ts
+QA_REPORT_DIR=output/exercise3-chatbot/combined npx playwright test exercise-3-chatbot-testing/tests/
 ```
 
 Escenarios LLM, con credenciales y cuota disponibles:
@@ -447,8 +447,8 @@ El job final `consolidated` depende de TypeScript, API/UI y LLM, y utiliza `if: 
 
 Produce únicamente dos formatos de reporte:
 
-- `exercise-5-consolidated-report/output/consolidated-report.md`: presentación en español, también visible en el resumen del job.
-- `exercise-5-consolidated-report/output/consolidated-report.json`: resultados estructurados, juicios originales y trazabilidad.
+- `output/reporte-consolidado/consolidated-report.md`: presentación en español, también visible en el resumen del job.
+- `output/reporte-consolidado/consolidated-report.json`: resultados estructurados, juicios originales y trazabilidad.
 
 Ambos se incluyen en `qa-consolidated-report-<run-id>-<attempt>`, con retención de 30 días. El ejercicio 5 no genera un reporte HTML. Los HTML de Playwright pertenecen a los ejercicios 2 y 3.
 
@@ -477,8 +477,8 @@ Después de subir el artefacto, el job publica las carpetas en la rama de origen
 
 | Carpeta | Política de actualización |
 | --- | --- |
-| `exercise-5-consolidated-report/lastRun/` | Último reporte generado, incluso con fallas, bloqueos o evidencia incompleta |
-| `exercise-5-consolidated-report/LastSuccesfulrun/` | Última evaluación completa, incluso con veredictos funcionales `FAIL` o `REVIEW` disponibles; excluye bloqueos técnicos |
+| `output/reporte-consolidado/lastRun/` | Último reporte generado, incluso con fallas, bloqueos o evidencia incompleta |
+| `output/reporte-consolidado/LastSuccesfulrun/` | Última evaluación completa, incluso con veredictos funcionales `FAIL` o `REVIEW` disponibles; excluye bloqueos técnicos |
 
 Cada carpeta contiene `consolidated-report.md`, `consolidated-report.json` y `publication.json`. Este último es metadato de auditoría, no otro formato de reporte: guarda número de ejecución, intento, commit y enlace. Se conserva intencionalmente la escritura `LastSuccesfulrun`.
 
@@ -494,19 +494,19 @@ Extrae los artefactos de una misma ejecución e intento en estas rutas, conserva
 
 | Directorio de entrada | Contenido |
 | --- | --- |
-| `exercise-5-consolidated-report/output/inputs/llm/` | JSON de escenarios y `execution-summary.json` |
-| `exercise-5-consolidated-report/output/inputs/api/` | `results.json` de API y evidencias |
-| `exercise-5-consolidated-report/output/inputs/chatbot-docs/` | `results.json`, latencia y evidencias de Docs |
-| `exercise-5-consolidated-report/output/inputs/chatbot-homepage/` | `results.json`, latencia y evidencias de la página principal |
+| `output/reporte-consolidado/inputs/llm/` | JSON de escenarios y `execution-summary.json` |
+| `output/reporte-consolidado/inputs/api/` | `results.json` de API y evidencias |
+| `output/reporte-consolidado/inputs/chatbot-docs/` | `results.json`, latencia y evidencias de Docs |
+| `output/reporte-consolidado/inputs/chatbot-homepage/` | `results.json`, latencia y evidencias de la página principal |
 
 ```bash
 node --test exercise-5-consolidated-report/generate-report.test.mjs exercise-5-consolidated-report/publish-reports.test.mjs
-node exercise-5-consolidated-report/generate-report.mjs exercise-5-consolidated-report/output/inputs exercise-5-consolidated-report/output
+node exercise-5-consolidated-report/generate-report.mjs output/reporte-consolidado/inputs output/reporte-consolidado
 ```
 
 El generador localiza JSON recursivamente e ignora copias adjuntas dentro de reportes HTML. Rechaza fuentes duplicadas o ambiguas. No combines artefactos de distintas ejecuciones. Un reintento parcial sin artefactos del intento actual se registra como evidencia ausente.
 
-El antiguo reporte situado directamente en `exercise-5-consolidated-report/` se trasladó a `LastSuccesfulrun/`. Los reportes conservados no se utilizan como entradas del generador.
+Los reportes consolidados publicados se conservan en `output/reporte-consolidado/lastRun/` y `output/reporte-consolidado/LastSuccesfulrun/`. Los reportes conservados no se utilizan como entradas del generador.
 
 No puede garantizarse la generación si GitHub no inicia el job, falla la preparación del entorno o se termina forzosamente el workflow. Un commit con `[skip ci]` no ejecuta este job.
 
@@ -514,22 +514,22 @@ No puede garantizarse la generación si GitHub no inicia el job, falla la prepar
 
 ```bash
 npm test
-npx playwright show-report exercise-2-api-testing/output/html
-npx playwright show-report exercise-3-chatbot-testing/output/docs/html
-npx playwright show-report exercise-3-chatbot-testing/output/homepage/html
+npx playwright show-report output/exercise2API-Reports/html
+npx playwright show-report output/exercise3-chatbot/docs/html
+npx playwright show-report output/exercise3-chatbot/homepage/html
 ```
 
-`npm test` ejecuta API, Docs y página principal por separado para mantener cada reporte en su ejercicio, y continúa con las suites restantes si una falla. Guarda el resumen de ejecución conjunta en `exercise-4-cicd/output/playwright-execution.json`. `npm test` no ejecuta los cinco escenarios conversacionales LLM. Ejecútalos por separado con el ejecutor del ejercicio 1 o el del ejercicio 4.
+`npm test` ejecuta API, Docs y página principal por separado para mantener cada reporte en su subcarpeta de `/output`, y continúa con las suites restantes si una falla. Guarda el resumen de ejecución conjunta en `output/ci/playwright-execution.json`. `npm test` no ejecuta los cinco escenarios conversacionales LLM. Ejecútalos por separado con el ejecutor del ejercicio 1 o el del ejercicio 4.
 
 ## Gestión de evidencias
 
 Una ejecución posterior puede sobrescribir reportes que usan la misma ruta. Para conservar varias, utiliza directorios únicos:
 
 ```bash
-QA_REPORT_DIR=exercise-3-chatbot-testing/output/runs/chatbot-$(date -u +%Y%m%dT%H%M%SZ) npx playwright test exercise-3-chatbot-testing/tests/
+QA_REPORT_DIR=output/exercise3-chatbot/runs/chatbot-$(date -u +%Y%m%dT%H%M%SZ) npx playwright test exercise-3-chatbot-testing/tests/
 ```
 
-La captura y el JSON de latencia de Docs se guardan en `QA_REPORT_DIR` cuando se especifica; sin esa variable utilizan `exercise-3-chatbot-testing/output/docs/`.
+La captura y el JSON de latencia de Docs se guardan en `QA_REPORT_DIR` cuando se especifica; sin esa variable utilizan `output/exercise3-chatbot/docs/`.
 
 Reporta resultados con evidencias de la ejecución correspondiente. Un reporte histórico aprobado no demuestra que una ejecución posterior fallida o bloqueada haya aprobado.
 
@@ -554,18 +554,24 @@ En Actions, agrega `ANTHROPIC_API_KEY` y selecciona `anthropic` en `llm_provider
 Para `claude-haiku-5-5`, las opciones del proveedor omiten parámetros de muestreo y desactivan explícitamente `thinking` para respetar presupuestos cortos de respuesta. Los demás proveedores conservan sus temperaturas. Esto no modifica veredictos ni elimina hallazgos. Revisa siempre la evidencia y el consumo de la ejecución concreta antes de asumir que otra configuración tendrá el mismo resultado.
 
 
-## Ubicación de los resultados por ejercicio
+## Entregables generales en `/output`
 
-| Ejercicio | Resultados nuevos | Evidencia histórica versionada |
-| --- | --- | --- |
-| 1 · LLM | `exercise-1-llm-evaluation/output/scenarios/`, `exercise-1-llm-evaluation/output/ci/` y `exercise-1-llm-evaluation/output/evaluator-validation/` | `exercise-1-llm-evaluation/output/history/` |
-| 2 · API | `exercise-2-api-testing/output/` | Sin reportes históricos de API identificados en la antigua raíz |
-| 3 · Chatbot | `exercise-3-chatbot-testing/output/docs/` y `exercise-3-chatbot-testing/output/homepage/` | `exercise-3-chatbot-testing/output/history/` |
-| 4 · Ejecución conjunta | `exercise-4-cicd/output/` | No aplica |
-| 5 · Consolidado | `exercise-5-consolidated-report/output/`; los entregables publicados permanecen en `lastRun/` y `LastSuccesfulrun/` | Historial de Git |
+El PDF exige una carpeta `/output` en la raíz. Los resultados se agrupan así:
 
-La antigua carpeta raíz `output/` se reorganizó conservando el contenido de los archivos históricos, incluidos los binarios y las rutas relativas internas de los reportes HTML. Esos reportes documentan ejecuciones anteriores, no la última ejecución. Las rutas antiguas citadas dentro de JSON/trazas se conservan como evidencia original.
+| Carpeta | Contenido |
+| --- | --- |
+| `output/exercise1-JSON/` | JSON de los cinco escenarios LLM; `history/` conserva evidencias anteriores y `ci/` guarda registros y resumen de ejecución |
+| `output/exercise2API-Reports/` | Reportes de API, `results.json`, HTML de Playwright y evidencia disponible |
+| `output/exercise3-chatbot/` | Reportes de Docs y página principal, capturas, videos, trazas y latencias; `history/` identifica ejecuciones anteriores |
+| `output/reporte-consolidado/` | Reporte único en JSON y Markdown, con `lastRun/` y `LastSuccesfulrun/` |
+| `output/ci/` | Resumen y reportes de ejecución conjunta del pipeline |
 
-Las salidas nuevas de los ejercicios 1, 2 y 3 se generan en sus carpetas y se suben como artefactos de Actions; no se añaden automáticamente a Git. El ejercicio 5 sigue publicando sus dos snapshots. Las salidas temporales están ignoradas para evitar commits accidentales. Para entregar una ejecución concreta, descarga sus artefactos y conserva su identificador.
+Las evidencias históricas se trasladaron sin alterar su contenido, incluidos los binarios y las rutas relativas internas del HTML. Las rutas antiguas citadas dentro de JSON/trazas se conservan como evidencia original. Un reporte histórico no representa la ejecución más reciente.
 
-El comando directo `npx playwright test` sin una ruta seleccionada genera un reporte global en `exercise-4-cicd/output/playwright-combined/`, por tratarse de una ejecución conjunta. Para obtener los tres reportes separados utiliza `npm test`. `QA_REPORT_DIR` permite elegir explícitamente otra ubicación.
+El código fuente permanece dentro de cada carpeta `exercise-*`. Los comandos, el workflow, la subida de artefactos y la publicación de snapshots utilizan las rutas de `/output`. Los archivos `publication.json` identifican la ejecución y el commit de cada consolidado publicado.
+
+Las ejecuciones de Actions siguen entregando los resultados completos como artefactos descargables. La publicación automática en Git continúa limitada a `output/reporte-consolidado/lastRun/` y `LastSuccesfulrun/`; los otros reportes se conservan explícitamente cuando se prepara la entrega. No se ejecutan LLM por reorganizar los archivos.
+
+`npm test` genera tres reportes separados. El comando directo `npx playwright test` sin una ruta seleccionada genera un reporte global en `output/ci/playwright-combined/`. `QA_REPORT_DIR` permite elegir explícitamente otra ubicación.
+
+Los cinco JSON y registros LLM, junto con `output/exercise2API-Reports/results.json`, se descargaron de los artefactos de la ejecución 43327492976 (intento 1). `output/evidence-manifest.json` conserva su origen y hashes SHA-256. El reporte HTML completo y las trazas de API también están disponibles en el artefacto `qa-api-43327492976-1` durante su retención.

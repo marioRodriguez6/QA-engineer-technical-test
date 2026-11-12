@@ -5,9 +5,9 @@ import { runPlaywrightSuites } from './run-playwright.mjs';
 
 test('reports for each selected exercise stay in that exercise folder', () => {
   for (const s of playwrightSuites) assert.equal(defaultPlaywrightReportDir([s.testPath]), s.reportDir);
-  assert.equal(defaultPlaywrightReportDir(['exercise-3-chatbot-testing/tests/']), 'exercise-3-chatbot-testing/output/combined');
-  assert.equal(defaultPlaywrightReportDir(['exercise-2-api-testing/tests/', 'exercise-3-chatbot-testing/tests/']), 'exercise-4-cicd/output/playwright-combined');
-  assert.equal(defaultPlaywrightReportDir([]), 'exercise-4-cicd/output/playwright-combined');
+  assert.equal(defaultPlaywrightReportDir(['exercise-3-chatbot-testing/tests/']), 'output/exercise3-chatbot/combined');
+  assert.equal(defaultPlaywrightReportDir(['exercise-2-api-testing/tests/', 'exercise-3-chatbot-testing/tests/']), 'output/ci/playwright-combined');
+  assert.equal(defaultPlaywrightReportDir([]), 'output/ci/playwright-combined');
 });
 
 test('npm test isolates suite outputs and continues after an assertion failure', () => {
@@ -20,3 +20,4 @@ test('npm test isolates suite outputs and continues after an assertion failure',
   assert.ok(calls.every(c => c.args.includes('--list') && c.options.env.CI === 'true'));
   assert.deepEqual(results.map(r => r.exitCode), [1, 0, 0]);
 });
+

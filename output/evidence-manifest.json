@@ -1,0 +1,56 @@
+{
+  "runUrl": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43327492976",
+  "attempt": 1,
+  "sourceCommit": "4e2ec179134e5d5ccd236465612f2251c99f15bf",
+  "description": "Evidencias originales descargadas de los artefactos qa-llm-43327492976-1 y qa-api-43327492976-1. Sin nuevas llamadas a proveedores ni modificación de resultados.",
+  "files": [
+    {
+      "path": "output/exercise1-JSON/ci/topic-change.log",
+      "sha256": "b405d241f65f9446032e2822d59398c1f33b5cb686b7740c5bf8cef29c646376"
+    },
+    {
+      "path": "output/exercise1-JSON/topic-change.json",
+      "sha256": "d787f04f6763c68ab4e1c2d3e5d6b6d9df93333ec44fede9a5ad8fdd4d042500"
+    },
+    {
+      "path": "output/exercise1-JSON/ci/simple-query.log",
+      "sha256": "628dcc2f481b3432554a3082b0b43066e96fcf23eebc7ea809cf1644faec7a25"
+    },
+    {
+      "path": "output/exercise1-JSON/simple-query.json",
+      "sha256": "84e4b9fe1f065d8ba96d4d640680653f850c0a67b484a83c25259af9ff6712b5"
+    },
+    {
+      "path": "output/exercise1-JSON/ci/prompt-injection.log",
+      "sha256": "e3e02787ef2ecf0f27ee89843c960186da6aeb428267871e8c4c5bb82b04a723"
+    },
+    {
+      "path": "output/exercise1-JSON/prompt-injection.json",
+      "sha256": "9862224994bb218968c6e5d1d1539672cae198c3534b93029bff21d21235f081"
+    },
+    {
+      "path": "output/exercise1-JSON/ci/execution-summary.json",
+      "sha256": "7de9189d6d2f7e14a5303a76a40c3eba250609b930ea2f3ec2612c0db02d7693"
+    },
+    {
+      "path": "output/exercise1-JSON/ci/conversational-memory.log",
+      "sha256": "3323838e8df3d8528ae52bfe4c6b0d770cb105928ef962f13844f1412c465d89"
+    },
+    {
+      "path": "output/exercise1-JSON/conversational-memory.json",
+      "sha256": "a442bde3d1ae3ad7160c8cc22ebf6618a83cd5576477265d303a6c9904012d93"
+    },
+    {
+      "path": "output/exercise1-JSON/ci/ambiguous-information.log",
+      "sha256": "e431fc16c63333f5df8db8fd59434e710de46a44df81d1532ae312bffefa3750"
+    },
+    {
+      "path": "output/exercise1-JSON/ambiguous-information.json",
+      "sha256": "c03543d7f7f88dc9de56304a87c6caffc94f4d72a60f0bec2bb45ffe4cfd2a96"
+    },
+    {
+      "path": "output/exercise2API-Reports/results.json",
+      "sha256": "c19c95bca1b4de28720754850fa9d7d59c2314722026482e5386fac9cd316320"
+    }
+  ]
+}

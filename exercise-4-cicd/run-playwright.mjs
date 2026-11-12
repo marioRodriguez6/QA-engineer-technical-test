@@ -17,7 +17,8 @@ export function runPlaywrightSuites(args = [], execute = spawnSync, env = proces
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const results = runPlaywrightSuites(process.argv.slice(2));
-  mkdirSync('exercise-4-cicd/output', { recursive: true });
-  writeFileSync('exercise-4-cicd/output/playwright-execution.json', JSON.stringify({ generatedAt: new Date().toISOString(), results }, null, 2) + '\n');
+  mkdirSync('output/ci', { recursive: true });
+  writeFileSync('output/ci/playwright-execution.json', JSON.stringify({ generatedAt: new Date().toISOString(), results }, null, 2) + '\n');
   process.exitCode = results.every(r => r.exitCode === 0 && !r.signal && !r.error) ? 0 : 1;
 }
+

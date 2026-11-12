@@ -17,13 +17,15 @@ test-results/
 Thumbs.db
 
 
-# Resultados nuevos: las evidencias históricas versionadas se conservan aparte.
-exercise-1-llm-evaluation/output/scenarios/
-exercise-1-llm-evaluation/output/ci/
-exercise-1-llm-evaluation/output/evaluator-validation/
-exercise-2-api-testing/output/
-exercise-3-chatbot-testing/output/docs/
-exercise-3-chatbot-testing/output/homepage/
-exercise-3-chatbot-testing/output/combined/
-exercise-4-cicd/output/
-exercise-5-consolidated-report/output/
+# Resultados temporales. Las evidencias de entrega y snapshots están versionados.
+output/exercise1-JSON/ci/
+output/exercise1-JSON/evaluator-validation/
+output/exercise2API-Reports/test-results/
+output/exercise3-chatbot/docs/
+output/exercise3-chatbot/homepage/
+output/exercise3-chatbot/combined/
+output/exercise3-chatbot/runs/
+output/ci/
+output/reporte-consolidado/inputs/
+output/reporte-consolidado/consolidated-report.json
+output/reporte-consolidado/consolidated-report.md

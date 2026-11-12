@@ -281,10 +281,10 @@ async function main(): Promise<void> {
 
   const result = await runScenario(scenarioId);
 
-  await mkdir('exercise-1-llm-evaluation/output/scenarios', { recursive: true });
+  await mkdir('output/exercise1-JSON', { recursive: true });
 
   const outputPath =
-    `exercise-1-llm-evaluation/output/scenarios/${scenarioId}.json`;
+    `output/exercise1-JSON/${scenarioId}.json`;
 
   await writeFile(
     outputPath,
@@ -320,4 +320,5 @@ main().catch((error: unknown) => {
 
   process.exitCode = 1;
 });
+
 

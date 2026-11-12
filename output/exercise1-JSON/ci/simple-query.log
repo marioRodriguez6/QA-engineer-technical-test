@@ -1,0 +1,122 @@
+STDOUT:
+
+Scenario: Simple Query
+
+--- Turn 1 ---
+USER: How long does standard shipping usually take?
+USER MODEL: fixed message
+[timer] anthropic Assistant: 0s / 30s
+[timer] anthropic Assistant: 1s / 30s
+[timer] anthropic Assistant: 1.23s - completed
+ASSISTANT: Standard shipping at Nerds Store usually takes 2 to 4 business days.
+ASSISTANT MODEL: anthropic / claude-haiku-5-5
+[timer] anthropic Evaluator - Turn 1: 0s / 30s
+[timer] anthropic Evaluator - Turn 1: 1s / 30s
+[timer] anthropic Evaluator - Turn 1: 1.33s - completed
+EVALUATOR: PASS
+EVALUATOR MODEL: anthropic / claude-haiku-5-5
+TIMING: user=0ms | assistant=1235ms | evaluator=1331ms | total=2566ms
+
+--- Turn 2 ---
+[timer] anthropic Simulated User - Turn 2: 0s / 30s
+[timer] anthropic Simulated User - Turn 2: 0.82s - completed
+USER: Nice, that's pretty quick. Do you know if there's an option for express shipping too, and roughly how much more it costs?
+USER MODEL: anthropic / claude-haiku-5-5
+[timer] anthropic Assistant: 0s / 30s
+[timer] anthropic Assistant: 0.88s - completed
+ASSISTANT: Yes, express shipping is available and usually takes 1 to 2 business days. However, the knowledge base doesn't include express shipping fees, so I can't tell you how much more it costs. You can contact support at support@nerdsstore.example for pricing details.
+ASSISTANT MODEL: anthropic / claude-haiku-5-5
+[timer] anthropic Evaluator - Turn 2: 0s / 30s
+[timer] anthropic Evaluator - Turn 2: 1s / 30s
+[timer] anthropic Evaluator - Turn 2: 2s / 30s
+[timer] anthropic Evaluator - Turn 2: 2.14s - completed
+EVALUATOR: PASS
+EVALUATOR MODEL: anthropic / claude-haiku-5-5
+TIMING: user=823ms | assistant=879ms | evaluator=2141ms | total=3843ms
+
+--- Turn 3 ---
+[timer] anthropic Simulated User - Turn 3: 0s / 30s
+[timer] anthropic Simulated User - Turn 3: 0.81s - completed
+USER: Got it, thanks! Do you happen to know if orders over a certain amount qualify for free shipping?
+USER MODEL: anthropic / claude-haiku-5-5
+[timer] anthropic Assistant: 0s / 30s
+[timer] anthropic Assistant: 0s / 30s
+[timer] anthropic Assistant: 1.39s - completed
+ASSISTANT: Yes, orders of $75 or more qualify for free shipping.
+ASSISTANT MODEL: anthropic / claude-haiku-5-5
+[timer] anthropic Evaluator - Turn 3: 0s / 30s
+[timer] anthropic Evaluator - Turn 3: 1s / 30s
+[timer] anthropic Evaluator - Turn 3: 2s / 30s
+[timer] anthropic Evaluator - Turn 3: 2.88s - completed
+EVALUATOR: PASS
+EVALUATOR MODEL: anthropic / claude-haiku-5-5
+TIMING: user=810ms | assistant=1389ms | evaluator=2882ms | total=5081ms
+
+--- Turn 4 ---
+[timer] anthropic Simulated User - Turn 4: 0s / 30s
+[timer] anthropic Simulated User - Turn 4: 0.73s - completed
+USER: Great, that's helpful! Do you know if the free shipping threshold applies before or after taxes?
+USER MODEL: anthropic / claude-haiku-5-5
+[timer] anthropic Assistant: 0s / 30s
+[timer] anthropic Assistant: 0.89s - completed
+ASSISTANT: I'm sorry, but the knowledge base doesn't say whether the $75 free shipping threshold is calculated before or after taxes. You can check with support at support@nerdsstore.example for that detail.
+ASSISTANT MODEL: anthropic / claude-haiku-5-5
+[timer] anthropic Evaluator - Turn 4: 0s / 30s
+[timer] anthropic Evaluator - Turn 4: 0s / 30s
+[timer] anthropic Evaluator - Turn 4: 1s / 30s
+[timer] anthropic Evaluator - Turn 4: 2.02s - completed
+EVALUATOR: PASS
+EVALUATOR MODEL: anthropic / claude-haiku-5-5
+TIMING: user=735ms | assistant=894ms | evaluator=2026ms | total=3655ms
+
+--- Turn 5 ---
+[timer] anthropic Simulated User - Turn 5: 0s / 30s
+[timer] anthropic Simulated User - Turn 5: 0.76s - completed
+USER: Thanks, that helps! Last thing: do you know if there's a return policy I should be aware of before ordering?
+USER MODEL: anthropic / claude-haiku-5-5
+[timer] anthropic Assistant: 0s / 30s
+[timer] anthropic Assistant: 1s / 30s
+[timer] anthropic Assistant: 1.03s - completed
+ASSISTANT: Yes. Here are the key return details:
+
+- **Standard returns:** within 15 days.
+- **Damaged products:** must be reported within 7 days of delivery.
+- **Clearance items:** not returnable.
+- **Opened headphones:** not returnable.
+
+Refunds, when approved, go back to the original payment method.
+ASSISTANT MODEL: anthropic / claude-haiku-5-5
+[timer] anthropic Evaluator - Turn 5: 0s / 30s
+[timer] anthropic Evaluator - Turn 5: 0s / 30s
+[timer] anthropic Evaluator - Turn 5: 2s / 30s
+[timer] anthropic Evaluator - Turn 5: 2.52s - completed
+EVALUATOR: PASS
+EVALUATOR MODEL: anthropic / claude-haiku-5-5
+TIMING: user=755ms | assistant=1030ms | evaluator=2525ms | total=4310ms
+
+--- Turn 6 ---
+[timer] anthropic Simulated User - Turn 6: 0s / 30s
+[timer] anthropic Simulated User - Turn 6: 0.73s - completed
+USER: Perfect, that's really clear. Thanks so much for all the help, I feel ready to place my order now!
+USER MODEL: anthropic / claude-haiku-5-5
+[timer] anthropic Assistant: 0s / 30s
+[timer] anthropic Assistant: 0.88s - completed
+ASSISTANT: You're welcome, and I'm glad I could help! Enjoy your order from Nerds Store. If you have any questions after purchase, our support team is available at support@nerdsstore.example, Monday to Friday, 8:00 AM to 6:00 PM.
+ASSISTANT MODEL: anthropic / claude-haiku-5-5
+[timer] anthropic Evaluator - Turn 6: 0s / 30s
+[timer] anthropic Evaluator - Turn 6: 0s / 30s
+[timer] anthropic Evaluator - Turn 6: 1s / 30s
+[timer] anthropic Evaluator - Turn 6: 2.10s - completed
+EVALUATOR: PASS
+EVALUATOR MODEL: anthropic / claude-haiku-5-5
+TIMING: user=730ms | assistant=882ms | evaluator=2097ms | total=3709ms
+
+Result saved to output/llm/simple-query.json
+Execution status: COMPLETED
+Completed turns: 6/6
+Final verdict: PASS
+
+STDERR:
+
+PROCESS ERROR:
+none
