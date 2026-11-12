@@ -15,6 +15,7 @@ const incoming = (page: Page) =>
   page.locator('.bpMessageContainer[data-direction="incoming"]');
 
 async function loadHomepage(page: Page): Promise<void> {
+  const startedAt = performance.now();
   const response = await page.goto(HOME_URL, {
     waitUntil: 'domcontentloaded',
     timeout: 60_000,
@@ -22,7 +23,27 @@ async function loadHomepage(page: Page): Promise<void> {
   expect(response).not.toBeNull();
   expect(response!.status()).toBe(200);
   await expect(page).toHaveTitle(/Botpress/i);
-  await expect(launcher(page)).toBeVisible({ timeout: UI_TIMEOUT_MS });
+  console.log(
+    `Homepage DOM ready after ${Math.round(performance.now() - startedAt)} ms`,
+  );
+
+  await test.step('Wait for window.load, which starts the webchat loader', async () => {
+    // The captured homepage installs inject.js inside a window load handler.
+    // DOMContentLoaded does not mean that handler has run yet.
+    // This is an event wait, not a fixed sleep or a networkidle requirement.
+    await page.waitForLoadState('load', { timeout: 60_000 });
+  });
+  const pageLoadedAt = performance.now();
+  console.log(
+    `Homepage load event observed after ${Math.round(pageLoadedAt - startedAt)} ms`,
+  );
+
+  await test.step('Wait for the floating launcher after page load', async () => {
+    await expect(launcher(page)).toBeVisible({ timeout: UI_TIMEOUT_MS });
+  });
+  console.log(
+    `Chatbot launcher visible ${Math.round(performance.now() - pageLoadedAt)} ms after load`,
+  );
 }
 
 async function openChat(page: Page): Promise<void> {
