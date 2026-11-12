@@ -48,7 +48,7 @@ test('empty artifacts still produce a report with MISSING and null semantic metr
   assert.equal(r.counts.MISSING, 24); assert.equal(r.metrics.meanCoherence, null);
   assert.equal(r.metrics.flaggedTurnRatePercent, null); assert.equal(r.metrics.passExecutedPercent, null);
   assert.equal(r.overall, 'FAIL'); assert.equal(r.evidenceComplete, false);
-  assert.match(renderMarkdown(r), /24 missing/);
+  assert.match(renderMarkdown(r), /24 ausentes/);
 });
 
 test('quota blocker is not an assistant quality FAIL', t => {
@@ -118,4 +118,80 @@ test('duplicate source reports are rejected instead of selecting a convenient PA
   const f = fixture(t); mkdirSync(join(f.root, 'api', 'duplicate'));
   writeFileSync(join(f.root, 'api', 'duplicate', 'results.json'), '{}');
   const r = f.read(); assert.equal(r.counts.MISSING, 11); assert.equal(r.evidenceComplete, false);
+});
+
+test('new UX fields and scenario analysis are consolidated while historical omissions remain unknown', t => {
+  const f = fixture(t);
+  f.reports['simple-query'].experience = { resolutionStatus: 'partial', explanation: 'Order not fully resolved.' };
+  f.reports['simple-query'].analisis = 'Turn 1: clarification is useful but resolution is partial.';
+  for (const turn of f.reports['simple-query'].evaluaciones) {
+    turn.evaluation.usefulnessScore = 75;
+    turn.evaluation.contextIssueDetected = false;
+  }
+  f.flush(); const r = f.read();
+  assert.equal(r.metrics.meanUsefulness, 75);
+  assert.equal(r.metrics.resolution.partial, 1); assert.equal(r.metrics.resolution.unknown, 4);
+  assert.equal(r.bonus.context.explicitDetectorCoverage, 6);
+  assert.equal(r.scenarios[0].experience.resolutionStatus, 'partial');
+  assert.match(renderMarkdown(r), /Turn 1: clarification/);
+});
+
+
+
+test('functional FAIL preserves quality findings while execution can complete successfully', t => {
+  const f = fixture(t); const report = f.reports['conversational-memory'];
+  report.veredicto = 'FAIL';
+  Object.assign(report.evaluaciones[1].evaluation, { verdict: 'FAIL', contextIssueDetected: true, errors: ['Irrelevant order details'] });
+  Object.assign(f.summary.results[3], { ciStatus: 'FAIL', verdict: 'FAIL', exitCode: 1, evaluationCompleted: true });
+  f.flush(); const r = f.read({ needs: { llm: { result: 'success' }, playwright: { result: 'success' } } });
+  assert.equal(r.executionStatus, 'COMPLETED'); assert.equal(r.overall, 'FAIL');
+  assert.equal(r.metrics.flaggedTurns, 1); assert.equal(r.metrics.flaggedTurnRatePercent, 3.33);
+  const md = renderMarkdown(r);
+  assert.match(md, /Ejecución de la evaluación: COMPLETED/); assert.match(md, /Calidad observada: FAIL/);
+  assert.match(md, /Irrelevant order details/);
+});
+
+test('synthesis keeps verbose evidence inside disclosures and exposes required summary dimensions', t => {
+  const f = fixture(t); f.reports['simple-query'].analisis = 'VERBOSE_ORIGINAL_ANALYSIS'; f.flush();
+  const md = renderMarkdown(f.read()); const location = md.indexOf('VERBOSE_ORIGINAL_ANALYSIS');
+  assert.ok(md.lastIndexOf('<details>', location) > md.lastIndexOf('</details>', location));
+  for (const label of ['Coherencia /100', 'Señales de alucinación', 'Seguridad %', 'Completitud', 'Uso incorrecto de herramientas (tool calling)', 'Prompt injection', 'Respuestas tóxicas', 'Tiempos promedio', 'API y chatbot']) assert.ok(md.includes(label), label);
+  assert.match(md, /Análisis original del escenario \(cita preservada\)/);
+});
+
+
+test('available REVIEW is a quality result, while missing REVIEW judgments are incomplete', t => {
+  const f = fixture(t); const s = f.reports['ambiguous-information'];
+  s.veredicto = 'REVIEW'; s.evaluaciones[2].evaluation.verdict = 'REVIEW';
+  Object.assign(f.summary.results[2], { ciStatus: 'REVIEW', verdict: 'REVIEW', exitCode: 1 }); f.flush();
+  const r = f.read({ needs: { llm: { result: 'success' }, playwright: { result: 'success' } } });
+  assert.equal(r.executionStatus, 'COMPLETED'); assert.equal(r.scenarios[2].status, 'REVIEW');
+  assert.match(renderMarkdown(r), /REVIEW indica una ejecución técnicamente incompleta solo cuando falta un juicio/);
+  s.evaluaciones[2].evaluation_status = 'UNAVAILABLE'; s.evaluaciones[2].evaluation = null; f.flush();
+  assert.equal(f.read().executionStatus, 'INCOMPLETE');
+});
+
+test('Exercise 5 CLI emits only JSON and Markdown report files, never HTML', async t => {
+  const { spawnSync } = await import('node:child_process');
+  const { readdirSync } = await import('node:fs');
+  const { fileURLToPath } = await import('node:url');
+  const f = fixture(t); const output = join(f.root, 'generated');
+  const result = spawnSync(process.execPath, [fileURLToPath(new URL('./generate-report.mjs', import.meta.url)), f.root, output], {
+    encoding: 'utf8', env: { ...process.env, GITHUB_SHA: 'current', GITHUB_STEP_SUMMARY: '' },
+  });
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(readdirSync(output).sort(), ['consolidated-report.json', 'consolidated-report.md']);
+});
+
+
+test('Spanish presentation preserves original English evidence, code states and JSON fields', t => {
+  const f = fixture(t); const s = f.reports['simple-query'];
+  s.evaluaciones[0].userMessage = 'How long does shipping take?';
+  s.evaluaciones[0].assistantMessage = 'Standard shipping takes 2 to 4 business days.';
+  s.evaluaciones[0].evaluation.analysis = 'The response matches the ground truth.';
+  f.flush(); const r = f.read(); const before = JSON.stringify(r); const md = renderMarkdown(r);
+  for (const title of ['# Reporte consolidado de QA', '## Métricas globales', '## Tiempos promedio', '## Detección automática', 'Usuario (cita original)', 'Razonamiento del juez (cita original)']) assert.ok(md.includes(title), title);
+  assert.ok(md.includes('Standard shipping takes 2 to 4 business days.'));
+  assert.ok(md.includes('The response matches the ground truth.'));
+  assert.equal(JSON.stringify(r), before); assert.equal(r.scenarios[0].status, 'PASS');
 });

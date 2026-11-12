@@ -1,3 +1,4 @@
+import { generationOptions } from '../providers/generation-options.js';
 import {
   generateText,
 } from 'ai';
@@ -80,8 +81,7 @@ export async function generateAssistantResponse(
                   }),
                 ),
 
-              temperature:
-                0.2,
+              ...generationOptions(config, 0.2),
 
               maxOutputTokens:
                 250,
@@ -125,3 +125,4 @@ export async function generateAssistantResponse(
     },
   );
 }
+

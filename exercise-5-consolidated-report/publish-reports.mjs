@@ -4,7 +4,7 @@ import { spawnSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 
 const folders = ['lastRun', 'LastSuccesfulrun'];
-const problematic = ['REVIEW', 'BLOCKED', 'MISSING', 'ERROR', 'FLAKY'];
+const problematic = [ 'BLOCKED', 'MISSING', 'ERROR', 'FLAKY'];
 const scenarioIds = ['simple-query', 'topic-change', 'ambiguous-information', 'conversational-memory', 'prompt-injection'];
 
 export function successfulRun(report) {
@@ -21,22 +21,27 @@ export function successfulRun(report) {
     const units = report.units.filter(unit => unit.suite === 'llm' && unit.id === id);
     const scenario = scenarios[0];
     if (scenarios.length !== 1 || units.length !== 1 ||
-        !['PASS', 'FAIL'].includes(scenario.status) ||
+        !['PASS', 'FAIL', 'REVIEW'].includes(scenario.status) ||
         scenario.reportedVerdict !== scenario.status || units[0].status !== scenario.status ||
         scenario.completedTurns !== 6 || scenario.validEvaluations !== 6 ||
         !Array.isArray(scenario.turnEvaluations) || scenario.turnEvaluations.length !== 6 ||
         !scenario.turnEvaluations.every((turn, index) =>
           turn.turn === index + 1 && turn.evaluation_status === 'COMPLETED' &&
           turn.evaluator_failure == null &&
-          ['PASS', 'FAIL'].includes(turn.evaluation?.verdict))) return false;
+          ['PASS', 'FAIL', 'REVIEW'].includes(turn.evaluation?.verdict))) return false;
   }
+  const semanticReviews = report.scenarios.filter(s => s.status === 'REVIEW').length;
   const semanticFailures = report.scenarios.filter(s => s.status === 'FAIL').length;
   // Every failed unit must be a fully evaluated LLM scenario, not an API/UI
   // failure or an unexplained job execution failure.
   if (report.units.filter(unit => unit.suite === 'llm').length !== 5 ||
       report.units.some(unit => unit.suite !== 'llm' && !['PASS', 'SKIPPED'].includes(unit.status)) ||
-      report.counts.FAIL !== semanticFailures) return false;
-  return report.metadata?.needs?.llm?.result === (semanticFailures ? 'failure' : 'success');
+      report.counts.FAIL !== semanticFailures || report.counts.REVIEW !== semanticReviews) return false;
+  const llmResult = report.metadata?.needs?.llm?.result;
+  // New CI succeeds on complete evaluations. Accept verdict-based legacy reports only
+  // when they predate the explicit execution status. Never mask a new technical failure.
+  return llmResult === 'success' ||
+    (report.executionStatus == null && semanticFailures > 0 && llmResult === 'failure');
 }
 
 function newer(candidate, current) {
@@ -80,7 +85,7 @@ export function publishReports({ cwd, sourceRoot, branch, sourceSha, runId, runN
     workflowCommit: report.metadata.commit, runUrl: report.metadata.runUrl,
     evaluationExecutionComplete: successfulRun(report),
     upstreamJobResults: Object.fromEntries(Object.entries(report.metadata.needs ?? {}).map(([name, job]) => [name, job.result])),
-    policy: 'Complete LLM evaluation: five scenarios, six responses and six valid judgments each. Semantic LLM FAIL verdicts are retained and eligible; provider/timeouts, unavailable evaluations, invalid evidence and failed API/UI jobs are not. Workflow conclusions are unchanged.',
+    policy: 'Complete LLM evaluation: five scenarios, six responses and six available valid judgments each. Semantic LLM FAIL/REVIEW verdicts are retained and eligible; provider/timeouts, unavailable evaluations, invalid evidence and failed API/UI jobs are not. Workflow conclusions are unchanged.',
   };
   for (let retry = 0; retry < 3; retry++) {
     git(['fetch', 'origin', `+refs/heads/${branch}:refs/remotes/origin/${branch}`]);
@@ -112,3 +117,5 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     attempt: Number(process.env.GITHUB_RUN_ATTEMPT),
   });
 }
+
+

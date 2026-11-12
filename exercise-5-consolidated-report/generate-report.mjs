@@ -59,7 +59,7 @@ export function buildReport(inputRoot, metadata = {}) {
     let status = 'MISSING';
     let evaluations = [];
     let completed = null;
-    let quality = { coherence: null, context: null, falseRate: null, unsupportedRate: null, security: null };
+    let quality = { coherence: null, context: null, falseRate: null, unsupportedRate: null, security: null, usefulness: null };
     const findings = [];
     if (data && summaryMatchesCommit) {
       completed = Array.isArray(data.turnos) ? data.turnos.filter(message => message.rol === 'asistente').length : null;
@@ -102,18 +102,19 @@ export function buildReport(inputRoot, metadata = {}) {
         if (numeric(turn.timing?.evaluatorResponseMs)) timing.llmEvaluatorMs.push(turn.timing.evaluatorResponseMs);
       }
       quality = {
+        usefulness: mean(evaluations.map(e => e.usefulnessScore).filter(numeric)),
         coherence: mean(evaluations.map(e => e.coherenceScore)),
         context: mean(evaluations.map(e => e.contextRetentionScore)),
         falseRate: pct(evaluations.filter(e => e.hallucinationType === 'demonstrably_false').length, evaluations.length),
         unsupportedRate: pct(evaluations.filter(e => e.hallucinationType === 'unsupported').length, evaluations.length),
         security: pct(evaluations.filter(e => !e.securityIssueDetected).length, evaluations.length),
       };
-      scenarioReports.push({ id, status, reportedVerdict: data.veredicto, completedTurns: completed, validEvaluations: evaluations.length, quality, findings: [...new Set(findings)], turnEvaluations: turns });
+      scenarioReports.push({ id, status, reportedVerdict: data.veredicto, completedTurns: completed, validEvaluations: evaluations.length, quality, experience: data.experience ?? { resolutionStatus: 'unknown' }, analysis: data.analisis ?? null, metricDefinitions: data.metric_definitions ?? null, findings: [...new Set(findings)], turnEvaluations: turns });
     } else {
       scenarioReports.push({ id, status, reportedVerdict: data?.veredicto ?? null, completedTurns: null, validEvaluations: 0, quality, findings: [] });
     }
     units.push({ suite: 'llm', id, status });
-    llmRows.push([id, status, quality.coherence, quality.context, quality.falseRate, quality.unsupportedRate, quality.security, completed == null ? 'N/A' : `${completed}/6`, `${evaluations.length}/6`]);
+    llmRows.push([id, status, quality.coherence, quality.context, quality.falseRate, quality.unsupportedRate, quality.security, completed == null ? 'N/A' : `${completed}/6`, `${evaluations.length}/6`, quality.usefulness, data && summaryMatchesCommit ? data.experience?.resolutionStatus ?? 'unknown' : 'unknown']);
   }
 
   const suites = [];
@@ -163,7 +164,7 @@ export function buildReport(inputRoot, metadata = {}) {
   }
   const counts = Object.fromEntries(states.map(state => [state, units.filter(unit => unit.status === state).length]));
   const executed = counts.PASS + counts.FAIL + counts.REVIEW + counts.FLAKY;
-  const qualityFlags = validTurns.filter(e => e.hallucinationDetected || e.hallucinationType !== 'none' || e.securityIssueDetected || e.toxicityDetected);
+  const qualityFlags = validTurns.filter(e => e.hallucinationDetected || e.hallucinationType !== 'none' || e.securityIssueDetected || e.toxicityDetected || e.contextIssueDetected === true);
   const injections = validTurns.filter(e => e.scenario === 'prompt-injection');
   const scoreDeviations = validTurns.filter(e => e.contextRetentionScore < 100);
   const bonus = {
@@ -171,26 +172,30 @@ export function buildReport(inputRoot, metadata = {}) {
       demonstrablyFalse: validTurns.filter(e => e.hallucinationType === 'demonstrably_false').length,
       unsupported: validTurns.filter(e => e.hallucinationType === 'unsupported').length },
     promptInjection: { evaluatedScenarioTurns: injections.length, securityFailures: injections.filter(e => e.securityIssueDetected).length,
-      limitation: 'Counts security failures in the injection scenario, including its benign first turn; not a per-attack success rate.' },
+      limitation: 'Cuenta fallas de seguridad en el escenario de inyección, incluido su primer turno benigno; no es una tasa de éxito por ataque.' },
     toxicity: { evaluatedTurns: validTurns.length, detectedTurns: validTurns.filter(e => e.toxicityDetected).length },
-    context: { evaluatedTurns: validTurns.length, meanScore: mean(validTurns.map(e => e.contextRetentionScore)), scoreDeviations: scoreDeviations.length,
-      limitation: 'A score below 100 is a review signal, not automatically a confirmed context-loss defect. Per-turn judge analysis and errors are preserved.' },
+    context: { materialContextFailures: validTurns.filter(e => e.contextIssueDetected === true).length, explicitDetectorCoverage: validTurns.filter(e => typeof e.contextIssueDetected === 'boolean').length, evaluatedTurns: validTurns.length, meanScore: mean(validTurns.map(e => e.contextRetentionScore)), scoreDeviations: scoreDeviations.length,
+      limitation: 'Una puntuación menor de 100 es una señal de revisión, no un defecto de contexto confirmado automáticamente. Se conservan los análisis y errores del juez por turno.' },
     toolCalling: { status: 'NOT_IMPLEMENTED', evaluatedCalls: 0, detectedErrors: null,
-      limitation: 'The assistant has no configured tools or recorded tool-call traces. Never counted as PASS.' },
-    apiAndUi: 'NOT_EVALUATED for semantic hallucination/injection/toxicity/context/tool-call detection. API/UI assertions and execution failures are consolidated separately.',
-    calibration: 'Existing LLM judge outputs are aggregated without new provider calls. Detector sensitivity/false-positive rates remain uncalibrated.',
+      limitation: 'El asistente no tiene herramientas configuradas ni trazas de sus llamadas. Nunca se cuenta como PASS.' },
+    apiAndUi: 'NOT_EVALUATED para detección semántica de alucinaciones, inyección, toxicidad, contexto y herramientas. Las aserciones y fallas de ejecución API/UI se consolidan por separado.',
+    calibration: 'Se agregan los juicios LLM existentes sin nuevas llamadas a proveedores. Estas métricas no demuestran la sensibilidad ni la tasa de falsos positivos del detector.',
   };
   const jobs = Object.fromEntries(Object.entries(metadata.needs ?? {}).map(([name, job]) => [name, job.result]));
   const incomplete = counts.MISSING + counts.ERROR > 0 || issues.length > 0;
   const failedJobs = Object.values(jobs).some(result => ['failure', 'cancelled'].includes(result));
   const overall = counts.FAIL || failedJobs ? 'FAIL' : incomplete || counts.BLOCKED || counts.REVIEW || counts.FLAKY || counts.SKIPPED ? 'INCOMPLETE' : 'PASS';
   return {
-    generatedAt: new Date().toISOString(), metadata, jobs, overall, evidenceComplete: !incomplete,
+    generatedAt: new Date().toISOString(), metadata, jobs, overall,
+    executionStatus: failedJobs || units.some(u => u.suite !== 'llm' && ['FAIL', 'FLAKY'].includes(u.status)) ? 'FAILED' :
+      incomplete || scenarioReports.some(s => !['PASS', 'FAIL', 'REVIEW'].includes(s.status) || s.completedTurns !== 6 || s.validEvaluations !== 6 || s.turnEvaluations?.some(t => t.evaluation_status !== 'COMPLETED' || !['PASS', 'FAIL', 'REVIEW'].includes(t.evaluation?.verdict))) ? 'INCOMPLETE' : 'COMPLETED',
+    evidenceComplete: !incomplete,
     units, counts, plannedUnits: units.length, executedUnits: executed,
     metrics: { passedPlannedPercent: pct(counts.PASS, units.length), passExecutedPercent: pct(counts.PASS, executed), failExecutedPercent: pct(counts.FAIL, executed),
       completedConversationsPercent: pct(scenarioReports.filter(s => s.completedTurns === 6).length, 5),
       llmEvaluationCoveragePercent: pct(validTurns.length, 30), meanCoherence: mean(validTurns.map(e => e.coherenceScore)),
-      meanContext: mean(validTurns.map(e => e.contextRetentionScore)), flaggedTurnRatePercent: pct(qualityFlags.length, validTurns.length),
+      meanContext: mean(validTurns.map(e => e.contextRetentionScore)), meanUsefulness: mean(validTurns.map(e => e.usefulnessScore).filter(numeric)),
+      resolution: { notApplicable: scenarioReports.filter(s => s.experience?.resolutionStatus === "not_applicable").length, resolved: scenarioReports.filter(s => s.experience?.resolutionStatus === "resolved").length, partial: scenarioReports.filter(s => s.experience?.resolutionStatus === "partial").length, unresolved: scenarioReports.filter(s => s.experience?.resolutionStatus === "unresolved").length, unknown: scenarioReports.filter(s => !s.experience || s.experience.resolutionStatus === "unknown").length }, flaggedTurnRatePercent: pct(qualityFlags.length, validTurns.length),
       flaggedTurns: qualityFlags.length, validEvaluations: validTurns.length,
       meanTimesMs: Object.fromEntries(Object.entries(timing).map(([key, values]) => [key, { mean: mean(values), samples: values.length }])) },
     scenarios: scenarioReports, suites, bonus, issues, sources, llmRows,
@@ -199,50 +204,98 @@ export function buildReport(inputRoot, metadata = {}) {
 
 export function renderMarkdown(r) {
   const m = r.metrics;
+  const labels = { 'simple-query': '1 · Consulta simple', 'topic-change': '2 · Cambio de tema', 'ambiguous-information': '3 · Información ambigua', 'conversational-memory': '4 · Memoria conversacional', 'prompt-injection': '5 · Seguridad y prompt injection' };
+  const resolutionNames = { resolved: 'resuelta', partial: 'parcial', unresolved: 'sin resolver', not_applicable: 'no aplica', unknown: 'desconocida' };
+  const scope = { llm: 'Ejercicio 1 · LLM', api: 'Ejercicio 2 · API', 'chatbot-docs': 'Ejercicio 3 · Chatbot de Docs', 'chatbot-homepage': 'Ejercicio 3 · Chatbot de la página principal (adicional)' };
+  const safe = value => cell(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+  const value = (n, suffix = '') => n == null ? 'N/A' : `${n}${suffix}`;
+  const details = (title, body) => ['<details>', `<summary>${safe(title)}</summary>`, '', ...body, '', '</details>', ''];
+  const historicalCompletion = r.evidenceComplete && ['typecheck', 'playwright'].every(job => r.jobs?.[job] === 'success') && r.scenarios.length === 5 && r.scenarios.every(s => ['PASS', 'FAIL', 'REVIEW'].includes(s.status) && s.completedTurns === 6 && s.validEvaluations === 6 && s.turnEvaluations?.every(t => t.evaluation_status === 'COMPLETED' && ['PASS', 'FAIL', 'REVIEW'].includes(t.evaluation?.verdict)));
+  const execution = r.executionStatus ?? (historicalCompletion ? 'COMPLETED' : 'UNKNOWN (reporte histórico)');
   const lines = [
-    '# Consolidated QA Report', '',
-    `Generated: ${r.generatedAt} | Overall assessment: **${r.overall}**`, '',
-    `Run: ${r.metadata.runUrl ?? 'Local input'} | Attempt: ${r.metadata.attempt ?? 'N/A'} | Commit: ${r.metadata.commit ?? 'Not supplied'}`, '',
-    '## Global assessment', '',
-    `${r.counts.PASS}/${r.plannedUnits} planned units passed. ${r.counts.FAIL} failed, ${r.counts.SKIPPED} skipped, ${r.counts.BLOCKED} blocked, ${r.counts.REVIEW} review, ${r.counts.FLAKY} flaky, ${r.counts.MISSING} missing and ${r.counts.ERROR} invalid/error.`, '',
-    'One unit is one LLM scenario or one API/UI case. These heterogeneous units are an execution summary, not a product quality score. Homepage is additional coverage; it does not replace Docs requirements.', '',
-    table(['Scope', ...states], ['llm', ...Object.keys(inventories)].map(suite => [suite, ...states.map(state => r.units.filter(u => u.suite === suite && u.status === state).length)])), '',
-    table(['Metric', 'Value'], [
-      ['PASS / planned (%)', m.passedPlannedPercent], ['PASS / executed (%)', m.passExecutedPercent], ['FAIL / executed (%)', m.failExecutedPercent],
-      ['Completed LLM conversations / 5 (%)', m.completedConversationsPercent], ['Valid LLM evaluations / 30 (%)', m.llmEvaluationCoveragePercent],
-      ['Mean coherence /100', m.meanCoherence], ['Mean context /100', m.meanContext], ['Judge-flagged turns / valid evaluations (%)', m.flaggedTurnRatePercent],
+    '# Reporte consolidado de QA', '',
+    `**Ejecución de la evaluación: ${execution}** · **Calidad observada: ${r.overall}**`, '',
+    `Ejecución: ${r.metadata.runUrl ?? 'Entrada local'} · Intento: ${r.metadata.attempt ?? 'N/A'}`, '',
+    `Commit: \`${r.metadata.commit ?? 'No suministrado'}\` · Generado: ${r.generatedAt}`, '',
+    '## Resumen general', '',
+    `**${r.counts.PASS} PASS · ${r.counts.FAIL} FAIL · ${r.counts.SKIPPED} SKIPPED** en ${r.plannedUnits} unidades planificadas.`, '',
+    `${r.counts.BLOCKED} bloqueadas, ${r.counts.REVIEW} para revisión, ${r.counts.FLAKY} inestables, ${r.counts.MISSING} ausentes y ${r.counts.ERROR} inválidas/con error.`, '',
+    'Una evaluación completada puede incluir hallazgos funcionales FAIL o REVIEW. REVIEW indica una ejecución técnicamente incompleta solo cuando falta un juicio; un veredicto REVIEW disponible es un hallazgo de calidad. El estado de ejecución describe si el proceso se completó; la calidad observada conserva los hallazgos y las brechas de cobertura.', '',
+    table(['Ámbito', 'PASS', 'FAIL', 'REVIEW', 'Omitidos', 'Otros / incompletos'], ['llm', ...Object.keys(inventories)].map(suite => {
+      const count = status => r.units.filter(u => u.suite === suite && u.status === status).length;
+      return [scope[suite], count('PASS'), count('FAIL'), count('REVIEW'), count('SKIPPED'), ['BLOCKED', 'FLAKY', 'MISSING', 'ERROR'].reduce((n, s) => n + count(s), 0)];
+    })), '',
+    '## Métricas globales', '',
+    table(['Métrica', 'Resultado'], [
+      ['PASS / unidades ejecutadas', value(m.passExecutedPercent, '%')], ['FAIL / unidades ejecutadas', value(m.failExecutedPercent, '%')],
+      ['PASS / unidades planificadas', value(m.passedPlannedPercent, '%')],
+      ['Conversaciones LLM completas', `${r.scenarios.filter(s => s.completedTurns === 6).length}/5 (${value(m.completedConversationsPercent, '%')})`],
+      ['Juicios LLM disponibles', `${m.validEvaluations}/30 (${value(m.llmEvaluationCoveragePercent, '%')})`],
+      ['Turnos con problemas señalados por el juez', `${m.flaggedTurns}/${m.validEvaluations} (${value(m.flaggedTurnRatePercent, '%')})`],
+      ['Promedio de coherencia / contexto / utilidad', `${value(m.meanCoherence)} / ${value(m.meanContext)} / ${value(m.meanUsefulness)} sobre 100`],
+      ['Resolución de la necesidad del usuario', `${m.resolution.resolved} resueltas · ${m.resolution.partial} parciales · ${m.resolution.unresolved} sin resolver · ${m.resolution.notApplicable} no aplican · ${m.resolution.unknown} desconocidas`],
     ]), '',
-    'Executed denominator includes PASS, FAIL, REVIEW and FLAKY. Skipped, blocked, missing and invalid/error units are excluded and listed separately. N/A means no valid samples; it never means zero errors.', '',
-    '## Exercise 1 - Five LLM scenarios', '',
-    table(['Scenario', 'Status', 'Coherence', 'Context', 'False %', 'Unsupported %', 'Security %', 'Exchanges', 'Valid evaluations'], r.llmRows), '',
-    'Quality metrics are recalculated from valid per-turn judge outputs. False and unsupported claims remain distinct. Security % uses all valid turns, not only attacks. Original verdicts, per-turn evaluations and errors are preserved in the JSON companion.', '',
-    '## Exercises 2 and 3 - API and chatbot', '',
+    'Las unidades son los cinco escenarios LLM más los casos de API/UI, no los turnos individuales. El denominador de ejecutadas incluye PASS, FAIL, REVIEW y FLAKY; excluye los demás estados. Estas unidades heterogéneas no representan una puntuación de calidad del producto. La tasa de turnos señalados cuenta cada turno una sola vez entre señales factuales, de seguridad, toxicidad y contexto explícito; no mide la precisión del detector. N/A indica evidencia no disponible, nunca cero errores.', '',
+    '## Ejercicio 1 · Cinco escenarios conversacionales', '',
+    table(['Escenario', 'Veredicto', 'Coherencia /100', 'Señales de alucinación', 'Seguridad %', 'Completitud'], r.scenarios.map(s => {
+      const valid = (s.turnEvaluations ?? []).filter(t => t.evaluation_status === 'COMPLETED' && t.evaluation);
+      const hallucinations = valid.filter(t => t.evaluation.hallucinationDetected || t.evaluation.hallucinationType !== 'none').length;
+      return [labels[s.id] ?? s.id, s.status, s.quality.coherence, s.validEvaluations ? `${hallucinations}/${s.validEvaluations}` : 'N/A', s.quality.security, `${s.completedTurns ?? '?'}/6 respuestas · ${s.validEvaluations}/6 juicios`];
+    })), '',
+    'Seguridad % es la proporción de juicios disponibles sin señal de falla de seguridad; incluye turnos benignos. Las señales de alucinación son clasificaciones del juez, no hechos confirmados independientemente. Completar seis intercambios no implica resolver la necesidad del usuario.', '',
   ];
-  for (const suite of r.suites) lines.push(`### ${suite.suite}`, '', table(['Case', 'Status', 'Test duration ms', 'Attempts'], suite.tests.map(t => [t.id, t.status, t.durationMs, t.attempts])), '');
-  lines.push('## Timing', '', table(['Measurement', 'Mean ms', 'Samples'], Object.entries(m.meanTimesMs).map(([key, value]) => [key, value.mean, value.samples])), '',
-    'LLM timings include wrapper/retry overhead. API/UI test duration includes assertions and setup; it is not endpoint response latency. Chatbot response timings are separate measurements to the first visible reply text, not necessarily the entire answer. No average combines these unlike measurements.', '',
-    '## Automated findings and bonus coverage', '',
-    table(['Dimension', 'Evidence', 'Limit'], [
-      ['Hallucinations', `${r.bonus.hallucinations.detectedTurns}/${m.validEvaluations} flagged; ${r.bonus.hallucinations.demonstrablyFalse} false, ${r.bonus.hallucinations.unsupported} unsupported`, 'LLM judge only; no evidence is not a PASS'],
-      ['Prompt injection', `${r.bonus.promptInjection.securityFailures} security failures / ${r.bonus.promptInjection.evaluatedScenarioTurns} valid scenario turns`, r.bonus.promptInjection.limitation],
-      ['Toxicity', `${r.bonus.toxicity.detectedTurns}/${m.validEvaluations} flagged`, 'No positive detector calibration demonstrated'],
-      ['Context retention', `${r.bonus.context.meanScore ?? 'N/A'}/100 mean; ${r.bonus.context.scoreDeviations} scores below 100`, r.bonus.context.limitation],
-      ['Incorrect tool calling', 'NOT_IMPLEMENTED; 0 observed calls', r.bonus.toolCalling.limitation],
-      ['API/UI semantic detectors', 'NOT_EVALUATED', r.bonus.apiAndUi],
-    ]), '', r.bonus.calibration, '',
-    '## Errors and evidence gaps', '');
-  const findings = [...r.issues, ...r.scenarios.flatMap(s => s.findings.map(f => `${s.id}: ${f}`)), ...r.suites.flatMap(s => s.tests.flatMap(t => t.errors.map(e => `${s.suite}/${t.id}: ${e}`)))];
-  lines.push(findings.length ? findings.map(f => `- ${cell(f)}`).join('\n') : 'No execution errors or judge findings were recorded in the available reports. This does not establish unimplemented or uncalibrated bonus coverage.', '',
-    '## Workflow and provenance', '', table(['Job', 'Result'], Object.entries(r.jobs)), '',
-    `Artifact download outcomes: ${cell(JSON.stringify(r.metadata.downloads ?? {}))}`, '',
-    'Only the supplied input directory is read. CI populates it with artifact names scoped to the current run ID and attempt. Tracked historical reports are never used as fallback. A retry without artifacts from successful earlier attempts is marked missing rather than silently mixed.', '',
-    ...r.sources.map(source => `- ${cell(source)}`), '',
-    '## Limitations and follow-up', '',
-    '- CHATBOT-003 remains a Docs coverage gap when skipped. A passing homepage name case does not close it.',
-    '- Inspect failed assertions and judge errors before changing expectations. BLOCKED provider failures are separate from assistant quality findings.',
-    '- Preserve the downloaded evidence before artifact retention expires. Review detector calibration and implement real tool instrumentation before claiming all bonuses complete.',
-    '- No report can be guaranteed if GitHub cannot start this job, checkout/setup fails, or the workflow is forcibly terminated. Normal upstream failures/skips are handled by always().', '',
+  for (const s of r.scenarios) {
+    const turns = s.turnEvaluations ?? [];
+    lines.push(`### ${labels[s.id] ?? s.id} · ${s.status}`, '',
+      `**Contexto:** ${value(s.quality.context, '/100')} · **Utilidad:** ${value(s.quality.usefulness, '/100')} · **Resolución de la necesidad:** ${safe(resolutionNames[s.experience?.resolutionStatus] ?? 'desconocida')}`, '',
+      `**Clasificaciones del juez:** ${value(s.quality.falseRate, '%')} afirmaciones falsas · ${value(s.quality.unsupportedRate, '%')} sin respaldo.`, '',
+      '**Hallazgos registrados (citas originales)**', '',
+      ...(s.findings.length ? s.findings.map(f => `- ${safe(f)}`) : ['No se registraron hallazgos en la evidencia disponible.']), '');
+    const body = [];
+    for (const t of turns) {
+      const e = t.evaluation;
+      body.push(`#### Turno ${t.turn} · ${safe(e?.verdict ?? t.evaluation_status ?? 'UNAVAILABLE')}`, '',
+        `**Usuario (cita original):** ${safe(t.userMessage ?? 'No registrado en esta fuente')}`, '',
+        `**Asistente (cita original):** ${safe(t.assistantMessage ?? 'No registrado en esta fuente')}`, '',
+        `**Razonamiento del juez (cita original):** ${safe(e?.analysis ?? t.evaluator_failure?.message ?? 'No disponible')}`, '',
+        `**Experiencia de usuario (cita del juez):** ${safe(e?.uxAnalysis ?? 'No disponible en esta fuente')}`, '');
+    }
+    if (!turns.length) body.push('No hay evidencia por turno disponible.');
+    lines.push(...details(`Revisar ${s.id}: conversación y juicios por turno`, body));
+    if (s.analysis) lines.push(...details('Análisis original del escenario (cita preservada)', [safe(s.analysis)]));
+  }
+  lines.push('## Ejercicios 2 y 3 · API y chatbot', '');
+  for (const suite of r.suites) {
+    const n = state => suite.tests.filter(t => t.status === state).length;
+    lines.push(`### ${scope[suite.suite]}`, '', `**${n('PASS')} PASS · ${n('FAIL')} FAIL · ${n('SKIPPED')} SKIPPED** · ${suite.tests.length} casos planificados.`, '');
+    lines.push(...details('Revisar resultados por caso y evidencia de aserciones', [
+      table(['Caso', 'Resultado', 'Duración ms', 'Intentos'], suite.tests.map(t => [t.id, t.status, t.durationMs, t.attempts])), '',
+      ...suite.tests.flatMap(t => t.errors.map(e => `- **${t.id}:** ${safe(e)}`)),
+    ]));
+  }
+  const timingLabels = { llmAssistantMs: 'Respuesta del asistente LLM', llmEvaluatorMs: 'Respuesta del juez LLM', apiTestMs: 'Prueba API (preparación y aserciones)', docsTestMs: 'Prueba UI de Docs', homepageTestMs: 'Prueba UI de la página principal', docsResponseMs: 'Primera respuesta visible de Docs', homepageResponseMs: 'Primera respuesta visible de la página principal' };
+  lines.push('## Tiempos promedio', '', table(['Medición', 'Promedio ms', 'Muestras'], Object.entries(m.meanTimesMs).map(([key, v]) => [timingLabels[key] ?? key, v.mean, v.samples])), '',
+    'Los tiempos LLM incluyen la sobrecarga del ejecutor y sus reintentos. La duración de una prueba no equivale a la latencia del endpoint. La latencia del chatbot mide el primer texto visible, no la respuesta completa. No se combinan mediciones de distinta naturaleza.', '',
+    '## Detección automática · Cobertura entre ejercicios', '',
+    table(['Detector', 'Evidencia LLM', 'Cobertura API / chatbot'], [
+      ['Alucinaciones', `${r.bonus.hallucinations.detectedTurns}/${m.validEvaluations} señaladas; ${r.bonus.hallucinations.demonstrablyFalse} falsas, ${r.bonus.hallucinations.unsupported} sin respaldo`, 'NOT_EVALUATED'],
+      ['Prompt injection', `${r.bonus.promptInjection.securityFailures} fallas de seguridad / ${r.bonus.promptInjection.evaluatedScenarioTurns} juicios del escenario`, 'NOT_EVALUATED'],
+      ['Respuestas tóxicas', `${r.bonus.toxicity.detectedTurns}/${m.validEvaluations} señaladas`, 'NOT_EVALUATED'],
+      ['Pérdida de contexto / contexto irrelevante', `${r.bonus.context.materialContextFailures} señales explícitas / ${r.bonus.context.explicitDetectorCoverage} juicios explícitos`, 'NOT_EVALUATED'],
+      ['Uso incorrecto de herramientas (tool calling)', 'NOT_IMPLEMENTED · 0 llamadas instrumentadas', 'NOT_EVALUATED'],
+    ]), '',
+    'Cero señales significa que no se registraron, no que se demostró su ausencia. El conteo de prompt injection incluye el turno inicial benigno. Una puntuación de contexto menor de 100 no confirma por sí sola un defecto. No hay herramientas configuradas ni trazas de sus llamadas; esa dimensión nunca se cuenta como PASS. Se consolidan resultados de todos los ejercicios, pero la cobertura actual de los detectores semánticos procede únicamente del ejercicio LLM.', '',
+    'Se agregan los juicios existentes sin nuevas llamadas al proveedor. Estas métricas no demuestran por sí solas la sensibilidad ni la tasa de falsos positivos del evaluador.', '',
+    '## Brechas de evidencia y seguimiento', '',
+    ...(r.issues.length ? ['**Incidencias de ejecución (mensajes originales del código):**', ''] : []),
+    ...r.issues.map(issue => `- ${safe(issue)}`),
+    '- CHATBOT-003 permanece como una brecha documentada de Docs cuando se omite; la página principal aporta cobertura adicional.',
+    '- Contrasta las clasificaciones del juez con la evidencia; los FAIL funcionales se conservan aunque la ejecución termine correctamente.',
+    '- Los campos históricos de experiencia de usuario ausentes permanecen desconocidos. El JSON conserva los análisis, mensajes, métricas y juicios originales.', '',
   );
+  lines.push(...details('Trazabilidad del workflow y archivos de entrada', [table(['Job', 'Resultado'], Object.entries(r.jobs)), '',
+    `Descargas de artefactos: ${safe(JSON.stringify(r.metadata.downloads ?? {}))}`, '',
+    'Solo se lee el directorio de entrada de esta ejecución e intento. Nunca se utilizan reportes históricos como respaldo. Generar este reporte no hace llamadas a proveedores.', '', ...r.sources.map(source => `- ${safe(source)}`)]));
   return lines.join('\n');
 }
 
@@ -264,9 +317,13 @@ export function main() {
   writeFileSync(join(output, 'consolidated-report.json'), JSON.stringify(report, null, 2) + '\n');
   writeFileSync(join(output, 'consolidated-report.md'), markdown);
   if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, markdown);
-  console.log(`Consolidated report: ${report.overall}; ${report.counts.PASS}/${report.plannedUnits} PASS. Saved to ${output}`);
+  console.log(`Reporte consolidado: ${report.overall}; ${report.counts.PASS}/${report.plannedUnits} PASS. Guardado en ${output}`);
   // Still upload the report when evidence is missing/invalid; do not greenwash missing inputs.
   if (!report.evidenceComplete) process.exitCode = 1;
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) main();
+
+
+
+

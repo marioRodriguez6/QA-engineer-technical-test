@@ -1,3 +1,4 @@
+import { generationOptions } from '../providers/generation-options.js';
 import {
   generateText,
 } from 'ai';
@@ -165,8 +166,7 @@ Rules:
 
                 prompt,
 
-                temperature:
-                  0.5,
+                ...generationOptions(config, 0.5),
 
                 maxOutputTokens:
                   80,
@@ -217,3 +217,4 @@ Rules:
       config.model,
   };
 }
+
