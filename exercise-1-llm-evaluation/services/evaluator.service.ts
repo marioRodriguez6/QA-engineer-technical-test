@@ -1,3 +1,4 @@
+import { generationOptions } from '../providers/generation-options.js';
 import { generateText } from 'ai';
 import { turnEvaluationSchema, type TurnEvaluation } from '../types/evaluation.types.js';
 export { turnEvaluationSchema, type TurnEvaluation } from '../types/evaluation.types.js';
@@ -285,7 +286,7 @@ with your actual assessment:
           const result = await generateText({
             model,
             prompt,
-            temperature: 0.1,
+            ...generationOptions(config, 0.1),
             maxOutputTokens: 2000,
           });
 
