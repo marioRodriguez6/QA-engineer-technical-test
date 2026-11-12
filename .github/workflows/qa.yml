@@ -50,9 +50,13 @@ jobs:
             test_path: exercise-2-api-testing/tests/status.spec.ts
             evidence_path: output/ci/api/
 
-          - suite: chatbot
-            test_path: exercise-3-chatbot-testing/tests/
+          - suite: chatbot-docs
+            test_path: exercise-3-chatbot-testing/tests/botpress-docs/
             evidence_path: output/chatbot/
+
+          - suite: chatbot-homepage
+            test_path: exercise-3-chatbot-testing/tests/botpress-homepage/
+            evidence_path: output/ci/chatbot-homepage/
 
     env:
       QA_REPORT_DIR: output/ci/${{ matrix.suite }}
@@ -70,11 +74,11 @@ jobs:
       - run: npm ci
 
       - name: Install Chromium
-        if: matrix.suite == 'chatbot'
+        if: startsWith(matrix.suite, 'chatbot-')
         run: npx playwright install --with-deps chromium
 
       - name: Remove previous chatbot evidence
-        if: matrix.suite == 'chatbot'
+        if: matrix.suite == 'chatbot-docs'
         run: |
           node --input-type=module <<'NODE'
           import { rmSync } from 'node:fs';
