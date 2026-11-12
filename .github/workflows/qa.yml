@@ -37,7 +37,7 @@ jobs:
         run: node --check exercise-4-cicd/run-llm-ci.mjs
 
       - name: Test consolidated report generator
-        run: node --test exercise-5-consolidated-report/generate-report.test.mjs
+        run: node --test exercise-5-consolidated-report/generate-report.test.mjs exercise-5-consolidated-report/publish-reports.test.mjs
 
   playwright:
     name: Playwright - ${{ matrix.suite }}
@@ -179,15 +179,22 @@ jobs:
     if: ${{ always() }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: write
+    concurrency:
+      group: qa-report-${{ github.repository }}-${{ github.head_ref || github.ref_name }}
+      cancel-in-progress: false
 
     env:
       REPORT_INPUT_DIR: output/ci/consolidated-inputs
       WORKFLOW_NEEDS: ${{ toJSON(needs) }}
+      REPORT_BRANCH: ${{ github.head_ref || github.ref_name }}
+      REPORT_SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
 
     steps:
       - uses: actions/checkout@v7
         with:
-          persist-credentials: false
+          persist-credentials: true
 
       - uses: actions/setup-node@v7
         with:
@@ -238,6 +245,7 @@ jobs:
           path: ${{ env.REPORT_INPUT_DIR }}/chatbot-homepage
 
       - name: Generate consolidated report
+        id: generate_report
         if: always()
         env:
           DOWNLOAD_OUTCOMES: >-
@@ -245,6 +253,7 @@ jobs:
         run: node exercise-5-consolidated-report/generate-report.mjs "$REPORT_INPUT_DIR" output
 
       - name: Upload consolidated report
+        id: upload_report
         if: always() && steps.prepare_report.outcome == 'success'
         uses: actions/upload-artifact@v7
         with:
@@ -254,3 +263,11 @@ jobs:
             output/consolidated-report.json
           if-no-files-found: error
           retention-days: 30
+
+      - name: Publish report snapshots to the source branch
+        if: >-
+          always() &&
+          steps.upload_report.outcome == 'success' &&
+          (github.event_name != 'pull_request' ||
+           github.event.pull_request.head.repo.full_name == github.repository)
+        run: node exercise-5-consolidated-report/publish-reports.mjs output
