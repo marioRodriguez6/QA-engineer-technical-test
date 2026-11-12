@@ -546,3 +546,23 @@ The custom chatbot conversation screenshot and latency JSON still use their fixe
 
 Use evidence from the corresponding execution when reporting results. Historical passing reports do not establish that a later failed or blocked execution passed.
 
+
+## Anthropic Local and Manual CI Runs
+
+To use Anthropic for all roles locally, set these variables in your private `.env`:
+
+```dotenv
+ANTHROPIC_API_KEY=your_private_key
+SIMULATED_USER_PROVIDER=anthropic
+SIMULATED_USER_MODEL=claude-haiku-5-5
+ASSISTANT_PROVIDER=anthropic
+ASSISTANT_MODEL=claude-haiku-5-5
+EVALUATOR_PROVIDER=anthropic
+EVALUATOR_MODEL=claude-haiku-5-5
+```
+
+Run `npm run validate:evaluator` for reference validation or `node exercise-4-cicd/run-llm-ci.mjs` for all five scenarios. Both consume API credit. Do not share or commit the key.
+
+For CI, add the repository Actions secret `ANTHROPIC_API_KEY`. In **Run workflow**, choose `anthropic` in `llm_provider` to run all three roles on Haiku 5.5; choose `groq` for the existing configuration. Push/PR events retain Groq. The workflow does not read your local `.env`. Artifact/consolidation publication stays in the same workflow so report run numbers remain comparable.
+
+For Haiku 5.5 only, the provider options omit sampling parameters and explicitly disable thinking to fit the short response budgets. Other providers retain their prior temperatures. The API budget and verdict rules are unchanged; a complete all-Anthropic live run must still be verified before claiming compatibility/quality.
