@@ -6,7 +6,9 @@
   "scripts": {
     "test": "playwright test",
     "test:api": "playwright test exercise-2-api-testing/tests/status.spec.ts",
-    "test:api:report": "playwright show-report output/playwright-report"
+    "test:api:report": "playwright show-report output/playwright-report",
+    "test:evaluator": "node --import tsx --test exercise-1-llm-evaluation/tests/evaluator-validation.test.ts",
+    "validate:evaluator": "tsx exercise-1-llm-evaluation/validate-evaluator.ts"
   },
   "keywords": [],
   "author": "",
