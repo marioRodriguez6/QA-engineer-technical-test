@@ -1,17 +1,483 @@
-# QA Engineer Technical Test
+# QA Engineer Technical Test — NerdsAi
 
-Technical assessment focused on QA for AI agents, APIs, conversational systems, and CI/CD.
+Technical assessment covering conversational AI evaluation, API testing, chatbot UI testing, CI/CD, and consolidated reporting.
 
 ## Project Structure
 
+| Path | Purpose |
+| --- | --- |
+| `exercise-1-llm-evaluation/` | Multi-provider conversational AI evaluation |
+| `exercise-2-api-testing/` | Goal Tracker API automated tests |
+| `exercise-3-chatbot-testing/` | Botpress documentation chatbot automated tests |
+| `exercise-4-cicd/` | CI runner for the five LLM scenarios |
+| `exercise-5-consolidated-report/` | Intended location for the consolidated report |
+| `.github/workflows/qa.yml` | GitHub Actions workflow |
+| `output/` | Generated reports and evidence |
+
+Run all commands from the repository root. Shell examples use Bash on Linux or Ubuntu WSL.
+
+## Requirements
+
+- Node.js 22 and npm.
+- Internet access for dependency installation and external services.
+- Chromium installed through Playwright for chatbot tests.
+- Provider credentials and sufficient quota for LLM scenarios.
+- A running Ollama server with the selected models installed when using Ollama.
+
+API and chatbot tests do not require LLM provider credentials.
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/marioRodriguez6/QA-engineer-technical-test.git
+cd QA-engineer-technical-test
+```
+
+Install the locked dependencies:
+
+```bash
+npm ci
+```
+
+Install Chromium and its system dependencies:
+
+```bash
+npx playwright install --with-deps chromium
+```
+
+Validate TypeScript and the CI runner syntax:
+
+```bash
+npx tsc --noEmit
+node --check exercise-4-cicd/run-llm-ci.mjs
+```
+
+## Exercise 1 — LLM Evaluation
+
+This exercise separates three roles:
+
+- **Simulated User:** generates scenario messages.
+- **Assistant:** answers using the supplied Nerds Store knowledge base.
+- **Evaluator:** independently evaluates each assistant response.
+
+Each role can independently use OpenAI, Anthropic, Groq, Gemini, or Ollama through the provider factory.
+
+### Environment Configuration
+
+For a first-time setup, copy the environment template:
+
+```bash
+cp .env.example .env
+```
+
+If `.env` already exists, update it instead of overwriting it.
+
+The template uses the following configuration:
+
+```dotenv
+SIMULATED_USER_PROVIDER=groq
+SIMULATED_USER_MODEL=qwen/qwen3.8-27b
+
+ASSISTANT_PROVIDER=groq
+ASSISTANT_MODEL=qwen/qwen3.8-27b
+
+EVALUATOR_PROVIDER=groq
+EVALUATOR_MODEL=openai/gpt-oss-20b
+
+GROQ_API_KEY=
+OPENAI_API_KEY=
+ANTHROPIC_API_KEY=
+GEMINI_API_KEY=
+
+OLLAMA_BASE_URL=http://localhost:11434/api
+```
+
+Provide credentials only for the providers selected by the three roles.
+
+| Provider value | Required configuration |
+| --- | --- |
+| `openai` | `OPENAI_API_KEY` |
+| `anthropic` | `ANTHROPIC_API_KEY` |
+| `groq` | `GROQ_API_KEY` |
+| `gemini` | `GEMINI_API_KEY` |
+| `ollama` | Reachable Ollama server and installed models |
+
+All three provider/model pairs must be configured. Model identifiers must be available to the selected provider and account.
+
+Keep `.env` and API keys out of version control.
+
+### Run an Individual Scenario
+
+Simple query:
+
+```bash
+npx tsx exercise-1-llm-evaluation/runner.ts simple-query
+```
+
+Topic change:
+
+```bash
+npx tsx exercise-1-llm-evaluation/runner.ts topic-change
+```
+
+Ambiguous information:
+
+```bash
+npx tsx exercise-1-llm-evaluation/runner.ts ambiguous-information
+```
+
+Conversational memory:
+
+```bash
+npx tsx exercise-1-llm-evaluation/runner.ts conversational-memory
+```
+
+Security and prompt injection:
+
+```bash
+npx tsx exercise-1-llm-evaluation/runner.ts prompt-injection
+```
+
+Each scenario targets six user–assistant exchanges and preserves conversation history.
+
+The JSON report is saved to:
+
 ```text
-exercise-1-llm-evaluation/
-exercise-2-api-testing/
-exercise-3-chatbot-testing/
-exercise-4-cicd/
-exercise-5-consolidated-report/
-output/
+output/llm/<scenario-id>.json
+```
 
-## LLM Limitations
+Running the same scenario again replaces its report at that path. Preserve previous evidence separately when comparing executions.
 
-For this project, free tiers of GenAI and Groq were used.
+### Run All Five Scenarios
+
+Use the CI runner locally:
+
+```bash
+node exercise-4-cicd/run-llm-ci.mjs
+```
+
+It runs the five scenarios sequentially and saves reports, logs, and a summary under:
+
+```text
+output/ci/llm/
+```
+
+The summary is:
+
+```text
+output/ci/llm/execution-summary.json
+```
+
+The CI runner removes each scenario's previous source report before execution to avoid accepting stale results.
+
+### Result Interpretation
+
+| Result | Meaning |
+| --- | --- |
+| `PASS` | All expected turn evaluations passed |
+| `FAIL` | At least one turn evaluation reported a failure |
+| `REVIEW` | No evaluated turn failed, but an evaluation is missing or requires review |
+| `BLOCKED` | An infrastructure or provider error prevented normal completion |
+
+A semantic `FAIL` does not stop the remaining conversation turns.
+
+Invalid evaluator output is recorded as an unavailable evaluation, and the scenario continues. Recognized infrastructure errors can stop the scenario and produce `BLOCKED`.
+
+The individual scenario runner returns:
+
+- `0` for `PASS`.
+- `1` for `FAIL`, `REVIEW`, or an unexpected execution error.
+- `2` for `BLOCKED`.
+
+The all-scenarios CI runner returns `0` only when all five scenarios pass its report consistency checks and have a `PASS` result. Otherwise, it returns `1`.
+
+### Provider Limitations
+
+LLM execution depends on provider availability, model access, and account quotas.
+
+A provider rate limit or exhausted daily token quota is an execution blocker, not evidence of an assistant quality failure.
+
+Increasing `maxOutputTokens` does not resolve an exhausted provider quota. Review the recorded provider error before retrying.
+
+LLM responses and evaluations may vary between runs. Investigate findings against the knowledge base before treating them as confirmed defects.
+
+## Exercise 2 — API Testing
+
+Target service:
+
+```text
+https://goal-tracker-api.onrender.com
+```
+
+The suite contains 11 sequential tests covering:
+
+- Service health.
+- User registration.
+- Successful and unsuccessful authentication.
+- Creation of two goals.
+- Retrieval and data integrity.
+- Goal listing.
+- Goal deletion and verification that the deleted goal cannot be retrieved.
+
+Run the API suite:
+
+```bash
+npm run test:api
+```
+
+Equivalent command:
+
+```bash
+npx playwright test exercise-2-api-testing/tests/status.spec.ts
+```
+
+To use another compatible API deployment:
+
+```bash
+GOAL_TRACKER_API_URL=https://your-api.example.com npm run test:api
+```
+
+The suite creates a new test user and test data in the selected service. Tests share authentication and goal IDs, so run the complete suite to preserve their dependencies.
+
+### API Reports
+
+Default report locations:
+
+```text
+output/playwright-report/
+output/playwright-results.json
+```
+
+Open the HTML report:
+
+```bash
+npm run test:api:report
+```
+
+To keep API results separate from other suites:
+
+```bash
+QA_REPORT_DIR=output/ci/api npx playwright test exercise-2-api-testing/tests/status.spec.ts
+```
+
+Open that report:
+
+```bash
+npx playwright show-report output/ci/api/html
+```
+
+## Exercise 3 — Chatbot Testing
+
+Target page:
+
+```text
+https://botpress.com/docs
+```
+
+The suite covers:
+
+- Loading the documentation page and locating the chatbot control.
+- Opening and closing the chatbot panel.
+- Chatbot name validation.
+- Sending `Hola`, checking the conversation, and measuring response latency.
+
+Run the chatbot suite:
+
+```bash
+QA_REPORT_DIR=output/ci/chatbot npx playwright test exercise-3-chatbot-testing/tests/chatbot.spec.ts
+```
+
+Run with a visible browser:
+
+```bash
+QA_REPORT_DIR=output/ci/chatbot npx playwright test exercise-3-chatbot-testing/tests/chatbot.spec.ts --headed
+```
+
+Run only the open/close test:
+
+```bash
+QA_REPORT_DIR=output/ci/chatbot npx playwright test exercise-3-chatbot-testing/tests/chatbot.spec.ts --grep CHATBOT-002
+```
+
+`QA_REPORT_DIR` changes the Playwright report and artifact locations. It does not change the test assertions.
+
+### Chatbot Reports and Evidence
+
+With the commands above, Playwright saves:
+
+```text
+output/ci/chatbot/html/
+output/ci/chatbot/results.json
+output/ci/chatbot/test-results/
+```
+
+The conversation test also saves:
+
+```text
+output/chatbot/chatbot-conversation.png
+output/chatbot/chatbot-response-time.json
+```
+
+Open the HTML report:
+
+```bash
+npx playwright show-report output/ci/chatbot/html
+```
+
+The current Playwright configuration enables screenshots, videos, and traces for successful and failed browser tests.
+
+To inspect a trace, replace the example path with the generated file:
+
+```bash
+npx playwright show-trace output/ci/chatbot/test-results/<test-directory>/trace.zip
+```
+
+API-only tests do not open browser pages and therefore do not generate browser videos.
+
+### Known Coverage Limitation
+
+`CHATBOT-003`, chatbot name validation, is currently skipped because the inspected interface does not expose the expected distinct bot name.
+
+A skipped test is not a passed test and must remain visible in the consolidated report.
+
+The chatbot tests depend on a live external website. Changes to its interface or response content can affect the assertions and require evidence-based review.
+
+## Exercise 4 — CI/CD
+
+Workflow file:
+
+```text
+.github/workflows/qa.yml
+```
+
+The workflow runs on:
+
+- Pushes.
+- Pull requests.
+- Manual dispatch through GitHub Actions.
+
+It performs:
+
+1. Dependency installation, TypeScript validation, and CI runner syntax validation.
+2. API testing.
+3. Chatbot testing with Chromium.
+4. Execution of all five LLM scenarios.
+5. Report and evidence uploads, including when test execution fails.
+
+After TypeScript validation, the API, chatbot, and LLM jobs can run independently. The five LLM scenarios run sequentially within their job.
+
+### GitHub Actions Secret
+
+Configure the repository Actions secret:
+
+```text
+GROQ_API_KEY
+```
+
+Repository settings location:
+
+```text
+Settings → Secrets and variables → Actions → New repository secret
+```
+
+The current workflow selects Groq for all three LLM roles and defines their model identifiers directly in the workflow.
+
+Changing the local `.env` does not change those CI selections. To use another provider in CI, update the workflow configuration and its required secrets.
+
+The LLM job is skipped for pull requests from forks because those executions do not receive the repository secret.
+
+### Local Checks Before Publishing Changes
+
+Static checks:
+
+```bash
+npx tsc --noEmit
+node --check exercise-4-cicd/run-llm-ci.mjs
+git diff --check
+```
+
+API suite:
+
+```bash
+QA_REPORT_DIR=output/ci/api npx playwright test exercise-2-api-testing/tests/status.spec.ts
+```
+
+Chatbot suite:
+
+```bash
+QA_REPORT_DIR=output/ci/chatbot npx playwright test exercise-3-chatbot-testing/tests/chatbot.spec.ts
+```
+
+LLM scenarios, when credentials and quota are available:
+
+```bash
+node exercise-4-cicd/run-llm-ci.mjs
+```
+
+These commands validate individual components locally. The complete GitHub Actions workflow executes on GitHub.
+
+### CI Artifacts
+
+Open the workflow execution under the repository's **Actions** tab and download its artifacts:
+
+```text
+qa-api-<run-id>-<attempt>
+qa-chatbot-<run-id>-<attempt>
+qa-llm-<run-id>-<attempt>
+```
+
+Artifacts are configured for 30-day retention.
+
+The LLM artifact includes individual JSON reports, scenario logs, and `execution-summary.json`.
+
+A workflow failure may represent a test finding, an unavailable evaluation, a provider quota issue, or an execution error. Inspect the corresponding reports and logs to identify the cause.
+
+## Exercise 5 — Consolidated Report
+
+This exercise is a written deliverable. It has no automated execution command and does not require additional LLM provider calls.
+
+The consolidated report is pending preparation.
+
+Use the generated evidence to document:
+
+- Scope and coverage.
+- Execution environment.
+- Results and metrics.
+- Findings and their supporting evidence.
+- Skipped tests and infrastructure blockers.
+- Limitations, risks, and recommendations.
+- Links to relevant CI executions and artifacts.
+
+Preserve the distinction between passed, failed, skipped, review-required, and blocked results.
+
+## Running the Playwright Suites Together
+
+Run all tests discovered by the Playwright configuration:
+
+```bash
+npm test
+```
+
+Open the default HTML report:
+
+```bash
+npx playwright show-report output/playwright-report
+```
+
+`npm test` does not execute the five conversational LLM scenarios. Run those separately with the Exercise 1 runner or the Exercise 4 CI runner.
+
+## Evidence Management
+
+Playwright report locations may be overwritten by subsequent executions using the same output directory.
+
+For an execution that must be preserved, use a unique report directory:
+
+```bash
+QA_REPORT_DIR=output/runs/chatbot-$(date -u +%Y%m%dT%H%M%SZ) npx playwright test exercise-3-chatbot-testing/tests/chatbot.spec.ts
+```
+
+The custom chatbot conversation screenshot and latency JSON still use their fixed paths under `output/chatbot/`; preserve copies separately when retaining multiple runs.
+
+Use evidence from the corresponding execution when reporting results. Historical passing reports do not establish that a later failed or blocked execution passed.
