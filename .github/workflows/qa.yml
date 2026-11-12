@@ -51,7 +51,7 @@ jobs:
             evidence_path: output/ci/api/
 
           - suite: chatbot
-            test_path: exercise-3-chatbot-testing/tests/chatbot.spec.ts
+            test_path: exercise-3-chatbot-testing/tests/
             evidence_path: output/chatbot/
 
     env:
