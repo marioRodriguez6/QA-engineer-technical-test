@@ -1,3 +1,4 @@
+import { captureEvidence, writeEvidence } from './publish-evidence.mjs';
 import { existsSync, readFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -68,7 +69,7 @@ export function writeSnapshots(cwd, markdown, report, publication) {
   return changed;
 }
 
-export function publishReports({ cwd, sourceRoot, branch, sourceSha, runId, runNumber, attempt }) {
+export function publishReports({ cwd, sourceRoot, branch, sourceSha, runId, runNumber, attempt, inputRoot }) {
   function git(args, allowFailure = false) {
     const result = spawnSync('git', args, { cwd, encoding: 'utf8' });
     if (!allowFailure && result.status !== 0) throw new Error(`git ${args[0]} failed: ${result.stderr || result.error?.message || result.status}`);
@@ -78,6 +79,7 @@ export function publishReports({ cwd, sourceRoot, branch, sourceSha, runId, runN
   // Read before checking out the current branch tip: never commit unrelated runner files.
   const markdown = readFileSync(join(sourceRoot, 'consolidated-report.md'), 'utf8');
   const report = JSON.parse(readFileSync(join(sourceRoot, 'consolidated-report.json'), 'utf8'));
+  const plans = inputRoot ? captureEvidence(inputRoot, report) : null;
   for (const value of [runNumber, attempt]) if (!Number.isSafeInteger(value) || value < 1) throw new Error('Invalid workflow sequence metadata.');
   if (!report.metadata?.runUrl?.endsWith(`/actions/runs/${runId}`) || report.metadata?.attempt !== String(attempt)) throw new Error('Report provenance does not match this run/attempt.');
   const publication = {
@@ -96,12 +98,13 @@ export function publishReports({ cwd, sourceRoot, branch, sourceSha, runId, runN
     }
     git(['checkout', '--detach', `refs/remotes/origin/${branch}`]);
     const changed = writeSnapshots(cwd, markdown, report, publication);
-    if (!changed.length) { console.log('Newer or identical report snapshots already exist. Artifact retained.'); return []; }
-    git(['add', '--', ...changed.map(folder => `output/reporte-consolidado/${folder}`)]);
+    const evidenceChanged = plans ? writeEvidence(cwd, plans, publication, report) : [];
+    if (!changed.length && !evidenceChanged.length) { console.log('Newer or identical report snapshots already exist. Artifact retained.'); return []; }
+    git(['add', '-f', '-A', '--', ...new Set([...changed.map(folder => `output/reporte-consolidado/${folder}`), ...evidenceChanged])]);
     git(['-c', 'user.name=github-actions[bot]', '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com',
       'commit', '-m', `docs: publish QA report for run ${runId} attempt ${attempt} [skip ci]`]);
     const pushed = git(['push', 'origin', `HEAD:refs/heads/${branch}`], true);
-    if (pushed.status === 0) { console.log(`Published: ${changed.join(', ')}`); return changed; }
+    if (pushed.status === 0) { console.log(`Published: ${[...changed, ...evidenceChanged].join(', ')}`); return changed; }
     // An ordinary branch update may race publication. Fetch and rebuild on its tip;
     // never force-push or overwrite a newer report with an older run.
     if (retry === 2) throw new Error(`Report publication failed after three attempts: ${pushed.stderr}`);
@@ -112,11 +115,13 @@ export function publishReports({ cwd, sourceRoot, branch, sourceSha, runId, runN
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   publishReports({
     cwd: process.cwd(), sourceRoot: resolve(process.argv[2] ?? 'output/reporte-consolidado'),
+    inputRoot: resolve(process.argv[3] ?? process.env.REPORT_INPUT_DIR ?? 'output/reporte-consolidado/inputs'),
     branch: process.env.REPORT_BRANCH, sourceSha: process.env.REPORT_SOURCE_SHA,
     runId: process.env.GITHUB_RUN_ID, runNumber: Number(process.env.GITHUB_RUN_NUMBER),
     attempt: Number(process.env.GITHUB_RUN_ATTEMPT),
   });
 }
+
 
 
 

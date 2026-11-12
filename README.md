@@ -482,11 +482,11 @@ Después de subir el artefacto, el job publica las carpetas en la rama de origen
 
 Cada carpeta contiene `consolidated-report.md`, `consolidated-report.json` y `publication.json`. Este último es metadato de auditoría, no otro formato de reporte: guarda número de ejecución, intento, commit y enlace. Se conserva intencionalmente la escritura `LastSuccesfulrun`.
 
-Una ejecución completa exige cinco escenarios con seis respuestas y seis juicios disponibles cada uno. Un `FAIL` por alucinación/seguridad o un `REVIEW` disponible puede actualizar ambas carpetas sin cambiar el veredicto. Cuota agotada, timeout, juicio ausente, conversación incompleta o evidencia inválida actualizan solo `lastRun`. TypeScript y API/UI deben terminar correctamente. Las omisiones explícitas permanecen visibles y no equivalen a cubrir todos los requisitos.
+Una ejecución completa exige cinco escenarios con seis respuestas y seis juicios disponibles cada uno. Un `FAIL` por alucinación/seguridad o un `REVIEW` disponible puede actualizar ambas carpetas sin cambiar el veredicto. Dentro del consolidado, cuota agotada, timeout, juicio ausente, conversación incompleta o evidencia inválida actualizan solo `lastRun`. Los resultados parciales de los otros ejercicios también se publican con su estado real. TypeScript y API/UI deben terminar correctamente. Las omisiones explícitas permanecen visibles y no equivalen a cubrir todos los requisitos.
 
 El primer reporte histórico de `LastSuccesfulrun` correspondía a la ejecución 43268157726, anterior a la cobertura de la página principal y sin JSON generado. Las ejecuciones elegibles posteriores lo reemplazan con ambos formatos. Los reportes anteriores permanecen en el historial de Git y en sus artefactos durante la retención.
 
-La publicación utiliza push normal, sin forzarlo, y reintenta si la rama cambia concurrentemente. Número de ejecución e intento evitan que una ejecución antigua sustituya otra más reciente. Solo se publican las carpetas de reportes. Los pull requests del mismo repositorio publican en su rama de origen; los de forks conservan únicamente artefactos porque su token no puede escribir allí. La protección de ramas o falta de permisos puede impedir publicar; primero se sube el artefacto y la falla de publicación queda visible.
+La publicación utiliza push normal, sin forzarlo, y reintenta si la rama cambia concurrentemente. Número de ejecución e intento evitan que una ejecución antigua sustituya otra más reciente. El commit publica los resultados de los ejercicios 1, 2 y 3, el manifiesto de evidencias y los snapshots consolidados. No incluye código fuente ni archivos ajenos a los resultados. Los pull requests del mismo repositorio publican en su rama de origen; los de forks conservan únicamente artefactos porque su token no puede escribir allí. La protección de ramas o falta de permisos puede impedir publicar; primero se sube el artefacto y la falla de publicación queda visible.
 
 ### Generación local desde artefactos descargados
 
@@ -570,8 +570,24 @@ Las evidencias históricas se trasladaron sin alterar su contenido, incluidos lo
 
 El código fuente permanece dentro de cada carpeta `exercise-*`. Los comandos, el workflow, la subida de artefactos y la publicación de snapshots utilizan las rutas de `/output`. Los archivos `publication.json` identifican la ejecución y el commit de cada consolidado publicado.
 
-Las ejecuciones de Actions siguen entregando los resultados completos como artefactos descargables. La publicación automática en Git continúa limitada a `output/reporte-consolidado/lastRun/` y `LastSuccesfulrun/`; los otros reportes se conservan explícitamente cuando se prepara la entrega. No se ejecutan LLM por reorganizar los archivos.
+Cada ejecución publica automáticamente en Git los resultados vigentes de los ejercicios 1, 2 y 3 y el consolidado, además de subir los artefactos completos. No se ejecutan llamadas adicionales a LLM durante la publicación.
 
 `npm test` genera tres reportes separados. El comando directo `npx playwright test` sin una ruta seleccionada genera un reporte global en `output/ci/playwright-combined/`. `QA_REPORT_DIR` permite elegir explícitamente otra ubicación.
 
-Los cinco JSON y registros LLM, junto con `output/exercise2API-Reports/results.json`, se descargaron de los artefactos de la ejecución 43327492976 (intento 1). `output/evidence-manifest.json` conserva su origen y hashes SHA-256. El reporte HTML completo y las trazas de API también están disponibles en el artefacto `qa-api-43327492976-1` durante su retención.
+### Actualización automática de todos los resultados
+
+El job final descarga las evidencias del mismo identificador de ejecución e intento y publica:
+
+- `output/exercise1-JSON/`: cinco reportes originales disponibles; `ci/` contiene el resumen y los logs.
+- `output/exercise2API-Reports/`: resultados, HTML, trazas y demás archivos del artefacto API.
+- `output/exercise3-chatbot/docs/` y `homepage/`: resultados, HTML, capturas, videos, trazas y mediciones disponibles.
+- `output/reporte-consolidado/lastRun/` y, cuando corresponde, `LastSuccesfulrun/`.
+- `output/evidence-manifest.json`: ejecución, intento, commits, estado por suite y hashes de los archivos originales y publicados.
+
+Los archivos vigentes anteriores se reemplazan, incluidas eliminaciones de capturas o resultados que ya no existen en el nuevo artefacto. Si una descarga falla o falta un reporte, `execution-status.json` registra `MISSING` o `PARTIAL` y elimina la evidencia vigente anterior de esa suite: no se conserva un PASS antiguo como si fuera actual. Los archivos disponibles y los veredictos FAIL/REVIEW no se convierten en aprobados.
+
+`history/` conserva ejecuciones históricas y `LastSuccesfulrun/` mantiene su regla de evaluación completa. La calibración manual en `evaluator-validation/` no se ejecuta ni se presenta como nueva automáticamente. Las ejecuciones locales conjuntas no sustituyen las evidencias separadas del pipeline.
+
+Las copias API que se suben a Git ocultan credenciales en JSON y trazas ZIP, incluidas cabeceras de autorización y contraseñas. Los artefactos originales de Actions permanecen intactos; el manifiesto indica qué archivos publicados difieren de su fuente. La publicación utiliza Python 3 y su biblioteca estándar de ZIP, disponibles en el ejecutor Ubuntu del workflow; no necesita instalar paquetes Python.
+
+Se utiliza un commit `[skip ci]`, push normal y controles por número de ejecución e intento para impedir que un workflow antiguo sobrescriba evidencias más recientes. Una protección de rama o un error de preparación/publicación puede impedir el commit; los artefactos se suben antes para conservar las evidencias.
