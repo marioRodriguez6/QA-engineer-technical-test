@@ -48,7 +48,7 @@ test('empty artifacts still produce a report with MISSING and null semantic metr
   assert.equal(r.counts.MISSING, 24); assert.equal(r.metrics.meanCoherence, null);
   assert.equal(r.metrics.flaggedTurnRatePercent, null); assert.equal(r.metrics.passExecutedPercent, null);
   assert.equal(r.overall, 'FAIL'); assert.equal(r.evidenceComplete, false);
-  assert.match(renderMarkdown(r), /24 missing/);
+  assert.match(renderMarkdown(r), /24 ausentes/);
 });
 
 test('quota blocker is not an assistant quality FAIL', t => {
@@ -147,7 +147,7 @@ test('functional FAIL preserves quality findings while execution can complete su
   assert.equal(r.executionStatus, 'COMPLETED'); assert.equal(r.overall, 'FAIL');
   assert.equal(r.metrics.flaggedTurns, 1); assert.equal(r.metrics.flaggedTurnRatePercent, 3.33);
   const md = renderMarkdown(r);
-  assert.match(md, /Evaluation execution: COMPLETED/); assert.match(md, /Observed quality: FAIL/);
+  assert.match(md, /Ejecución de la evaluación: COMPLETED/); assert.match(md, /Calidad observada: FAIL/);
   assert.match(md, /Irrelevant order details/);
 });
 
@@ -155,8 +155,8 @@ test('synthesis keeps verbose evidence inside disclosures and exposes required s
   const f = fixture(t); f.reports['simple-query'].analisis = 'VERBOSE_ORIGINAL_ANALYSIS'; f.flush();
   const md = renderMarkdown(f.read()); const location = md.indexOf('VERBOSE_ORIGINAL_ANALYSIS');
   assert.ok(md.lastIndexOf('<details>', location) > md.lastIndexOf('</details>', location));
-  for (const label of ['Coherence /100', 'Hallucination flags', 'Security %', 'Completion', 'Incorrect tool calling', 'Prompt injection', 'Toxic responses', 'Average timings', 'API and chatbot']) assert.ok(md.includes(label), label);
-  assert.match(md, /Original scenario analysis \(preserved\)/);
+  for (const label of ['Coherencia /100', 'Señales de alucinación', 'Seguridad %', 'Completitud', 'Uso incorrecto de herramientas (tool calling)', 'Prompt injection', 'Respuestas tóxicas', 'Tiempos promedio', 'API y chatbot']) assert.ok(md.includes(label), label);
+  assert.match(md, /Análisis original del escenario \(cita preservada\)/);
 });
 
 
@@ -166,7 +166,7 @@ test('available REVIEW is a quality result, while missing REVIEW judgments are i
   Object.assign(f.summary.results[2], { ciStatus: 'REVIEW', verdict: 'REVIEW', exitCode: 1 }); f.flush();
   const r = f.read({ needs: { llm: { result: 'success' }, playwright: { result: 'success' } } });
   assert.equal(r.executionStatus, 'COMPLETED'); assert.equal(r.scenarios[2].status, 'REVIEW');
-  assert.match(renderMarkdown(r), /REVIEW is technical incompleteness only when a judgment is unavailable/);
+  assert.match(renderMarkdown(r), /REVIEW indica una ejecución técnicamente incompleta solo cuando falta un juicio/);
   s.evaluaciones[2].evaluation_status = 'UNAVAILABLE'; s.evaluaciones[2].evaluation = null; f.flush();
   assert.equal(f.read().executionStatus, 'INCOMPLETE');
 });
@@ -181,4 +181,17 @@ test('Exercise 5 CLI emits only JSON and Markdown report files, never HTML', asy
   });
   assert.equal(result.status, 0, result.stderr);
   assert.deepEqual(readdirSync(output).sort(), ['consolidated-report.json', 'consolidated-report.md']);
+});
+
+
+test('Spanish presentation preserves original English evidence, code states and JSON fields', t => {
+  const f = fixture(t); const s = f.reports['simple-query'];
+  s.evaluaciones[0].userMessage = 'How long does shipping take?';
+  s.evaluaciones[0].assistantMessage = 'Standard shipping takes 2 to 4 business days.';
+  s.evaluaciones[0].evaluation.analysis = 'The response matches the ground truth.';
+  f.flush(); const r = f.read(); const before = JSON.stringify(r); const md = renderMarkdown(r);
+  for (const title of ['# Reporte consolidado de QA', '## Métricas globales', '## Tiempos promedio', '## Detección automática', 'Usuario (cita original)', 'Razonamiento del juez (cita original)']) assert.ok(md.includes(title), title);
+  assert.ok(md.includes('Standard shipping takes 2 to 4 business days.'));
+  assert.ok(md.includes('The response matches the ground truth.'));
+  assert.equal(JSON.stringify(r), before); assert.equal(r.scenarios[0].status, 'PASS');
 });

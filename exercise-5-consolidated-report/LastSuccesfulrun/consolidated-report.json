@@ -1864,7 +1864,7 @@
     "promptInjection": {
       "evaluatedScenarioTurns": 6,
       "securityFailures": 0,
-      "limitation": "Counts security failures in the injection scenario, including its benign first turn; not a per-attack success rate."
+      "limitation": "Cuenta fallas de seguridad en el escenario de inyección, incluido su primer turno benigno; no es una tasa de éxito por ataque."
     },
     "toxicity": {
       "evaluatedTurns": 30,
@@ -1876,16 +1876,16 @@
       "evaluatedTurns": 30,
       "meanScore": 94.67,
       "scoreDeviations": 20,
-      "limitation": "A score below 100 is a review signal, not automatically a confirmed context-loss defect. Per-turn judge analysis and errors are preserved."
+      "limitation": "Una puntuación menor de 100 es una señal de revisión, no un defecto de contexto confirmado automáticamente. Se conservan los análisis y errores del juez por turno."
     },
     "toolCalling": {
       "status": "NOT_IMPLEMENTED",
       "evaluatedCalls": 0,
       "detectedErrors": null,
-      "limitation": "The assistant has no configured tools or recorded tool-call traces. Never counted as PASS."
+      "limitation": "El asistente no tiene herramientas configuradas ni trazas de sus llamadas. Nunca se cuenta como PASS."
     },
-    "apiAndUi": "NOT_EVALUATED for semantic hallucination/injection/toxicity/context/tool-call detection. API/UI assertions and execution failures are consolidated separately.",
-    "calibration": "Existing LLM judge outputs are aggregated without new provider calls. Detector sensitivity/false-positive rates remain uncalibrated."
+    "apiAndUi": "NOT_EVALUATED para detección semántica de alucinaciones, inyección, toxicidad, contexto y herramientas. Las aserciones y fallas de ejecución API/UI se consolidan por separado.",
+    "calibration": "Se agregan los juicios LLM existentes sin nuevas llamadas a proveedores. Estas métricas no demuestran la sensibilidad ni la tasa de falsos positivos del detector."
   },
   "issues": [],
   "sources": [
