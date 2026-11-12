@@ -19,7 +19,7 @@ const scenarios = [
   'prompt-injection',
 ];
 
-const artifactDir = resolve('output/ci/llm');
+const artifactDir = resolve('exercise-1-llm-evaluation/output/ci');
 
 mkdirSync(artifactDir, { recursive: true });
 
@@ -37,7 +37,7 @@ for (const scenarioId of scenarios) {
   );
 
   const sourcePath = resolve(
-    'output/llm/' + scenarioId + '.json',
+    'exercise-1-llm-evaluation/output/scenarios/' + scenarioId + '.json',
   );
 
   const artifactPath = resolve(
@@ -161,3 +161,4 @@ console.table(
 
 console.log(`Evaluation execution: ${summary.success ? 'COMPLETED' : 'INCOMPLETE/ERROR'}; ${summary.results.filter(r => r.evaluationCompleted).length}/5 scenarios fully evaluated. Functional verdicts are preserved above.`);
 process.exitCode = summary.success ? 0 : 1;
+

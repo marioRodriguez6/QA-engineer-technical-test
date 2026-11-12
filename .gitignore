@@ -15,3 +15,15 @@ test-results/
 # Operating system
 .DS_Store
 Thumbs.db
+
+
+# Resultados nuevos: las evidencias históricas versionadas se conservan aparte.
+exercise-1-llm-evaluation/output/scenarios/
+exercise-1-llm-evaluation/output/ci/
+exercise-1-llm-evaluation/output/evaluator-validation/
+exercise-2-api-testing/output/
+exercise-3-chatbot-testing/output/docs/
+exercise-3-chatbot-testing/output/homepage/
+exercise-3-chatbot-testing/output/combined/
+exercise-4-cicd/output/
+exercise-5-consolidated-report/output/

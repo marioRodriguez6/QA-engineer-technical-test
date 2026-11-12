@@ -304,8 +304,8 @@ function envJson(name) {
 }
 
 export function main() {
-  const input = process.argv[2] ?? 'output/ci/consolidated-inputs';
-  const output = resolve(process.argv[3] ?? 'output');
+  const input = process.argv[2] ?? 'exercise-5-consolidated-report/output/inputs';
+  const output = resolve(process.argv[3] ?? 'exercise-5-consolidated-report/output');
   const report = buildReport(input, {
     runUrl: process.env.GITHUB_RUN_ID ? `${process.env.GITHUB_SERVER_URL ?? 'https://github.com'}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}` : null,
     attempt: process.env.GITHUB_RUN_ATTEMPT ?? null, commit: process.env.GITHUB_SHA ?? null,
@@ -322,3 +322,4 @@ export function main() {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) main();
+

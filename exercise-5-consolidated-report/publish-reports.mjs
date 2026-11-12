@@ -111,11 +111,12 @@ export function publishReports({ cwd, sourceRoot, branch, sourceSha, runId, runN
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   publishReports({
-    cwd: process.cwd(), sourceRoot: resolve(process.argv[2] ?? 'output'),
+    cwd: process.cwd(), sourceRoot: resolve(process.argv[2] ?? 'exercise-5-consolidated-report/output'),
     branch: process.env.REPORT_BRANCH, sourceSha: process.env.REPORT_SOURCE_SHA,
     runId: process.env.GITHUB_RUN_ID, runNumber: Number(process.env.GITHUB_RUN_NUMBER),
     attempt: Number(process.env.GITHUB_RUN_ATTEMPT),
   });
 }
+
 
 

@@ -46,7 +46,7 @@ jobs:
       - name: Check CI runner syntax
         run: |
           node --check exercise-4-cicd/run-llm-ci.mjs
-          node --test exercise-4-cicd/inspect-report.test.mjs
+          node --test exercise-4-cicd/inspect-report.test.mjs exercise-4-cicd/report-paths.test.mjs
 
       - name: Test consolidated report generator
         run: node --test exercise-5-consolidated-report/generate-report.test.mjs exercise-5-consolidated-report/publish-reports.test.mjs
@@ -62,19 +62,19 @@ jobs:
       matrix:
         include:
           - suite: api
+            report_dir: exercise-2-api-testing/output
             test_path: exercise-2-api-testing/tests/status.spec.ts
-            evidence_path: output/ci/api/
 
           - suite: chatbot-docs
+            report_dir: exercise-3-chatbot-testing/output/docs
             test_path: exercise-3-chatbot-testing/tests/botpress-docs/
-            evidence_path: output/chatbot/
 
           - suite: chatbot-homepage
+            report_dir: exercise-3-chatbot-testing/output/homepage
             test_path: exercise-3-chatbot-testing/tests/botpress-homepage/
-            evidence_path: output/ci/chatbot-homepage/
 
     env:
-      QA_REPORT_DIR: output/ci/${{ matrix.suite }}
+      QA_REPORT_DIR: ${{ matrix.report_dir }}
 
     steps:
       - uses: actions/checkout@v7
@@ -92,12 +92,6 @@ jobs:
           node --input-type=module <<'NODE'
           import { rmSync } from 'node:fs';
           rmSync(process.env.QA_REPORT_DIR, { recursive: true, force: true });
-          if (process.env.QA_REPORT_DIR.endsWith('/chatbot-docs')) {
-            for (const path of [
-              'output/chatbot/chatbot-conversation.png',
-              'output/chatbot/chatbot-response-time.json',
-            ]) rmSync(path, { force: true });
-          }
           NODE
 
       - run: npm ci
@@ -114,9 +108,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: qa-${{ matrix.suite }}-${{ github.run_id }}-${{ github.run_attempt }}
-          path: |
-            output/ci/${{ matrix.suite }}/
-            ${{ matrix.evidence_path }}
+          path: ${{ matrix.report_dir }}/
           if-no-files-found: warn
           retention-days: 30
 
@@ -157,7 +149,7 @@ jobs:
         run: |
           node --input-type=module <<'NODE'
           import { rmSync } from 'node:fs';
-          rmSync('output/ci/llm', { recursive: true, force: true });
+          rmSync('exercise-1-llm-evaluation/output/ci', { recursive: true, force: true });
           NODE
 
       - run: npm ci
@@ -186,7 +178,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: qa-llm-${{ github.run_id }}-${{ github.run_attempt }}
-          path: output/ci/llm/
+          path: exercise-1-llm-evaluation/output/ci/
           if-no-files-found: warn
           retention-days: 30
 
@@ -203,7 +195,7 @@ jobs:
       cancel-in-progress: false
 
     env:
-      REPORT_INPUT_DIR: output/ci/consolidated-inputs
+      REPORT_INPUT_DIR: exercise-5-consolidated-report/output/inputs
       WORKFLOW_NEEDS: ${{ toJSON(needs) }}
       REPORT_BRANCH: ${{ github.head_ref || github.ref_name }}
       REPORT_SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
@@ -224,7 +216,7 @@ jobs:
           import { mkdirSync, rmSync } from 'node:fs';
           rmSync(process.env.REPORT_INPUT_DIR, { recursive: true, force: true });
           mkdirSync(process.env.REPORT_INPUT_DIR, { recursive: true });
-          for (const path of ['output/consolidated-report.md', 'output/consolidated-report.json']) {
+          for (const path of ['exercise-5-consolidated-report/output/consolidated-report.md', 'exercise-5-consolidated-report/output/consolidated-report.json']) {
             rmSync(path, { force: true });
           }
           NODE
@@ -267,7 +259,7 @@ jobs:
         env:
           DOWNLOAD_OUTCOMES: >-
             {"llm":"${{ steps.llm.outcome }}","api":"${{ steps.api.outcome }}","chatbot-docs":"${{ steps.docs.outcome }}","chatbot-homepage":"${{ steps.homepage.outcome }}"}
-        run: node exercise-5-consolidated-report/generate-report.mjs "$REPORT_INPUT_DIR" output
+        run: node exercise-5-consolidated-report/generate-report.mjs "$REPORT_INPUT_DIR" exercise-5-consolidated-report/output
 
       - name: Upload consolidated report
         id: upload_report
@@ -276,8 +268,8 @@ jobs:
         with:
           name: qa-consolidated-report-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
-            output/consolidated-report.md
-            output/consolidated-report.json
+            exercise-5-consolidated-report/output/consolidated-report.md
+            exercise-5-consolidated-report/output/consolidated-report.json
           if-no-files-found: error
           retention-days: 30
 
@@ -287,4 +279,5 @@ jobs:
           steps.upload_report.outcome == 'success' &&
           (github.event_name != 'pull_request' ||
            github.event.pull_request.head.repo.full_name == github.repository)
-        run: node exercise-5-consolidated-report/publish-reports.mjs output
+        run: node exercise-5-consolidated-report/publish-reports.mjs exercise-5-consolidated-report/output
+

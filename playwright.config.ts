@@ -1,7 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const reportDir =
-  process.env.QA_REPORT_DIR?.trim();
+import { defaultPlaywrightReportDir } from './exercise-4-cicd/report-paths.mjs';
+
+const reportDir = process.env.QA_REPORT_DIR?.trim() ||
+  defaultPlaywrightReportDir(process.argv.slice(2));
 
 export default defineConfig({
   testDir: './',
@@ -19,9 +21,7 @@ export default defineConfig({
   retries: 0,
 
   outputDir:
-    reportDir
-      ? `${reportDir}/test-results`
-      : 'test-results',
+    `${reportDir}/test-results`,
 
   reporter: [
     ['list'],
@@ -30,9 +30,7 @@ export default defineConfig({
       'html',
       {
         outputFolder:
-          reportDir
-            ? `${reportDir}/html`
-            : 'output/playwright-report',
+          `${reportDir}/html`,
 
         open: 'never',
       },
@@ -42,9 +40,7 @@ export default defineConfig({
       'json',
       {
         outputFile:
-          reportDir
-            ? `${reportDir}/results.json`
-            : 'output/playwright-results.json',
+          `${reportDir}/results.json`,
       },
     ],
   ],
@@ -64,3 +60,4 @@ export default defineConfig({
     },
   ],
 });
+
