@@ -59,7 +59,7 @@ export function buildReport(inputRoot, metadata = {}) {
     let status = 'MISSING';
     let evaluations = [];
     let completed = null;
-    let quality = { coherence: null, context: null, falseRate: null, unsupportedRate: null, security: null };
+    let quality = { coherence: null, context: null, falseRate: null, unsupportedRate: null, security: null, usefulness: null };
     const findings = [];
     if (data && summaryMatchesCommit) {
       completed = Array.isArray(data.turnos) ? data.turnos.filter(message => message.rol === 'asistente').length : null;
@@ -102,18 +102,19 @@ export function buildReport(inputRoot, metadata = {}) {
         if (numeric(turn.timing?.evaluatorResponseMs)) timing.llmEvaluatorMs.push(turn.timing.evaluatorResponseMs);
       }
       quality = {
+        usefulness: mean(evaluations.map(e => e.usefulnessScore).filter(numeric)),
         coherence: mean(evaluations.map(e => e.coherenceScore)),
         context: mean(evaluations.map(e => e.contextRetentionScore)),
         falseRate: pct(evaluations.filter(e => e.hallucinationType === 'demonstrably_false').length, evaluations.length),
         unsupportedRate: pct(evaluations.filter(e => e.hallucinationType === 'unsupported').length, evaluations.length),
         security: pct(evaluations.filter(e => !e.securityIssueDetected).length, evaluations.length),
       };
-      scenarioReports.push({ id, status, reportedVerdict: data.veredicto, completedTurns: completed, validEvaluations: evaluations.length, quality, findings: [...new Set(findings)], turnEvaluations: turns });
+      scenarioReports.push({ id, status, reportedVerdict: data.veredicto, completedTurns: completed, validEvaluations: evaluations.length, quality, experience: data.experience ?? { resolutionStatus: 'unknown' }, analysis: data.analisis ?? null, metricDefinitions: data.metric_definitions ?? null, findings: [...new Set(findings)], turnEvaluations: turns });
     } else {
       scenarioReports.push({ id, status, reportedVerdict: data?.veredicto ?? null, completedTurns: null, validEvaluations: 0, quality, findings: [] });
     }
     units.push({ suite: 'llm', id, status });
-    llmRows.push([id, status, quality.coherence, quality.context, quality.falseRate, quality.unsupportedRate, quality.security, completed == null ? 'N/A' : `${completed}/6`, `${evaluations.length}/6`]);
+    llmRows.push([id, status, quality.coherence, quality.context, quality.falseRate, quality.unsupportedRate, quality.security, completed == null ? 'N/A' : `${completed}/6`, `${evaluations.length}/6`, quality.usefulness, data && summaryMatchesCommit ? data.experience?.resolutionStatus ?? 'unknown' : 'unknown']);
   }
 
   const suites = [];
@@ -173,7 +174,7 @@ export function buildReport(inputRoot, metadata = {}) {
     promptInjection: { evaluatedScenarioTurns: injections.length, securityFailures: injections.filter(e => e.securityIssueDetected).length,
       limitation: 'Counts security failures in the injection scenario, including its benign first turn; not a per-attack success rate.' },
     toxicity: { evaluatedTurns: validTurns.length, detectedTurns: validTurns.filter(e => e.toxicityDetected).length },
-    context: { evaluatedTurns: validTurns.length, meanScore: mean(validTurns.map(e => e.contextRetentionScore)), scoreDeviations: scoreDeviations.length,
+    context: { materialContextFailures: validTurns.filter(e => e.contextIssueDetected === true).length, explicitDetectorCoverage: validTurns.filter(e => typeof e.contextIssueDetected === 'boolean').length, evaluatedTurns: validTurns.length, meanScore: mean(validTurns.map(e => e.contextRetentionScore)), scoreDeviations: scoreDeviations.length,
       limitation: 'A score below 100 is a review signal, not automatically a confirmed context-loss defect. Per-turn judge analysis and errors are preserved.' },
     toolCalling: { status: 'NOT_IMPLEMENTED', evaluatedCalls: 0, detectedErrors: null,
       limitation: 'The assistant has no configured tools or recorded tool-call traces. Never counted as PASS.' },
@@ -190,7 +191,8 @@ export function buildReport(inputRoot, metadata = {}) {
     metrics: { passedPlannedPercent: pct(counts.PASS, units.length), passExecutedPercent: pct(counts.PASS, executed), failExecutedPercent: pct(counts.FAIL, executed),
       completedConversationsPercent: pct(scenarioReports.filter(s => s.completedTurns === 6).length, 5),
       llmEvaluationCoveragePercent: pct(validTurns.length, 30), meanCoherence: mean(validTurns.map(e => e.coherenceScore)),
-      meanContext: mean(validTurns.map(e => e.contextRetentionScore)), flaggedTurnRatePercent: pct(qualityFlags.length, validTurns.length),
+      meanContext: mean(validTurns.map(e => e.contextRetentionScore)), meanUsefulness: mean(validTurns.map(e => e.usefulnessScore).filter(numeric)),
+      resolution: { notApplicable: scenarioReports.filter(s => s.experience?.resolutionStatus === "not_applicable").length, resolved: scenarioReports.filter(s => s.experience?.resolutionStatus === "resolved").length, partial: scenarioReports.filter(s => s.experience?.resolutionStatus === "partial").length, unresolved: scenarioReports.filter(s => s.experience?.resolutionStatus === "unresolved").length, unknown: scenarioReports.filter(s => !s.experience || s.experience.resolutionStatus === "unknown").length }, flaggedTurnRatePercent: pct(qualityFlags.length, validTurns.length),
       flaggedTurns: qualityFlags.length, validEvaluations: validTurns.length,
       meanTimesMs: Object.fromEntries(Object.entries(timing).map(([key, values]) => [key, { mean: mean(values), samples: values.length }])) },
     scenarios: scenarioReports, suites, bonus, issues, sources, llmRows,
@@ -210,12 +212,14 @@ export function renderMarkdown(r) {
     table(['Metric', 'Value'], [
       ['PASS / planned (%)', m.passedPlannedPercent], ['PASS / executed (%)', m.passExecutedPercent], ['FAIL / executed (%)', m.failExecutedPercent],
       ['Completed LLM conversations / 5 (%)', m.completedConversationsPercent], ['Valid LLM evaluations / 30 (%)', m.llmEvaluationCoveragePercent],
-      ['Mean coherence /100', m.meanCoherence], ['Mean context /100', m.meanContext], ['Judge-flagged turns / valid evaluations (%)', m.flaggedTurnRatePercent],
+      ['Mean coherence /100', m.meanCoherence], ['Mean context /100', m.meanContext], ['Mean usefulness /100', m.meanUsefulness], ['User needs resolved (scenarios)', m.resolution.resolved], ['User needs unresolved (scenarios)', m.resolution.unresolved], ['Resolution unavailable (scenarios)', m.resolution.unknown], ['Judge-flagged turns / valid evaluations (%)', m.flaggedTurnRatePercent],
     ]), '',
     'Executed denominator includes PASS, FAIL, REVIEW and FLAKY. Skipped, blocked, missing and invalid/error units are excluded and listed separately. N/A means no valid samples; it never means zero errors.', '',
     '## Exercise 1 - Five LLM scenarios', '',
-    table(['Scenario', 'Status', 'Coherence', 'Context', 'False %', 'Unsupported %', 'Security %', 'Exchanges', 'Valid evaluations'], r.llmRows), '',
+    table(['Scenario', 'Status', 'Coherence', 'Context', 'False %', 'Unsupported %', 'Security %', 'Exchanges', 'Valid evaluations', 'Usefulness', 'Need resolution'], r.llmRows), '',
     'Quality metrics are recalculated from valid per-turn judge outputs. False and unsupported claims remain distinct. Security % uses all valid turns, not only attacks. Original verdicts, per-turn evaluations and errors are preserved in the JSON companion.', '',
+    ...r.scenarios.flatMap(s => [`### ${s.id} - evaluation synthesis`, '', cell(s.analysis ?? 'No scenario-level synthesis available in this source report.'), '']),
+    'User-need resolution is distinct from technical completion. Historical reports without these fields remain unknown, not retroactively resolved.', '',
     '## Exercises 2 and 3 - API and chatbot', '',
   ];
   for (const suite of r.suites) lines.push(`### ${suite.suite}`, '', table(['Case', 'Status', 'Test duration ms', 'Attempts'], suite.tests.map(t => [t.id, t.status, t.durationMs, t.attempts])), '');
@@ -226,7 +230,7 @@ export function renderMarkdown(r) {
       ['Hallucinations', `${r.bonus.hallucinations.detectedTurns}/${m.validEvaluations} flagged; ${r.bonus.hallucinations.demonstrablyFalse} false, ${r.bonus.hallucinations.unsupported} unsupported`, 'LLM judge only; no evidence is not a PASS'],
       ['Prompt injection', `${r.bonus.promptInjection.securityFailures} security failures / ${r.bonus.promptInjection.evaluatedScenarioTurns} valid scenario turns`, r.bonus.promptInjection.limitation],
       ['Toxicity', `${r.bonus.toxicity.detectedTurns}/${m.validEvaluations} flagged`, 'No positive detector calibration demonstrated'],
-      ['Context retention', `${r.bonus.context.meanScore ?? 'N/A'}/100 mean; ${r.bonus.context.scoreDeviations} scores below 100`, r.bonus.context.limitation],
+      ['Context retention', `${r.bonus.context.meanScore ?? 'N/A'}/100 mean; ${r.bonus.context.materialContextFailures} explicit material context flags (${r.bonus.context.explicitDetectorCoverage} explicit judgments); ${r.bonus.context.scoreDeviations} scores below 100`, r.bonus.context.limitation],
       ['Incorrect tool calling', 'NOT_IMPLEMENTED; 0 observed calls', r.bonus.toolCalling.limitation],
       ['API/UI semantic detectors', 'NOT_EVALUATED', r.bonus.apiAndUi],
     ]), '', r.bonus.calibration, '',
@@ -270,3 +274,4 @@ export function main() {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) main();
+
