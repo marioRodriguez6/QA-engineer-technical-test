@@ -4,6 +4,13 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+    inputs:
+      llm_provider:
+        description: Provider for all three LLM roles
+        type: choice
+        options: [groq, anthropic]
+        default: groq
+        required: true
 
 permissions:
   contents: read
@@ -124,14 +131,14 @@ jobs:
     timeout-minutes: 35
 
     env:
-      SIMULATED_USER_PROVIDER: groq
-      SIMULATED_USER_MODEL: qwen/qwen3.8-27b
+      SIMULATED_USER_PROVIDER: ${{ inputs.llm_provider || 'groq' }}
+      SIMULATED_USER_MODEL: ${{ inputs.llm_provider == 'anthropic' && 'claude-haiku-5-5' || 'qwen/qwen3.8-27b' }}
 
-      ASSISTANT_PROVIDER: groq
-      ASSISTANT_MODEL: qwen/qwen3.8-27b
+      ASSISTANT_PROVIDER: ${{ inputs.llm_provider || 'groq' }}
+      ASSISTANT_MODEL: ${{ inputs.llm_provider == 'anthropic' && 'claude-haiku-5-5' || 'qwen/qwen3.8-27b' }}
 
-      EVALUATOR_PROVIDER: groq
-      EVALUATOR_MODEL: openai/gpt-oss-20b
+      EVALUATOR_PROVIDER: ${{ inputs.llm_provider || 'groq' }}
+      EVALUATOR_MODEL: ${{ inputs.llm_provider == 'anthropic' && 'claude-haiku-5-5' || 'openai/gpt-oss-20b' }}
 
     steps:
       - uses: actions/checkout@v7
@@ -153,18 +160,23 @@ jobs:
 
       - run: npm ci
 
-      - name: Validate Groq secret
+      - name: Validate selected provider secret
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          if [ -z "$GROQ_API_KEY" ]; then
-            echo "::error::GROQ_API_KEY is missing. LLM execution is blocked."
-            exit 1
-          fi
+          node --input-type=module <<'NODE'
+          const key = process.env.ASSISTANT_PROVIDER === 'anthropic' ? 'ANTHROPIC_API_KEY' : 'GROQ_API_KEY';
+          if (!process.env[key]?.trim()) {
+            console.error(key + ' is missing. LLM execution is blocked.');
+            process.exit(1);
+          }
+          NODE
 
       - name: Run all five LLM scenarios
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: node exercise-4-cicd/run-llm-ci.mjs
 
       - name: Upload LLM reports and logs
