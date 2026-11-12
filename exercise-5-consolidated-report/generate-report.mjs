@@ -157,7 +157,6 @@ export function buildReport(inputRoot, metadata = {}) {
     suites.push({ suite, durationMs: data?.stats?.duration ?? null, tests: rows });
   }
 
-  // Optional latency evidence is read only from the downloaded suite artifact.
   for (const [suite, name, key] of [['chatbot-docs', 'chatbot-response-time.json', 'docsResponseMs'], ['chatbot-homepage', 'homepage-response-time.json', 'homepageResponseMs']]) {
     const data = readOne(suite, name, false);
     if (numeric(data?.responseTimeMs)) timing[key].push(data.responseTimeMs);
@@ -318,12 +317,8 @@ export function main() {
   writeFileSync(join(output, 'consolidated-report.md'), markdown);
   if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, markdown);
   console.log(`Reporte consolidado: ${report.overall}; ${report.counts.PASS}/${report.plannedUnits} PASS. Guardado en ${output}`);
-  // Still upload the report when evidence is missing/invalid; do not greenwash missing inputs.
+  // Escribe las evidencias antes de devolver el error para permitir su subida.
   if (!report.evidenceComplete) process.exitCode = 1;
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) main();
-
-
-
-

@@ -274,7 +274,6 @@ export function calculateScenarioResult(
         ),
       ),
 
-      // All flagged responses; subcategories retain their separate meanings.
       hallucination_rate:
         validCount === 0
           ? null
@@ -305,8 +304,6 @@ export function calculateScenarioResult(
         expectedTurns,
       ),
 
-      // Indicador por escenario; luego se promedia
-      // entre los cinco escenarios.
       completed_conversation_rate:
         isComplete ? 100 : 0,
     },
@@ -371,4 +368,3 @@ export function calculateScenarioResult(
     errores_detectados: errors,
   };
 }
-

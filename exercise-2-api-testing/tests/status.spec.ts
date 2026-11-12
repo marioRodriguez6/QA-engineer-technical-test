@@ -1,10 +1,5 @@
-
 import 'dotenv/config';
 import { test, expect } from '@playwright/test';
-
-// --------------------------------------------------
-// Configuration
-// --------------------------------------------------
 
 const API_BASE_URL = (
   process.env.GOAL_TRACKER_API_URL ??
@@ -12,14 +7,8 @@ const API_BASE_URL = (
 ).replace(/\/$/, '');
 
 const PASSWORD = 'TestPassword123!';
-
-// Generate a unique email to avoid conflicts between executions.
 const TEST_EMAIL = `qa.test.${Date.now()}@example.com`;
 const TEST_NAME = 'QA Automation Test';
-
-// --------------------------------------------------
-// Shared test data
-// --------------------------------------------------
 
 let authToken: string;
 
@@ -42,13 +31,7 @@ let secondGoalData: {
   createdAt: string;
 };
 
-// --------------------------------------------------
-// Sequential API test suite
-// --------------------------------------------------
-
 test.describe.serial('Exercise 2 - Goal Tracker API', () => {
-
-  // API-001: Health Check
   test('API-001: Verify API operational status', async ({ request }) => {
     const response = await request.get(
       `${API_BASE_URL}/api/v1/status`,
@@ -62,8 +45,6 @@ test.describe.serial('Exercise 2 - Goal Tracker API', () => {
 
     expect(body.status).toBe('OPERATIONAL');
   });
-
-  // API-002: Register user
   test('API-002: Register a new user', async ({ request }) => {
     const response = await request.post(
       `${API_BASE_URL}/api/v1/auth/register`,
@@ -84,8 +65,6 @@ test.describe.serial('Exercise 2 - Goal Tracker API', () => {
     expect(body.user.name).toBe(TEST_NAME);
     expect(body.user.email).toBe(TEST_EMAIL);
   });
-
-  // API-003: Successful login
   test('API-003: Login with valid credentials', async ({ request }) => {
     const response = await request.post(
       `${API_BASE_URL}/api/v1/auth/login`,
@@ -107,8 +86,6 @@ test.describe.serial('Exercise 2 - Goal Tracker API', () => {
 
     authToken = body.token;
   });
-
-  // API-004: Invalid login
   test('API-004: Reject login with invalid credentials', async ({ request }) => {
     const response = await request.post(
       `${API_BASE_URL}/api/v1/auth/login`,
@@ -128,8 +105,6 @@ test.describe.serial('Exercise 2 - Goal Tracker API', () => {
       msg: 'Invalid Credentials',
     });
   });
-
-  // API-005: Create first goal
   test('API-005: Create the first goal', async ({ request }) => {
     const goalPayload = {
       title: 'Complete QA technical assessment',
@@ -178,8 +153,6 @@ test.describe.serial('Exercise 2 - Goal Tracker API', () => {
       createdAt: body.goal.createdAt,
     };
   });
-
-  // API-006: Create second goal
   test('API-006: Create a second goal with a different ID', async ({ request }) => {
     const goalPayload = {
       title: 'Practice API automation',
@@ -227,12 +200,8 @@ test.describe.serial('Exercise 2 - Goal Tracker API', () => {
       priority: body.goal.priority,
       createdAt: body.goal.createdAt,
     };
-
-    // Both goals must have different generated IDs.
     expect(secondGoalId).not.toBe(firstGoalId);
   });
-
-  // API-007: Retrieve first goal
   test('API-007: Retrieve the first goal by ID', async ({ request }) => {
     const response = await request.get(
       `${API_BASE_URL}/api/v1/goals/${firstGoalId}`,
@@ -256,8 +225,6 @@ test.describe.serial('Exercise 2 - Goal Tracker API', () => {
     expect(body.goal.priority).toBe(firstGoalData.priority);
     expect(body.goal.createdAt).toBe(firstGoalData.createdAt);
   });
-
-  // API-008: Retrieve second goal
   test('API-008: Retrieve the second goal by ID', async ({ request }) => {
     const response = await request.get(
       `${API_BASE_URL}/api/v1/goals/${secondGoalId}`,
@@ -281,8 +248,6 @@ test.describe.serial('Exercise 2 - Goal Tracker API', () => {
     expect(body.goal.priority).toBe(secondGoalData.priority);
     expect(body.goal.createdAt).toBe(secondGoalData.createdAt);
   });
-
-  // API-009: Retrieve complete goal list
   test('API-009: Retrieve the complete list of created goals', async ({ request }) => {
     const response = await request.get(
       `${API_BASE_URL}/api/v1/goals`,
@@ -298,8 +263,6 @@ test.describe.serial('Exercise 2 - Goal Tracker API', () => {
     const body = await response.json();
 
     expect(Array.isArray(body.goals)).toBe(true);
-
-    // The newly registered user should have exactly these two goals.
     expect(body.goals).toHaveLength(2);
 
     const goalIds = body.goals.map(
@@ -309,8 +272,6 @@ test.describe.serial('Exercise 2 - Goal Tracker API', () => {
     expect(goalIds).toContain(firstGoalId);
     expect(goalIds).toContain(secondGoalId);
   });
-
-  // API-010: Delete first goal
   test('API-010: Delete the first goal', async ({ request }) => {
     const response = await request.delete(
       `${API_BASE_URL}/api/v1/goals/${firstGoalId}`,
@@ -327,8 +288,6 @@ test.describe.serial('Exercise 2 - Goal Tracker API', () => {
 
     expect(body.msg).toBe('Success! Goal removed.');
   });
-
-  // API-011: Verify deleted goal no longer exists
   test('API-011: Verify the deleted goal cannot be retrieved', async ({ request }) => {
     const response = await request.get(
       `${API_BASE_URL}/api/v1/goals/${firstGoalId}`,
@@ -342,5 +301,3 @@ test.describe.serial('Exercise 2 - Goal Tracker API', () => {
     expect(response.status()).toBe(404);
   });
 });
-
-

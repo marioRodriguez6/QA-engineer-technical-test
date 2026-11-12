@@ -18,7 +18,6 @@ import {
 
 import {
   getScenario,
-  type Scenario,
 } from './scenarios/scenarios.js';
 
 import {
@@ -32,7 +31,6 @@ import {
 
 import type {
   ConversationMessage,
-  LlmProvider,
 } from './types/llm.types.js';
 
 import { calculateScenarioResult, getEvaluationFailure, isEvaluatorOutputError, type TurnResult, type ModelMetadata, type EvaluationFailure, type InfrastructureFailure, type ScenarioResult } from './evaluation-summary.js';
@@ -143,7 +141,6 @@ async function runScenario(
 
     const assistantMessage = assistantResult.text;
 
-    // Se conserva antes de intentar evaluarla.
     conversation.push({
       role: 'assistant',
       message: assistantMessage,
@@ -198,8 +195,6 @@ async function runScenario(
           message: getErrorSummary(error),
         };
       } else {
-        // Los errores inesperados de programación
-        // no se ocultan como evaluaciones inválidas.
         throw error;
       }
     }
@@ -271,9 +266,6 @@ async function runScenario(
       );
     }
 
-    // PASS, FAIL, REVIEW o evaluación inválida:
-    // continuar con el siguiente turno.
-    // El usuario simulado solo recibe conversation.
   }
 
   return calculateScenarioResult(
@@ -314,8 +306,6 @@ async function main(): Promise<void> {
   if (result.veredicto === 'BLOCKED') {
     process.exitCode = 2;
   } else if (result.veredicto !== 'PASS') {
-    // El reporte se guarda antes de señalar
-    // que la ejecución requiere atención.
     process.exitCode = 1;
   }
 }
@@ -330,4 +320,3 @@ main().catch((error: unknown) => {
 
   process.exitCode = 1;
 });
-

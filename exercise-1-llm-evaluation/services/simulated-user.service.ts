@@ -81,10 +81,6 @@ export async function generateSimulatedUserMessage({
   turnDefinition,
   history,
 }: GenerateUserMessageParams): Promise<SimulatedUserResponse> {
-  /*
-   * Fixed turns do not require
-   * an LLM request.
-   */
   if (
     turnDefinition.type ===
     'fixed'
@@ -217,4 +213,3 @@ Rules:
       config.model,
   };
 }
-

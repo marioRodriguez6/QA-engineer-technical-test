@@ -12,7 +12,6 @@ async function main() {
   let mismatches = 0;
   const root = 'output/llm/evaluator-validation';
   await mkdir(root, { recursive: true });
-  // Separate reference validation, not one of the five six-exchange conversations.
   for (const item of cases) {
     if (blocked) { records.push({ id: item.id, expected: item.expected, rationale: item.rationale, status: 'NOT_RUN', reason: 'Earlier provider blocker' }); continue; }
     try {

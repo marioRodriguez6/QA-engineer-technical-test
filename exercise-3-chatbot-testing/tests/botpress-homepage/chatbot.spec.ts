@@ -4,8 +4,7 @@ const HOME_URL = 'https://botpress.com/';
 const UI_TIMEOUT_MS = 30_000;
 const RESPONSE_TIMEOUT_MS = 60_000;
 
-// Observed on the live homepage: the launcher opens an embedded Shadow DOM
-// widget. The other iframes belong to forms/tracking, not this chat.
+// El chat de esta página utiliza Shadow DOM; los iframes pertenecen a otros widgets.
 const launcher = (page: Page) => page.locator('.bpFabWrapper');
 const input = (page: Page) =>
   page.getByRole('textbox', { name: 'Message Input', exact: true });
@@ -28,9 +27,7 @@ async function loadHomepage(page: Page): Promise<void> {
   );
 
   await test.step('Wait for window.load, which starts the webchat loader', async () => {
-    // The captured homepage installs inject.js inside a window load handler.
-    // DOMContentLoaded does not mean that handler has run yet.
-    // This is an event wait, not a fixed sleep or a networkidle requirement.
+    // inject.js se instala en window.load; DOMContentLoaded ocurre antes.
     await page.waitForLoadState('load', { timeout: 60_000 });
   });
   const pageLoadedAt = performance.now();
@@ -91,8 +88,7 @@ test.describe('Exercise 3 - Botpress homepage chatbot', () => {
       await loadHomepage(page);
       await openChat(page);
 
-      // Wait for the welcome message BEFORE taking the baseline.
-      // The welcome must never count as the response to Hola.
+      // Excluir la bienvenida del conteo de respuestas a Hola.
       await expect(incoming(page).first()).toBeVisible({
         timeout: UI_TIMEOUT_MS,
       });

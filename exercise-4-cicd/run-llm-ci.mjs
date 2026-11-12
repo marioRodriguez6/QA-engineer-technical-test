@@ -102,7 +102,6 @@ for (const scenarioId of scenarios) {
     entry.issue ??=
       'Runner did not generate a new JSON report.';
   } else {
-    // Conserva el reporte original sin cambiar el juicio.
     copyFileSync(sourcePath, artifactPath);
 
     try {
@@ -128,7 +127,6 @@ for (const scenarioId of scenarios) {
 
   summary.results.push(entry);
 
-  // Conserva el progreso después de cada escenario.
   writeFileSync(
     resolve(artifactDir, 'execution-summary.json'),
     JSON.stringify(summary, null, 2),
@@ -163,4 +161,3 @@ console.table(
 
 console.log(`Evaluation execution: ${summary.success ? 'COMPLETED' : 'INCOMPLETE/ERROR'}; ${summary.results.filter(r => r.evaluationCompleted).length}/5 scenarios fully evaluated. Functional verdicts are preserved above.`);
 process.exitCode = summary.success ? 0 : 1;
-

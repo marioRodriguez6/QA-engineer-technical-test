@@ -93,7 +93,6 @@ async function waitForChatbotReady(
     { timeout: UI_TIMEOUT_MS },
   );
 
-  // Espera a que el botón y el estado global coincidan.
   await expect.poll(
     async () => {
       const buttonState =
@@ -170,7 +169,6 @@ async function setChatbotOpen(
     `Chatbot state: current=${currentState}, requested=${open}`,
   );
 
-  // Un clic solo si es necesario cambiar de estado.
   if (currentState !== String(open)) {
     await toggle.click();
   }
@@ -203,7 +201,6 @@ test.describe(
         await test.step(
           'Open the panel using Ask Docs',
           async () => {
-            // Parte de un estado cerrado comprobado.
             await getChatToggle(page).click();
             await assertChatbotState(page, true);
           },

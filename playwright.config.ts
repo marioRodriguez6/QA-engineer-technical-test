@@ -7,7 +7,6 @@ export default defineConfig({
   testDir: './',
 
   testMatch: [
-    'exercise-1-llm-evaluation/**/*.spec.ts',
     'exercise-2-api-testing/**/*.spec.ts',
     'exercise-3-chatbot-testing/**/*.spec.ts',
   ],
