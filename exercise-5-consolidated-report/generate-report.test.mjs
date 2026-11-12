@@ -119,3 +119,20 @@ test('duplicate source reports are rejected instead of selecting a convenient PA
   writeFileSync(join(f.root, 'api', 'duplicate', 'results.json'), '{}');
   const r = f.read(); assert.equal(r.counts.MISSING, 11); assert.equal(r.evidenceComplete, false);
 });
+
+test('new UX fields and scenario analysis are consolidated while historical omissions remain unknown', t => {
+  const f = fixture(t);
+  f.reports['simple-query'].experience = { resolutionStatus: 'partial', explanation: 'Order not fully resolved.' };
+  f.reports['simple-query'].analisis = 'Turn 1: clarification is useful but resolution is partial.';
+  for (const turn of f.reports['simple-query'].evaluaciones) {
+    turn.evaluation.usefulnessScore = 75;
+    turn.evaluation.contextIssueDetected = false;
+  }
+  f.flush(); const r = f.read();
+  assert.equal(r.metrics.meanUsefulness, 75);
+  assert.equal(r.metrics.resolution.partial, 1); assert.equal(r.metrics.resolution.unknown, 4);
+  assert.equal(r.bonus.context.explicitDetectorCoverage, 6);
+  assert.equal(r.scenarios[0].experience.resolutionStatus, 'partial');
+  assert.match(renderMarkdown(r), /Turn 1: clarification/);
+});
+
