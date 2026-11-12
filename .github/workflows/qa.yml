@@ -181,7 +181,7 @@ jobs:
     timeout-minutes: 10
 
     env:
-      REPORT_INPUT_DIR: ${{ runner.temp }}/consolidated-inputs
+      REPORT_INPUT_DIR: output/ci/consolidated-inputs
       WORKFLOW_NEEDS: ${{ toJSON(needs) }}
 
     steps:
