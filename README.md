@@ -8,9 +8,9 @@ Technical assessment covering conversational AI evaluation, API testing, chatbot
 | --- | --- |
 | `exercise-1-llm-evaluation/` | Multi-provider conversational AI evaluation |
 | `exercise-2-api-testing/` | Goal Tracker API automated tests |
-| `exercise-3-chatbot-testing/` | Botpress documentation chatbot automated tests |
+| `exercise-3-chatbot-testing/` | Botpress Docs and homepage chatbot automated tests |
 | `exercise-4-cicd/` | CI runner for the five LLM scenarios |
-| `exercise-5-consolidated-report/` | Intended location for the consolidated report |
+| `exercise-5-consolidated-report/` | Report generator, validation tests and historical consolidated report |
 | `.github/workflows/qa.yml` | GitHub Actions workflow |
 | `output/` | Generated reports and evidence |
 
@@ -270,79 +270,75 @@ npx playwright show-report output/ci/api/html
 
 ## Exercise 3 — Chatbot Testing
 
-Target page:
+The exercise contains two independent suites:
 
-```text
-https://botpress.com/docs
-```
+| Suite | Target | Coverage |
+| --- | --- | --- |
+| `tests/botpress-docs/chatbot.spec.ts` | https://botpress.com/docs/ | Assessment target: page load, panel open/close, Hola and latency; CHATBOT-003 remains skipped |
+| `tests/botpress-homepage/chatbot.spec.ts` | https://botpress.com/ | Additional coverage: floating launcher, open/close/reopen, name Botpress, Hola and latency |
 
-The suite covers:
+The observed homepage chat uses an open Shadow DOM, not a chat iframe. Playwright locators traverse open shadow roots. Its loader starts on `window.load`; the suite waits for that event before checking the launcher and logs both timings.
 
-- Loading the documentation page and locating the chatbot control.
-- Opening and closing the chatbot panel.
-- Chatbot name validation.
-- Sending `Hola`, checking the conversation, and measuring response latency.
+### Run Each Suite
 
-Run the chatbot suite:
+Docs:
 
 ```bash
-QA_REPORT_DIR=output/ci/chatbot npx playwright test exercise-3-chatbot-testing/tests/chatbot.spec.ts
+QA_REPORT_DIR=output/ci/chatbot-docs npx playwright test exercise-3-chatbot-testing/tests/botpress-docs/
 ```
 
-Run with a visible browser:
+Homepage:
 
 ```bash
-QA_REPORT_DIR=output/ci/chatbot npx playwright test exercise-3-chatbot-testing/tests/chatbot.spec.ts --headed
+QA_REPORT_DIR=output/ci/chatbot-homepage npx playwright test exercise-3-chatbot-testing/tests/botpress-homepage/
 ```
 
-Run only the open/close test:
+Add `--headed` to either command to use a visible browser.
+
+Run only the Docs open/close case:
 
 ```bash
-QA_REPORT_DIR=output/ci/chatbot npx playwright test exercise-3-chatbot-testing/tests/chatbot.spec.ts --grep CHATBOT-002
+QA_REPORT_DIR=output/ci/chatbot-docs npx playwright test exercise-3-chatbot-testing/tests/botpress-docs/ --grep CHATBOT-002
 ```
 
-`QA_REPORT_DIR` changes the Playwright report and artifact locations. It does not change the test assertions.
-
-### Chatbot Reports and Evidence
-
-With the commands above, Playwright saves:
-
-```text
-output/ci/chatbot/html/
-output/ci/chatbot/results.json
-output/ci/chatbot/test-results/
-```
-
-The conversation test also saves:
-
-```text
-output/chatbot/chatbot-conversation.png
-output/chatbot/chatbot-response-time.json
-```
-
-Open the HTML report:
+Run both suites in one local report:
 
 ```bash
-npx playwright show-report output/ci/chatbot/html
+QA_REPORT_DIR=output/ci/chatbot npx playwright test exercise-3-chatbot-testing/tests/
 ```
 
-The current Playwright configuration enables screenshots, videos, and traces for successful and failed browser tests.
+These suites do not require Groq credentials. Each test has an isolated browser context. `QA_REPORT_DIR` changes evidence locations, not assertions.
 
-To inspect a trace, replace the example path with the generated file:
+### Reports and Evidence
+
+Each report directory contains `html/`, `results.json` and `test-results/`:
+
+| Suite | Report directory |
+| --- | --- |
+| Docs | `output/ci/chatbot-docs/` |
+| Homepage | `output/ci/chatbot-homepage/` |
+| Combined local run | `output/ci/chatbot/` |
+
+Open either separate report:
 
 ```bash
-npx playwright show-trace output/ci/chatbot/test-results/<test-directory>/trace.zip
+npx playwright show-report output/ci/chatbot-docs/html
+npx playwright show-report output/ci/chatbot-homepage/html
 ```
 
-API-only tests do not open browser pages and therefore do not generate browser videos.
+Screenshots, videos and traces are retained for executed browser tests regardless of outcome. API-only tests do not generate browser videos. Inspect a trace by passing its actual path to `npx playwright show-trace`.
+
+The Docs conversation also writes `output/chatbot/chatbot-conversation.png` and `output/chatbot/chatbot-response-time.json`. These fixed paths are overwritten on a later run.
+
+HOME-004 saves and attaches `homepage-conversation.png` and `homepage-response-time.json` in its own test-results directory. It waits for the welcome message before taking a baseline, then requires a new incoming message after Hola. Latency measures time until the first new loaded message has visible text, including UI/assertion overhead; it does not measure all subsequent bot messages or enforce an undocumented SLA.
+
+The verified local homepage execution passed all four cases without skips or retries and recorded 5,114 ms to the first new response. This describes that execution only. Preserve its original report separately.
 
 ### Known Coverage Limitation
 
-`CHATBOT-003`, chatbot name validation, is currently skipped because the inspected interface does not expose the expected distinct bot name.
+CHATBOT-003 remains skipped because the inspected Docs interface does not expose a distinct bot name. A homepage name validation does not replace or pass that Docs requirement. The homepage suite is complementary coverage on a different target.
 
-A skipped test is not a passed test and must remain visible in the consolidated report.
-
-The chatbot tests depend on a live external website. Changes to its interface or response content can affect the assertions and require evidence-based review.
+Both suites depend on live external pages. Review interface or response changes against execution evidence before modifying assertions.
 
 ## Exercise 4 — CI/CD
 
@@ -365,6 +361,7 @@ It performs:
 3. Chatbot testing with Chromium.
 4. Execution of all five LLM scenarios.
 5. Report and evidence uploads, including when test execution fails.
+6. Final consolidated Markdown/JSON report and workflow Summary, even after upstream failures.
 
 After TypeScript validation, the API, chatbot, and LLM jobs can run independently. The five LLM scenarios run sequentially within their job.
 
@@ -407,7 +404,7 @@ QA_REPORT_DIR=output/ci/api npx playwright test exercise-2-api-testing/tests/sta
 Chatbot suite:
 
 ```bash
-QA_REPORT_DIR=output/ci/chatbot npx playwright test exercise-3-chatbot-testing/tests/chatbot.spec.ts
+QA_REPORT_DIR=output/ci/chatbot npx playwright test exercise-3-chatbot-testing/tests/
 ```
 
 LLM scenarios, when credentials and quota are available:
@@ -424,8 +421,10 @@ Open the workflow execution under the repository's **Actions** tab and download 
 
 ```text
 qa-api-<run-id>-<attempt>
-qa-chatbot-<run-id>-<attempt>
+qa-chatbot-docs-<run-id>-<attempt>
+qa-chatbot-homepage-<run-id>-<attempt>
 qa-llm-<run-id>-<attempt>
+qa-consolidated-report-<run-id>-<attempt>
 ```
 
 Artifacts are configured for 30-day retention.
@@ -434,23 +433,62 @@ The LLM artifact includes individual JSON reports, scenario logs, and `execution
 
 A workflow failure may represent a test finding, an unavailable evaluation, a provider quota issue, or an execution error. Inspect the corresponding reports and logs to identify the cause.
 
-## Exercise 5 — Consolidated Report
+## Exercise 5 — Automated Consolidated Report
 
-This exercise is a written deliverable. It has no automated execution command and does not require additional LLM provider calls.
+The final `consolidated` job depends on TypeScript, API/UI and LLM jobs and uses `if: always()`. It generates a new report even when upstream jobs fail or are skipped. It reads only artifacts downloaded for this run ID and attempt, never tracked historical reports.
 
-The consolidated report is pending preparation.
+Outputs:
 
-Use the generated evidence to document:
+- `output/consolidated-report.md`: readable report, also displayed in the job Summary.
+- `output/consolidated-report.json`: structured results, original LLM judgments, findings and provenance.
+- Artifact: `qa-consolidated-report-<run-id>-<attempt>`, retained for 30 days.
 
-- Scope and coverage.
-- Execution environment.
-- Results and metrics.
-- Findings and their supporting evidence.
-- Skipped tests and infrastructure blockers.
-- Limitations, risks, and recommendations.
-- Links to relevant CI executions and artifacts.
+The report includes the five LLM scenarios; API; Docs and additional homepage coverage; global outcome counts/rates; completion/evaluation coverage; separate response/test durations; automatic judge flags for hallucinations, injection security failures, toxicity and context score deviations; and execution/evidence errors.
 
-Preserve the distinction between passed, failed, skipped, review-required, and blocked results.
+PASS, FAIL, REVIEW, BLOCKED, SKIPPED, FLAKY, MISSING and ERROR remain distinct. Missing/invalid evidence fails report validation after files are written, so the report can still be uploaded. Upstream failures retain their original workflow failure. A skipped required case makes the quality assessment incomplete even if the CI jobs succeed.
+
+Quality metrics use valid LLM evaluations. Demonstrably false and unsupported claims are reported separately. Context scores below 100 are review signals, not automatically proven defects. API/UI semantic detectors are NOT_EVALUATED; incorrect tool calling is NOT_IMPLEMENTED because the assistant has no tools/call traces. This reporting automation does not implement missing detectors or prove judge calibration.
+
+No provider credentials, additional LLM calls or external npm dependencies are needed for consolidation.
+
+After uploading the artifact, the final job commits report snapshots to the source branch with `[skip ci]`:
+
+| Folder | Update policy |
+| --- | --- |
+| `exercise-5-consolidated-report/lastRun/` | Latest generated report, including failed, blocked and missing-evidence results |
+| `exercise-5-consolidated-report/LastSuccesfulrun/` | Latest complete LLM evaluation, including documented semantic FAIL findings; excludes quota/timeouts, unavailable judgments and other technical blockers |
+
+Both folders contain `consolidated-report.md`, `consolidated-report.json` and `publication.json` after automatic publication. The marker records the run number, attempt, source commit and workflow link. The spelling `LastSuccesfulrun` is intentional.
+
+Here, successful means the evaluation ran completely, not that the assistant had no defects. All five LLM scenarios must contain six responses and six valid PASS/FAIL judgments. A documented hallucination or security FAIL is eligible for both folders, even though the LLM job and workflow remain failed. Original verdicts and findings are never changed.
+
+Quota exhaustion, timeout, an unavailable evaluator, incomplete conversation, REVIEW, missing/invalid evidence or an unexplained execution failure updates only `lastRun`. TypeScript and API/UI jobs must still succeed; API/UI failures are not reclassified by the LLM exception. Explicit skipped cases remain visible and do not mean all assessment requirements passed. Earlier reports remain in Git history and per-run artifacts.
+
+The first `LastSuccesfulrun` snapshot preserves the manually prepared historical report for run 43268157726; its scope predates homepage coverage and it has no generated JSON companion. Future eligible runs replace it with both report formats.
+
+Publication uses a normal fast-forward push, never a force push, and retries on concurrent branch updates. Run-number/attempt checks prevent older runs replacing newer snapshots. Only the report folders are committed. Same-repository pull requests publish to their head branch; fork PRs retain artifacts only because their token cannot write the source repository. Protected-branch rules or unavailable write permission can prevent publication; the artifact is uploaded first and the publication failure remains visible.
+
+### Local Generation from Downloaded Artifacts
+
+Extract the selected run's artifacts into these subdirectories; preserve any internal artifact paths:
+
+| Input directory | Artifact contents |
+| --- | --- |
+| `output/ci/consolidated-inputs/llm/` | LLM JSON reports and execution-summary.json |
+| `output/ci/consolidated-inputs/api/` | API results.json and evidence |
+| `output/ci/consolidated-inputs/chatbot-docs/` | Docs results.json, latency JSON and evidence |
+| `output/ci/consolidated-inputs/chatbot-homepage/` | Homepage results.json, latency JSON and evidence |
+
+```bash
+node --test exercise-5-consolidated-report/generate-report.test.mjs exercise-5-consolidated-report/publish-reports.test.mjs
+node exercise-5-consolidated-report/generate-report.mjs output/ci/consolidated-inputs output
+```
+
+The generator recursively locates source JSON files and ignores duplicate HTML report assets. It rejects ambiguous files. Do not combine artifacts from different runs. In CI a partial retry that lacks this attempt's artifacts is explicitly reported as missing.
+
+The report directly under `exercise-5-consolidated-report/` has been moved into `LastSuccesfulrun/`. Historical snapshots are never used as generator inputs.
+
+Normal upstream failures and missing artifacts are handled. Generation cannot be guaranteed if GitHub cannot start the job, checkout/setup fails or the workflow is forcibly terminated. A workflow omitted with `[skip ci]` does not run this job.
 
 ## Running the Playwright Suites Together
 
@@ -475,7 +513,7 @@ Playwright report locations may be overwritten by subsequent executions using th
 For an execution that must be preserved, use a unique report directory:
 
 ```bash
-QA_REPORT_DIR=output/runs/chatbot-$(date -u +%Y%m%dT%H%M%SZ) npx playwright test exercise-3-chatbot-testing/tests/chatbot.spec.ts
+QA_REPORT_DIR=output/runs/chatbot-$(date -u +%Y%m%dT%H%M%SZ) npx playwright test exercise-3-chatbot-testing/tests/
 ```
 
 The custom chatbot conversation screenshot and latency JSON still use their fixed paths under `output/chatbot/`; preserve copies separately when retaining multiple runs.

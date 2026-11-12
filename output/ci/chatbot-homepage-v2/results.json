@@ -1,0 +1,448 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/mario/projects/QA-engineer-technical-test/node_modules/.bin/playwright",
+      "test",
+      "exercise-3-chatbot-testing/tests/homepage.spec.ts"
+    ],
+    "configFile": "/home/mario/projects/QA-engineer-technical-test/playwright.config.ts",
+    "rootDir": "/home/mario/projects/QA-engineer-technical-test",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot-homepage-v2/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/mario/projects/QA-engineer-technical-test",
+        "testIgnore": [],
+        "testMatch": [
+          "exercise-1-llm-evaluation/**/*.spec.ts",
+          "exercise-2-api-testing/**/*.spec.ts",
+          "exercise-3-chatbot-testing/**/*.spec.ts"
+        ],
+        "timeout": 150000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot-homepage-v2/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "chromium",
+        "testDir": "/home/mario/projects/QA-engineer-technical-test",
+        "snapshotDir": "/home/mario/projects/QA-engineer-technical-test",
+        "testIgnore": [],
+        "testMatch": [
+          "exercise-1-llm-evaluation/**/*.spec.ts",
+          "exercise-2-api-testing/**/*.spec.ts",
+          "exercise-3-chatbot-testing/**/*.spec.ts"
+        ],
+        "timeout": 150000,
+        "use": {
+          "trace": "on",
+          "screenshot": "on",
+          "video": "on",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.8127.18 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "chromium"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "output/ci/chatbot-homepage-v2/html",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "output/ci/chatbot-homepage-v2/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "exercise-3-chatbot-testing/tests/homepage.spec.ts",
+      "file": "exercise-3-chatbot-testing/tests/homepage.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Exercise 3 - Botpress homepage chatbot",
+          "file": "exercise-3-chatbot-testing/tests/homepage.spec.ts",
+          "line": 58,
+          "column": 6,
+          "specs": [
+            {
+              "title": "HOME-001: Load homepage and verify floating launcher",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 36914,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Homepage DOM ready after 2562 ms\n"
+                        },
+                        {
+                          "text": "Homepage load event observed after 33478 ms\n"
+                        },
+                        {
+                          "text": "Chatbot launcher visible 1876 ms after load\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Wait for window.load, which starts the webchat loader",
+                          "duration": 30915
+                        },
+                        {
+                          "title": "Wait for the floating launcher after page load",
+                          "duration": 1876
+                        }
+                      ],
+                      "startTime": "2026-11-13T00:47:29.087Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot-homepage-v2/test-results/exercise-3-chatbot-testing-8c00f-nd-verify-floating-launcher-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot-homepage-v2/test-results/exercise-3-chatbot-testing-8c00f-nd-verify-floating-launcher-chromium/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot-homepage-v2/test-results/exercise-3-chatbot-testing-8c00f-nd-verify-floating-launcher-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b71de454955f4659f1df-e8e1322def130695d68e",
+              "file": "exercise-3-chatbot-testing/tests/homepage.spec.ts",
+              "line": 59,
+              "column": 3
+            },
+            {
+              "title": "HOME-002: Open, close and reopen the chatbot",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 40871,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Homepage DOM ready after 2330 ms\n"
+                        },
+                        {
+                          "text": "Homepage load event observed after 33682 ms\n"
+                        },
+                        {
+                          "text": "Chatbot launcher visible 1459 ms after load\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Wait for window.load, which starts the webchat loader",
+                          "duration": 31349
+                        },
+                        {
+                          "title": "Wait for the floating launcher after page load",
+                          "duration": 1457
+                        },
+                        {
+                          "title": "Close using the real header control",
+                          "duration": 1265
+                        },
+                        {
+                          "title": "Reopen using the floating launcher",
+                          "duration": 1332
+                        }
+                      ],
+                      "startTime": "2026-11-13T00:48:07.385Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot-homepage-v2/test-results/exercise-3-chatbot-testing-9dddc-lose-and-reopen-the-chatbot-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot-homepage-v2/test-results/exercise-3-chatbot-testing-9dddc-lose-and-reopen-the-chatbot-chromium/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot-homepage-v2/test-results/exercise-3-chatbot-testing-9dddc-lose-and-reopen-the-chatbot-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b71de454955f4659f1df-3cb49ec9641aa5e9ea64",
+              "file": "exercise-3-chatbot-testing/tests/homepage.spec.ts",
+              "line": 63,
+              "column": 3
+            },
+            {
+              "title": "HOME-003: Validate the displayed bot name",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7657,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Homepage DOM ready after 2176 ms\n"
+                        },
+                        {
+                          "text": "Homepage load event observed after 3672 ms\n"
+                        },
+                        {
+                          "text": "Chatbot launcher visible 1512 ms after load\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Wait for window.load, which starts the webchat loader",
+                          "duration": 1494
+                        },
+                        {
+                          "title": "Wait for the floating launcher after page load",
+                          "duration": 1511
+                        }
+                      ],
+                      "startTime": "2026-11-13T00:48:49.441Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot-homepage-v2/test-results/exercise-3-chatbot-testing-9cc5c-date-the-displayed-bot-name-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot-homepage-v2/test-results/exercise-3-chatbot-testing-9cc5c-date-the-displayed-bot-name-chromium/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot-homepage-v2/test-results/exercise-3-chatbot-testing-9cc5c-date-the-displayed-bot-name-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b71de454955f4659f1df-d83edc1aed19e66796f2",
+              "file": "exercise-3-chatbot-testing/tests/homepage.spec.ts",
+              "line": 82,
+              "column": 3
+            },
+            {
+              "title": "HOME-004: Send Hola and record a new bot response and latency",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 42766,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Homepage DOM ready after 2074 ms\n"
+                        },
+                        {
+                          "text": "Homepage load event observed after 31693 ms\n"
+                        },
+                        {
+                          "text": "Chatbot launcher visible 1347 ms after load\n"
+                        },
+                        {
+                          "text": "{\"testId\":\"HOME-004\",\"pageUrl\":\"https://botpress.com/\",\"widgetStructure\":\"Shadow DOM\",\"botName\":\"Botpress\",\"userMessage\":\"Hola\",\"assistantResponse\":\"Hola, encantado de verte por aquí en Botpress. 😊\",\"responseTimeMs\":5114,\"measuredAt\":\"2026-11-13T00:49:38.140Z\",\"measurement\":\"From immediately before pressing Enter until a new, loaded bot message with visible text is observed. Includes UI and assertion overhead.\"}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Wait for window.load, which starts the webchat loader",
+                          "duration": 29617
+                        },
+                        {
+                          "title": "Wait for the floating launcher after page load",
+                          "duration": 1347
+                        }
+                      ],
+                      "startTime": "2026-11-13T00:48:57.637Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "Homepage conversation and latency",
+                          "contentType": "application/json",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot-homepage-v2/test-results/exercise-3-chatbot-testing-d5c8b-ew-bot-response-and-latency-chromium/attachments/Homepage-conversation-and-latency-d7aae55e1bbd62f32028027dd90d358fbd858f9f.json"
+                        },
+                        {
+                          "name": "Homepage conversation",
+                          "contentType": "image/png",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot-homepage-v2/test-results/exercise-3-chatbot-testing-d5c8b-ew-bot-response-and-latency-chromium/attachments/Homepage-conversation-48ac41058d3c3e50aa59b55d1d367bf59d828616.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot-homepage-v2/test-results/exercise-3-chatbot-testing-d5c8b-ew-bot-response-and-latency-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot-homepage-v2/test-results/exercise-3-chatbot-testing-d5c8b-ew-bot-response-and-latency-chromium/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/mario/projects/QA-engineer-technical-test/output/ci/chatbot-homepage-v2/test-results/exercise-3-chatbot-testing-d5c8b-ew-bot-response-and-latency-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b71de454955f4659f1df-2e8ceb237104a5d1dcee",
+              "file": "exercise-3-chatbot-testing/tests/homepage.spec.ts",
+              "line": 88,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-13T00:47:28.353Z",
+    "duration": 133497.56699999998,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
