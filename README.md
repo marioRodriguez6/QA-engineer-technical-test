@@ -203,6 +203,32 @@ Increasing `maxOutputTokens` does not resolve an exhausted provider quota. Revie
 
 LLM responses and evaluations may vary between runs. Investigate findings against the knowledge base before treating them as confirmed defects.
 
+### Evaluator Validation and Metric Definitions
+
+The five six-exchange scenarios remain the primary real-LLM exercise. Every new turn judgment also records usefulness (0–100), whether clarification was required/appropriate, an explicit material context-error flag, cumulative user-need resolution (resolved/partial/unresolved/not_applicable), and an evidence-based UX explanation.
+
+The final analysis synthesizes the existing turn judgments with turn references; it makes no additional provider request. Completing six exchanges does not imply the user's need was resolved. If the final judgment is unavailable or the run is incomplete, resolution is unknown.
+
+New individual reports define `hallucination_rate` as responses flagged by the judge or classified as unsupported/false, divided by valid evaluations. `demonstrably_false_rate` and `unsupported_rate` retain separate meanings. `security_score` includes benign turns. Quality metrics are null without valid evaluations. Historical reports retain their original definitions and are not rewritten. The consolidated report reports false and unsupported rates separately and leaves missing historical UX fields unknown.
+
+Run deterministic schema, aggregation and reference-comparison tests without tokens:
+
+```bash
+npm run test:evaluator
+```
+
+Run the separate judge calibration only when provider credentials and quota are available:
+
+```bash
+npm run validate:evaluator
+```
+
+This command consumes evaluator tokens. It evaluates ten fixed reference cases with positive/negative controls for factual accuracy, memory, security and toxicity; expectations and rationale are defined before execution in `exercise-1-llm-evaluation/tests/evaluator-cases.ts`. These fixtures test the evaluator itself; they never replace real scenario responses. No exact numeric score is demanded from the judge.
+
+Results are written to `output/llm/evaluator-validation/validation-results.json` and `.md`. They preserve expected/observed judgments, disagreements, coverage and per-category TP/TN/FP/FN counts. False-positive rate is FP/(FP+TN); false-negative rate is FN/(FN+TP). No valid samples yields null. A provider blocker stops remaining calls and records NOT_RUN, distinct from detector failure. This small reference set cannot establish universal sensitivity or specificity.
+
+CI runs only the offline validation automatically. Live calibration is deliberately separate to avoid extra quota consumption. Its results are not mixed into the five-scenario quality metrics. New schema fields missing or malformed in a fresh judge response make that evaluation unavailable; no values are fabricated to satisfy the schema.
+
 ## Exercise 2 — API Testing
 
 Target service:
@@ -519,3 +545,4 @@ QA_REPORT_DIR=output/runs/chatbot-$(date -u +%Y%m%dT%H%M%SZ) npx playwright test
 The custom chatbot conversation screenshot and latency JSON still use their fixed paths under `output/chatbot/`; preserve copies separately when retaining multiple runs.
 
 Use evidence from the corresponding execution when reporting results. Historical passing reports do not establish that a later failed or blocked execution passed.
+
