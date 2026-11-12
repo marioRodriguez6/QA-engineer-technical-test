@@ -15,39 +15,44 @@ import {
 } from '@ai-sdk/groq';
 
 import {
-  evaluatorConfig,
-} from '../config/evaluator.config.js';
+  createOllama,
+} from 'ollama-ai-provider-v2';
+
+import {
+  llmConfig,
+} from '../config/llm.config.js';
+
+import type {
+  RoleModelConfig,
+} from '../types/llm.types.js';
 
 function requiredKey(
-  name: string,
+  variable:
+    string,
 ): string {
   const value =
     process.env[
-      name
+      variable
     ]?.trim();
 
-  if (
-    !value
-  ) {
+  if (!value) {
     throw new Error(
-      `Missing API key for selected evaluator provider: ${name}`,
+      `Missing API key for selected provider: ${variable}`,
     );
   }
 
   return value;
 }
 
-export function getEvaluatorModel() {
-  const {
-    provider,
-    model,
-  } = evaluatorConfig;
-
+export function getModel(
+  config:
+    RoleModelConfig,
+) {
   switch (
-    provider
+    config.provider
   ) {
     case 'openai': {
-      const openai =
+      const provider =
         createOpenAI({
           apiKey:
             requiredKey(
@@ -55,13 +60,13 @@ export function getEvaluatorModel() {
             ),
         });
 
-      return openai(
-        model,
+      return provider(
+        config.model,
       );
     }
 
     case 'anthropic': {
-      const anthropic =
+      const provider =
         createAnthropic({
           apiKey:
             requiredKey(
@@ -69,13 +74,13 @@ export function getEvaluatorModel() {
             ),
         });
 
-      return anthropic(
-        model,
+      return provider(
+        config.model,
       );
     }
 
     case 'groq': {
-      const groq =
+      const provider =
         createGroq({
           apiKey:
             requiredKey(
@@ -83,13 +88,13 @@ export function getEvaluatorModel() {
             ),
         });
 
-      return groq(
-        model,
+      return provider(
+        config.model,
       );
     }
 
     case 'gemini': {
-      const google =
+      const provider =
         createGoogleGenerativeAI({
           apiKey:
             requiredKey(
@@ -97,23 +102,21 @@ export function getEvaluatorModel() {
             ),
         });
 
-      return google(
-        model,
+      return provider(
+        config.model,
       );
     }
 
     case 'ollama': {
-      /*
-       * Ollama will be connected in
-       * the next step through its
-       * OpenAI-compatible endpoint.
-       *
-       * Keeping this explicit prevents
-       * silently using the wrong
-       * provider configuration.
-       */
-      throw new Error(
-        'Ollama evaluator provider is configured but its OpenAI-compatible adapter has not been enabled yet.',
+      const provider =
+        createOllama({
+          baseURL:
+            llmConfig
+              .ollamaBaseUrl,
+        });
+
+      return provider(
+        config.model,
       );
     }
   }

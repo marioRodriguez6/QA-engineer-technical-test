@@ -1,32 +1,76 @@
-import { GoogleGenAI } from '@google/genai';
-import { modelConfig } from '../config/models.js';
-import { withRetry } from '../utils/retry.js';
+import {
+  generateText,
+} from 'ai';
+
+import {
+  llmConfig,
+} from '../config/llm.config.js';
+
+import {
+  getModel,
+} from '../providers/provider-factory.js';
+
+import {
+  withRetry,
+} from '../utils/retry.js';
+
+import {
+  withVisibleTimeout,
+} from '../utils/timeout.js';
+
+import type {
+  LlmProvider,
+  ConversationMessage,
+} from '../types/llm.types.js';
 
 import type {
   Scenario,
   UserTurnDefinition,
 } from '../scenarios/scenarios.js';
-import type { ConversationMessage } from './gemini.service.js';
 
-const gemini = new GoogleGenAI({
-  apiKey: modelConfig.gemini.apiKey,
-});
+export interface SimulatedUserResponse {
+  text: string;
 
-interface GenerateUserMessageParams {
-  scenario: Scenario;
-  turnDefinition: UserTurnDefinition;
-  history: ConversationMessage[];
+  source:
+    | 'fixed'
+    | 'llm';
+
+  provider:
+    LlmProvider | null;
+
+  model:
+    string | null;
 }
 
-function formatHistory(history: ConversationMessage[]): string {
-  if (history.length === 0) {
+interface GenerateUserMessageParams {
+  scenario:
+    Scenario;
+
+  turnDefinition:
+    UserTurnDefinition;
+
+  history:
+    ConversationMessage[];
+}
+
+function formatHistory(
+  history:
+    ConversationMessage[],
+): string {
+  if (
+    history.length === 0
+  ) {
     return 'No previous conversation yet.';
   }
 
   return history
     .map(
       (item) =>
-        `${item.role === 'user' ? 'USER' : 'ASSISTANT'}: ${item.message}`,
+        `${
+          item.role === 'user'
+            ? 'USER'
+            : 'ASSISTANT'
+        }: ${item.message}`,
     )
     .join('\n');
 }
@@ -35,16 +79,45 @@ export async function generateSimulatedUserMessage({
   scenario,
   turnDefinition,
   history,
-}: GenerateUserMessageParams): Promise<string> {
-  if (turnDefinition.type === 'fixed') {
-    if (!turnDefinition.message) {
+}: GenerateUserMessageParams): Promise<SimulatedUserResponse> {
+  /*
+   * Fixed turns do not require
+   * an LLM request.
+   */
+  if (
+    turnDefinition.type ===
+    'fixed'
+  ) {
+    if (
+      !turnDefinition.message
+    ) {
       throw new Error(
         `Fixed turn ${turnDefinition.position} does not have a message.`,
       );
     }
 
-    return turnDefinition.message;
+    return {
+      text:
+        turnDefinition.message,
+
+      source:
+        'fixed',
+
+      provider:
+        null,
+
+      model:
+        null,
+    };
   }
+
+  const config =
+    llmConfig.simulatedUser;
+
+  const model =
+    getModel(
+      config,
+    );
 
   const prompt = `
 You are simulating ONE consistent user during a QA conversation.
@@ -71,7 +144,7 @@ CONVERSATION HISTORY:
 ${formatHistory(history)}
 
 Rules:
-- Generate only the next user message.
+- Generate ONLY the next user message.
 - Do not include explanations.
 - Do not mention that this is a simulation.
 - Do not evaluate the assistant.
@@ -81,37 +154,66 @@ Rules:
 - Do not repeat information unnecessarily.
 `;
 
-  return withRetry<string>(
-    async (): Promise<string> => {
-      const response =
-        await gemini.models.generateContent({
-          model:
-            modelConfig.gemini.simulatedUserModel,
+  const text =
+    await withRetry(
+      async () =>
+        withVisibleTimeout(
+          async () => {
+            const result =
+              await generateText({
+                model,
 
-          contents: prompt,
+                prompt,
 
-          config: {
-            temperature: 0.5,
-            maxOutputTokens: 80,
-            automaticContinuation: false,
+                temperature:
+                  0.5,
+
+                maxOutputTokens:
+                  80,
+              });
+
+            const generatedText =
+              result.text.trim();
+
+            if (
+              !generatedText
+            ) {
+              throw new Error(
+                `Simulated user returned an empty message at turn ${turnDefinition.position}.`,
+              );
+            }
+
+            return generatedText;
           },
-        });
 
-      const text =
-        response.text?.trim();
+          {
+            timeoutMs:
+              30_000,
 
-      if (!text) {
-        throw new Error(
-          `Gemini returned an empty simulated user message at turn ${turnDefinition.position}.`,
-        );
-      }
+            label:
+              `${config.provider} Simulated User - Turn ${turnDefinition.position}`,
+          },
+        ),
 
-      return text;
-    },
-    {
-      maxAttempts: 3,
-      label:
-        `Gemini Simulated User - Turn ${turnDefinition.position}`,
-    },
-  );
+      {
+        maxAttempts:
+          3,
+
+        label:
+          `${config.provider} Simulated User - Turn ${turnDefinition.position}`,
+      },
+    );
+
+  return {
+    text,
+
+    source:
+      'llm',
+
+    provider:
+      config.provider,
+
+    model:
+      config.model,
+  };
 }
