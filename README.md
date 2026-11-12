@@ -10,7 +10,7 @@ Technical assessment covering conversational AI evaluation, API testing, chatbot
 | `exercise-2-api-testing/` | Goal Tracker API automated tests |
 | `exercise-3-chatbot-testing/` | Botpress Docs and homepage chatbot automated tests |
 | `exercise-4-cicd/` | CI runner for the five LLM scenarios |
-| `exercise-5-consolidated-report/` | Intended location for the consolidated report |
+| `exercise-5-consolidated-report/` | Report generator, validation tests and historical consolidated report |
 | `.github/workflows/qa.yml` | GitHub Actions workflow |
 | `output/` | Generated reports and evidence |
 
@@ -361,6 +361,7 @@ It performs:
 3. Chatbot testing with Chromium.
 4. Execution of all five LLM scenarios.
 5. Report and evidence uploads, including when test execution fails.
+6. Final consolidated Markdown/JSON report and workflow Summary, even after upstream failures.
 
 After TypeScript validation, the API, chatbot, and LLM jobs can run independently. The five LLM scenarios run sequentially within their job.
 
@@ -423,6 +424,7 @@ qa-api-<run-id>-<attempt>
 qa-chatbot-docs-<run-id>-<attempt>
 qa-chatbot-homepage-<run-id>-<attempt>
 qa-llm-<run-id>-<attempt>
+qa-consolidated-report-<run-id>-<attempt>
 ```
 
 Artifacts are configured for 30-day retention.
@@ -431,23 +433,45 @@ The LLM artifact includes individual JSON reports, scenario logs, and `execution
 
 A workflow failure may represent a test finding, an unavailable evaluation, a provider quota issue, or an execution error. Inspect the corresponding reports and logs to identify the cause.
 
-## Exercise 5 — Consolidated Report
+## Exercise 5 — Automated Consolidated Report
 
-This exercise is a written deliverable. It has no automated execution command and does not require additional LLM provider calls.
+The final `consolidated` job depends on TypeScript, API/UI and LLM jobs and uses `if: always()`. It generates a new report even when upstream jobs fail or are skipped. It reads only artifacts downloaded for this run ID and attempt, never tracked historical reports.
 
-The consolidated report is pending preparation.
+Outputs:
 
-Use the generated evidence to document:
+- `output/consolidated-report.md`: readable report, also displayed in the job Summary.
+- `output/consolidated-report.json`: structured results, original LLM judgments, findings and provenance.
+- Artifact: `qa-consolidated-report-<run-id>-<attempt>`, retained for 30 days.
 
-- Scope and coverage.
-- Execution environment.
-- Results and metrics.
-- Findings and their supporting evidence.
-- Skipped tests and infrastructure blockers.
-- Limitations, risks, and recommendations.
-- Links to relevant CI executions and artifacts.
+The report includes the five LLM scenarios; API; Docs and additional homepage coverage; global outcome counts/rates; completion/evaluation coverage; separate response/test durations; automatic judge flags for hallucinations, injection security failures, toxicity and context score deviations; and execution/evidence errors.
 
-Preserve the distinction between passed, failed, skipped, review-required, and blocked results.
+PASS, FAIL, REVIEW, BLOCKED, SKIPPED, FLAKY, MISSING and ERROR remain distinct. Missing/invalid evidence fails report validation after files are written, so the report can still be uploaded. Upstream failures retain their original workflow failure. A skipped required case makes the quality assessment incomplete even if the CI jobs succeed.
+
+Quality metrics use valid LLM evaluations. Demonstrably false and unsupported claims are reported separately. Context scores below 100 are review signals, not automatically proven defects. API/UI semantic detectors are NOT_EVALUATED; incorrect tool calling is NOT_IMPLEMENTED because the assistant has no tools/call traces. This reporting automation does not implement missing detectors or prove judge calibration.
+
+No provider credentials, additional LLM calls or external npm dependencies are needed for consolidation. It does not commit generated reports back to GitHub.
+
+### Local Generation from Downloaded Artifacts
+
+Extract the selected run's artifacts into these subdirectories; preserve any internal artifact paths:
+
+| Input directory | Artifact contents |
+| --- | --- |
+| `output/ci/consolidated-inputs/llm/` | LLM JSON reports and execution-summary.json |
+| `output/ci/consolidated-inputs/api/` | API results.json and evidence |
+| `output/ci/consolidated-inputs/chatbot-docs/` | Docs results.json, latency JSON and evidence |
+| `output/ci/consolidated-inputs/chatbot-homepage/` | Homepage results.json, latency JSON and evidence |
+
+```bash
+node --test exercise-5-consolidated-report/generate-report.test.mjs
+node exercise-5-consolidated-report/generate-report.mjs output/ci/consolidated-inputs output
+```
+
+The generator recursively locates source JSON files and ignores duplicate HTML report assets. It rejects ambiguous files. Do not combine artifacts from different runs. In CI a partial retry that lacks this attempt's artifacts is explicitly reported as missing.
+
+The manually prepared `exercise-5-consolidated-report/consolidated-report.md` remains a historical report of its identified successful execution; it is not used as input or overwritten.
+
+Normal upstream failures and missing artifacts are handled. Generation cannot be guaranteed if GitHub cannot start the job, checkout/setup fails or the workflow is forcibly terminated. A workflow omitted with `[skip ci]` does not run this job.
 
 ## Running the Playwright Suites Together
 
