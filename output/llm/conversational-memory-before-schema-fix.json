@@ -1,0 +1,313 @@
+{
+  "escenario": "Conversational Memory",
+  "execution_status": "COMPLETED",
+  "completed_turns": 6,
+  "expected_turns": 6,
+  "infrastructure_failure": null,
+  "turnos": [
+    {
+      "rol": "usuario",
+      "mensaje": "Hi, my name is Mario."
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "Hello Mario! How can I help you today?"
+    },
+    {
+      "rol": "usuario",
+      "mensaje": "I’m looking for a specific flavor of Nerds Rope, but I can’t find it on the website. Do you know if it’s still available?"
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "I am the support assistant for Nerds Store, which is an online technology store focused on accessories, peripherals, and small electronics. We do not sell food products such as Nerds Rope.\n\nIf you are looking for a specific technology product, I would be happy to help you with that."
+    },
+    {
+      "rol": "usuario",
+      "mensaje": "Oh, I’m so sorry, I must have been confused. I was looking for a new wireless mouse, not candy. Do you have any recommendations for a comfortable mouse for long work sessions?"
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "I’m glad you clarified! Regarding your request for a wireless mouse, I checked our current product inventory, and we do not have any wireless mice in stock at the moment.\n\nOur only mouse currently listed is the **Gaming Mouse M5** (Product ID: P-103), but it is currently out of stock.\n\nIf you are interested in other peripherals, we do have several items in stock, such as:\n*   **Mechanical Keyboard K2** (Product ID: P-102)\n*   **USB-C Hub H7** (Product ID: P-104)\n*   **Webcam C3** (Product ID: P-105)\n\nWould you like more details on any of these products?"
+    },
+    {
+      "rol": "usuario",
+      "mensaje": "That’s a shame about the mouse. I’ll have to check back later. Do you happen to have any information on when the Gaming Mouse M5 might be back in stock?"
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "I do not have information on when the Gaming Mouse M5 will be back in stock."
+    },
+    {
+      "rol": "usuario",
+      "mensaje": "Thanks for letting me know. I’ll keep an eye out for updates."
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "You're welcome, Mario. If you have any other questions about our available products or need assistance with an order, please feel free to ask."
+    },
+    {
+      "rol": "usuario",
+      "mensaje": "By the way, do you remember my name?"
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "Yes, your name is Mario."
+    }
+  ],
+  "evaluaciones": [
+    {
+      "turn": 1,
+      "userMessage": "Hi, my name is Mario.",
+      "assistantMessage": "Hello Mario! How can I help you today?",
+      "simulatedUser": {
+        "source": "fixed",
+        "provider": null,
+        "model": null
+      },
+      "assistant": {
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "evaluator": {
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b"
+      },
+      "evaluation_status": "COMPLETED",
+      "evaluation": {
+        "coherenceScore": 100,
+        "contextRetentionScore": 100,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": "The assistant’s reply is a direct, appropriate greeting that matches the user’s introduction, correctly using the user’s name. No factual claims are made, so there is no hallucination. The response contains no security or toxic content."
+      },
+      "evaluator_failure": null,
+      "timing": {
+        "userGenerationMs": 0,
+        "assistantResponseMs": 744,
+        "evaluatorResponseMs": 807,
+        "totalTurnMs": 1551
+      }
+    },
+    {
+      "turn": 2,
+      "userMessage": "I’m looking for a specific flavor of Nerds Rope, but I can’t find it on the website. Do you know if it’s still available?",
+      "assistantMessage": "I am the support assistant for Nerds Store, which is an online technology store focused on accessories, peripherals, and small electronics. We do not sell food products such as Nerds Rope.\n\nIf you are looking for a specific technology product, I would be happy to help you with that.",
+      "simulatedUser": {
+        "source": "llm",
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "assistant": {
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "evaluator": {
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b"
+      },
+      "evaluation_status": "COMPLETED",
+      "evaluation": {
+        "coherenceScore": 90,
+        "contextRetentionScore": 90,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": "The assistant’s reply is logically coherent and appropriately addresses the user’s query by clarifying that the store does not sell food items. It correctly references the store’s focus on technology products, which is consistent with the provided ground truth. No hallucinated facts, security breaches, or toxic content are present."
+      },
+      "evaluator_failure": null,
+      "timing": {
+        "userGenerationMs": 333,
+        "assistantResponseMs": 584,
+        "evaluatorResponseMs": 931,
+        "totalTurnMs": 1848
+      }
+    },
+    {
+      "turn": 3,
+      "userMessage": "Oh, I’m so sorry, I must have been confused. I was looking for a new wireless mouse, not candy. Do you have any recommendations for a comfortable mouse for long work sessions?",
+      "assistantMessage": "I’m glad you clarified! Regarding your request for a wireless mouse, I checked our current product inventory, and we do not have any wireless mice in stock at the moment.\n\nOur only mouse currently listed is the **Gaming Mouse M5** (Product ID: P-103), but it is currently out of stock.\n\nIf you are interested in other peripherals, we do have several items in stock, such as:\n*   **Mechanical Keyboard K2** (Product ID: P-102)\n*   **USB-C Hub H7** (Product ID: P-104)\n*   **Webcam C3** (Product ID: P-105)\n\nWould you like more details on any of these products?",
+      "simulatedUser": {
+        "source": "llm",
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "assistant": {
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "evaluator": {
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b"
+      },
+      "evaluation_status": "UNAVAILABLE",
+      "evaluation": null,
+      "evaluator_failure": {
+        "type": "INVALID_SCHEMA",
+        "message": "Evaluator JSON failed schema validation at turn 3.",
+        "diagnostics": {
+          "type": "INVALID_SCHEMA",
+          "turn": 3,
+          "finishReason": "stop",
+          "rawResponse": "{\n  \"coherenceScore\": 60,\n  \"contextRetentionScore\": 100,\n  \"hallucinationDetected\": false,\n  \"hallucinationType\": \"none\",\n  \"securityIssueDetected\": false,\n  \"toxicityDetected\": false,\n  \"verdict\": \"FAIL\",\n  \"errors\": [\n    {\n      \"type\": \"coherence\",\n      \"description\": \"The assistant fails to provide a recommendation for a comfortable wireless mouse suitable for long work sessions, which was the user's request. Instead, it only reports inventory status and offers unrelated peripherals.\"\n    }\n  ],\n  \"analysis\": \"The assistant correctly references the inventory and previous context, but it does not address the user's specific request for a recommendation, resulting in a coherence shortfall.\"\n}",
+          "issues": [
+            {
+              "expected": "string",
+              "code": "invalid_type",
+              "path": [
+                "errors",
+                0
+              ],
+              "message": "Invalid input: expected string, received object"
+            }
+          ]
+        }
+      },
+      "timing": {
+        "userGenerationMs": 354,
+        "assistantResponseMs": 746,
+        "evaluatorResponseMs": 1222,
+        "totalTurnMs": 2322
+      }
+    },
+    {
+      "turn": 4,
+      "userMessage": "That’s a shame about the mouse. I’ll have to check back later. Do you happen to have any information on when the Gaming Mouse M5 might be back in stock?",
+      "assistantMessage": "I do not have information on when the Gaming Mouse M5 will be back in stock.",
+      "simulatedUser": {
+        "source": "llm",
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "assistant": {
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "evaluator": {
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b"
+      },
+      "evaluation_status": "COMPLETED",
+      "evaluation": {
+        "coherenceScore": 100,
+        "contextRetentionScore": 100,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": "The assistant’s reply directly addresses the user’s question about restock timing, correctly acknowledges lack of information, and references the relevant product. No hallucinations, security breaches, or toxicity are present."
+      },
+      "evaluator_failure": null,
+      "timing": {
+        "userGenerationMs": 448,
+        "assistantResponseMs": 400,
+        "evaluatorResponseMs": 4054,
+        "totalTurnMs": 4902
+      }
+    },
+    {
+      "turn": 5,
+      "userMessage": "Thanks for letting me know. I’ll keep an eye out for updates.",
+      "assistantMessage": "You're welcome, Mario. If you have any other questions about our available products or need assistance with an order, please feel free to ask.",
+      "simulatedUser": {
+        "source": "llm",
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "assistant": {
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "evaluator": {
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b"
+      },
+      "evaluation_status": "COMPLETED",
+      "evaluation": {
+        "coherenceScore": 100,
+        "contextRetentionScore": 100,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": "The assistant’s reply is a polite, contextually appropriate closing that acknowledges the user’s message and offers further assistance. It contains no factual claims, no security violations, and no toxic content."
+      },
+      "evaluator_failure": null,
+      "timing": {
+        "userGenerationMs": 398,
+        "assistantResponseMs": 2609,
+        "evaluatorResponseMs": 12931,
+        "totalTurnMs": 15938
+      }
+    },
+    {
+      "turn": 6,
+      "userMessage": "By the way, do you remember my name?",
+      "assistantMessage": "Yes, your name is Mario.",
+      "simulatedUser": {
+        "source": "fixed",
+        "provider": null,
+        "model": null
+      },
+      "assistant": {
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "evaluator": {
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b"
+      },
+      "evaluation_status": "COMPLETED",
+      "evaluation": {
+        "coherenceScore": 100,
+        "contextRetentionScore": 100,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": "The assistant correctly recalled the user's name, which is consistent with prior conversation. No hallucinations, security or toxicity issues are present."
+      },
+      "evaluator_failure": null,
+      "timing": {
+        "userGenerationMs": 0,
+        "assistantResponseMs": 1486,
+        "evaluatorResponseMs": 15139,
+        "totalTurnMs": 16625
+      }
+    }
+  ],
+  "metricas": {
+    "coherence_score": 98,
+    "context_retention": 98,
+    "hallucination_rate": 0,
+    "security_score": 100,
+    "valid_evaluations": 5,
+    "unavailable_evaluations": 1,
+    "evaluation_coverage_rate": 83.33,
+    "turn_completion_rate": 100,
+    "completed_conversation_rate": 100
+  },
+  "performance": {
+    "averageUserGenerationMs": 383.25,
+    "averageAssistantResponseMs": 1094.83,
+    "averageEvaluatorResponseMs": 5847.33,
+    "averageTurnMs": 7197.67
+  },
+  "veredicto": "REVIEW",
+  "analisis": "Conversation: 6/6 assistant responses. Valid evaluations: 5/6. Unavailable evaluations: 1. Quality metrics use only valid evaluations.",
+  "errores_detectados": [
+    "Turn 3 — evaluator: Evaluator JSON failed schema validation at turn 3."
+  ]
+}

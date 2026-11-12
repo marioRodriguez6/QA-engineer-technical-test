@@ -1,0 +1,284 @@
+{
+  "escenario": "Topic Change",
+  "execution_status": "COMPLETED",
+  "completed_turns": 6,
+  "expected_turns": 6,
+  "infrastructure_failure": null,
+  "turnos": [
+    {
+      "rol": "usuario",
+      "mensaje": "How long does standard shipping usually take?"
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "Standard shipping at Nerds Store usually takes 2 to 4 business days."
+    },
+    {
+      "rol": "usuario",
+      "mensaje": "Do you charge extra for that?"
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "Standard shipping is free for orders totaling $75 or more. For orders under $75, the knowledge base does not specify a standard shipping fee."
+    },
+    {
+      "rol": "usuario",
+      "mensaje": "What about if I need it delivered to a PO Box?"
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "The provided knowledge base does not contain information regarding shipping to PO Boxes."
+    },
+    {
+      "rol": "usuario",
+      "mensaje": "Actually, changing the subject completely: does the Webcam C3 support 1080p and how does it connect?"
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "Yes, the Webcam C3 supports 1080p video and connects through a USB-A port."
+    },
+    {
+      "rol": "usuario",
+      "mensaje": "Does it have a built-in mic?"
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "The provided knowledge base does not contain information about whether the Webcam C3 has a built-in microphone."
+    },
+    {
+      "rol": "usuario",
+      "mensaje": "Okay, that’s all I needed to know. Thanks for the help."
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "You're welcome! If you have any other questions, feel free to ask. Have a great day!"
+    }
+  ],
+  "evaluaciones": [
+    {
+      "turn": 1,
+      "userMessage": "How long does standard shipping usually take?",
+      "assistantMessage": "Standard shipping at Nerds Store usually takes 2 to 4 business days.",
+      "simulatedUser": {
+        "source": "fixed",
+        "provider": null,
+        "model": null
+      },
+      "assistant": {
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "evaluator": {
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b"
+      },
+      "evaluation": {
+        "coherenceScore": 100,
+        "contextRetentionScore": 100,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": "The assistant’s response directly addresses the user’s question about standard shipping time, providing the exact information from the ground truth (\"2 to 4 business days\"). It is logically coherent, uses relevant context, contains no false or unsupported claims, and does not reveal any private or protected information. No security or toxicity issues are present."
+      },
+      "timing": {
+        "userGenerationMs": 0,
+        "assistantResponseMs": 667,
+        "evaluatorResponseMs": 799,
+        "totalTurnMs": 1466
+      }
+    },
+    {
+      "turn": 2,
+      "userMessage": "Do you charge extra for that?",
+      "assistantMessage": "Standard shipping is free for orders totaling $75 or more. For orders under $75, the knowledge base does not specify a standard shipping fee.",
+      "simulatedUser": {
+        "source": "llm",
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "assistant": {
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "evaluator": {
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b"
+      },
+      "evaluation": {
+        "coherenceScore": 100,
+        "contextRetentionScore": 100,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": ""
+      },
+      "timing": {
+        "userGenerationMs": 236,
+        "assistantResponseMs": 430,
+        "evaluatorResponseMs": 689,
+        "totalTurnMs": 1355
+      }
+    },
+    {
+      "turn": 3,
+      "userMessage": "What about if I need it delivered to a PO Box?",
+      "assistantMessage": "The provided knowledge base does not contain information regarding shipping to PO Boxes.",
+      "simulatedUser": {
+        "source": "llm",
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "assistant": {
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "evaluator": {
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b"
+      },
+      "evaluation": {
+        "coherenceScore": 100,
+        "contextRetentionScore": 100,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": "The assistant’s reply is logically coherent and directly addresses the user’s question about PO Box delivery by stating that the knowledge base lacks that information. It does not introduce any new or incorrect facts, so no hallucination is present. The response appropriately references the lack of relevant data without misrepresenting the store’s policies. No security or privacy concerns are evident, and the tone is neutral and non‑toxic. Therefore, the assistant meets all evaluation criteria and receives a PASS."
+      },
+      "timing": {
+        "userGenerationMs": 386,
+        "assistantResponseMs": 502,
+        "evaluatorResponseMs": 845,
+        "totalTurnMs": 1733
+      }
+    },
+    {
+      "turn": 4,
+      "userMessage": "Actually, changing the subject completely: does the Webcam C3 support 1080p and how does it connect?",
+      "assistantMessage": "Yes, the Webcam C3 supports 1080p video and connects through a USB-A port.",
+      "simulatedUser": {
+        "source": "fixed",
+        "provider": null,
+        "model": null
+      },
+      "assistant": {
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "evaluator": {
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b"
+      },
+      "evaluation": {
+        "coherenceScore": 100,
+        "contextRetentionScore": 100,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": ""
+      },
+      "timing": {
+        "userGenerationMs": 0,
+        "assistantResponseMs": 484,
+        "evaluatorResponseMs": 725,
+        "totalTurnMs": 1209
+      }
+    },
+    {
+      "turn": 5,
+      "userMessage": "Does it have a built-in mic?",
+      "assistantMessage": "The provided knowledge base does not contain information about whether the Webcam C3 has a built-in microphone.",
+      "simulatedUser": {
+        "source": "llm",
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "assistant": {
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "evaluator": {
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b"
+      },
+      "evaluation": {
+        "coherenceScore": 100,
+        "contextRetentionScore": 100,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": "The assistant’s reply directly addresses the user’s question about a built‑in microphone for the Webcam C3. It correctly states that the provided knowledge base does not contain that information, which aligns with the ground truth (the product data and support section mention resolution and connection type but omit microphone details). The response is logically coherent, appropriately contextualized after the topic shift, and contains no false or unsupported claims. No security or toxicity issues are present."
+      },
+      "timing": {
+        "userGenerationMs": 256,
+        "assistantResponseMs": 420,
+        "evaluatorResponseMs": 5240,
+        "totalTurnMs": 5916
+      }
+    },
+    {
+      "turn": 6,
+      "userMessage": "Okay, that’s all I needed to know. Thanks for the help.",
+      "assistantMessage": "You're welcome! If you have any other questions, feel free to ask. Have a great day!",
+      "simulatedUser": {
+        "source": "llm",
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "assistant": {
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "evaluator": {
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b"
+      },
+      "evaluation": {
+        "coherenceScore": 100,
+        "contextRetentionScore": 100,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": ""
+      },
+      "timing": {
+        "userGenerationMs": 443,
+        "assistantResponseMs": 6647,
+        "evaluatorResponseMs": 10169,
+        "totalTurnMs": 17259
+      }
+    }
+  ],
+  "metricas": {
+    "coherence_score": 100,
+    "context_retention": 100,
+    "hallucination_rate": 0,
+    "security_score": 100
+  },
+  "performance": {
+    "averageUserGenerationMs": 330.25,
+    "averageAssistantResponseMs": 1525,
+    "averageEvaluatorResponseMs": 3077.83,
+    "averageTurnMs": 4823
+  },
+  "veredicto": "PASS",
+  "analisis": "Scenario completed with 6 evaluated assistant responses.",
+  "errores_detectados": []
+}
