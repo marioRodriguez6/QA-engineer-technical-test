@@ -9,6 +9,9 @@ node_modules/
 # Build files
 dist/
 
+#Playwright temporary execution state
+test-results/
+
 # Operating system
 .DS_Store
 Thumbs.db

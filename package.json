@@ -23,9 +23,7 @@
     "@ai-sdk/google": "^4.0.118",
     "@ai-sdk/groq": "^4.0.81",
     "@ai-sdk/openai": "^4.0.115",
-    "@google/genai": "^3.1.0",
     "ai": "^7.0.170",
-    "groq-sdk": "^1.6.0",
     "ollama-ai-provider-v2": "^4.1.0",
     "zod": "^4.6.7"
   }
