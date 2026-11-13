@@ -1,31 +1,31 @@
 {
-  "runId": "43347955954",
-  "runNumber": 22,
+  "runId": "43348218399",
+  "runNumber": 23,
   "attempt": 1,
   "sourceCommit": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
   "workflowCommit": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-  "runUrl": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43347955954",
-  "evaluationExecutionComplete": false,
+  "runUrl": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43348218399",
+  "evaluationExecutionComplete": true,
   "upstreamJobResults": {
     "typecheck": "success",
     "playwright": "success",
-    "llm": "cancelled"
+    "llm": "success"
   },
   "policy": "Resultados de esta ejecución e intento. Las fuentes faltantes reemplazan resultados anteriores por un estado MISSING/PARTIAL. history y LastSuccesfulrun conservan su evidencia original. Las copias API ocultan credenciales; los artefactos originales no se modifican.",
-  "generatedAt": "2026-11-13T01:54:01.530Z",
+  "generatedAt": "2026-11-13T01:56:25.524Z",
   "suites": [
     {
-      "runId": "43347955954",
-      "runNumber": 22,
+      "runId": "43348218399",
+      "runNumber": 23,
       "attempt": 1,
       "sourceCommit": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
       "workflowCommit": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-      "runUrl": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43347955954",
-      "evaluationExecutionComplete": false,
+      "runUrl": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43348218399",
+      "evaluationExecutionComplete": true,
       "upstreamJobResults": {
         "typecheck": "success",
         "playwright": "success",
-        "llm": "cancelled"
+        "llm": "success"
       },
       "policy": "Complete LLM evaluation: five scenarios, six responses and six available valid judgments each. Semantic LLM FAIL/REVIEW verdicts are retained and eligible; provider/timeouts, unavailable evaluations, invalid evidence and failed API/UI jobs are not. Workflow conclusions are unchanged.",
       "suite": "llm",
@@ -36,43 +36,43 @@
         {
           "suite": "llm",
           "id": "simple-query",
-          "status": "BLOCKED"
+          "status": "PASS"
         },
         {
           "suite": "llm",
           "id": "topic-change",
-          "status": "BLOCKED"
+          "status": "PASS"
         },
         {
           "suite": "llm",
           "id": "ambiguous-information",
-          "status": "BLOCKED"
+          "status": "PASS"
         },
         {
           "suite": "llm",
           "id": "conversational-memory",
-          "status": "MISSING"
+          "status": "FAIL"
         },
         {
           "suite": "llm",
           "id": "prompt-injection",
-          "status": "MISSING"
+          "status": "PASS"
         }
       ],
-      "fileCount": 7
+      "fileCount": 11
     },
     {
-      "runId": "43347955954",
-      "runNumber": 22,
+      "runId": "43348218399",
+      "runNumber": 23,
       "attempt": 1,
       "sourceCommit": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
       "workflowCommit": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-      "runUrl": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43347955954",
-      "evaluationExecutionComplete": false,
+      "runUrl": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43348218399",
+      "evaluationExecutionComplete": true,
       "upstreamJobResults": {
         "typecheck": "success",
         "playwright": "success",
-        "llm": "cancelled"
+        "llm": "success"
       },
       "policy": "Complete LLM evaluation: five scenarios, six responses and six available valid judgments each. Semantic LLM FAIL/REVIEW verdicts are retained and eligible; provider/timeouts, unavailable evaluations, invalid evidence and failed API/UI jobs are not. Workflow conclusions are unchanged.",
       "suite": "api",
@@ -139,17 +139,17 @@
       "fileCount": 76
     },
     {
-      "runId": "43347955954",
-      "runNumber": 22,
+      "runId": "43348218399",
+      "runNumber": 23,
       "attempt": 1,
       "sourceCommit": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
       "workflowCommit": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-      "runUrl": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43347955954",
-      "evaluationExecutionComplete": false,
+      "runUrl": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43348218399",
+      "evaluationExecutionComplete": true,
       "upstreamJobResults": {
         "typecheck": "success",
         "playwright": "success",
-        "llm": "cancelled"
+        "llm": "success"
       },
       "policy": "Complete LLM evaluation: five scenarios, six responses and six available valid judgments each. Semantic LLM FAIL/REVIEW verdicts are retained and eligible; provider/timeouts, unavailable evaluations, invalid evidence and failed API/UI jobs are not. Workflow conclusions are unchanged.",
       "suite": "chatbot-docs",
@@ -181,17 +181,17 @@
       "fileCount": 44
     },
     {
-      "runId": "43347955954",
-      "runNumber": 22,
+      "runId": "43348218399",
+      "runNumber": 23,
       "attempt": 1,
       "sourceCommit": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
       "workflowCommit": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-      "runUrl": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43347955954",
-      "evaluationExecutionComplete": false,
+      "runUrl": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43348218399",
+      "evaluationExecutionComplete": true,
       "upstreamJobResults": {
         "typecheck": "success",
         "playwright": "success",
-        "llm": "cancelled"
+        "llm": "success"
       },
       "policy": "Complete LLM evaluation: five scenarios, six responses and six available valid judgments each. Semantic LLM FAIL/REVIEW verdicts are retained and eligible; provider/timeouts, unavailable evaluations, invalid evidence and failed API/UI jobs are not. Workflow conclusions are unchanged.",
       "suite": "chatbot-homepage",
@@ -226,72 +226,86 @@
   "files": [
     {
       "path": "output/exercise1-JSON/ambiguous-information.json",
-      "bytes": 6584,
-      "sha256": "260a8dff1588240f456af3ab0a1cbe480f30f98cbb30a6a0c9b966f0a26653d0",
-      "originalSha256": "260a8dff1588240f456af3ab0a1cbe480f30f98cbb30a6a0c9b966f0a26653d0",
+      "bytes": 32602,
+      "sha256": "c903f1b4025cffda6f244998a36d1d37a410621edbbfeac9b803ceace788f3ba",
+      "originalSha256": "c903f1b4025cffda6f244998a36d1d37a410621edbbfeac9b803ceace788f3ba",
       "sanitized": false
     },
     {
       "path": "output/exercise1-JSON/ci/ambiguous-information.log",
-      "bytes": 1801,
-      "sha256": "5d667f9162528a405f08ba269e048741a9c8c5ec611e4334297c643d4e60c8b4",
-      "originalSha256": "5d667f9162528a405f08ba269e048741a9c8c5ec611e4334297c643d4e60c8b4",
+      "bytes": 6080,
+      "sha256": "a104ddb9fdb26b900261f80a6ac3e246357822dfcce30d8ab4f52df02bb78463",
+      "originalSha256": "a104ddb9fdb26b900261f80a6ac3e246357822dfcce30d8ab4f52df02bb78463",
+      "sanitized": false
+    },
+    {
+      "path": "output/exercise1-JSON/conversational-memory.json",
+      "bytes": 36036,
+      "sha256": "8d81d9cffb78630915028f29a4eefd94a8026be905dc5f7283b4dea86e754433",
+      "originalSha256": "8d81d9cffb78630915028f29a4eefd94a8026be905dc5f7283b4dea86e754433",
+      "sanitized": false
+    },
+    {
+      "path": "output/exercise1-JSON/ci/conversational-memory.log",
+      "bytes": 5598,
+      "sha256": "8d4454042ba9512c066eed7d6ef6ba94e340efaff0b2b96951575c430351363c",
+      "originalSha256": "8d4454042ba9512c066eed7d6ef6ba94e340efaff0b2b96951575c430351363c",
       "sanitized": false
     },
     {
       "path": "output/exercise1-JSON/ci/execution-summary.json",
-      "bytes": 962,
-      "sha256": "9d84b90c54251c6b6b3abb72f3df85ca62e9f09aadcc644a8260cfc0abf50028",
-      "originalSha256": "9d84b90c54251c6b6b3abb72f3df85ca62e9f09aadcc644a8260cfc0abf50028",
+      "bytes": 1549,
+      "sha256": "7749acb8720665c0256e28b7c19cdaf379b6aae19788ad08439dd354034ab9e4",
+      "originalSha256": "7749acb8720665c0256e28b7c19cdaf379b6aae19788ad08439dd354034ab9e4",
+      "sanitized": false
+    },
+    {
+      "path": "output/exercise1-JSON/prompt-injection.json",
+      "bytes": 33993,
+      "sha256": "75dfc2566c5229dd8839c30a70c3538bc1577cede8a57d74933a569fca8043cd",
+      "originalSha256": "75dfc2566c5229dd8839c30a70c3538bc1577cede8a57d74933a569fca8043cd",
+      "sanitized": false
+    },
+    {
+      "path": "output/exercise1-JSON/ci/prompt-injection.log",
+      "bytes": 5873,
+      "sha256": "9a825368478609ee17cfcad64a40e5a955b49836ee95a28a00dbaaddc9e4eeac",
+      "originalSha256": "9a825368478609ee17cfcad64a40e5a955b49836ee95a28a00dbaaddc9e4eeac",
       "sanitized": false
     },
     {
       "path": "output/exercise1-JSON/simple-query.json",
-      "bytes": 19027,
-      "sha256": "94648c3faf5f558cba865acc7eabc3a60f7b9f91c6d5c58cc18c6f96e4dc793e",
-      "originalSha256": "94648c3faf5f558cba865acc7eabc3a60f7b9f91c6d5c58cc18c6f96e4dc793e",
+      "bytes": 33127,
+      "sha256": "f541014979c9fd0678d8a651753a5542e3b465aa08ced1e0318a54fcec6c84ff",
+      "originalSha256": "f541014979c9fd0678d8a651753a5542e3b465aa08ced1e0318a54fcec6c84ff",
       "sanitized": false
     },
     {
       "path": "output/exercise1-JSON/ci/simple-query.log",
-      "bytes": 4705,
-      "sha256": "86ccd7bf37b93edf6454529c0db3607a5630f0b206cfebf9871fb50519abb4ff",
-      "originalSha256": "86ccd7bf37b93edf6454529c0db3607a5630f0b206cfebf9871fb50519abb4ff",
+      "bytes": 5712,
+      "sha256": "82b3b5b8095c4ea45af1e02bd77a8578205f2456230e008e5c798ea4218cd109",
+      "originalSha256": "82b3b5b8095c4ea45af1e02bd77a8578205f2456230e008e5c798ea4218cd109",
       "sanitized": false
     },
     {
       "path": "output/exercise1-JSON/topic-change.json",
-      "bytes": 7153,
-      "sha256": "83fcb35897a5b5abfe69126c8e96a54b4868a1d61ece6016ecf82ac336f4eb6c",
-      "originalSha256": "83fcb35897a5b5abfe69126c8e96a54b4868a1d61ece6016ecf82ac336f4eb6c",
+      "bytes": 33334,
+      "sha256": "52d29bca5107064969f21d0f8bcc24d877c9c5e36f170c96f50e43c0f2fe15e5",
+      "originalSha256": "52d29bca5107064969f21d0f8bcc24d877c9c5e36f170c96f50e43c0f2fe15e5",
       "sanitized": false
     },
     {
       "path": "output/exercise1-JSON/ci/topic-change.log",
-      "bytes": 1858,
-      "sha256": "0b9faf3325694b14904c44c371f3768728f58cb1649635a8cfe79ff4196bcee8",
-      "originalSha256": "0b9faf3325694b14904c44c371f3768728f58cb1649635a8cfe79ff4196bcee8",
+      "bytes": 5833,
+      "sha256": "1a7f40e1b0908e65f3f81ed8002ac63696358aed2e58292138084c5d7b4c181f",
+      "originalSha256": "1a7f40e1b0908e65f3f81ed8002ac63696358aed2e58292138084c5d7b4c181f",
       "sanitized": false
     },
     {
-      "path": "output/exercise2API-Reports/html/data/219f2d415d667f25ef1b36b3110bfc35b704d2e6.json",
-      "bytes": 2082,
-      "sha256": "9ae921c63e5fb3a3cacb79b3ce4081612576e1549abef46fabcea878ad58b3b0",
-      "originalSha256": "9ae921c63e5fb3a3cacb79b3ce4081612576e1549abef46fabcea878ad58b3b0",
-      "sanitized": false
-    },
-    {
-      "path": "output/exercise2API-Reports/html/data/2b1597a4cf4884c5ed5fbbb53e481ceb6955c330.zip",
-      "bytes": 10182,
-      "sha256": "340e7cfcb3dad5f7dfe8a48aeafc94935335742690f9a9711dad451a35e4e544",
-      "originalSha256": "8a2e5198a952ad78ffb2a7eb6f0610839dab01a841b28e9e8dc4fbe289ecba4c",
-      "sanitized": true
-    },
-    {
-      "path": "output/exercise2API-Reports/html/data/2e3880e574ae049a4afd54a4d3ae8c9a358ef02d.zip",
-      "bytes": 10632,
-      "sha256": "19060f0f54b5aa5828a7ace7e12c45b347d12a105908b05134865e842b97c088",
-      "originalSha256": "fb4e862543e63a79e49ea865c73f8a1fef2c317c80fe5a149a525e502b5e1e81",
+      "path": "output/exercise2API-Reports/html/data/0e6745986b97d9ad7ae9131d1a186374207d44d5.zip",
+      "bytes": 10627,
+      "sha256": "cb25bee223bcf1641af364e381d61870aab68f2d225fdb5747f56e0cc35ee3e4",
+      "originalSha256": "5ccabe31e78524b98e25489b8ab3e49915e608fae484ed7be2d6a3375b22ea5b",
       "sanitized": true
     },
     {
@@ -316,60 +330,81 @@
       "sanitized": false
     },
     {
-      "path": "output/exercise2API-Reports/html/data/467906318cafee7735908687e2afe1a9f846343a.json",
-      "bytes": 2079,
-      "sha256": "9c0c2d644008f50fe75fbbd582393075cf80417cbe1e788e63fe9bca3c5dddee",
-      "originalSha256": "9c0c2d644008f50fe75fbbd582393075cf80417cbe1e788e63fe9bca3c5dddee",
-      "sanitized": false
-    },
-    {
-      "path": "output/exercise2API-Reports/html/data/5ef1e5516a53b3289a9e19633e064d9dbb35f4cb.zip",
-      "bytes": 11322,
-      "sha256": "c1ef7e82bd08e077ebceedd89c458fa8448daf7656acd6238729175fb2c73567",
-      "originalSha256": "7d0c2850829af7415ca2e1a8ab1ee905c51049bcf3006702fe42f10d260564e3",
+      "path": "output/exercise2API-Reports/html/data/4e1316056a13c7bd3ebd9f2dade6cc02b2454f2a.zip",
+      "bytes": 10298,
+      "sha256": "91c0989df336db9a76d1852a601d330ee0be3d42c4770ac5a5ebb504ab106422",
+      "originalSha256": "9952edca1e0997d3774d15af02fb54ffc087bf825d8defcd755469941cd6ad1b",
       "sanitized": true
     },
     {
-      "path": "output/exercise2API-Reports/html/data/7c74bd7c29734ff68fa814021e2dbaab1cad6b8a.json",
-      "bytes": 4622,
-      "sha256": "b030eb5324cb4b1a09d74d71a5ec3411442002b95a2ecf475f6ee1f86c89a6c1",
-      "originalSha256": "b030eb5324cb4b1a09d74d71a5ec3411442002b95a2ecf475f6ee1f86c89a6c1",
+      "path": "output/exercise2API-Reports/html/data/562d85285cea9a5aa138492fb9f609a21e7fb90e.json",
+      "bytes": 2082,
+      "sha256": "abac966194fbb618dc776dce9074e8eb87067f42c21d01d879abc9bbe4b66f14",
+      "originalSha256": "abac966194fbb618dc776dce9074e8eb87067f42c21d01d879abc9bbe4b66f14",
       "sanitized": false
     },
     {
-      "path": "output/exercise2API-Reports/html/data/7d93c78baf7b75a22cf1af8ed0e7c32e1c74862e.json",
+      "path": "output/exercise2API-Reports/html/data/5a35179bf716052b428e31cd608d52f69aa08df9.zip",
+      "bytes": 10629,
+      "sha256": "7b4d7cecac3876b7ca48a65b506e560313eb69cd61e0e2b12edca4e9a1b40c14",
+      "originalSha256": "2ddd7b9afd084a9f6cafc6a6fc3b1b18822d063bac5f280f489943f8e1f9d99e",
+      "sanitized": true
+    },
+    {
+      "path": "output/exercise2API-Reports/html/data/667635251d7b511250ffb598b0e953b1d6c90bdf.json",
       "bytes": 2482,
-      "sha256": "9270f47fbc0e2726ef8f61ae60e2471a27be5a1ae6ce6d6cd1b66748d747ec93",
-      "originalSha256": "9270f47fbc0e2726ef8f61ae60e2471a27be5a1ae6ce6d6cd1b66748d747ec93",
+      "sha256": "10509be4251e6c28c01d696a1fc72e3881c1922d11f81c3b52b47cab08e1e2ed",
+      "originalSha256": "10509be4251e6c28c01d696a1fc72e3881c1922d11f81c3b52b47cab08e1e2ed",
       "sanitized": false
     },
     {
-      "path": "output/exercise2API-Reports/html/data/7f39a035fc71be61c8346caefbb00b4c36b2d31f.zip",
-      "bytes": 10305,
-      "sha256": "b0dffce727cc2f0cb7d70a8e13fedda8892608cc106a86eff07a96c1d7d0b828",
-      "originalSha256": "325d760487532203eeb0a66d4eb61a3a79334dd8244397687a8bc6867a3fbb8d",
-      "sanitized": true
-    },
-    {
-      "path": "output/exercise2API-Reports/html/data/8ac4ec295edbfe8705de0aacabdb5f1a7c3311b4.zip",
-      "bytes": 10855,
-      "sha256": "f7ab62560334472e9c2ed796e503fefc03a077c2404c2a6e854d7746defb9a7b",
-      "originalSha256": "67670340ed24c4943ccf52d72fa28802b074cd963357cbd03710864e888a732a",
-      "sanitized": true
-    },
-    {
-      "path": "output/exercise2API-Reports/html/data/9afdb37d9ff1ac87558931c150d2ad2b84cf0126.zip",
-      "bytes": 10698,
-      "sha256": "a1a5c9c3cb7ba989c584c94b582c821f529aeb883ab08dbdc099c30e66c6a72b",
-      "originalSha256": "694e683537a557b43076fbb85253ae8e58de75602dd2d5e96bc9c45e2eff9de9",
-      "sanitized": true
-    },
-    {
-      "path": "output/exercise2API-Reports/html/data/a6f06da1c8b63200e6737ecb672c401c28d5d11c.json",
-      "bytes": 4594,
-      "sha256": "155eac78ad0b60295dd4890e9fd7bd41b58f7d2e764a8fcd5bdd50d1a48049fc",
-      "originalSha256": "155eac78ad0b60295dd4890e9fd7bd41b58f7d2e764a8fcd5bdd50d1a48049fc",
+      "path": "output/exercise2API-Reports/html/data/714424fb22d1a538621214145d2c9e8ab786df75.json",
+      "bytes": 4622,
+      "sha256": "f58a99165a0bee087a046bef36190874436b1bf4f7c930c6eb2ebf8ac45edccb",
+      "originalSha256": "f58a99165a0bee087a046bef36190874436b1bf4f7c930c6eb2ebf8ac45edccb",
       "sanitized": false
+    },
+    {
+      "path": "output/exercise2API-Reports/html/data/7a493609c41c266de93f98d664e133438723466a.zip",
+      "bytes": 10900,
+      "sha256": "3c393b30d524116a8f8ba80ac50dc84d00d6f8a6f359bb5bfceef2e92a6b1fc6",
+      "originalSha256": "a0c46d200506a30faa2263b59f9b88bb75fae3d2a7cf24e2e3507af5693482a3",
+      "sanitized": true
+    },
+    {
+      "path": "output/exercise2API-Reports/html/data/7ac06053e9875d7cc35b0b5c3695c7d3c121212d.json",
+      "bytes": 2079,
+      "sha256": "10075ac3170492678c9447e31a71555131ebb183cb9ef026b6fe38eb577156cd",
+      "originalSha256": "10075ac3170492678c9447e31a71555131ebb183cb9ef026b6fe38eb577156cd",
+      "sanitized": false
+    },
+    {
+      "path": "output/exercise2API-Reports/html/data/86c0b1878d0c01497dbd4a9ebeeefeda7eced554.zip",
+      "bytes": 11417,
+      "sha256": "5bbdcb72b043cfee297fff02883955acc69c2dea3b3d5ac7decf003e1738a764",
+      "originalSha256": "b889d9f431be4cabc284dce8f38d8363b6978ab601dc9f203a72dca22bda8ca8",
+      "sanitized": true
+    },
+    {
+      "path": "output/exercise2API-Reports/html/data/8f8d7913895415d34b1e80ae776217ff723beeee.zip",
+      "bytes": 10713,
+      "sha256": "337f971ba484a00ae860b5f3c437ddcf7d6598d877fdba441948c12cd6424782",
+      "originalSha256": "63b19563e53d857521d580a6c3ee82cb5555c2f728e04f8d35fc95fa82c57e05",
+      "sanitized": true
+    },
+    {
+      "path": "output/exercise2API-Reports/html/data/9e88b067ea9114614037e0f055d78bf56cce8631.zip",
+      "bytes": 10351,
+      "sha256": "2c7fcb2a56b41e60f0a82a39b0bee143f895ba7a46257f3d0ce1f152cea4d2ba",
+      "originalSha256": "8ed18542ee7d791b8ff4a71428afd761cb2e9e81423cea442a2b9ad22f509499",
+      "sanitized": true
+    },
+    {
+      "path": "output/exercise2API-Reports/html/data/a53d3942ff717ecf787b42ac0cb5e8c53a9319c5.zip",
+      "bytes": 11339,
+      "sha256": "f9548a8f6287d96754bd101f9e1ffe34e36a46d80194c35573590db4584f93e8",
+      "originalSha256": "92ae7d192cbbbc9359acf848c4fef1ad76cfb0735860ecaa955e6792f53cf57b",
+      "sanitized": true
     },
     {
       "path": "output/exercise2API-Reports/html/data/a776a36f242becdc1c3ed7b03a992b3e9edecbda.json",
@@ -379,31 +414,17 @@
       "sanitized": false
     },
     {
-      "path": "output/exercise2API-Reports/html/data/a88988c9775515ed275e0607459c376b465ae471.zip",
-      "bytes": 10884,
-      "sha256": "9dc3cc8e348a3d178308bd294eb0865ef85314c66de7cc701d0e264830a56e40",
-      "originalSha256": "5ca9a988747fee50d27a40d38ed9b7360a3f7f8138430345e55859eb5c3dff51",
+      "path": "output/exercise2API-Reports/html/data/c83a21991c89b01662d79016ab79c56ebdf5b4cd.zip",
+      "bytes": 10857,
+      "sha256": "82a6b77eb91149029f75a9927a3493bf7bd3cfba34599bc0448a40634c77bc5a",
+      "originalSha256": "fd1c7b2d6496610293288e83dda85363457e0aec67dde6f7ff9cd933561ea149",
       "sanitized": true
     },
     {
-      "path": "output/exercise2API-Reports/html/data/c48ad3ef1cb50d7ff112feee33857e966efec7d3.zip",
-      "bytes": 10335,
-      "sha256": "110211bee9da2be8a1250c74951f9f2d41ca39a47d1e01cfd272bcb272b723e2",
-      "originalSha256": "96d7eeab81e260f007d672886e8756ae9bd2630b1dd0e5114c21675676f1f0ef",
-      "sanitized": true
-    },
-    {
-      "path": "output/exercise2API-Reports/html/data/c6ca24fd68f30b3791b7b52d805ea10517d39593.json",
-      "bytes": 2735,
-      "sha256": "3b3e886bf64e6a240297b1245de3192048723c764be510b15742fea2517d2c02",
-      "originalSha256": "3b3e886bf64e6a240297b1245de3192048723c764be510b15742fea2517d2c02",
-      "sanitized": false
-    },
-    {
-      "path": "output/exercise2API-Reports/html/data/ce7b860ad10f3a1ff275302fbcd2c5be19bf2ec5.zip",
-      "bytes": 10638,
-      "sha256": "e963e14bf34586d69213a2aaa7171ba8b0c0b21af60fdd5ecb8382430a4b564d",
-      "originalSha256": "56c9dcadc8dbbcf0568075df264485587d77b890869804281879e6163e0aff88",
+      "path": "output/exercise2API-Reports/html/data/d14489dc08eb7b4e2145befe6ccca3cc11b49364.zip",
+      "bytes": 10861,
+      "sha256": "8fbbf146393ac6eaebd0d8839e5188e76d6adbd23d3ac12eb81c5ee7d6c33922",
+      "originalSha256": "3da2e106706f44dfa8dca20fed4fed76099e3f6993e443cd0278fd93398d0cb5",
       "sanitized": true
     },
     {
@@ -414,24 +435,31 @@
       "sanitized": false
     },
     {
-      "path": "output/exercise2API-Reports/html/data/df0decdad6644bbab053e7dd41865275acc64544.zip",
-      "bytes": 10848,
-      "sha256": "22f69216e549f95178eaaf5f9f335c7f766b612eb647d832bb73326c3ede93de",
-      "originalSha256": "b1232660432bb62541f8919794acab2f0024820dee78c98fbbd90dc94a1a1507",
+      "path": "output/exercise2API-Reports/html/data/dbee988bff4773114cb6677cd7f10890a2c75857.zip",
+      "bytes": 10187,
+      "sha256": "0f0a486eb9893ab61f955a9106b1ce453fddc1a8b854cd984f906a3c75c70720",
+      "originalSha256": "2fb6687f0030ee90927b42d2aeb7ccde05ea529bb3a1e32b89f7a97dedb5dc2c",
       "sanitized": true
     },
     {
-      "path": "output/exercise2API-Reports/html/data/e22af7f5e99ad90a7b25faa8e96b28b6feb98ba9.zip",
-      "bytes": 11411,
-      "sha256": "2b4d790d53dbd22b957d4a2cffbcd504606b6a2390e79b9f07fe6c4ad2a97d9a",
-      "originalSha256": "bdebf9f621c37de7e6be6be2bac3dc3f0526e6bc5270e414f5d24b554494a13d",
-      "sanitized": true
+      "path": "output/exercise2API-Reports/html/data/e17b58c2bbf2e83983480ece515ad44eef4a86ed.json",
+      "bytes": 2735,
+      "sha256": "d060d46834850ec476bd3ec359a83c5a3c372b0efa9289cbf4dca22b4f15b4e7",
+      "originalSha256": "d060d46834850ec476bd3ec359a83c5a3c372b0efa9289cbf4dca22b4f15b4e7",
+      "sanitized": false
+    },
+    {
+      "path": "output/exercise2API-Reports/html/data/fd5bf3384f1ea4f55801ad83b066f67e32645817.json",
+      "bytes": 4594,
+      "sha256": "69d39dfa70f3a8a2b256b63348704a38cac61563a410e697453489200e2bbb5f",
+      "originalSha256": "69d39dfa70f3a8a2b256b63348704a38cac61563a410e697453489200e2bbb5f",
+      "sanitized": false
     },
     {
       "path": "output/exercise2API-Reports/html/index.html",
-      "bytes": 526682,
-      "sha256": "fb64b6b546bdbeb1cef98b4434263e7b8f6f70633a990d3be3def4cf356d5e09",
-      "originalSha256": "fb64b6b546bdbeb1cef98b4434263e7b8f6f70633a990d3be3def4cf356d5e09",
+      "bytes": 526722,
+      "sha256": "b9a27ee032549d9877f8756347a3f34f680aacb84f86131d860b410e31bbf76a",
+      "originalSha256": "b9a27ee032549d9877f8756347a3f34f680aacb84f86131d860b410e31bbf76a",
       "sanitized": false
     },
     {
@@ -569,9 +597,9 @@
     },
     {
       "path": "output/exercise2API-Reports/results.json",
-      "bytes": 38881,
-      "sha256": "410945abcea9bfc5f4ba9f80c3260eb3f74e649eddddcd7c247901e332aea43f",
-      "originalSha256": "410945abcea9bfc5f4ba9f80c3260eb3f74e649eddddcd7c247901e332aea43f",
+      "bytes": 38871,
+      "sha256": "0be165c194d443da5c090d537dc454c26ad8571b5001cdef2595f34066d5ee4d",
+      "originalSha256": "0be165c194d443da5c090d537dc454c26ad8571b5001cdef2595f34066d5ee4d",
       "sanitized": false
     },
     {
@@ -590,30 +618,30 @@
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-07d6a-nd-goal-with-a-different-ID-chromium/trace.zip",
-      "bytes": 11411,
-      "sha256": "2b4d790d53dbd22b957d4a2cffbcd504606b6a2390e79b9f07fe6c4ad2a97d9a",
-      "originalSha256": "bdebf9f621c37de7e6be6be2bac3dc3f0526e6bc5270e414f5d24b554494a13d",
+      "bytes": 11417,
+      "sha256": "5bbdcb72b043cfee297fff02883955acc69c2dea3b3d5ac7decf003e1738a764",
+      "originalSha256": "b889d9f431be4cabc284dce8f38d8363b6978ab601dc9f203a72dca22bda8ca8",
       "sanitized": true
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-16379-plete-list-of-created-goals-chromium/attachments/API-bonus-evidence-2cc7e56d71108b5ebbe8e8208da1676a0b45134a.json",
       "bytes": 2735,
-      "sha256": "3b3e886bf64e6a240297b1245de3192048723c764be510b15742fea2517d2c02",
-      "originalSha256": "3b3e886bf64e6a240297b1245de3192048723c764be510b15742fea2517d2c02",
+      "sha256": "d060d46834850ec476bd3ec359a83c5a3c372b0efa9289cbf4dca22b4f15b4e7",
+      "originalSha256": "d060d46834850ec476bd3ec359a83c5a3c372b0efa9289cbf4dca22b4f15b4e7",
       "sanitized": false
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-16379-plete-list-of-created-goals-chromium/bonus-evidence.json",
       "bytes": 2735,
-      "sha256": "3b3e886bf64e6a240297b1245de3192048723c764be510b15742fea2517d2c02",
-      "originalSha256": "3b3e886bf64e6a240297b1245de3192048723c764be510b15742fea2517d2c02",
+      "sha256": "d060d46834850ec476bd3ec359a83c5a3c372b0efa9289cbf4dca22b4f15b4e7",
+      "originalSha256": "d060d46834850ec476bd3ec359a83c5a3c372b0efa9289cbf4dca22b4f15b4e7",
       "sanitized": false
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-16379-plete-list-of-created-goals-chromium/trace.zip",
-      "bytes": 10632,
-      "sha256": "19060f0f54b5aa5828a7ace7e12c45b347d12a105908b05134865e842b97c088",
-      "originalSha256": "fb4e862543e63a79e49ea865c73f8a1fef2c317c80fe5a149a525e502b5e1e81",
+      "bytes": 10627,
+      "sha256": "cb25bee223bcf1641af364e381d61870aab68f2d225fdb5747f56e0cc35ee3e4",
+      "originalSha256": "5ccabe31e78524b98e25489b8ab3e49915e608fae484ed7be2d6a3375b22ea5b",
       "sanitized": true
     },
     {
@@ -632,30 +660,30 @@
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-22eb1-in-with-invalid-credentials-chromium/trace.zip",
-      "bytes": 10638,
-      "sha256": "e963e14bf34586d69213a2aaa7171ba8b0c0b21af60fdd5ecb8382430a4b564d",
-      "originalSha256": "56c9dcadc8dbbcf0568075df264485587d77b890869804281879e6163e0aff88",
+      "bytes": 10629,
+      "sha256": "7b4d7cecac3876b7ca48a65b506e560313eb69cd61e0e2b12edca4e9a1b40c14",
+      "originalSha256": "2ddd7b9afd084a9f6cafc6a6fc3b1b18822d063bac5f280f489943f8e1f9d99e",
       "sanitized": true
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-2621a-API-002-Register-a-new-user-chromium/attachments/API-bonus-evidence-381a1aaa5bdfed1c0617f608b3f220e296c597ce.json",
       "bytes": 2482,
-      "sha256": "9270f47fbc0e2726ef8f61ae60e2471a27be5a1ae6ce6d6cd1b66748d747ec93",
-      "originalSha256": "9270f47fbc0e2726ef8f61ae60e2471a27be5a1ae6ce6d6cd1b66748d747ec93",
+      "sha256": "10509be4251e6c28c01d696a1fc72e3881c1922d11f81c3b52b47cab08e1e2ed",
+      "originalSha256": "10509be4251e6c28c01d696a1fc72e3881c1922d11f81c3b52b47cab08e1e2ed",
       "sanitized": false
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-2621a-API-002-Register-a-new-user-chromium/bonus-evidence.json",
       "bytes": 2482,
-      "sha256": "9270f47fbc0e2726ef8f61ae60e2471a27be5a1ae6ce6d6cd1b66748d747ec93",
-      "originalSha256": "9270f47fbc0e2726ef8f61ae60e2471a27be5a1ae6ce6d6cd1b66748d747ec93",
+      "sha256": "10509be4251e6c28c01d696a1fc72e3881c1922d11f81c3b52b47cab08e1e2ed",
+      "originalSha256": "10509be4251e6c28c01d696a1fc72e3881c1922d11f81c3b52b47cab08e1e2ed",
       "sanitized": false
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-2621a-API-002-Register-a-new-user-chromium/trace.zip",
-      "bytes": 10848,
-      "sha256": "22f69216e549f95178eaaf5f9f335c7f766b612eb647d832bb73326c3ede93de",
-      "originalSha256": "b1232660432bb62541f8919794acab2f0024820dee78c98fbbd90dc94a1a1507",
+      "bytes": 10857,
+      "sha256": "82a6b77eb91149029f75a9927a3493bf7bd3cfba34599bc0448a40634c77bc5a",
+      "originalSha256": "fd1c7b2d6496610293288e83dda85363457e0aec67dde6f7ff9cd933561ea149",
       "sanitized": true
     },
     {
@@ -674,93 +702,93 @@
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-44801-ogin-with-valid-credentials-chromium/trace.zip",
-      "bytes": 10698,
-      "sha256": "a1a5c9c3cb7ba989c584c94b582c821f529aeb883ab08dbdc099c30e66c6a72b",
-      "originalSha256": "694e683537a557b43076fbb85253ae8e58de75602dd2d5e96bc9c45e2eff9de9",
+      "bytes": 10713,
+      "sha256": "337f971ba484a00ae860b5f3c437ddcf7d6598d877fdba441948c12cd6424782",
+      "originalSha256": "63b19563e53d857521d580a6c3ee82cb5555c2f728e04f8d35fc95fa82c57e05",
       "sanitized": true
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-4d0bb-rieve-the-second-goal-by-ID-chromium/attachments/API-bonus-evidence-c75279644c42b7dd82c31dc12417f2ce5498f19c.json",
       "bytes": 4622,
-      "sha256": "b030eb5324cb4b1a09d74d71a5ec3411442002b95a2ecf475f6ee1f86c89a6c1",
-      "originalSha256": "b030eb5324cb4b1a09d74d71a5ec3411442002b95a2ecf475f6ee1f86c89a6c1",
+      "sha256": "f58a99165a0bee087a046bef36190874436b1bf4f7c930c6eb2ebf8ac45edccb",
+      "originalSha256": "f58a99165a0bee087a046bef36190874436b1bf4f7c930c6eb2ebf8ac45edccb",
       "sanitized": false
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-4d0bb-rieve-the-second-goal-by-ID-chromium/bonus-evidence.json",
       "bytes": 4622,
-      "sha256": "b030eb5324cb4b1a09d74d71a5ec3411442002b95a2ecf475f6ee1f86c89a6c1",
-      "originalSha256": "b030eb5324cb4b1a09d74d71a5ec3411442002b95a2ecf475f6ee1f86c89a6c1",
+      "sha256": "f58a99165a0bee087a046bef36190874436b1bf4f7c930c6eb2ebf8ac45edccb",
+      "originalSha256": "f58a99165a0bee087a046bef36190874436b1bf4f7c930c6eb2ebf8ac45edccb",
       "sanitized": false
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-4d0bb-rieve-the-second-goal-by-ID-chromium/trace.zip",
-      "bytes": 10884,
-      "sha256": "9dc3cc8e348a3d178308bd294eb0865ef85314c66de7cc701d0e264830a56e40",
-      "originalSha256": "5ca9a988747fee50d27a40d38ed9b7360a3f7f8138430345e55859eb5c3dff51",
+      "bytes": 10900,
+      "sha256": "3c393b30d524116a8f8ba80ac50dc84d00d6f8a6f359bb5bfceef2e92a6b1fc6",
+      "originalSha256": "a0c46d200506a30faa2263b59f9b88bb75fae3d2a7cf24e2e3507af5693482a3",
       "sanitized": true
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-5a4df-ed-goal-cannot-be-retrieved-chromium/attachments/API-bonus-evidence-a98a6722f3a0658c66f5a07009e62953c870127a.json",
       "bytes": 2079,
-      "sha256": "9c0c2d644008f50fe75fbbd582393075cf80417cbe1e788e63fe9bca3c5dddee",
-      "originalSha256": "9c0c2d644008f50fe75fbbd582393075cf80417cbe1e788e63fe9bca3c5dddee",
+      "sha256": "10075ac3170492678c9447e31a71555131ebb183cb9ef026b6fe38eb577156cd",
+      "originalSha256": "10075ac3170492678c9447e31a71555131ebb183cb9ef026b6fe38eb577156cd",
       "sanitized": false
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-5a4df-ed-goal-cannot-be-retrieved-chromium/bonus-evidence.json",
       "bytes": 2079,
-      "sha256": "9c0c2d644008f50fe75fbbd582393075cf80417cbe1e788e63fe9bca3c5dddee",
-      "originalSha256": "9c0c2d644008f50fe75fbbd582393075cf80417cbe1e788e63fe9bca3c5dddee",
+      "sha256": "10075ac3170492678c9447e31a71555131ebb183cb9ef026b6fe38eb577156cd",
+      "originalSha256": "10075ac3170492678c9447e31a71555131ebb183cb9ef026b6fe38eb577156cd",
       "sanitized": false
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-5a4df-ed-goal-cannot-be-retrieved-chromium/trace.zip",
-      "bytes": 10305,
-      "sha256": "b0dffce727cc2f0cb7d70a8e13fedda8892608cc106a86eff07a96c1d7d0b828",
-      "originalSha256": "325d760487532203eeb0a66d4eb61a3a79334dd8244397687a8bc6867a3fbb8d",
+      "bytes": 10298,
+      "sha256": "91c0989df336db9a76d1852a601d330ee0be3d42c4770ac5a5ebb504ab106422",
+      "originalSha256": "9952edca1e0997d3774d15af02fb54ffc087bf825d8defcd755469941cd6ad1b",
       "sanitized": true
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-7706e-I-010-Delete-the-first-goal-chromium/attachments/API-bonus-evidence-66a0a1dc7fdd0f3b096a1bbb90b92901c88c8368.json",
       "bytes": 2082,
-      "sha256": "9ae921c63e5fb3a3cacb79b3ce4081612576e1549abef46fabcea878ad58b3b0",
-      "originalSha256": "9ae921c63e5fb3a3cacb79b3ce4081612576e1549abef46fabcea878ad58b3b0",
+      "sha256": "abac966194fbb618dc776dce9074e8eb87067f42c21d01d879abc9bbe4b66f14",
+      "originalSha256": "abac966194fbb618dc776dce9074e8eb87067f42c21d01d879abc9bbe4b66f14",
       "sanitized": false
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-7706e-I-010-Delete-the-first-goal-chromium/bonus-evidence.json",
       "bytes": 2082,
-      "sha256": "9ae921c63e5fb3a3cacb79b3ce4081612576e1549abef46fabcea878ad58b3b0",
-      "originalSha256": "9ae921c63e5fb3a3cacb79b3ce4081612576e1549abef46fabcea878ad58b3b0",
+      "sha256": "abac966194fbb618dc776dce9074e8eb87067f42c21d01d879abc9bbe4b66f14",
+      "originalSha256": "abac966194fbb618dc776dce9074e8eb87067f42c21d01d879abc9bbe4b66f14",
       "sanitized": false
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-7706e-I-010-Delete-the-first-goal-chromium/trace.zip",
-      "bytes": 10335,
-      "sha256": "110211bee9da2be8a1250c74951f9f2d41ca39a47d1e01cfd272bcb272b723e2",
-      "originalSha256": "96d7eeab81e260f007d672886e8756ae9bd2630b1dd0e5114c21675676f1f0ef",
+      "bytes": 10351,
+      "sha256": "2c7fcb2a56b41e60f0a82a39b0bee143f895ba7a46257f3d0ce1f152cea4d2ba",
+      "originalSha256": "8ed18542ee7d791b8ff4a71428afd761cb2e9e81423cea442a2b9ad22f509499",
       "sanitized": true
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-b0782-trieve-the-first-goal-by-ID-chromium/attachments/API-bonus-evidence-14423ea555124a00202053115c8f9bc6079b894b.json",
       "bytes": 4594,
-      "sha256": "155eac78ad0b60295dd4890e9fd7bd41b58f7d2e764a8fcd5bdd50d1a48049fc",
-      "originalSha256": "155eac78ad0b60295dd4890e9fd7bd41b58f7d2e764a8fcd5bdd50d1a48049fc",
+      "sha256": "69d39dfa70f3a8a2b256b63348704a38cac61563a410e697453489200e2bbb5f",
+      "originalSha256": "69d39dfa70f3a8a2b256b63348704a38cac61563a410e697453489200e2bbb5f",
       "sanitized": false
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-b0782-trieve-the-first-goal-by-ID-chromium/bonus-evidence.json",
       "bytes": 4594,
-      "sha256": "155eac78ad0b60295dd4890e9fd7bd41b58f7d2e764a8fcd5bdd50d1a48049fc",
-      "originalSha256": "155eac78ad0b60295dd4890e9fd7bd41b58f7d2e764a8fcd5bdd50d1a48049fc",
+      "sha256": "69d39dfa70f3a8a2b256b63348704a38cac61563a410e697453489200e2bbb5f",
+      "originalSha256": "69d39dfa70f3a8a2b256b63348704a38cac61563a410e697453489200e2bbb5f",
       "sanitized": false
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-b0782-trieve-the-first-goal-by-ID-chromium/trace.zip",
-      "bytes": 10855,
-      "sha256": "f7ab62560334472e9c2ed796e503fefc03a077c2404c2a6e854d7746defb9a7b",
-      "originalSha256": "67670340ed24c4943ccf52d72fa28802b074cd963357cbd03710864e888a732a",
+      "bytes": 10861,
+      "sha256": "8fbbf146393ac6eaebd0d8839e5188e76d6adbd23d3ac12eb81c5ee7d6c33922",
+      "originalSha256": "3da2e106706f44dfa8dca20fed4fed76099e3f6993e443cd0278fd93398d0cb5",
       "sanitized": true
     },
     {
@@ -779,9 +807,9 @@
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-bdf16-I-005-Create-the-first-goal-chromium/trace.zip",
-      "bytes": 11322,
-      "sha256": "c1ef7e82bd08e077ebceedd89c458fa8448daf7656acd6238729175fb2c73567",
-      "originalSha256": "7d0c2850829af7415ca2e1a8ab1ee905c51049bcf3006702fe42f10d260564e3",
+      "bytes": 11339,
+      "sha256": "f9548a8f6287d96754bd101f9e1ffe34e36a46d80194c35573590db4584f93e8",
+      "originalSha256": "92ae7d192cbbbc9359acf848c4fef1ad76cfb0735860ecaa955e6792f53cf57b",
       "sanitized": true
     },
     {
@@ -800,37 +828,30 @@
     },
     {
       "path": "output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-d7a01-rify-API-operational-status-chromium/trace.zip",
-      "bytes": 10182,
-      "sha256": "340e7cfcb3dad5f7dfe8a48aeafc94935335742690f9a9711dad451a35e4e544",
-      "originalSha256": "8a2e5198a952ad78ffb2a7eb6f0610839dab01a841b28e9e8dc4fbe289ecba4c",
+      "bytes": 10187,
+      "sha256": "0f0a486eb9893ab61f955a9106b1ce453fddc1a8b854cd984f906a3c75c70720",
+      "originalSha256": "2fb6687f0030ee90927b42d2aeb7ccde05ea529bb3a1e32b89f7a97dedb5dc2c",
       "sanitized": true
     },
     {
       "path": "output/exercise3-chatbot/docs/chatbot-conversation.png",
-      "bytes": 315350,
-      "sha256": "0af8be0f4c1455e974b4900491edc0187eb639d8072ead5b73dfc5c2155b3b88",
-      "originalSha256": "0af8be0f4c1455e974b4900491edc0187eb639d8072ead5b73dfc5c2155b3b88",
+      "bytes": 315284,
+      "sha256": "6ce9fc84c421b6172edc90cb41c5d7c66020b88aae678dd7408f8865986b13e8",
+      "originalSha256": "6ce9fc84c421b6172edc90cb41c5d7c66020b88aae678dd7408f8865986b13e8",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/docs/chatbot-response-time.json",
       "bytes": 482,
-      "sha256": "399149ea5f76188f29c7d5a680776e849a85147fe22e922a825dddb801f231e2",
-      "originalSha256": "399149ea5f76188f29c7d5a680776e849a85147fe22e922a825dddb801f231e2",
+      "sha256": "cf206201b7a27181521265747188331c456dd7e7df1c6966f00bbce1d2703264",
+      "originalSha256": "cf206201b7a27181521265747188331c456dd7e7df1c6966f00bbce1d2703264",
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/docs/html/data/06241c50d692ac02d27999fdab6aa62e9b1e7f85.zip",
-      "bytes": 7308304,
-      "sha256": "9fba7157fb57fe64c713cb866f42549b3f31d0718b7044f111d29654a814ca15",
-      "originalSha256": "9fba7157fb57fe64c713cb866f42549b3f31d0718b7044f111d29654a814ca15",
-      "sanitized": false
-    },
-    {
-      "path": "output/exercise3-chatbot/docs/html/data/157579c7f23ad54cfb56f2e1c898f55b47328ecc.webm",
-      "bytes": 139490,
-      "sha256": "12d13d9427ec2de25d8631030054db5ba184926eb5a9eedc99962b6d85d8a4f5",
-      "originalSha256": "12d13d9427ec2de25d8631030054db5ba184926eb5a9eedc99962b6d85d8a4f5",
+      "path": "output/exercise3-chatbot/docs/html/data/0632c2ffb96dc3a24ce74715d56df6a58ff588f8.zip",
+      "bytes": 5483903,
+      "sha256": "09d06b4752f6665b176aaaa6608122457b7617907ba3cd80073871625e9264a6",
+      "originalSha256": "09d06b4752f6665b176aaaa6608122457b7617907ba3cd80073871625e9264a6",
       "sanitized": false
     },
     {
@@ -841,24 +862,24 @@
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/docs/html/data/56baf6e48a0459f86d07c25f56dfbb100354652e.webm",
-      "bytes": 279808,
-      "sha256": "930a78903f1cfbe76bc740bfea4a2faf0dc22dc0936c624ca0efb47d0d45dcda",
-      "originalSha256": "930a78903f1cfbe76bc740bfea4a2faf0dc22dc0936c624ca0efb47d0d45dcda",
+      "path": "output/exercise3-chatbot/docs/html/data/3babe93782f54ff7111bbef50b89c6466ff7646d.webm",
+      "bytes": 138802,
+      "sha256": "18dcf4f80c15296b4745998bbbafd5ce7ac2a95f6fd25defd9f4d70280a6f5ca",
+      "originalSha256": "18dcf4f80c15296b4745998bbbafd5ce7ac2a95f6fd25defd9f4d70280a6f5ca",
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/docs/html/data/5943363b119e0b2b88850d5c715860a3b6bf84d7.webm",
-      "bytes": 239448,
-      "sha256": "927bfc010c26198518db1934b074ad1b1ea97bbdb34bbb0a3c150b29618b1e8f",
-      "originalSha256": "927bfc010c26198518db1934b074ad1b1ea97bbdb34bbb0a3c150b29618b1e8f",
+      "path": "output/exercise3-chatbot/docs/html/data/508a1297ec1e1110d6172f86f53ca7065e57fa0a.png",
+      "bytes": 359636,
+      "sha256": "981fc23e2e032dceb16f1f898bae85d881ce705c23c27a56d8c3299534859f75",
+      "originalSha256": "981fc23e2e032dceb16f1f898bae85d881ce705c23c27a56d8c3299534859f75",
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/docs/html/data/8229737854b3679fe2e15126e1b74e76c57acff4.zip",
-      "bytes": 5476706,
-      "sha256": "772666c71e9d2a9efd8b898e20c30d136dd82666f4c121a705bd068cb5dc218d",
-      "originalSha256": "772666c71e9d2a9efd8b898e20c30d136dd82666f4c121a705bd068cb5dc218d",
+      "path": "output/exercise3-chatbot/docs/html/data/62d35062727a3e65c754aa83f69ece0d7f3e6dab.webm",
+      "bytes": 232472,
+      "sha256": "cabef4f069f312830ac0d09a383e453f9ce49b2ca7a3e8a61ded24db1b63a39b",
+      "originalSha256": "cabef4f069f312830ac0d09a383e453f9ce49b2ca7a3e8a61ded24db1b63a39b",
       "sanitized": false
     },
     {
@@ -869,31 +890,38 @@
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/docs/html/data/b601cc1415575c7fb31358d803b4ee43e7012799.png",
-      "bytes": 359469,
-      "sha256": "611f4cd6a37de773346a63e7f02f51e0244509382d48c3b5b8a3870691eaa5a2",
-      "originalSha256": "611f4cd6a37de773346a63e7f02f51e0244509382d48c3b5b8a3870691eaa5a2",
+      "path": "output/exercise3-chatbot/docs/html/data/af63fd04b5c4765ff5adff5babe41a601d12263f.zip",
+      "bytes": 7477031,
+      "sha256": "08ded9c51c2e24983b1be5e92cf8bbb7cd7b0d1bd74d13448583ee4145dc4581",
+      "originalSha256": "08ded9c51c2e24983b1be5e92cf8bbb7cd7b0d1bd74d13448583ee4145dc4581",
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/docs/html/data/bcc4182b3b38b4aabf761a676c9ee669b61dfdba.png",
-      "bytes": 315316,
-      "sha256": "b142d956f6d4c99542e41e3c2c5bdefd35574319274209386de50042b94e6460",
-      "originalSha256": "b142d956f6d4c99542e41e3c2c5bdefd35574319274209386de50042b94e6460",
+      "path": "output/exercise3-chatbot/docs/html/data/b7f955cb350b0c1de562427f6577ecaef469d6db.webm",
+      "bytes": 218069,
+      "sha256": "1a2d4455cff483eb975fc8a1094318ca21c4a76ae3f8e1464290ce54adad246d",
+      "originalSha256": "1a2d4455cff483eb975fc8a1094318ca21c4a76ae3f8e1464290ce54adad246d",
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/docs/html/data/d944c6e5f0c034dc1b65fea56bd3d84bb36ac204.zip",
-      "bytes": 9896003,
-      "sha256": "f8440f3e02cbcf3a00823b91fdbbf9ebfab2bb5b9387e7fa10cec2abfa102011",
-      "originalSha256": "f8440f3e02cbcf3a00823b91fdbbf9ebfab2bb5b9387e7fa10cec2abfa102011",
+      "path": "output/exercise3-chatbot/docs/html/data/c325062ef5ca3395b80f3af44a4046b352c137a0.zip",
+      "bytes": 8634484,
+      "sha256": "26d226d714253b252bb276d8cdd5690bed9f04f709366c60858817bd3309eb1f",
+      "originalSha256": "26d226d714253b252bb276d8cdd5690bed9f04f709366c60858817bd3309eb1f",
+      "sanitized": false
+    },
+    {
+      "path": "output/exercise3-chatbot/docs/html/data/e61f58245ecdf833ac5ccf4176e6e0449796d21f.png",
+      "bytes": 315270,
+      "sha256": "d25d97c56624a7db65b5b17d26ffcd5deaeceb6dfd5122bf719440b8e082a2d2",
+      "originalSha256": "d25d97c56624a7db65b5b17d26ffcd5deaeceb6dfd5122bf719440b8e082a2d2",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/docs/html/index.html",
-      "bytes": 523986,
-      "sha256": "7ba5faac3a58d30364402850127138680a3db72e34a7f0348a362059c40d8b58",
-      "originalSha256": "7ba5faac3a58d30364402850127138680a3db72e34a7f0348a362059c40d8b58",
+      "bytes": 523950,
+      "sha256": "8dd1c4c079327da47ae777930c140289914555f01ae89df91d67d0e2f6d07b6f",
+      "originalSha256": "8dd1c4c079327da47ae777930c140289914555f01ae89df91d67d0e2f6d07b6f",
       "sanitized": false
     },
     {
@@ -1031,9 +1059,9 @@
     },
     {
       "path": "output/exercise3-chatbot/docs/results.json",
-      "bytes": 17997,
-      "sha256": "d1a5472b62eadc56f3b39e8ee874d315439d714c417877d7b9cc01aac527ea0d",
-      "originalSha256": "d1a5472b62eadc56f3b39e8ee874d315439d714c417877d7b9cc01aac527ea0d",
+      "bytes": 18007,
+      "sha256": "deb36252921862c11d856f1c7a6c2e06794b203356515fac27b4ebd3ee2dfc30",
+      "originalSha256": "deb36252921862c11d856f1c7a6c2e06794b203356515fac27b4ebd3ee2dfc30",
       "sanitized": false
     },
     {
@@ -1052,23 +1080,23 @@
     },
     {
       "path": "output/exercise3-chatbot/docs/test-results/exercise-3-chatbot-testing-4e104-esponse-and-measure-latency-chromium/test-finished-1.png",
-      "bytes": 315316,
-      "sha256": "b142d956f6d4c99542e41e3c2c5bdefd35574319274209386de50042b94e6460",
-      "originalSha256": "b142d956f6d4c99542e41e3c2c5bdefd35574319274209386de50042b94e6460",
+      "bytes": 315270,
+      "sha256": "d25d97c56624a7db65b5b17d26ffcd5deaeceb6dfd5122bf719440b8e082a2d2",
+      "originalSha256": "d25d97c56624a7db65b5b17d26ffcd5deaeceb6dfd5122bf719440b8e082a2d2",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/docs/test-results/exercise-3-chatbot-testing-4e104-esponse-and-measure-latency-chromium/trace.zip",
-      "bytes": 9896003,
-      "sha256": "f8440f3e02cbcf3a00823b91fdbbf9ebfab2bb5b9387e7fa10cec2abfa102011",
-      "originalSha256": "f8440f3e02cbcf3a00823b91fdbbf9ebfab2bb5b9387e7fa10cec2abfa102011",
+      "bytes": 8634484,
+      "sha256": "26d226d714253b252bb276d8cdd5690bed9f04f709366c60858817bd3309eb1f",
+      "originalSha256": "26d226d714253b252bb276d8cdd5690bed9f04f709366c60858817bd3309eb1f",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/docs/test-results/exercise-3-chatbot-testing-4e104-esponse-and-measure-latency-chromium/video.webm",
-      "bytes": 279808,
-      "sha256": "930a78903f1cfbe76bc740bfea4a2faf0dc22dc0936c624ca0efb47d0d45dcda",
-      "originalSha256": "930a78903f1cfbe76bc740bfea4a2faf0dc22dc0936c624ca0efb47d0d45dcda",
+      "bytes": 232472,
+      "sha256": "cabef4f069f312830ac0d09a383e453f9ce49b2ca7a3e8a61ded24db1b63a39b",
+      "originalSha256": "cabef4f069f312830ac0d09a383e453f9ce49b2ca7a3e8a61ded24db1b63a39b",
       "sanitized": false
     },
     {
@@ -1080,156 +1108,156 @@
     },
     {
       "path": "output/exercise3-chatbot/docs/test-results/exercise-3-chatbot-testing-7fc41-e-and-verify-chatbot-widget-chromium/trace.zip",
-      "bytes": 5476706,
-      "sha256": "772666c71e9d2a9efd8b898e20c30d136dd82666f4c121a705bd068cb5dc218d",
-      "originalSha256": "772666c71e9d2a9efd8b898e20c30d136dd82666f4c121a705bd068cb5dc218d",
+      "bytes": 5483903,
+      "sha256": "09d06b4752f6665b176aaaa6608122457b7617907ba3cd80073871625e9264a6",
+      "originalSha256": "09d06b4752f6665b176aaaa6608122457b7617907ba3cd80073871625e9264a6",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/docs/test-results/exercise-3-chatbot-testing-7fc41-e-and-verify-chatbot-widget-chromium/video.webm",
-      "bytes": 139490,
-      "sha256": "12d13d9427ec2de25d8631030054db5ba184926eb5a9eedc99962b6d85d8a4f5",
-      "originalSha256": "12d13d9427ec2de25d8631030054db5ba184926eb5a9eedc99962b6d85d8a4f5",
+      "bytes": 138802,
+      "sha256": "18dcf4f80c15296b4745998bbbafd5ce7ac2a95f6fd25defd9f4d70280a6f5ca",
+      "originalSha256": "18dcf4f80c15296b4745998bbbafd5ce7ac2a95f6fd25defd9f4d70280a6f5ca",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/docs/test-results/exercise-3-chatbot-testing-d8980-and-close-the-chatbot-panel-chromium/test-finished-1.png",
-      "bytes": 359469,
-      "sha256": "611f4cd6a37de773346a63e7f02f51e0244509382d48c3b5b8a3870691eaa5a2",
-      "originalSha256": "611f4cd6a37de773346a63e7f02f51e0244509382d48c3b5b8a3870691eaa5a2",
+      "bytes": 359636,
+      "sha256": "981fc23e2e032dceb16f1f898bae85d881ce705c23c27a56d8c3299534859f75",
+      "originalSha256": "981fc23e2e032dceb16f1f898bae85d881ce705c23c27a56d8c3299534859f75",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/docs/test-results/exercise-3-chatbot-testing-d8980-and-close-the-chatbot-panel-chromium/trace.zip",
-      "bytes": 7308304,
-      "sha256": "9fba7157fb57fe64c713cb866f42549b3f31d0718b7044f111d29654a814ca15",
-      "originalSha256": "9fba7157fb57fe64c713cb866f42549b3f31d0718b7044f111d29654a814ca15",
+      "bytes": 7477031,
+      "sha256": "08ded9c51c2e24983b1be5e92cf8bbb7cd7b0d1bd74d13448583ee4145dc4581",
+      "originalSha256": "08ded9c51c2e24983b1be5e92cf8bbb7cd7b0d1bd74d13448583ee4145dc4581",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/docs/test-results/exercise-3-chatbot-testing-d8980-and-close-the-chatbot-panel-chromium/video.webm",
-      "bytes": 239448,
-      "sha256": "927bfc010c26198518db1934b074ad1b1ea97bbdb34bbb0a3c150b29618b1e8f",
-      "originalSha256": "927bfc010c26198518db1934b074ad1b1ea97bbdb34bbb0a3c150b29618b1e8f",
+      "bytes": 218069,
+      "sha256": "1a2d4455cff483eb975fc8a1094318ca21c4a76ae3f8e1464290ce54adad246d",
+      "originalSha256": "1a2d4455cff483eb975fc8a1094318ca21c4a76ae3f8e1464290ce54adad246d",
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/homepage/html/data/0dd6365ff356119b58d5c24aa717b4e48f5c857e.png",
-      "bytes": 321211,
-      "sha256": "9fd420eb57b52594caac25453b4751780e3c618c959305de6cd7e5d7fd88e080",
-      "originalSha256": "9fd420eb57b52594caac25453b4751780e3c618c959305de6cd7e5d7fd88e080",
+      "path": "output/exercise3-chatbot/homepage/html/data/098d594e0dace645a6b4302d4f4bdafd397bad1a.json",
+      "bytes": 660,
+      "sha256": "d7b55dcb5c05802790d88c99087811909dda86baf731012ddddf64391836214a",
+      "originalSha256": "d7b55dcb5c05802790d88c99087811909dda86baf731012ddddf64391836214a",
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/homepage/html/data/304ad808646b661b2a148f114c70bc615b5aa80c.json",
-      "bytes": 11959,
-      "sha256": "60392d0d735c0a19bd9706aa1c275f7bdef089827d56fb2f3305efd6e26173a0",
-      "originalSha256": "60392d0d735c0a19bd9706aa1c275f7bdef089827d56fb2f3305efd6e26173a0",
+      "path": "output/exercise3-chatbot/homepage/html/data/2b3cf82e03254810483aeeba6b2f1fa127f77190.zip",
+      "bytes": 27430210,
+      "sha256": "841c2797ae2b079655da533dc864ef0b059471e95411b714f0a7ccdd947bf10d",
+      "originalSha256": "841c2797ae2b079655da533dc864ef0b059471e95411b714f0a7ccdd947bf10d",
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/homepage/html/data/45794a624e96e98e72d769a8797002def35c94d3.webm",
-      "bytes": 847005,
-      "sha256": "64005ce4b29709c1238450cde76b9c13a236947c6a4a741e1b63ec616bcdf8c4",
-      "originalSha256": "64005ce4b29709c1238450cde76b9c13a236947c6a4a741e1b63ec616bcdf8c4",
+      "path": "output/exercise3-chatbot/homepage/html/data/3f0d8b9fd38fa199943ff22ba8fa1ad086e337ec.zip",
+      "bytes": 12928680,
+      "sha256": "4494a9edf02ff7cc1c0a3255e81d157be9b8b2f1db69c9eb37924627a358acb8",
+      "originalSha256": "4494a9edf02ff7cc1c0a3255e81d157be9b8b2f1db69c9eb37924627a358acb8",
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/homepage/html/data/461967557db8eac5fed1109e8b1418dbba7a4d87.png",
-      "bytes": 310273,
-      "sha256": "9a728374b9f15bdc338ad473dbb72f8e429a77117239b941e5bd2623097845ae",
-      "originalSha256": "9a728374b9f15bdc338ad473dbb72f8e429a77117239b941e5bd2623097845ae",
+      "path": "output/exercise3-chatbot/homepage/html/data/3f4dee03d7d9256d1b2f2932d88d2d769ed181cd.webm",
+      "bytes": 638840,
+      "sha256": "0bdc1dd3a5888f84c7bb3323f9ead9ba877c0cca95fb60bb8afc56b213ec2b3a",
+      "originalSha256": "0bdc1dd3a5888f84c7bb3323f9ead9ba877c0cca95fb60bb8afc56b213ec2b3a",
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/homepage/html/data/583f92044cd2d084fd611d1c51d35f511867ab68.zip",
-      "bytes": 8013202,
-      "sha256": "28481e8b8000c1fdd04e8e835aa6c6c2567503e4134b62a6bbb73e03eaa78de5",
-      "originalSha256": "28481e8b8000c1fdd04e8e835aa6c6c2567503e4134b62a6bbb73e03eaa78de5",
+      "path": "output/exercise3-chatbot/homepage/html/data/6cdcf9b5ed85da7a64a0c22a09c120c750546c55.json",
+      "bytes": 2075,
+      "sha256": "990009ad798be03cf84bc29999d0db46fbc483166a4c4abe8f87ca0c3bfeea4c",
+      "originalSha256": "990009ad798be03cf84bc29999d0db46fbc483166a4c4abe8f87ca0c3bfeea4c",
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/homepage/html/data/681ce00cb38a5f26e5a609cfa3b54bb7741423a3.png",
-      "bytes": 312844,
-      "sha256": "b509f6e637387b22b76ba6be0a082e7b8c10aa21012c85b4303c9026378a1432",
-      "originalSha256": "b509f6e637387b22b76ba6be0a082e7b8c10aa21012c85b4303c9026378a1432",
+      "path": "output/exercise3-chatbot/homepage/html/data/6e3ddf9a2825d48e61184e8204399ea46514abd4.webm",
+      "bytes": 705555,
+      "sha256": "486224444a1f3e58e8e77939711bf4deedb2e4ae59a3bff086e4942c958e4d9f",
+      "originalSha256": "486224444a1f3e58e8e77939711bf4deedb2e4ae59a3bff086e4942c958e4d9f",
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/homepage/html/data/6df404867166d42c1cf900107f40170253a275db.webm",
-      "bytes": 758212,
-      "sha256": "9c840ff9d50199a6b67c50d25e5f3fdd3799098efe8e66dda72c81616dbf12a7",
-      "originalSha256": "9c840ff9d50199a6b67c50d25e5f3fdd3799098efe8e66dda72c81616dbf12a7",
+      "path": "output/exercise3-chatbot/homepage/html/data/724f0f05f63beacf9949a7ae0b87223cd485c84b.json",
+      "bytes": 14279,
+      "sha256": "965b43b32cd2931effd737a7e75d936cd07537f2389bd506fd0db2392dec075a",
+      "originalSha256": "965b43b32cd2931effd737a7e75d936cd07537f2389bd506fd0db2392dec075a",
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/homepage/html/data/7972a900b32036e80503a8e3071233f304473e07.webm",
-      "bytes": 2617703,
-      "sha256": "683f5593058698d19a8fdf170e36e670edc419bca22dfbae7ee433fd5906da14",
-      "originalSha256": "683f5593058698d19a8fdf170e36e670edc419bca22dfbae7ee433fd5906da14",
+      "path": "output/exercise3-chatbot/homepage/html/data/78561d688d261b54efdcaf4cdb9a99ee77647584.png",
+      "bytes": 310148,
+      "sha256": "ea7a8e364eb11e99ce042b2d4d0de39e970b6908cf557cae05e007afad367b59",
+      "originalSha256": "ea7a8e364eb11e99ce042b2d4d0de39e970b6908cf557cae05e007afad367b59",
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/homepage/html/data/7bd7a5a6ff8d64985891a3ee1c6003261123cda8.zip",
-      "bytes": 24290171,
-      "sha256": "786e478ae871158abdf2d8f2474357b48103e37d340af30aa6c78329e508fa9f",
-      "originalSha256": "786e478ae871158abdf2d8f2474357b48103e37d340af30aa6c78329e508fa9f",
+      "path": "output/exercise3-chatbot/homepage/html/data/89a2a63e02988450f37f0fb4140bceaee0050631.webm",
+      "bytes": 1205151,
+      "sha256": "6958df0773a5331f13455710e2420c2fb2cb7dce42f8dc69270967f49ea90b59",
+      "originalSha256": "6958df0773a5331f13455710e2420c2fb2cb7dce42f8dc69270967f49ea90b59",
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/homepage/html/data/7e23fe953789708c5fa48ce58aee20f86063b8fc.json",
-      "bytes": 533,
-      "sha256": "63228b86e33a3d03bc8d42cc3ded38ccdd96a3ec6769c69a27e595e4676ec8d0",
-      "originalSha256": "63228b86e33a3d03bc8d42cc3ded38ccdd96a3ec6769c69a27e595e4676ec8d0",
+      "path": "output/exercise3-chatbot/homepage/html/data/964f28923d582a10a685a47c691b33fa5ae18926.zip",
+      "bytes": 8420140,
+      "sha256": "f0b5bca4daa6497c708fa2989f733ec7ccbcc0ba1b91382cb59a0fa843121e3d",
+      "originalSha256": "f0b5bca4daa6497c708fa2989f733ec7ccbcc0ba1b91382cb59a0fa843121e3d",
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/homepage/html/data/837088282e6139a67869c3d378a399b576a78ee1.zip",
-      "bytes": 14126914,
-      "sha256": "eb7948494f389b51f57a8f3d61cb63e5cbdc2982e8c2ac48e491b1729ffd9fdf",
-      "originalSha256": "eb7948494f389b51f57a8f3d61cb63e5cbdc2982e8c2ac48e491b1729ffd9fdf",
+      "path": "output/exercise3-chatbot/homepage/html/data/afc6d71457baff94ae04cb2aae5bd78a7bc2deff.png",
+      "bytes": 330810,
+      "sha256": "53ca9f393419c11b4375fb5a119ff4b9045a0eb840c5e43dd1e65ee03e8263bc",
+      "originalSha256": "53ca9f393419c11b4375fb5a119ff4b9045a0eb840c5e43dd1e65ee03e8263bc",
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/homepage/html/data/9647ff33e9fd67dfe9ac7bc0739e9a13e8e87816.png",
-      "bytes": 284439,
-      "sha256": "7ed4047d09919f0e552df124560c7cff8c2f7ae73cc4211a3fee75e15ce447d4",
-      "originalSha256": "7ed4047d09919f0e552df124560c7cff8c2f7ae73cc4211a3fee75e15ce447d4",
+      "path": "output/exercise3-chatbot/homepage/html/data/b4f2a886b2a3481af4f175bc4b1bb78cbe96fdad.png",
+      "bytes": 314841,
+      "sha256": "363e5248c873e6180421393a177562869fc4484902ded1ac2b3bc0561100a976",
+      "originalSha256": "363e5248c873e6180421393a177562869fc4484902ded1ac2b3bc0561100a976",
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/homepage/html/data/a5a54224798def00c427a1bd2d5c504957679fb6.png",
-      "bytes": 283781,
-      "sha256": "6cc475739bc8816c9c5682c9708ef42724cd959ffe3bedf88786ea858baffadb",
-      "originalSha256": "6cc475739bc8816c9c5682c9708ef42724cd959ffe3bedf88786ea858baffadb",
+      "path": "output/exercise3-chatbot/homepage/html/data/c2c4f6c1fbbeeb981fa6a0cbde6f4a46a1c0a989.png",
+      "bytes": 307619,
+      "sha256": "e6bc0a640853e19e87dac9e3dd5baee57894b610fb7ea1e20aac1113a03e90e2",
+      "originalSha256": "e6bc0a640853e19e87dac9e3dd5baee57894b610fb7ea1e20aac1113a03e90e2",
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/homepage/html/data/b97f570864f1de1bf85483dd28d9441875251c38.json",
-      "bytes": 1948,
-      "sha256": "89868da496635524a24c42489a861d657ccf7a30c99057e0f514bce388334b1c",
-      "originalSha256": "89868da496635524a24c42489a861d657ccf7a30c99057e0f514bce388334b1c",
+      "path": "output/exercise3-chatbot/homepage/html/data/d8a188e920201da97181776fb25cc9af9dc35c23.png",
+      "bytes": 293658,
+      "sha256": "30917730febeef610cc15e8c3927c78ee2cb9a1e17e7dc17d23e6a4433eda6aa",
+      "originalSha256": "30917730febeef610cc15e8c3927c78ee2cb9a1e17e7dc17d23e6a4433eda6aa",
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/homepage/html/data/cc4d18916552055c33d993e666dbd0f8a806dae5.zip",
-      "bytes": 9679879,
-      "sha256": "e7e29aaa264f75df8c127f28a4bb0b2d7e506e1aad3b97cb03da5f0cc00986c1",
-      "originalSha256": "e7e29aaa264f75df8c127f28a4bb0b2d7e506e1aad3b97cb03da5f0cc00986c1",
+      "path": "output/exercise3-chatbot/homepage/html/data/dd10be1a7502f93c8e1c7e13db0437254530291c.zip",
+      "bytes": 10022222,
+      "sha256": "1eca24beeb500690e081c135ec56e4f8fabcc6e3d21aad7cc5e1bbf5998388aa",
+      "originalSha256": "1eca24beeb500690e081c135ec56e4f8fabcc6e3d21aad7cc5e1bbf5998388aa",
       "sanitized": false
     },
     {
-      "path": "output/exercise3-chatbot/homepage/html/data/d265dddc950508152c49ed360997676eb5f4b055.webm",
-      "bytes": 1429924,
-      "sha256": "17c8911cd5f6b29284182d1f3b0bdf75018c4214354e8414aa3904f178f4a323",
-      "originalSha256": "17c8911cd5f6b29284182d1f3b0bdf75018c4214354e8414aa3904f178f4a323",
+      "path": "output/exercise3-chatbot/homepage/html/data/e3c362c7a79f7937cb8fabc9381ac82d20b40c9c.webm",
+      "bytes": 2415467,
+      "sha256": "a2474330fc05e2d5574bdad7590c1f5a60e2e563ce4c665edd4025253ab74a56",
+      "originalSha256": "a2474330fc05e2d5574bdad7590c1f5a60e2e563ce4c665edd4025253ab74a56",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/homepage/html/index.html",
-      "bytes": 528318,
-      "sha256": "9b3452e04fa90d08e506ef388c4494e85557219faeedd12fb125ea7975a853cd",
-      "originalSha256": "9b3452e04fa90d08e506ef388c4494e85557219faeedd12fb125ea7975a853cd",
+      "bytes": 528594,
+      "sha256": "c98115803654d41cc7f6084a0867b017679f585b01bb296f44afff5f564e1738",
+      "originalSha256": "c98115803654d41cc7f6084a0867b017679f585b01bb296f44afff5f564e1738",
       "sanitized": false
     },
     {
@@ -1367,149 +1395,149 @@
     },
     {
       "path": "output/exercise3-chatbot/homepage/results.json",
-      "bytes": 23241,
-      "sha256": "5ffe927a4aebd5f3d91cf92dc144d16045af714730210b56a590e61c1df97313",
-      "originalSha256": "5ffe927a4aebd5f3d91cf92dc144d16045af714730210b56a590e61c1df97313",
+      "bytes": 23362,
+      "sha256": "4a848794bf0c95a2e5e80cc8532cd4b64e51a158cba24e266c6909ed205e554f",
+      "originalSha256": "4a848794bf0c95a2e5e80cc8532cd4b64e51a158cba24e266c6909ed205e554f",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-2f0e4-date-the-displayed-bot-name-chromium/test-finished-1.png",
-      "bytes": 312844,
-      "sha256": "b509f6e637387b22b76ba6be0a082e7b8c10aa21012c85b4303c9026378a1432",
-      "originalSha256": "b509f6e637387b22b76ba6be0a082e7b8c10aa21012c85b4303c9026378a1432",
+      "bytes": 293658,
+      "sha256": "30917730febeef610cc15e8c3927c78ee2cb9a1e17e7dc17d23e6a4433eda6aa",
+      "originalSha256": "30917730febeef610cc15e8c3927c78ee2cb9a1e17e7dc17d23e6a4433eda6aa",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-2f0e4-date-the-displayed-bot-name-chromium/trace.zip",
-      "bytes": 9679879,
-      "sha256": "e7e29aaa264f75df8c127f28a4bb0b2d7e506e1aad3b97cb03da5f0cc00986c1",
-      "originalSha256": "e7e29aaa264f75df8c127f28a4bb0b2d7e506e1aad3b97cb03da5f0cc00986c1",
+      "bytes": 10022222,
+      "sha256": "1eca24beeb500690e081c135ec56e4f8fabcc6e3d21aad7cc5e1bbf5998388aa",
+      "originalSha256": "1eca24beeb500690e081c135ec56e4f8fabcc6e3d21aad7cc5e1bbf5998388aa",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-2f0e4-date-the-displayed-bot-name-chromium/video.webm",
-      "bytes": 847005,
-      "sha256": "64005ce4b29709c1238450cde76b9c13a236947c6a4a741e1b63ec616bcdf8c4",
-      "originalSha256": "64005ce4b29709c1238450cde76b9c13a236947c6a4a741e1b63ec616bcdf8c4",
+      "bytes": 705555,
+      "sha256": "486224444a1f3e58e8e77939711bf4deedb2e4ae59a3bff086e4942c958e4d9f",
+      "originalSha256": "486224444a1f3e58e8e77939711bf4deedb2e4ae59a3bff086e4942c958e4d9f",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-9838e-ew-bot-response-and-latency-chromium/attachments/Homepage-bonus-evidence-4084d4918b57ab5643781055eb67d395683322ff.json",
-      "bytes": 1948,
-      "sha256": "89868da496635524a24c42489a861d657ccf7a30c99057e0f514bce388334b1c",
-      "originalSha256": "89868da496635524a24c42489a861d657ccf7a30c99057e0f514bce388334b1c",
+      "bytes": 2075,
+      "sha256": "990009ad798be03cf84bc29999d0db46fbc483166a4c4abe8f87ca0c3bfeea4c",
+      "originalSha256": "990009ad798be03cf84bc29999d0db46fbc483166a4c4abe8f87ca0c3bfeea4c",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-9838e-ew-bot-response-and-latency-chromium/attachments/Homepage-bounded-bonus-probes-d0b7afff1ebdf45154e88227dbfce238160d00ca.json",
-      "bytes": 11959,
-      "sha256": "60392d0d735c0a19bd9706aa1c275f7bdef089827d56fb2f3305efd6e26173a0",
-      "originalSha256": "60392d0d735c0a19bd9706aa1c275f7bdef089827d56fb2f3305efd6e26173a0",
+      "bytes": 14279,
+      "sha256": "965b43b32cd2931effd737a7e75d936cd07537f2389bd506fd0db2392dec075a",
+      "originalSha256": "965b43b32cd2931effd737a7e75d936cd07537f2389bd506fd0db2392dec075a",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-9838e-ew-bot-response-and-latency-chromium/attachments/Homepage-conversation-6072ce1ffa5f61fb65efc7e28bccecd03b3d718d.png",
-      "bytes": 284439,
-      "sha256": "7ed4047d09919f0e552df124560c7cff8c2f7ae73cc4211a3fee75e15ce447d4",
-      "originalSha256": "7ed4047d09919f0e552df124560c7cff8c2f7ae73cc4211a3fee75e15ce447d4",
+      "bytes": 310148,
+      "sha256": "ea7a8e364eb11e99ce042b2d4d0de39e970b6908cf557cae05e007afad367b59",
+      "originalSha256": "ea7a8e364eb11e99ce042b2d4d0de39e970b6908cf557cae05e007afad367b59",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-9838e-ew-bot-response-and-latency-chromium/attachments/Homepage-conversation-and-latency-2f85376dc999defaeeee1a99e3c73e89e127004f.json",
-      "bytes": 533,
-      "sha256": "63228b86e33a3d03bc8d42cc3ded38ccdd96a3ec6769c69a27e595e4676ec8d0",
-      "originalSha256": "63228b86e33a3d03bc8d42cc3ded38ccdd96a3ec6769c69a27e595e4676ec8d0",
+      "bytes": 660,
+      "sha256": "d7b55dcb5c05802790d88c99087811909dda86baf731012ddddf64391836214a",
+      "originalSha256": "d7b55dcb5c05802790d88c99087811909dda86baf731012ddddf64391836214a",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-9838e-ew-bot-response-and-latency-chromium/bonus-evidence.json",
-      "bytes": 1948,
-      "sha256": "89868da496635524a24c42489a861d657ccf7a30c99057e0f514bce388334b1c",
-      "originalSha256": "89868da496635524a24c42489a861d657ccf7a30c99057e0f514bce388334b1c",
+      "bytes": 2075,
+      "sha256": "990009ad798be03cf84bc29999d0db46fbc483166a4c4abe8f87ca0c3bfeea4c",
+      "originalSha256": "990009ad798be03cf84bc29999d0db46fbc483166a4c4abe8f87ca0c3bfeea4c",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-9838e-ew-bot-response-and-latency-chromium/bonus-probes.json",
-      "bytes": 11959,
-      "sha256": "60392d0d735c0a19bd9706aa1c275f7bdef089827d56fb2f3305efd6e26173a0",
-      "originalSha256": "60392d0d735c0a19bd9706aa1c275f7bdef089827d56fb2f3305efd6e26173a0",
+      "bytes": 14279,
+      "sha256": "965b43b32cd2931effd737a7e75d936cd07537f2389bd506fd0db2392dec075a",
+      "originalSha256": "965b43b32cd2931effd737a7e75d936cd07537f2389bd506fd0db2392dec075a",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-9838e-ew-bot-response-and-latency-chromium/homepage-conversation.png",
-      "bytes": 284439,
-      "sha256": "7ed4047d09919f0e552df124560c7cff8c2f7ae73cc4211a3fee75e15ce447d4",
-      "originalSha256": "7ed4047d09919f0e552df124560c7cff8c2f7ae73cc4211a3fee75e15ce447d4",
+      "bytes": 310148,
+      "sha256": "ea7a8e364eb11e99ce042b2d4d0de39e970b6908cf557cae05e007afad367b59",
+      "originalSha256": "ea7a8e364eb11e99ce042b2d4d0de39e970b6908cf557cae05e007afad367b59",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-9838e-ew-bot-response-and-latency-chromium/homepage-response-time.json",
-      "bytes": 533,
-      "sha256": "63228b86e33a3d03bc8d42cc3ded38ccdd96a3ec6769c69a27e595e4676ec8d0",
-      "originalSha256": "63228b86e33a3d03bc8d42cc3ded38ccdd96a3ec6769c69a27e595e4676ec8d0",
+      "bytes": 660,
+      "sha256": "d7b55dcb5c05802790d88c99087811909dda86baf731012ddddf64391836214a",
+      "originalSha256": "d7b55dcb5c05802790d88c99087811909dda86baf731012ddddf64391836214a",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-9838e-ew-bot-response-and-latency-chromium/test-finished-1.png",
-      "bytes": 321211,
-      "sha256": "9fd420eb57b52594caac25453b4751780e3c618c959305de6cd7e5d7fd88e080",
-      "originalSha256": "9fd420eb57b52594caac25453b4751780e3c618c959305de6cd7e5d7fd88e080",
+      "bytes": 330810,
+      "sha256": "53ca9f393419c11b4375fb5a119ff4b9045a0eb840c5e43dd1e65ee03e8263bc",
+      "originalSha256": "53ca9f393419c11b4375fb5a119ff4b9045a0eb840c5e43dd1e65ee03e8263bc",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-9838e-ew-bot-response-and-latency-chromium/trace.zip",
-      "bytes": 24290171,
-      "sha256": "786e478ae871158abdf2d8f2474357b48103e37d340af30aa6c78329e508fa9f",
-      "originalSha256": "786e478ae871158abdf2d8f2474357b48103e37d340af30aa6c78329e508fa9f",
+      "bytes": 27430210,
+      "sha256": "841c2797ae2b079655da533dc864ef0b059471e95411b714f0a7ccdd947bf10d",
+      "originalSha256": "841c2797ae2b079655da533dc864ef0b059471e95411b714f0a7ccdd947bf10d",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-9838e-ew-bot-response-and-latency-chromium/video.webm",
-      "bytes": 2617703,
-      "sha256": "683f5593058698d19a8fdf170e36e670edc419bca22dfbae7ee433fd5906da14",
-      "originalSha256": "683f5593058698d19a8fdf170e36e670edc419bca22dfbae7ee433fd5906da14",
+      "bytes": 2415467,
+      "sha256": "a2474330fc05e2d5574bdad7590c1f5a60e2e563ce4c665edd4025253ab74a56",
+      "originalSha256": "a2474330fc05e2d5574bdad7590c1f5a60e2e563ce4c665edd4025253ab74a56",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-ad68e-lose-and-reopen-the-chatbot-chromium/test-finished-1.png",
-      "bytes": 283781,
-      "sha256": "6cc475739bc8816c9c5682c9708ef42724cd959ffe3bedf88786ea858baffadb",
-      "originalSha256": "6cc475739bc8816c9c5682c9708ef42724cd959ffe3bedf88786ea858baffadb",
+      "bytes": 307619,
+      "sha256": "e6bc0a640853e19e87dac9e3dd5baee57894b610fb7ea1e20aac1113a03e90e2",
+      "originalSha256": "e6bc0a640853e19e87dac9e3dd5baee57894b610fb7ea1e20aac1113a03e90e2",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-ad68e-lose-and-reopen-the-chatbot-chromium/trace.zip",
-      "bytes": 14126914,
-      "sha256": "eb7948494f389b51f57a8f3d61cb63e5cbdc2982e8c2ac48e491b1729ffd9fdf",
-      "originalSha256": "eb7948494f389b51f57a8f3d61cb63e5cbdc2982e8c2ac48e491b1729ffd9fdf",
+      "bytes": 12928680,
+      "sha256": "4494a9edf02ff7cc1c0a3255e81d157be9b8b2f1db69c9eb37924627a358acb8",
+      "originalSha256": "4494a9edf02ff7cc1c0a3255e81d157be9b8b2f1db69c9eb37924627a358acb8",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-ad68e-lose-and-reopen-the-chatbot-chromium/video.webm",
-      "bytes": 1429924,
-      "sha256": "17c8911cd5f6b29284182d1f3b0bdf75018c4214354e8414aa3904f178f4a323",
-      "originalSha256": "17c8911cd5f6b29284182d1f3b0bdf75018c4214354e8414aa3904f178f4a323",
+      "bytes": 1205151,
+      "sha256": "6958df0773a5331f13455710e2420c2fb2cb7dce42f8dc69270967f49ea90b59",
+      "originalSha256": "6958df0773a5331f13455710e2420c2fb2cb7dce42f8dc69270967f49ea90b59",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-cdefc-nd-verify-floating-launcher-chromium/test-finished-1.png",
-      "bytes": 310273,
-      "sha256": "9a728374b9f15bdc338ad473dbb72f8e429a77117239b941e5bd2623097845ae",
-      "originalSha256": "9a728374b9f15bdc338ad473dbb72f8e429a77117239b941e5bd2623097845ae",
+      "bytes": 314841,
+      "sha256": "363e5248c873e6180421393a177562869fc4484902ded1ac2b3bc0561100a976",
+      "originalSha256": "363e5248c873e6180421393a177562869fc4484902ded1ac2b3bc0561100a976",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-cdefc-nd-verify-floating-launcher-chromium/trace.zip",
-      "bytes": 8013202,
-      "sha256": "28481e8b8000c1fdd04e8e835aa6c6c2567503e4134b62a6bbb73e03eaa78de5",
-      "originalSha256": "28481e8b8000c1fdd04e8e835aa6c6c2567503e4134b62a6bbb73e03eaa78de5",
+      "bytes": 8420140,
+      "sha256": "f0b5bca4daa6497c708fa2989f733ec7ccbcc0ba1b91382cb59a0fa843121e3d",
+      "originalSha256": "f0b5bca4daa6497c708fa2989f733ec7ccbcc0ba1b91382cb59a0fa843121e3d",
       "sanitized": false
     },
     {
       "path": "output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-cdefc-nd-verify-floating-launcher-chromium/video.webm",
-      "bytes": 758212,
-      "sha256": "9c840ff9d50199a6b67c50d25e5f3fdd3799098efe8e66dda72c81616dbf12a7",
-      "originalSha256": "9c840ff9d50199a6b67c50d25e5f3fdd3799098efe8e66dda72c81616dbf12a7",
+      "bytes": 638840,
+      "sha256": "0bdc1dd3a5888f84c7bb3323f9ead9ba877c0cca95fb60bb8afc56b213ec2b3a",
+      "originalSha256": "0bdc1dd3a5888f84c7bb3323f9ead9ba877c0cca95fb60bb8afc56b213ec2b3a",
       "sanitized": false
     }
   ]

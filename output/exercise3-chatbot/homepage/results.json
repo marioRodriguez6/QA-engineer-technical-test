@@ -21,7 +21,7 @@
       "ci": {
         "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
         "commitHash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43347955954"
+        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43348218399"
       },
       "gitCommit": {
         "shortHash": "0fbd54a",
@@ -52,7 +52,7 @@
           "ci": {
             "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
             "commitHash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43347955954"
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43348218399"
           },
           "gitCommit": {
             "shortHash": "0fbd54a",
@@ -95,7 +95,7 @@
           "ci": {
             "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
             "commitHash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43347955954"
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43348218399"
           },
           "gitCommit": {
             "shortHash": "0fbd54a",
@@ -210,17 +210,17 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 7106,
+                      "duration": 5565,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "Homepage DOM ready after 1935 ms\n"
+                          "text": "Homepage DOM ready after 1489 ms\n"
                         },
                         {
-                          "text": "Homepage load event observed after 4704 ms\n"
+                          "text": "Homepage load event observed after 3774 ms\n"
                         },
                         {
-                          "text": "Chatbot launcher visible 1113 ms after load\n"
+                          "text": "Chatbot launcher visible 845 ms after load\n"
                         }
                       ],
                       "stderr": [],
@@ -228,14 +228,14 @@
                       "steps": [
                         {
                           "title": "Wait for window.load, which starts the webchat loader",
-                          "duration": 2767
+                          "duration": 2284
                         },
                         {
                           "title": "Wait for the floating launcher after page load",
-                          "duration": 1113
+                          "duration": 845
                         }
                       ],
-                      "startTime": "2026-11-13T01:52:22.478Z",
+                      "startTime": "2026-11-13T01:54:27.667Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -280,17 +280,17 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 12790,
+                      "duration": 10647,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "Homepage DOM ready after 2619 ms\n"
+                          "text": "Homepage DOM ready after 1324 ms\n"
                         },
                         {
-                          "text": "Homepage load event observed after 5184 ms\n"
+                          "text": "Homepage load event observed after 3521 ms\n"
                         },
                         {
-                          "text": "Chatbot launcher visible 1255 ms after load\n"
+                          "text": "Chatbot launcher visible 820 ms after load\n"
                         }
                       ],
                       "stderr": [],
@@ -298,22 +298,22 @@
                       "steps": [
                         {
                           "title": "Wait for window.load, which starts the webchat loader",
-                          "duration": 2564
+                          "duration": 2197
                         },
                         {
                           "title": "Wait for the floating launcher after page load",
-                          "duration": 1254
+                          "duration": 819
                         },
                         {
                           "title": "Close using the real header control",
-                          "duration": 1378
+                          "duration": 1318
                         },
                         {
                           "title": "Reopen using the floating launcher",
-                          "duration": 1592
+                          "duration": 1805
                         }
                       ],
-                      "startTime": "2026-11-13T01:52:32.628Z",
+                      "startTime": "2026-11-13T01:54:33.812Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -358,17 +358,17 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 7502,
+                      "duration": 6423,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "Homepage DOM ready after 1393 ms\n"
+                          "text": "Homepage DOM ready after 1321 ms\n"
                         },
                         {
-                          "text": "Homepage load event observed after 3929 ms\n"
+                          "text": "Homepage load event observed after 3102 ms\n"
                         },
                         {
-                          "text": "Chatbot launcher visible 1017 ms after load\n"
+                          "text": "Chatbot launcher visible 878 ms after load\n"
                         }
                       ],
                       "stderr": [],
@@ -376,14 +376,14 @@
                       "steps": [
                         {
                           "title": "Wait for window.load, which starts the webchat loader",
-                          "duration": 2534
+                          "duration": 1780
                         },
                         {
                           "title": "Wait for the floating launcher after page load",
-                          "duration": 1016
+                          "duration": 878
                         }
                       ],
-                      "startTime": "2026-11-13T01:52:46.096Z",
+                      "startTime": "2026-11-13T01:54:44.919Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -428,20 +428,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 23929,
+                      "duration": 23322,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "Homepage DOM ready after 1357 ms\n"
+                          "text": "Homepage DOM ready after 1334 ms\n"
                         },
                         {
-                          "text": "Homepage load event observed after 4028 ms\n"
+                          "text": "Homepage load event observed after 3823 ms\n"
                         },
                         {
-                          "text": "Chatbot launcher visible 963 ms after load\n"
+                          "text": "Chatbot launcher visible 786 ms after load\n"
                         },
                         {
-                          "text": "{\"testId\":\"HOME-004\",\"pageUrl\":\"https://botpress.com/\",\"widgetStructure\":\"Shadow DOM\",\"botName\":\"Botpress\",\"userMessage\":\"Hola\",\"assistantResponse\":\"Hola, encantado de hablar contigo. ¿Qué te gustaría lograr con Botpress: automatizar soporte, reservar demos o algo diferente?\",\"responseTimeMs\":4221,\"measuredAt\":\"2026-11-13T01:53:05.893Z\",\"measurement\":\"From immediately before pressing Enter until a new, loaded bot message with visible text is observed. Includes UI and assertion overhead.\"}\n"
+                          "text": "{\"testId\":\"HOME-004\",\"pageUrl\":\"https://botpress.com/\",\"widgetStructure\":\"Shadow DOM\",\"botName\":\"Botpress\",\"userMessage\":\"Hola\",\"assistantResponse\":\"Hola, encantado de verte por aquí. Soy el asistente de Botpress y te ayudo con todo lo relacionado con nuestros agentes de IA y el helpdesk de soporte.\\n\\n¿Qué te gustaría hacer con Botpress o en qué estás pensando usar agentes de IA para tu negocio?\",\"responseTimeMs\":4114,\"measuredAt\":\"2026-11-13T01:55:02.608Z\",\"measurement\":\"From immediately before pressing Enter until a new, loaded bot message with visible text is observed. Includes UI and assertion overhead.\"}\n"
                         }
                       ],
                       "stderr": [],
@@ -449,14 +449,14 @@
                       "steps": [
                         {
                           "title": "Wait for window.load, which starts the webchat loader",
-                          "duration": 2668
+                          "duration": 2488
                         },
                         {
                           "title": "Wait for the floating launcher after page load",
-                          "duration": 963
+                          "duration": 786
                         }
                       ],
-                      "startTime": "2026-11-13T01:52:54.104Z",
+                      "startTime": "2026-11-13T01:54:51.715Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -512,8 +512,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-13T01:52:21.891Z",
-    "duration": 57364.371,
+    "startTime": "2026-11-13T01:54:27.229Z",
+    "duration": 48824.7,
     "expected": 4,
     "skipped": 0,
     "unexpected": 0,

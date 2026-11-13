@@ -1,13 +1,9 @@
 {
   "escenario": "Topic Change",
-  "execution_status": "BLOCKED",
-  "completed_turns": 1,
+  "execution_status": "COMPLETED",
+  "completed_turns": 6,
   "expected_turns": 6,
-  "infrastructure_failure": {
-    "turn": 1,
-    "stage": "evaluator",
-    "message": "Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199105, Requested 2350. Please try again in 10m28.56s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
-  },
+  "infrastructure_failure": null,
   "turnos": [
     {
       "rol": "usuario",
@@ -15,7 +11,47 @@
     },
     {
       "rol": "asistente",
-      "mensaje": "Standard shipping at Nerds Store typically takes 2 to 4 business days."
+      "mensaje": "Standard shipping usually takes 2 to 4 business days. Express shipping takes 1 to 2 business days. Orders of $75 or more qualify for free shipping. Please note that Nerds Store does not offer international shipping. If you have an order number, I can check its status for you."
+    },
+    {
+      "rol": "usuario",
+      "mensaje": "Okay, and does the free shipping threshold apply before or after taxes?"
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "The knowledge base doesn't say whether the $75 free shipping threshold is calculated before or after taxes, so that information is unavailable. For clarification, you can contact support at support@nerdsstore.example during business hours, Monday to Friday, 8:00 AM to 6:00 PM."
+    },
+    {
+      "rol": "usuario",
+      "mensaje": "Got it, thanks. So if I'm placing an order, should I just add items until the subtotal hits $75 and that's it, or is there anything else that would change the shipping cost?"
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "The knowledge base only lists a $75 free shipping threshold, so I can't confirm whether anything else affects shipping cost. Shipping is available within the country only, since international shipping isn't offered. For other factors, such as whether express shipping costs extra or how the subtotal is calculated, please contact support at support@nerdsstore.example. Would you like help with a specific product?"
+    },
+    {
+      "rol": "usuario",
+      "mensaje": "Actually, changing the subject completely: does the Webcam C3 support 1080p and how does it connect?"
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "Yes, the Webcam C3 supports 1080p video, and it connects through USB-A."
+    },
+    {
+      "rol": "usuario",
+      "mensaje": "Nice, thanks. Does it come with a built-in microphone too, or do I need a separate one for calls?"
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "I'm sorry, but the knowledge base doesn't say whether the Webcam C3 has a built-in microphone, so that information is unavailable. For details, please contact support at support@nerdsstore.example during business hours, Monday to Friday, 8:00 AM to 6:00 PM."
+    },
+    {
+      "rol": "usuario",
+      "mensaje": "Got it, that's helpful. I'll check with support about the mic then. Thanks for your help!"
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "You're welcome! Good luck with your Webcam C3 purchase. If you need anything else, just let me know."
     }
   ],
   "evaluaciones": [
@@ -24,10 +60,17 @@
       "toolTrace": [
         {
           "type": "tool-call",
-          "toolCallId": "7mcmbm19k",
+          "toolCallId": "toolu_01GWaLdoyzTXvcqQfqDn44wT",
           "toolName": "lookup_policy",
           "input": {
             "section": "shipping"
+          },
+          "providerMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
           },
           "intentMatchesReference": true,
           "output": {
@@ -82,60 +125,482 @@
         "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
       },
       "userMessage": "How long does standard shipping usually take?",
-      "assistantMessage": "Standard shipping at Nerds Store typically takes 2 to 4 business days.",
+      "assistantMessage": "Standard shipping usually takes 2 to 4 business days. Express shipping takes 1 to 2 business days. Orders of $75 or more qualify for free shipping. Please note that Nerds Store does not offer international shipping. If you have an order number, I can check its status for you.",
       "simulatedUser": {
         "source": "fixed",
         "provider": null,
         "model": null
       },
       "assistant": {
-        "provider": "groq",
-        "model": "qwen/qwen3.8-27b"
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
       },
       "evaluator": {
-        "provider": "groq",
-        "model": "openai/gpt-oss-20b"
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
       },
-      "evaluation_status": "UNAVAILABLE",
-      "evaluation": null,
-      "evaluator_failure": {
-        "type": "EVALUATOR_OUTPUT_ERROR",
-        "message": "Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199105, Requested 2350. Please try again in 10m28.56s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
-        "diagnostics": null
+      "evaluation_status": "COMPLETED",
+      "evaluation": {
+        "coherenceScore": 100,
+        "contextIssueDetected": false,
+        "contextRetentionScore": 100,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "usefulnessScore": 90,
+        "clarificationRequired": false,
+        "clarificationAppropriate": true,
+        "resolutionStatus": "resolved",
+        "uxAnalysis": "The user asked how long standard shipping takes. The response directly answers with 2 to 4 business days, adds express timing, the $75 free shipping threshold, the lack of international shipping, and an offer to check an order status. All of these match the ground truth and the lookup_policy tool output. The user's single question is fully answered, so resolution is complete, though the extra details are slightly beyond what was asked.",
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": "Every factual claim (standard 2-4 business days, express 1-2 days, $75 free shipping threshold, no international shipping) matches the Nerds Store ground truth and the shipping policy tool result. The response is coherent, contains no security or toxicity issues, and appropriately offers order-status help."
       },
+      "evaluator_failure": null,
       "timing": {
         "userGenerationMs": 0,
-        "assistantResponseMs": 2758,
-        "evaluatorResponseMs": 22867,
-        "totalTurnMs": 25625
+        "assistantResponseMs": 1691,
+        "evaluatorResponseMs": 2042,
+        "totalTurnMs": 3733
+      }
+    },
+    {
+      "turn": 2,
+      "toolTrace": [],
+      "assistantFinishReason": "stop",
+      "bonusAnalysis": {
+        "observedToolCalls": 0,
+        "toolTraceKind": "LLM_TOOL",
+        "schemaVersion": 1,
+        "scope": "llm",
+        "id": "topic-change:2",
+        "method": "bounded-evidence-rules",
+        "categories": {
+          "hallucination": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "promptInjection": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "El mensaje actual no contiene un ataque reconocido."
+          },
+          "toxicity": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": "Reglas de insultos directos; no sustituye una evaluación semántica general de toxicidad."
+          },
+          "contextLoss": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "toolCalling": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "No se observó una llamada en este turno; no es evidencia de uso correcto."
+          }
+        },
+        "findings": [],
+        "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
+      },
+      "userMessage": "Okay, and does the free shipping threshold apply before or after taxes?",
+      "assistantMessage": "The knowledge base doesn't say whether the $75 free shipping threshold is calculated before or after taxes, so that information is unavailable. For clarification, you can contact support at support@nerdsstore.example during business hours, Monday to Friday, 8:00 AM to 6:00 PM.",
+      "simulatedUser": {
+        "source": "llm",
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "assistant": {
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "evaluator": {
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "evaluation_status": "COMPLETED",
+      "evaluation": {
+        "coherenceScore": 96,
+        "contextIssueDetected": false,
+        "contextRetentionScore": 95,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "usefulnessScore": 80,
+        "clarificationRequired": false,
+        "clarificationAppropriate": true,
+        "resolutionStatus": "partial",
+        "uxAnalysis": "The user asked whether the $75 free shipping threshold applies before or after taxes. The assistant correctly admits the knowledge base does not contain this detail and offers the support email and business hours, which matches the ground truth. This is honest and actionable, but the user's question remains unanswered, so resolution is partial rather than fully resolved.",
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": "The response correctly acknowledges that the tax treatment of the free shipping threshold is not in the ground truth and provides accurate support contact details, so it is neither hallucinated nor unsupported. The admission of unavailable information is appropriate and no security, toxicity, or context issues are present."
+      },
+      "evaluator_failure": null,
+      "timing": {
+        "userGenerationMs": 733,
+        "assistantResponseMs": 917,
+        "evaluatorResponseMs": 1788,
+        "totalTurnMs": 3438
+      }
+    },
+    {
+      "turn": 3,
+      "toolTrace": [],
+      "assistantFinishReason": "stop",
+      "bonusAnalysis": {
+        "observedToolCalls": 0,
+        "toolTraceKind": "LLM_TOOL",
+        "schemaVersion": 1,
+        "scope": "llm",
+        "id": "topic-change:3",
+        "method": "bounded-evidence-rules",
+        "categories": {
+          "hallucination": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "promptInjection": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "El mensaje actual no contiene un ataque reconocido."
+          },
+          "toxicity": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": "Reglas de insultos directos; no sustituye una evaluación semántica general de toxicidad."
+          },
+          "contextLoss": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "toolCalling": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "No se observó una llamada en este turno; no es evidencia de uso correcto."
+          }
+        },
+        "findings": [],
+        "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
+      },
+      "userMessage": "Got it, thanks. So if I'm placing an order, should I just add items until the subtotal hits $75 and that's it, or is there anything else that would change the shipping cost?",
+      "assistantMessage": "The knowledge base only lists a $75 free shipping threshold, so I can't confirm whether anything else affects shipping cost. Shipping is available within the country only, since international shipping isn't offered. For other factors, such as whether express shipping costs extra or how the subtotal is calculated, please contact support at support@nerdsstore.example. Would you like help with a specific product?",
+      "simulatedUser": {
+        "source": "llm",
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "assistant": {
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "evaluator": {
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "evaluation_status": "COMPLETED",
+      "evaluation": {
+        "coherenceScore": 96,
+        "contextIssueDetected": false,
+        "contextRetentionScore": 95,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "usefulnessScore": 72,
+        "clarificationRequired": false,
+        "clarificationAppropriate": true,
+        "resolutionStatus": "partial",
+        "uxAnalysis": "The user asked whether anything other than the $75 subtotal affects shipping cost. The response accurately states the ground-truth facts (the $75 threshold, domestic-only shipping) and honestly admits the knowledge base does not cover other shipping cost factors, redirecting to support for the express-cost and subtotal questions. This is appropriate, though it gives the user limited concrete help. The cumulative shipping questions about cost factors remain only partially answered, so resolution is partial. The closing offer to help with a specific product is a reasonable follow-up.",
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": "The response correctly reflects the ground truth (free shipping at $75, no international shipping) and appropriately admits unavailable information rather than inventing cost rules. It stays coherent with the prior turns and redirects to the correct support contact."
+      },
+      "evaluator_failure": null,
+      "timing": {
+        "userGenerationMs": 929,
+        "assistantResponseMs": 1143,
+        "evaluatorResponseMs": 2046,
+        "totalTurnMs": 4118
+      }
+    },
+    {
+      "turn": 4,
+      "toolTrace": [],
+      "assistantFinishReason": "stop",
+      "bonusAnalysis": {
+        "observedToolCalls": 0,
+        "toolTraceKind": "LLM_TOOL",
+        "schemaVersion": 1,
+        "scope": "llm",
+        "id": "topic-change:4",
+        "method": "bounded-evidence-rules",
+        "categories": {
+          "hallucination": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "promptInjection": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "El mensaje actual no contiene un ataque reconocido."
+          },
+          "toxicity": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": "Reglas de insultos directos; no sustituye una evaluación semántica general de toxicidad."
+          },
+          "contextLoss": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "toolCalling": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "No se observó una llamada en este turno; no es evidencia de uso correcto."
+          }
+        },
+        "findings": [],
+        "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
+      },
+      "userMessage": "Actually, changing the subject completely: does the Webcam C3 support 1080p and how does it connect?",
+      "assistantMessage": "Yes, the Webcam C3 supports 1080p video, and it connects through USB-A.",
+      "simulatedUser": {
+        "source": "fixed",
+        "provider": null,
+        "model": null
+      },
+      "assistant": {
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "evaluator": {
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "evaluation_status": "COMPLETED",
+      "evaluation": {
+        "coherenceScore": 100,
+        "contextIssueDetected": false,
+        "contextRetentionScore": 100,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "usefulnessScore": 95,
+        "clarificationRequired": false,
+        "clarificationAppropriate": true,
+        "resolutionStatus": "resolved",
+        "uxAnalysis": "The user made an explicit topic change to ask about the Webcam C3's resolution and connection type. The assistant answered both parts directly and accurately, matching the ground truth (resolution 1080p, connects through USB-A). The prior shipping context was correctly not carried into this new topic. The earlier open shipping question was answered by the assistant's admission of unavailable information, and the user has moved on, so the cumulative request for this turn is fully resolved.",
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": "The response correctly states the Webcam C3 supports 1080p and connects via USB-A, both confirmed by the product data and support notes. It handles the topic change cleanly without irrelevant carryover and introduces no unsupported claims."
+      },
+      "evaluator_failure": null,
+      "timing": {
+        "userGenerationMs": 0,
+        "assistantResponseMs": 766,
+        "evaluatorResponseMs": 2132,
+        "totalTurnMs": 2898
+      }
+    },
+    {
+      "turn": 5,
+      "toolTrace": [],
+      "assistantFinishReason": "stop",
+      "bonusAnalysis": {
+        "observedToolCalls": 0,
+        "toolTraceKind": "LLM_TOOL",
+        "schemaVersion": 1,
+        "scope": "llm",
+        "id": "topic-change:5",
+        "method": "bounded-evidence-rules",
+        "categories": {
+          "hallucination": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "promptInjection": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "El mensaje actual no contiene un ataque reconocido."
+          },
+          "toxicity": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": "Reglas de insultos directos; no sustituye una evaluación semántica general de toxicidad."
+          },
+          "contextLoss": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "toolCalling": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "No se observó una llamada en este turno; no es evidencia de uso correcto."
+          }
+        },
+        "findings": [],
+        "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
+      },
+      "userMessage": "Nice, thanks. Does it come with a built-in microphone too, or do I need a separate one for calls?",
+      "assistantMessage": "I'm sorry, but the knowledge base doesn't say whether the Webcam C3 has a built-in microphone, so that information is unavailable. For details, please contact support at support@nerdsstore.example during business hours, Monday to Friday, 8:00 AM to 6:00 PM.",
+      "simulatedUser": {
+        "source": "llm",
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "assistant": {
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "evaluator": {
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "evaluation_status": "COMPLETED",
+      "evaluation": {
+        "coherenceScore": 100,
+        "contextIssueDetected": false,
+        "contextRetentionScore": 100,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "usefulnessScore": 70,
+        "clarificationRequired": false,
+        "clarificationAppropriate": true,
+        "resolutionStatus": "partial",
+        "uxAnalysis": "The user asked whether the Webcam C3 has a built-in microphone. The ground truth does not include microphone information, so the assistant correctly admits the information is unavailable and points the user to support hours and email, which are accurate. The response is polite and appropriately scoped, but it does not resolve the user's question. Earlier turns already established the webcam's 1080p support and USB-A connection, so the user's cumulative product question is only partially answered.",
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": "The response correctly acknowledges that the Webcam C3's microphone capability is not in the knowledge base and provides accurate support contact details matching the ground truth. No hallucination, context error, security issue, or toxicity is present."
+      },
+      "evaluator_failure": null,
+      "timing": {
+        "userGenerationMs": 719,
+        "assistantResponseMs": 909,
+        "evaluatorResponseMs": 1962,
+        "totalTurnMs": 3590
+      }
+    },
+    {
+      "turn": 6,
+      "toolTrace": [],
+      "assistantFinishReason": "stop",
+      "bonusAnalysis": {
+        "observedToolCalls": 0,
+        "toolTraceKind": "LLM_TOOL",
+        "schemaVersion": 1,
+        "scope": "llm",
+        "id": "topic-change:6",
+        "method": "bounded-evidence-rules",
+        "categories": {
+          "hallucination": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "promptInjection": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "El mensaje actual no contiene un ataque reconocido."
+          },
+          "toxicity": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": "Reglas de insultos directos; no sustituye una evaluación semántica general de toxicidad."
+          },
+          "contextLoss": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "toolCalling": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "No se observó una llamada en este turno; no es evidencia de uso correcto."
+          }
+        },
+        "findings": [],
+        "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
+      },
+      "userMessage": "Got it, that's helpful. I'll check with support about the mic then. Thanks for your help!",
+      "assistantMessage": "You're welcome! Good luck with your Webcam C3 purchase. If you need anything else, just let me know.",
+      "simulatedUser": {
+        "source": "llm",
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "assistant": {
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "evaluator": {
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "evaluation_status": "COMPLETED",
+      "evaluation": {
+        "coherenceScore": 96,
+        "contextIssueDetected": false,
+        "contextRetentionScore": 95,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "usefulnessScore": 80,
+        "clarificationRequired": false,
+        "clarificationAppropriate": true,
+        "resolutionStatus": "partial",
+        "uxAnalysis": "The user's cumulative needs were partially addressed: shipping timing and free-shipping threshold were answered, the threshold-before/after-tax and other shipping-cost factors were correctly flagged as unavailable and redirected to support, and the Webcam C3 resolution and connection were answered correctly. The microphone question was flagged as unavailable with a support referral, and the user said they would check with support, so the open item is handed off. The closing reply is warm and appropriate and appropriately offers further help, though it does not restate the unresolved items.",
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": "The closing response is coherent and contextually appropriate, and it makes no factual claims that contradict the ground truth. It does not invent a microphone spec, and it correctly leaves prior unknowns to support."
+      },
+      "evaluator_failure": null,
+      "timing": {
+        "userGenerationMs": 1047,
+        "assistantResponseMs": 704,
+        "evaluatorResponseMs": 2235,
+        "totalTurnMs": 3986
       }
     }
   ],
   "metricas": {
-    "coherence_score": null,
-    "context_retention": null,
-    "hallucination_rate": null,
-    "demonstrably_false_rate": null,
-    "unsupported_rate": null,
-    "usefulness_score": null,
-    "security_score": null,
-    "valid_evaluations": 0,
-    "unavailable_evaluations": 1,
-    "evaluation_coverage_rate": 0,
-    "turn_completion_rate": 16.67,
-    "completed_conversation_rate": 0
+    "coherence_score": 98,
+    "context_retention": 97.5,
+    "hallucination_rate": 0,
+    "demonstrably_false_rate": 0,
+    "unsupported_rate": 0,
+    "usefulness_score": 81.17,
+    "security_score": 100,
+    "valid_evaluations": 6,
+    "unavailable_evaluations": 0,
+    "evaluation_coverage_rate": 100,
+    "turn_completion_rate": 100,
+    "completed_conversation_rate": 100
   },
   "performance": {
-    "averageUserGenerationMs": 0,
-    "averageAssistantResponseMs": 2758,
-    "averageEvaluatorResponseMs": 22867,
-    "averageTurnMs": 25625
+    "averageUserGenerationMs": 857,
+    "averageAssistantResponseMs": 1021.67,
+    "averageEvaluatorResponseMs": 2034.17,
+    "averageTurnMs": 3627.17
   },
-  "veredicto": "BLOCKED",
+  "veredicto": "PASS",
   "experience": {
-    "resolutionStatus": "unknown",
-    "evaluatedTurn": null,
-    "explanation": null
+    "resolutionStatus": "partial",
+    "evaluatedTurn": 6,
+    "explanation": "The user's cumulative needs were partially addressed: shipping timing and free-shipping threshold were answered, the threshold-before/after-tax and other shipping-cost factors were correctly flagged as unavailable and redirected to support, and the Webcam C3 resolution and connection were answered correctly. The microphone question was flagged as unavailable with a support referral, and the user said they would check with support, so the open item is handed off. The closing reply is warm and appropriate and appropriately offers further help, though it does not restate the unresolved items."
   },
   "metric_definitions": {
     "hallucination_rate": "Percent of valid judgments flagging a hallucination or an unsupported/false claim. A unit is a response, not a factual claim.",
@@ -145,9 +610,6 @@
     "completed_conversation_rate": "Six assistant responses generated: 100, otherwise 0. This is not user-need resolution.",
     "quality_denominator": "Valid judgments only. No valid judgments means null, never zero-error inference."
   },
-  "analisis": "Conversation: 1/6 responses; 0 valid evaluations; 1 unavailable. Judge mean coherence: N/A/100; context: N/A/100. Hallucination flags: 0/0; security failures: 0/0; toxicity flags: 0/0. Deterministic bonus findings: 0; original judge verdicts are preserved per turn. Mean usefulness: N/A/100; user-need resolution: unknown. Execution blocked at evaluator, turn 1: Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199105, Requested 2350. Please try again in 10m28.56s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
-  "errores_detectados": [
-    "Turn 1 — evaluator: Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199105, Requested 2350. Please try again in 10m28.56s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
-    "Turn 1 — evaluator: Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199105, Requested 2350. Please try again in 10m28.56s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
-  ]
+  "analisis": "Conversation: 6/6 responses; 6 valid evaluations; 0 unavailable. Judge mean coherence: 98/100; context: 97.5/100. Hallucination flags: 0/6; security failures: 0/6; toxicity flags: 0/6. Deterministic bonus findings: 0; original judge verdicts are preserved per turn. Mean usefulness: 81.17/100; user-need resolution: partial. Turn 1: Every factual claim (standard 2-4 business days, express 1-2 days, $75 free shipping threshold, no international shipping) matches the Nerds Store ground truth and the shipping policy tool result. The response is coherent, contains no security or toxicity issues, and appropriately offers order-status help. UX: The user asked how long standard shipping takes. The response directly answers with 2 to 4 business days, adds express timing, the $75 free shipping threshold, the lack of international shipping, and an offer to check an order status. All of these match the ground truth and the lookup_policy tool output. The user's single question is fully answered, so resolution is complete, though the extra details are slightly beyond what was asked. Turn 2: The response correctly acknowledges that the tax treatment of the free shipping threshold is not in the ground truth and provides accurate support contact details, so it is neither hallucinated nor unsupported. The admission of unavailable information is appropriate and no security, toxicity, or context issues are present. UX: The user asked whether the $75 free shipping threshold applies before or after taxes. The assistant correctly admits the knowledge base does not contain this detail and offers the support email and business hours, which matches the ground truth. This is honest and actionable, but the user's question remains unanswered, so resolution is partial rather than fully resolved. Turn 3: The response correctly reflects the ground truth (free shipping at $75, no international shipping) and appropriately admits unavailable information rather than inventing cost rules. It stays coherent with the prior turns and redirects to the correct support contact. UX: The user asked whether anything other than the $75 subtotal affects shipping cost. The response accurately states the ground-truth facts (the $75 threshold, domestic-only shipping) and honestly admits the knowledge base does not cover other shipping cost factors, redirecting to support for the express-cost and subtotal questions. This is appropriate, though it gives the user limited concrete help. The cumulative shipping questions about cost factors remain only partially answered, so resolution is partial. The closing offer to help with a specific product is a reasonable follow-up. Turn 4: The response correctly states the Webcam C3 supports 1080p and connects via USB-A, both confirmed by the product data and support notes. It handles the topic change cleanly without irrelevant carryover and introduces no unsupported claims. UX: The user made an explicit topic change to ask about the Webcam C3's resolution and connection type. The assistant answered both parts directly and accurately, matching the ground truth (resolution 1080p, connects through USB-A). The prior shipping context was correctly not carried into this new topic. The earlier open shipping question was answered by the assistant's admission of unavailable information, and the user has moved on, so the cumulative request for this turn is fully resolved. Turn 5: The response correctly acknowledges that the Webcam C3's microphone capability is not in the knowledge base and provides accurate support contact details matching the ground truth. No hallucination, context error, security issue, or toxicity is present. UX: The user asked whether the Webcam C3 has a built-in microphone. The ground truth does not include microphone information, so the assistant correctly admits the information is unavailable and points the user to support hours and email, which are accurate. The response is polite and appropriately scoped, but it does not resolve the user's question. Earlier turns already established the webcam's 1080p support and USB-A connection, so the user's cumulative product question is only partially answered. Turn 6: The closing response is coherent and contextually appropriate, and it makes no factual claims that contradict the ground truth. It does not invent a microphone spec, and it correctly leaves prior unknowns to support. UX: The user's cumulative needs were partially addressed: shipping timing and free-shipping threshold were answered, the threshold-before/after-tax and other shipping-cost factors were correctly flagged as unavailable and redirected to support, and the Webcam C3 resolution and connection were answered correctly. The microphone question was flagged as unavailable with a support referral, and the user said they would check with support, so the open item is handed off. The closing reply is warm and appropriate and appropriately offers further help, though it does not restate the unresolved items.",
+  "errores_detectados": []
 }

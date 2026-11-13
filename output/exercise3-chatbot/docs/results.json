@@ -21,7 +21,7 @@
       "ci": {
         "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
         "commitHash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43347955954"
+        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43348218399"
       },
       "gitCommit": {
         "shortHash": "0fbd54a",
@@ -52,7 +52,7 @@
           "ci": {
             "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
             "commitHash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43347955954"
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43348218399"
           },
           "gitCommit": {
             "shortHash": "0fbd54a",
@@ -95,7 +95,7 @@
           "ci": {
             "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
             "commitHash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43347955954"
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43348218399"
           },
           "gitCommit": {
             "shortHash": "0fbd54a",
@@ -210,12 +210,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1146,
+                      "duration": 1253,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:52:16.023Z",
+                      "startTime": "2026-11-13T01:55:31.796Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -260,7 +260,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1685,
+                      "duration": 1575,
                       "errors": [],
                       "stdout": [
                         {
@@ -272,18 +272,18 @@
                       "steps": [
                         {
                           "title": "Establish a closed initial state",
-                          "duration": 427
+                          "duration": 294
                         },
                         {
                           "title": "Open the panel using Ask Docs",
-                          "duration": 85
+                          "duration": 108
                         },
                         {
                           "title": "Close the panel using Ask Docs",
-                          "duration": 66
+                          "duration": 104
                         }
                       ],
-                      "startTime": "2026-11-13T01:52:19.754Z",
+                      "startTime": "2026-11-13T01:55:33.573Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -342,7 +342,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:52:21.715Z",
+                      "startTime": "2026-11-13T01:55:35.451Z",
                       "annotations": [
                         {
                           "type": "skip",
@@ -380,19 +380,19 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3597,
+                      "duration": 2787,
                       "errors": [],
                       "stdout": [
                         {
                           "text": "Chatbot state: current=true, requested=true\n"
                         },
                         {
-                          "text": "CHATBOT-004 response time: 2188 ms\n"
+                          "text": "CHATBOT-004 response time: 1460 ms\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:52:21.715Z",
+                      "startTime": "2026-11-13T01:55:35.451Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -433,8 +433,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-13T01:52:15.591Z",
-    "duration": 10099.692,
+    "startTime": "2026-11-13T01:55:31.222Z",
+    "duration": 7402.727000000001,
     "expected": 3,
     "skipped": 1,
     "unexpected": 0,
