@@ -6,6 +6,8 @@ Ejecución: https://github.com/marioRodriguez6/QA-engineer-technical-test/action
 
 Commit: `f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03` · Generado: 2026-11-12T23:56:36.699Z
 
+Revisión de métricas: Tasa recalculada sin llamadas LLM a partir de los juicios originales. Esta ejecución anterior no contiene las herramientas y sondas bonus nuevas; no se les atribuyen resultados retroactivamente.
+
 ## Resumen general
 
 **20 PASS · 0 FAIL · 1 SKIPPED** en 24 unidades planificadas.
@@ -30,11 +32,13 @@ Una evaluación completada puede incluir hallazgos funcionales FAIL o REVIEW. RE
 | PASS / unidades planificadas | 83.33% |
 | Conversaciones LLM completas | 5/5 (100%) |
 | Juicios LLM disponibles | 30/30 (100%) |
-| Turnos con problemas señalados por el juez | 0/30 (0%) |
+| Turnos LLM con hallazgos (juez o bonus, incluye REVIEW) | 4/30 (13.33%) |
+| Turnos señalados por los cuatro detectores semánticos del juez | 0/30 (0%) |
+| Registros bonus con hallazgos / registros evaluables | N/A/N/A (N/A) |
 | Promedio de coherencia / contexto / utilidad | 92 / 94.03 / 70.43 sobre 100 |
 | Resolución de la necesidad del usuario | 3 resueltas · 1 parciales · 1 sin resolver · 0 no aplican · 0 desconocidas |
 
-Las unidades son los cinco escenarios LLM más los casos de API/UI, no los turnos individuales. El denominador de ejecutadas incluye PASS, FAIL, REVIEW y FLAKY; excluye los demás estados. Estas unidades heterogéneas no representan una puntuación de calidad del producto. La tasa de turnos señalados cuenta cada turno una sola vez entre señales factuales, de seguridad, toxicidad y contexto explícito; no mide la precisión del detector. N/A indica evidencia no disponible, nunca cero errores.
+Las unidades son los cinco escenarios LLM más los casos de API/UI, no los turnos individuales. El denominador de ejecutadas incluye PASS, FAIL, REVIEW y FLAKY; excluye los demás estados. Estas unidades heterogéneas no representan una puntuación de calidad del producto. La tasa global cuenta una vez cada turno con juicio válido y errores explícitos, FAIL, REVIEW, señal semántica o hallazgo bonus. La tasa de detectores se limita a alucinación, seguridad, toxicidad y contexto explícito; no mide la precisión del detector. N/A indica evidencia no disponible, nunca cero errores.
 
 ## Ejercicio 1 · Cinco escenarios conversacionales
 
@@ -544,15 +548,21 @@ Los tiempos LLM incluyen la sobrecarga del ejecutor y sus reintentos. La duraci�
 
 | Detector | Evidencia LLM | Cobertura API / chatbot |
 | --- | --- | --- |
-| Alucinaciones | 0/30 señaladas; 0 falsas, 0 sin respaldo | NOT_EVALUATED |
-| Prompt injection | 0 fallas de seguridad / 6 juicios del escenario | NOT_EVALUATED |
-| Respuestas tóxicas | 0/30 señaladas | NOT_EVALUATED |
-| Pérdida de contexto / contexto irrelevante | 0 señales explícitas / 30 juicios explícitos | NOT_EVALUATED |
-| Uso incorrecto de herramientas (tool calling) | NOT_IMPLEMENTED · 0 llamadas instrumentadas | NOT_EVALUATED |
+| Alucinaciones | 0/30 señaladas; 0 falsas, 0 sin respaldo | NOT_EVALUATED (sin registros de esta ejecución) |
+| Prompt injection | 0 fallas de seguridad / 6 juicios del escenario | NOT_EVALUATED (sin registros de esta ejecución) |
+| Respuestas tóxicas | 0/30 señaladas | NOT_EVALUATED (sin registros de esta ejecución) |
+| Pérdida de contexto / contexto irrelevante | 0 señales explícitas / 30 juicios explícitos | NOT_EVALUATED (sin registros de esta ejecución) |
+| Uso incorrecto de herramientas (tool calling) | NOT_IMPLEMENTED · 0 llamadas LLM · N/A acciones HTTP · N/A hallazgos instrumentados totales | Contrato de acciones HTTP; trazas internas de Botpress no observables |
 
-Cero señales significa que no se registraron, no que se demostró su ausencia. El conteo de prompt injection incluye el turno inicial benigno. Una puntuación de contexto menor de 100 no confirma por sí sola un defecto. No hay herramientas configuradas ni trazas de sus llamadas; esa dimensión nunca se cuenta como PASS. Se consolidan resultados de todos los ejercicios, pero la cobertura actual de los detectores semánticos procede únicamente del ejercicio LLM.
+Cero señales significa que no se registraron, no que se demostró su ausencia. El conteo de prompt injection incluye el turno inicial benigno. Una puntuación de contexto menor de 100 no confirma por sí sola un defecto. Las herramientas de consulta del LLM y las acciones HTTP se instrumentan. No se infieren herramientas internas del bot externo. Cada detector declara la cobertura realmente disponible.
+
+En API, la comparación factual corresponde al contrato y a la integridad de sus datos; no se atribuye al servicio una conversación LLM. Los controles de reglas no se incluyen en las métricas de ejecución real.
 
 Se agregan los juicios existentes sin nuevas llamadas al proveedor. Estas métricas no demuestran por sí solas la sensibilidad ni la tasa de falsos positivos del evaluador.
+
+### Controles de validación del motor bonus
+
+28 controles fijos; 0 discrepancias. Incluyen casos positivos y negativos. No son conversaciones reales ni calibración del juez LLM.
 
 ## Brechas de evidencia y seguimiento
 

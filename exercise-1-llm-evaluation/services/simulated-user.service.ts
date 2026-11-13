@@ -158,7 +158,7 @@ Rules:
           async () => {
             const result =
               await generateText({
-                model,
+              abortSignal: AbortSignal.timeout(30_000),                model,
 
                 prompt,
 
@@ -213,3 +213,4 @@ Rules:
       config.model,
   };
 }
+

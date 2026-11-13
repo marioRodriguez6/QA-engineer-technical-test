@@ -1,3 +1,4 @@
+import { detectBonus, conversationEvidence } from '../exercise-5-consolidated-report/detectors/bonus.mjs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { performance } from 'node:perf_hooks';
 
@@ -163,11 +164,14 @@ async function runScenario(
 
     const evaluatorStartedAt = performance.now();
 
+    const toolExecutionFailed = assistantResult.toolTrace?.some(t=>t.allowed && t.argumentsValid && t.executionStatus==='ERROR') ?? false;
     try {
+      if (toolExecutionFailed) throw Object.assign(new Error('Tool execution failed before the judge could evaluate the response.'), { diagnostics: { type: 'TOOL_EXECUTION_ERROR', toolTrace: assistantResult.toolTrace } });
       const result = await evaluateAssistantTurn({
         scenario,
         history: conversation,
         assistantResponse: assistantMessage,
+        toolTrace: assistantResult.toolTrace,
         turnNumber,
       });
 
@@ -191,7 +195,7 @@ async function runScenario(
 
         infrastructureFailure = {
           turn: turnNumber,
-          stage: 'evaluator',
+          stage: toolExecutionFailed ? 'assistant' : 'evaluator',
           message: getErrorSummary(error),
         };
       } else {
@@ -210,6 +214,9 @@ async function runScenario(
 
     turns.push({
       turn: turnNumber,
+      toolTrace: assistantResult.toolTrace,
+      assistantFinishReason: assistantResult.finishReason,
+      bonusAnalysis: detectBonus(conversationEvidence({ scope: "llm", id: `${scenario.id}:${turnNumber}`, history: conversation, userMessage, response: assistantMessage, toolCalls: assistantResult.toolTrace, shippingStandardDays: [2, 4] })),
       userMessage,
       assistantMessage,
 
@@ -320,5 +327,6 @@ main().catch((error: unknown) => {
 
   process.exitCode = 1;
 });
+
 
 

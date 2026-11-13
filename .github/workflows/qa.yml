@@ -43,13 +43,16 @@ jobs:
       - name: Validate evaluator schema and metrics without provider calls
         run: npm run test:evaluator
 
+      - name: Validate API bonus instrumentation locally
+        run: node --test exercise-2-api-testing/tests/api-fixture.test.mjs
+
       - name: Check CI runner syntax
         run: |
           node --check exercise-4-cicd/run-llm-ci.mjs
           node --test exercise-4-cicd/inspect-report.test.mjs exercise-4-cicd/report-paths.test.mjs
 
       - name: Test consolidated report generator
-        run: node --test exercise-5-consolidated-report/generate-report.test.mjs exercise-5-consolidated-report/publish-reports.test.mjs exercise-5-consolidated-report/publish-evidence.test.mjs
+        run: node --test exercise-5-consolidated-report/generate-report.test.mjs exercise-5-consolidated-report/publish-reports.test.mjs exercise-5-consolidated-report/publish-evidence.test.mjs exercise-5-consolidated-report/detectors/bonus.test.mjs
 
   playwright:
     name: Playwright - ${{ matrix.suite }}
@@ -280,6 +283,7 @@ jobs:
           (github.event_name != 'pull_request' ||
            github.event.pull_request.head.repo.full_name == github.repository)
         run: node exercise-5-consolidated-report/publish-reports.mjs output/reporte-consolidado "$REPORT_INPUT_DIR"
+
 
 
 

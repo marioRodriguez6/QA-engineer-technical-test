@@ -1,3 +1,5 @@
+import { homepageBonusProbes } from '../bonus-probes.js';
+import { detectBonus, conversationEvidence } from '../../../exercise-5-consolidated-report/detectors/bonus.mjs';
 import { test, expect, type Page } from '@playwright/test';
 
 const HOME_URL = 'https://botpress.com/';
@@ -84,7 +86,7 @@ test.describe('Exercise 3 - Botpress homepage chatbot', () => {
 
   test('HOME-004: Send Hola and record a new bot response and latency',
     async ({ page }, testInfo) => {
-      test.setTimeout(150_000);
+      test.setTimeout(300_000);
       await loadHomepage(page);
       await openChat(page);
 
@@ -133,6 +135,10 @@ test.describe('Exercise 3 - Botpress homepage chatbot', () => {
       const jsonPath = testInfo.outputPath('homepage-response-time.json');
       const screenshotPath = testInfo.outputPath('homepage-conversation.png');
       const { writeFile } = await import('node:fs/promises');
+      const bonusInput = conversationEvidence({scope:'chatbot-homepage',id:'HOME-004',history:[{role:'user',message:'Hola'}],userMessage:'Hola',response:evidence.assistantResponse});
+      const bonusPath=testInfo.outputPath('bonus-evidence.json');
+      await writeFile(bonusPath,JSON.stringify({scope:'chatbot-homepage',records:[{input:bonusInput,analysis:detectBonus(bonusInput)}]},null,2));
+      await testInfo.attach('Homepage bonus evidence',{path:bonusPath,contentType:'application/json'});
       await writeFile(jsonPath, JSON.stringify(evidence, null, 2), 'utf8');
       await page.screenshot({ path: screenshotPath });
       await testInfo.attach('Homepage conversation and latency', {
@@ -142,6 +148,8 @@ test.describe('Exercise 3 - Botpress homepage chatbot', () => {
         path: screenshotPath, contentType: 'image/png',
       });
       console.log(JSON.stringify(evidence));
+      await homepageBonusProbes(page,testInfo,evidence.assistantResponse);
     },
   );
 });
+

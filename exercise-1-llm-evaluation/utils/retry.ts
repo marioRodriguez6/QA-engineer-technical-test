@@ -226,6 +226,7 @@ export function isInfrastructureError(
     ).toLowerCase();
 
   const infrastructureMessages = [
+    'tool execution failed',
     'rate limit',
     'quota',
     'resource exhausted',
@@ -316,3 +317,4 @@ export async function withRetry<T>(
 
   throw lastError;
 }
+

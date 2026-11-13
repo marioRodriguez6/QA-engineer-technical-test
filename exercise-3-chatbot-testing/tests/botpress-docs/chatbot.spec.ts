@@ -1,3 +1,4 @@
+import { detectBonus, conversationEvidence } from '../../../exercise-5-consolidated-report/detectors/bonus.mjs';
 import {
   test,
   expect,
@@ -228,7 +229,7 @@ test.describe(
 
     test(
       'CHATBOT-004: Send Hola, validate response and measure latency',
-      async ({ page }) => {
+      async ({ page }, testInfo) => {
         test.setTimeout(150_000);
 
         await loadDocumentation(page);
@@ -300,6 +301,10 @@ test.describe(
           { recursive: true },
         );
 
+        const bonusInput = conversationEvidence({scope:'chatbot-docs',id:'CHATBOT-004',history:[{role:'user',message:'Hola'}],userMessage:'Hola',response:assistantResponse.join(' ')});
+        const bonusPath = testInfo.outputPath('bonus-evidence.json');
+        await writeFile(bonusPath,JSON.stringify({scope:'chatbot-docs',records:[{input:bonusInput,analysis:detectBonus(bonusInput)}]},null,2));
+        await testInfo.attach('Docs bonus evidence',{path:bonusPath,contentType:'application/json'});
         const evidence = {
           testId: 'CHATBOT-004',
           pageUrl: page.url(),
@@ -335,5 +340,6 @@ test.describe(
     );
   },
 );
+
 
 

@@ -7,10 +7,11 @@
     "test": "node exercise-4-cicd/run-playwright.mjs",
     "test:api": "playwright test exercise-2-api-testing/tests/status.spec.ts",
     "test:api:report": "playwright show-report output/exercise2API-Reports/html",
-    "test:evaluator": "node --import tsx --test exercise-1-llm-evaluation/tests/evaluator-validation.test.ts",
+    "test:evaluator": "node --import tsx --test exercise-1-llm-evaluation/tests/*.test.ts",
     "validate:evaluator": "tsx exercise-1-llm-evaluation/validate-evaluator.ts",
     "test:chatbot:docs": "playwright test exercise-3-chatbot-testing/tests/botpress-docs/",
-    "test:chatbot:homepage": "playwright test exercise-3-chatbot-testing/tests/botpress-homepage/"
+    "test:chatbot:homepage": "playwright test exercise-3-chatbot-testing/tests/botpress-homepage/",
+    "test:bonus": "node --test exercise-5-consolidated-report/detectors/bonus.test.mjs"
   },
   "keywords": [],
   "author": "",
@@ -32,4 +33,3 @@
     "zod": "^4.6.7"
   }
 }
-

@@ -63,6 +63,7 @@ export function writeSnapshots(cwd, markdown, report, publication) {
     mkdirSync(destination, { recursive: true });
     writeFileSync(join(destination, 'consolidated-report.md'), markdown);
     writeFileSync(join(destination, 'consolidated-report.json'), JSON.stringify(report, null, 2) + '\n');
+    if (report.bonus?.detectorValidation) writeFileSync(join(destination, 'detector-validation.json'), JSON.stringify(report.bonus.detectorValidation, null, 2) + '\n');
     writeFileSync(marker, JSON.stringify(publication, null, 2) + '\n');
     changed.push(folder);
   }
@@ -121,6 +122,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     attempt: Number(process.env.GITHUB_RUN_ATTEMPT),
   });
 }
+
 
 
 

@@ -46,3 +46,10 @@ test('six available judgments including a semantic REVIEW complete successfully 
   r.evaluaciones[2].evaluator_failure = { message: 'timeout' };
   assert.equal(evaluationCompleted(r, processResult(1)), false);
 });
+
+
+test('a deterministic tool-use finding is a functional FAIL with a complete original PASS judge',()=>{
+ const r=fixture();r.veredicto='FAIL';r.evaluaciones[1].bonusAnalysis={findings:[{category:'toolCalling',code:'WRONG_TOOL_SELECTION'}]};
+ assert.equal(evaluationCompleted(r,processResult(1)),true);
+ assert.equal(r.evaluaciones[1].evaluation.verdict,'PASS');
+});

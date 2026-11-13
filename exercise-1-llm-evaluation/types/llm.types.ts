@@ -24,6 +24,8 @@ export interface ConversationMessage {
 }
 
 export interface LlmGenerationResult {
+  toolTrace?: import("../../exercise-5-consolidated-report/detectors/bonus.mjs").ToolObservation[];
+  finishReason?: string;
   text: string;
 
   provider:
@@ -32,3 +34,4 @@ export interface LlmGenerationResult {
   model:
     string;
 }
+

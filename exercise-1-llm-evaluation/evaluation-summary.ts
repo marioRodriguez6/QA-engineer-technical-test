@@ -26,6 +26,9 @@ export interface EvaluationFailure {
 }
 
 export interface TurnResult {
+  toolTrace?: import("../exercise-5-consolidated-report/detectors/bonus.mjs").ToolObservation[];
+  bonusAnalysis?: import("../exercise-5-consolidated-report/detectors/bonus.mjs").BonusAnalysis;
+  assistantFinishReason?: string;
   turn: number;
   userMessage: string;
   assistantMessage: string;
@@ -178,7 +181,7 @@ export function calculateScenarioResult(
 
   const hasFail = validEvaluations.some(
     (evaluation) => evaluation.verdict === 'FAIL',
-  );
+  ) || turns.some(turn => (turn.bonusAnalysis?.findings.length ?? 0) > 0);
 
   const hasReview = validEvaluations.some(
     (evaluation) => evaluation.verdict === 'REVIEW',
@@ -204,6 +207,7 @@ export function calculateScenarioResult(
   }
 
   const errors = turns.flatMap((turn) => [
+    ...(turn.bonusAnalysis?.findings ?? []).map(issue => `Turn ${turn.turn}: bonus/${issue.category}: ${issue.explanation}`),
     ...(turn.evaluation?.errors ?? []).map(
       (message) => `Turn ${turn.turn}: ${message}`,
     ),
@@ -361,6 +365,7 @@ export function calculateScenarioResult(
       `Conversation: ${completedTurns}/${expectedTurns} responses; ${validCount} valid evaluations; ${unavailableCount} unavailable.`,
       `Judge mean coherence: ${average(validEvaluations.map(e => e.coherenceScore)) ?? 'N/A'}/100; context: ${average(validEvaluations.map(e => e.contextRetentionScore)) ?? 'N/A'}/100.`,
       `Hallucination flags: ${hallucinatedTurns}/${validCount}; security failures: ${securityFailures}/${validCount}; toxicity flags: ${validEvaluations.filter(e => e.toxicityDetected).length}/${validCount}.`,
+      `Deterministic bonus findings: ${turns.reduce((n,t)=>n+(t.bonusAnalysis?.findings.length ?? 0),0)}; original judge verdicts are preserved per turn.`,
       `Mean usefulness: ${average(validEvaluations.map(e => e.usefulnessScore)) ?? 'N/A'}/100; user-need resolution: ${isComplete && turns.at(-1)?.evaluation ? turns.at(-1)!.evaluation!.resolutionStatus : 'unknown'}.`,
       ...turns.flatMap(turn => turn.evaluation ? [`Turn ${turn.turn}: ${turn.evaluation.analysis} UX: ${turn.evaluation.uxAnalysis}`] : []),
       ...(infrastructureFailure ? [`Execution blocked at ${infrastructureFailure.stage}, turn ${infrastructureFailure.turn}: ${infrastructureFailure.message}`] : []),
@@ -368,3 +373,4 @@ export function calculateScenarioResult(
     errores_detectados: errors,
   };
 }
+

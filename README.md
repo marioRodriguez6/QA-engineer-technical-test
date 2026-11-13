@@ -467,7 +467,7 @@ Las conversaciones, justificaciones y análisis extensos se presentan en seccion
 
 Los estados `PASS`, `FAIL`, `REVIEW`, `BLOCKED`, `SKIPPED`, `FLAKY`, `MISSING` y `ERROR` son distintos. Un caso requerido omitido deja la evaluación de calidad incompleta aunque CI termine correctamente. Una evaluación ausente o inválida hace fallar la validación del reporte después de escribir los archivos, para permitir su subida como evidencia.
 
-Las métricas de calidad utilizan juicios válidos. Se separan afirmaciones falsas y sin respaldo. Una puntuación de contexto menor de 100 no demuestra por sí sola un defecto. Los detectores semánticos de API/UI figuran como `NOT_EVALUATED`; el uso incorrecto de herramientas figura como `NOT_IMPLEMENTED` porque no hay herramientas configuradas ni trazas de llamadas. Consolidar resultados no implementa detectores faltantes ni demuestra la precisión del juez.
+Las métricas de calidad utilizan juicios válidos. Se separan afirmaciones falsas y sin respaldo. Una puntuación de contexto menor de 100 no demuestra por sí sola un defecto. El motor bonus compartido declara por ejercicio la evidencia realmente disponible. El asistente dispone de herramientas instrumentadas; API audita contratos HTTP e integridad, y chatbot audita texto e historial visibles. Las herramientas internas del bot externo no son observables. Sin referencia o traza se conserva NOT_EVALUATED/NOT_APPLICABLE, sin convertirlos en PASS.
 
 La consolidación no necesita credenciales, dependencias npm externas ni nuevas llamadas a LLM.
 
@@ -591,3 +591,31 @@ Los archivos vigentes anteriores se reemplazan, incluidas eliminaciones de captu
 Las copias API que se suben a Git ocultan credenciales en JSON y trazas ZIP, incluidas cabeceras de autorización y contraseñas. Los artefactos originales de Actions permanecen intactos; el manifiesto indica qué archivos publicados difieren de su fuente. La publicación utiliza Python 3 y su biblioteca estándar de ZIP, disponibles en el ejecutor Ubuntu del workflow; no necesita instalar paquetes Python.
 
 Se utiliza un commit `[skip ci]`, push normal y controles por número de ejecución e intento para impedir que un workflow antiguo sobrescriba evidencias más recientes. Una protección de rama o un error de preparación/publicación puede impedir el commit; los artefactos se suben antes para conservar las evidencias.
+
+
+## Bonus de detección y métricas globales
+
+La tasa global de turnos LLM con hallazgos cuenta una vez cada turno con juicio válido y `errors` no vacío, `FAIL`, `REVIEW`, señal semántica o hallazgo bonus. Incluye coherencia y utilidad. Otra tasa separada cuenta únicamente los cuatro detectores semánticos originales del juez. La tasa de registros bonus usa su propio denominador y no mezcla controles sintéticos con conversaciones reales.
+
+El módulo `exercise-5-consolidated-report/detectors/` implementa reglas acotadas de hechos contra referencias explícitas, resistencia a inyección, insultos directos, contexto contra historial y uso incorrecto de herramientas. Cada hallazgo conserva código, evidencia y explicación. Los controles fijos positivos/negativos se ejecutan sin proveedores y se incluyen en el consolidado y en `detector-validation.json` de cada snapshot elegible; no calibran el juez LLM ni demuestran precisión semántica universal.
+
+### Herramientas reales del asistente
+
+`lookup_policy`, `lookup_product` y `lookup_order` consultan únicamente la base de conocimiento local. `lookup_order` deniega consultas cuyo ID no fue proporcionado por el usuario. Es una política del entorno de prueba con datos ficticios, no autenticación de clientes reales. `inspect_http_request` interpreta GET/POST/DELETE de Goal Tracker (acción, campos requeridos y autenticación); no ejecuta peticiones de red.
+
+El SDK ejecuta las herramientas solicitadas por el modelo y entrega sus resultados al paso final. Se registran nombre, argumentos, resultado, alcance y correspondencia con la referencia. El auditor detecta herramientas desconocidas, argumentos inválidos, selección contraria a una intención explícita, resultados incorrectos, resultados ausentes y alcance no autorizado. Los hallazgos bonus pueden dar FAIL al escenario sin modificar el juicio original almacenado en `evaluation`. Como cualquier FAIL funcional completo, no hacen fallar el job LLM.
+
+Las consultas iniciales de envío estándar exigen una llamada real; el modelo elige la herramienta y los argumentos. Se permite como máximo un paso de herramientas y un paso final de respuesta por intento; los reintentos técnicos existentes siguen aplicando. Esto puede añadir una petición de generación del asistente por turno con herramientas al ejecutar el pipeline; el límite por paso sigue siendo 250 tokens. Los tres roles utilizan cancelación a los 30 segundos. Ninguna calibración LLM adicional se inicia automáticamente.
+
+### API y chatbot
+
+API instrumenta sus peticiones reales y verifica método/ruta, campos, autenticación presente, código de respuesta e integridad respecto a las operaciones anteriores. Se registra `bonus-evidence.json` por caso, sin valores de contraseñas ni tokens. Estos son contratos e integridad de datos de una API tradicional, no supuestas conversaciones ni tool calls de un LLM. El texto almacenado por el usuario no se atribuye como toxicidad o cumplimiento de inyección del asistente.
+
+Docs adjunta evidencia del intercambio real de Hola. La página principal añade tres sondas al caso HOME-004: nombre de prueba, recuerdo y producto documentado, y resistencia a inyección. Conserva el historial, resultados parciales y errores técnicos en `bonus-probes.json`. Estas sondas añaden tres mensajes al chatbot externo; su tiempo forma parte de HOME-004 y no sustituye la latencia del saludo medida por separado. No se simula ni se infiere acceso al backend de Botpress. Si no hay afirmación comprobable, recuerdo explícito o trazas internas, esa dimensión queda no evaluada o para revisión.
+
+```bash
+npm run test:evaluator
+npm run test:bonus
+```
+
+Los archivos de bonus viajan en los artefactos de cada suite, se consolidan sin nuevas llamadas al proveedor y se publican con el resto de `/output`. Las evidencias anteriores sin esos campos siguen identificadas como anteriores; no se les inventan herramientas o sondas retrospectivamente.

@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { test, expect } from '@playwright/test';
+import { test, expect } from './api-fixture.js';
 
 const API_BASE_URL = (
   process.env.GOAL_TRACKER_API_URL ??
@@ -301,3 +301,4 @@ test.describe.serial('Exercise 2 - Goal Tracker API', () => {
     expect(response.status()).toBe(404);
   });
 });
+

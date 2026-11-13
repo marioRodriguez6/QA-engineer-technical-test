@@ -1,3 +1,5 @@
+import { detectBonus } from './detectors/bonus.mjs';
+import { validateDetectors } from './detectors/validation.mjs';
 import { existsSync, readdirSync, readFileSync, mkdirSync, writeFileSync, appendFileSync } from 'node:fs';
 import { resolve, join, relative, basename } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -10,6 +12,12 @@ const pct = (n, d) => d ? Number((100 * n / d).toFixed(2)) : null;
 const numeric = value => typeof value === 'number' && Number.isFinite(value);
 const cell = value => value == null ? 'N/A' : String(value).replaceAll('|', '\\|').replace(/[\r\n]+/g, ' ');
 const table = (headers, rows) => [headers, headers.map(() => '---'), ...rows].map(row => '| ' + row.map(cell).join(' | ') + ' |').join('\n');
+
+export function judgmentFindingMetrics(evaluations) {
+  const detectors = evaluations.filter(e => e.hallucinationDetected || e.hallucinationType !== 'none' || e.securityIssueDetected || e.toxicityDetected || e.contextIssueDetected === true);
+  const findings = evaluations.filter(e => (e.errors?.length ?? 0) > 0 || (e.bonusFindings ?? 0) > 0 || ['FAIL','REVIEW'].includes(e.verdict) || detectors.includes(e));
+  return { flaggedTurns: findings.length, flaggedTurnRatePercent: pct(findings.length,evaluations.length), detectorFlaggedTurns: detectors.length, detectorFlaggedTurnRatePercent: pct(detectors.length,evaluations.length) };
+}
 
 function filesUnder(root) {
   if (!existsSync(root)) return [];
@@ -30,6 +38,7 @@ export function buildReport(inputRoot, metadata = {}) {
   const sources = [];
   const units = [];
   const validTurns = [];
+  const bonusRecords = [];
   const timing = { llmAssistantMs: [], llmEvaluatorMs: [], apiTestMs: [], docsTestMs: [], homepageTestMs: [], docsResponseMs: [], homepageResponseMs: [] };
   const llmRows = [];
   const scenarioReports = [];
@@ -83,7 +92,7 @@ export function buildReport(inputRoot, metadata = {}) {
       status = states.includes(data.veredicto) ? data.veredicto : 'ERROR';
       const ordered = Array.isArray(data.turnos) && data.turnos.length === 12 && data.turnos.every((m, i) =>
         m.rol === (i % 2 ? 'asistente' : 'usuario') && typeof m.mensaje === 'string' && m.mensaje.trim());
-      const expected = evaluations.some(e => e.verdict === 'FAIL') ? 'FAIL' :
+      const expected = evaluations.some(e => e.verdict === 'FAIL') || turns.some(t => (t.bonusAnalysis?.findings?.length ?? 0) > 0) ? 'FAIL' :
         evaluations.length === 6 && evaluations.every(e => e.verdict === 'PASS') && ordered ? 'PASS' : 'REVIEW';
       const consistent = entry && entry.ciStatus === status && entry.verdict === data.veredicto &&
         (status === 'BLOCKED' ? data.execution_status === 'BLOCKED' && entry.exitCode === 2 :
@@ -95,7 +104,8 @@ export function buildReport(inputRoot, metadata = {}) {
       }
       if (Array.isArray(data.errores_detectados)) findings.push(...data.errores_detectados.map(String));
       if (data.infrastructure_failure?.message) findings.push(String(data.infrastructure_failure.message));
-      validTurns.push(...evaluations.map(e => ({ scenario: id, ...e })));
+      validTurns.push(...evaluations.map(e => ({ scenario: id, ...e, bonusFindings: turns.find(t=>t.evaluation===e)?.bonusAnalysis?.findings.length ?? 0 })));
+      for (const turn of turns) if (turn.bonusAnalysis) bonusRecords.push(turn.bonusAnalysis);
       for (const turn of turns) {
         if (!turn || typeof turn !== 'object') continue;
         if (numeric(turn.timing?.assistantResponseMs)) timing.llmAssistantMs.push(turn.timing.assistantResponseMs);
@@ -161,9 +171,25 @@ export function buildReport(inputRoot, metadata = {}) {
     const data = readOne(suite, name, false);
     if (numeric(data?.responseTimeMs)) timing[key].push(data.responseTimeMs);
   }
+  for (const suite of Object.keys(inventories)) {
+    for (const path of filesUnder(join(root, suite)).filter(p => ['bonus-evidence.json','bonus-probes.json'].includes(basename(p)))) {
+      try {
+        const evidence = JSON.parse(readFileSync(path,'utf8'));
+        for (const record of evidence.records ?? []) {
+          if (record.input?.scope !== suite) { issues.push(`${suite}: bonus scope mismatch.`); continue; }
+          bonusRecords.push(detectBonus(record.input));
+        }
+      } catch (error) { issues.push(`${suite}: invalid bonus evidence: ${error.message}`); }
+    }
+  }
   const counts = Object.fromEntries(states.map(state => [state, units.filter(unit => unit.status === state).length]));
   const executed = counts.PASS + counts.FAIL + counts.REVIEW + counts.FLAKY;
-  const qualityFlags = validTurns.filter(e => e.hallucinationDetected || e.hallucinationType !== 'none' || e.securityIssueDetected || e.toxicityDetected || e.contextIssueDetected === true);
+  const findingMetrics = judgmentFindingMetrics(validTurns);
+  const toolRecords = bonusRecords.map(r => r.categories.toolCalling).filter(Boolean);
+  const httpActions = bonusRecords.filter(r=>r.scope==='api').reduce((n,r)=>n+(r.observedToolCalls ?? 0),0);
+  const eligibleBonusRecords = bonusRecords.filter(r=>Object.values(r.categories).some(c=>['CLEAR','DETECTED'].includes(c.status)));
+  const toolCalls = scenarioReports.flatMap(s => s.turnEvaluations ?? []).flatMap(t => t.toolTrace ?? []);
+  const transverse = ['llm',...Object.keys(inventories)].map(scope => ({ scope, records: bonusRecords.filter(r=>r.scope===scope).length, categories: Object.fromEntries(['hallucination','promptInjection','toxicity','contextLoss','toolCalling'].map(c => { const entries=bonusRecords.filter(r=>r.scope===scope).map(r=>r.categories[c]).filter(Boolean); return [c,{ evaluated:entries.filter(e=>['CLEAR','DETECTED'].includes(e.status)).length,detected:entries.filter(e=>e.status==='DETECTED').length,review:entries.filter(e=>e.status==='REVIEW').length,notApplicable:entries.filter(e=>e.status==='NOT_APPLICABLE').length,unavailable:entries.filter(e=>e.status==='NOT_EVALUATED').length }]; })) }));
   const injections = validTurns.filter(e => e.scenario === 'prompt-injection');
   const scoreDeviations = validTurns.filter(e => e.contextRetentionScore < 100);
   const bonus = {
@@ -175,27 +201,30 @@ export function buildReport(inputRoot, metadata = {}) {
     toxicity: { evaluatedTurns: validTurns.length, detectedTurns: validTurns.filter(e => e.toxicityDetected).length },
     context: { materialContextFailures: validTurns.filter(e => e.contextIssueDetected === true).length, explicitDetectorCoverage: validTurns.filter(e => typeof e.contextIssueDetected === 'boolean').length, evaluatedTurns: validTurns.length, meanScore: mean(validTurns.map(e => e.contextRetentionScore)), scoreDeviations: scoreDeviations.length,
       limitation: 'Una puntuación menor de 100 es una señal de revisión, no un defecto de contexto confirmado automáticamente. Se conservan los análisis y errores del juez por turno.' },
-    toolCalling: { status: 'NOT_IMPLEMENTED', evaluatedCalls: 0, detectedErrors: null,
-      limitation: 'El asistente no tiene herramientas configuradas ni trazas de sus llamadas. Nunca se cuenta como PASS.' },
-    apiAndUi: 'NOT_EVALUATED para detección semántica de alucinaciones, inyección, toxicidad, contexto y herramientas. Las aserciones y fallas de ejecución API/UI se consolidan por separado.',
+    toolCalling: { implementation: 'AVAILABLE', status: toolRecords.some(r=>['CLEAR','DETECTED'].includes(r.status)) ? 'EVALUATED' : 'NO_TRACE', evaluatedCalls: toolCalls.length, httpActionsEvaluated: httpActions,
+      detectedErrors: toolRecords.some(r=>['CLEAR','DETECTED'].includes(r.status)) ? toolRecords.reduce((n,r)=>n+r.findings.length,0) : null, limitation: 'Se auditan trazas instrumentadas. Las llamadas HTTP de API se identifican por separado; las herramientas internas de Botpress no son observables desde la UI.' },
+    transverse, records: bonusRecords, detectorValidation: validateDetectors(),
+    apiAndUi: 'Motor compartido de reglas acotadas. API: contrato HTTP e integridad, no conversación LLM. Chatbot: texto/historial visibles y sondas; el backend cerrado no expone tool calls. Sin hechos de referencia o trazas se informa NOT_EVALUATED/NOT_APPLICABLE.',
     calibration: 'Se agregan los juicios LLM existentes sin nuevas llamadas a proveedores. Estas métricas no demuestran la sensibilidad ni la tasa de falsos positivos del detector.',
   };
   const jobs = Object.fromEntries(Object.entries(metadata.needs ?? {}).map(([name, job]) => [name, job.result]));
   const incomplete = counts.MISSING + counts.ERROR > 0 || issues.length > 0;
   const failedJobs = Object.values(jobs).some(result => ['failure', 'cancelled'].includes(result));
-  const overall = counts.FAIL || failedJobs ? 'FAIL' : incomplete || counts.BLOCKED || counts.REVIEW || counts.FLAKY || counts.SKIPPED ? 'INCOMPLETE' : 'PASS';
+  const overall = counts.FAIL || failedJobs || bonusRecords.some(r=>r.findings.length>0) ? 'FAIL' : incomplete || counts.BLOCKED || counts.REVIEW || counts.FLAKY || counts.SKIPPED || bonusRecords.some(r=>Object.values(r.categories).some(c=>c.status==='REVIEW')) ? 'INCOMPLETE' : 'PASS';
   return {
     generatedAt: new Date().toISOString(), metadata, jobs, overall,
     executionStatus: failedJobs || units.some(u => u.suite !== 'llm' && ['FAIL', 'FLAKY'].includes(u.status)) ? 'FAILED' :
       incomplete || scenarioReports.some(s => !['PASS', 'FAIL', 'REVIEW'].includes(s.status) || s.completedTurns !== 6 || s.validEvaluations !== 6 || s.turnEvaluations?.some(t => t.evaluation_status !== 'COMPLETED' || !['PASS', 'FAIL', 'REVIEW'].includes(t.evaluation?.verdict))) ? 'INCOMPLETE' : 'COMPLETED',
     evidenceComplete: !incomplete,
+    metricDefinitions: { flaggedTurnRatePercent: 'Turnos con juicio válido y errores, FAIL, REVIEW, señal semántica o hallazgo bonus / juicios válidos; un turno se cuenta una vez.', detectorFlaggedTurnRatePercent: 'Juicios válidos con señal de alucinación, seguridad, toxicidad o contexto explícito / juicios válidos.', bonusFindingRecordRatePercent: 'Registros bonus con hallazgos / registros con al menos una categoría evaluable. Controles fijos excluidos.' },
     units, counts, plannedUnits: units.length, executedUnits: executed,
     metrics: { passedPlannedPercent: pct(counts.PASS, units.length), passExecutedPercent: pct(counts.PASS, executed), failExecutedPercent: pct(counts.FAIL, executed),
       completedConversationsPercent: pct(scenarioReports.filter(s => s.completedTurns === 6).length, 5),
       llmEvaluationCoveragePercent: pct(validTurns.length, 30), meanCoherence: mean(validTurns.map(e => e.coherenceScore)),
       meanContext: mean(validTurns.map(e => e.contextRetentionScore)), meanUsefulness: mean(validTurns.map(e => e.usefulnessScore).filter(numeric)),
-      resolution: { notApplicable: scenarioReports.filter(s => s.experience?.resolutionStatus === "not_applicable").length, resolved: scenarioReports.filter(s => s.experience?.resolutionStatus === "resolved").length, partial: scenarioReports.filter(s => s.experience?.resolutionStatus === "partial").length, unresolved: scenarioReports.filter(s => s.experience?.resolutionStatus === "unresolved").length, unknown: scenarioReports.filter(s => !s.experience || s.experience.resolutionStatus === "unknown").length }, flaggedTurnRatePercent: pct(qualityFlags.length, validTurns.length),
-      flaggedTurns: qualityFlags.length, validEvaluations: validTurns.length,
+      resolution: { notApplicable: scenarioReports.filter(s => s.experience?.resolutionStatus === "not_applicable").length, resolved: scenarioReports.filter(s => s.experience?.resolutionStatus === "resolved").length, partial: scenarioReports.filter(s => s.experience?.resolutionStatus === "partial").length, unresolved: scenarioReports.filter(s => s.experience?.resolutionStatus === "unresolved").length, unknown: scenarioReports.filter(s => !s.experience || s.experience.resolutionStatus === "unknown").length }, ...findingMetrics,
+      bonusRecords: eligibleBonusRecords.length, bonusDetectedRecords: eligibleBonusRecords.filter(r=>r.findings.length>0).length, bonusFindingRecordRatePercent: pct(eligibleBonusRecords.filter(r=>r.findings.length>0).length,eligibleBonusRecords.length),
+      validEvaluations: validTurns.length,
       meanTimesMs: Object.fromEntries(Object.entries(timing).map(([key, values]) => [key, { mean: mean(values), samples: values.length }])) },
     scenarios: scenarioReports, suites, bonus, issues, sources, llmRows,
   };
@@ -210,12 +239,14 @@ export function renderMarkdown(r) {
   const value = (n, suffix = '') => n == null ? 'N/A' : `${n}${suffix}`;
   const details = (title, body) => ['<details>', `<summary>${safe(title)}</summary>`, '', ...body, '', '</details>', ''];
   const historicalCompletion = r.evidenceComplete && ['typecheck', 'playwright'].every(job => r.jobs?.[job] === 'success') && r.scenarios.length === 5 && r.scenarios.every(s => ['PASS', 'FAIL', 'REVIEW'].includes(s.status) && s.completedTurns === 6 && s.validEvaluations === 6 && s.turnEvaluations?.every(t => t.evaluation_status === 'COMPLETED' && ['PASS', 'FAIL', 'REVIEW'].includes(t.evaluation?.verdict)));
+  const coverage = category => { if (!(r.bonus.transverse ?? []).some(s=>s.scope!=='llm' && s.records>0)) return 'NOT_EVALUATED (sin registros de esta ejecución)'; const c=(r.bonus.transverse ?? []).filter(s=>s.scope!=='llm').map(s=>s.categories[category]).filter(Boolean); return c.length ? `${c.reduce((n,e)=>n+e.evaluated,0)} registros evaluados · ${c.reduce((n,e)=>n+e.detected,0)} detectados · ${c.reduce((n,e)=>n+e.review,0)} REVIEW` : 'Sin evidencia de reglas transversales en esta ejecución'; };
   const execution = r.executionStatus ?? (historicalCompletion ? 'COMPLETED' : 'UNKNOWN (reporte histórico)');
   const lines = [
     '# Reporte consolidado de QA', '',
     `**Ejecución de la evaluación: ${execution}** · **Calidad observada: ${r.overall}**`, '',
     `Ejecución: ${r.metadata.runUrl ?? 'Entrada local'} · Intento: ${r.metadata.attempt ?? 'N/A'}`, '',
     `Commit: \`${r.metadata.commit ?? 'No suministrado'}\` · Generado: ${r.generatedAt}`, '',
+    ...(r.metricRevision ? [`Revisión de métricas: ${r.metricRevision.note}`, ''] : []),
     '## Resumen general', '',
     `**${r.counts.PASS} PASS · ${r.counts.FAIL} FAIL · ${r.counts.SKIPPED} SKIPPED** en ${r.plannedUnits} unidades planificadas.`, '',
     `${r.counts.BLOCKED} bloqueadas, ${r.counts.REVIEW} para revisión, ${r.counts.FLAKY} inestables, ${r.counts.MISSING} ausentes y ${r.counts.ERROR} inválidas/con error.`, '',
@@ -230,11 +261,13 @@ export function renderMarkdown(r) {
       ['PASS / unidades planificadas', value(m.passedPlannedPercent, '%')],
       ['Conversaciones LLM completas', `${r.scenarios.filter(s => s.completedTurns === 6).length}/5 (${value(m.completedConversationsPercent, '%')})`],
       ['Juicios LLM disponibles', `${m.validEvaluations}/30 (${value(m.llmEvaluationCoveragePercent, '%')})`],
-      ['Turnos con problemas señalados por el juez', `${m.flaggedTurns}/${m.validEvaluations} (${value(m.flaggedTurnRatePercent, '%')})`],
+      ['Turnos LLM con hallazgos (juez o bonus, incluye REVIEW)', `${m.flaggedTurns}/${m.validEvaluations} (${value(m.flaggedTurnRatePercent, '%')})`],
+      ['Turnos señalados por los cuatro detectores semánticos del juez', `${m.detectorFlaggedTurns ?? 'N/A'}/${m.validEvaluations} (${value(m.detectorFlaggedTurnRatePercent, '%')})`],
+      ['Registros bonus con hallazgos / registros evaluables', `${m.bonusDetectedRecords ?? 'N/A'}/${m.bonusRecords ?? 'N/A'} (${value(m.bonusFindingRecordRatePercent, '%')})`],
       ['Promedio de coherencia / contexto / utilidad', `${value(m.meanCoherence)} / ${value(m.meanContext)} / ${value(m.meanUsefulness)} sobre 100`],
       ['Resolución de la necesidad del usuario', `${m.resolution.resolved} resueltas · ${m.resolution.partial} parciales · ${m.resolution.unresolved} sin resolver · ${m.resolution.notApplicable} no aplican · ${m.resolution.unknown} desconocidas`],
     ]), '',
-    'Las unidades son los cinco escenarios LLM más los casos de API/UI, no los turnos individuales. El denominador de ejecutadas incluye PASS, FAIL, REVIEW y FLAKY; excluye los demás estados. Estas unidades heterogéneas no representan una puntuación de calidad del producto. La tasa de turnos señalados cuenta cada turno una sola vez entre señales factuales, de seguridad, toxicidad y contexto explícito; no mide la precisión del detector. N/A indica evidencia no disponible, nunca cero errores.', '',
+    'Las unidades son los cinco escenarios LLM más los casos de API/UI, no los turnos individuales. El denominador de ejecutadas incluye PASS, FAIL, REVIEW y FLAKY; excluye los demás estados. Estas unidades heterogéneas no representan una puntuación de calidad del producto. La tasa global cuenta una vez cada turno con juicio válido y errores explícitos, FAIL, REVIEW, señal semántica o hallazgo bonus. La tasa de detectores se limita a alucinación, seguridad, toxicidad y contexto explícito; no mide la precisión del detector. N/A indica evidencia no disponible, nunca cero errores.', '',
     '## Ejercicio 1 · Cinco escenarios conversacionales', '',
     table(['Escenario', 'Veredicto', 'Coherencia /100', 'Señales de alucinación', 'Seguridad %', 'Completitud'], r.scenarios.map(s => {
       const valid = (s.turnEvaluations ?? []).filter(t => t.evaluation_status === 'COMPLETED' && t.evaluation);
@@ -277,14 +310,18 @@ export function renderMarkdown(r) {
     'Los tiempos LLM incluyen la sobrecarga del ejecutor y sus reintentos. La duración de una prueba no equivale a la latencia del endpoint. La latencia del chatbot mide el primer texto visible, no la respuesta completa. No se combinan mediciones de distinta naturaleza.', '',
     '## Detección automática · Cobertura entre ejercicios', '',
     table(['Detector', 'Evidencia LLM', 'Cobertura API / chatbot'], [
-      ['Alucinaciones', `${r.bonus.hallucinations.detectedTurns}/${m.validEvaluations} señaladas; ${r.bonus.hallucinations.demonstrablyFalse} falsas, ${r.bonus.hallucinations.unsupported} sin respaldo`, 'NOT_EVALUATED'],
-      ['Prompt injection', `${r.bonus.promptInjection.securityFailures} fallas de seguridad / ${r.bonus.promptInjection.evaluatedScenarioTurns} juicios del escenario`, 'NOT_EVALUATED'],
-      ['Respuestas tóxicas', `${r.bonus.toxicity.detectedTurns}/${m.validEvaluations} señaladas`, 'NOT_EVALUATED'],
-      ['Pérdida de contexto / contexto irrelevante', `${r.bonus.context.materialContextFailures} señales explícitas / ${r.bonus.context.explicitDetectorCoverage} juicios explícitos`, 'NOT_EVALUATED'],
-      ['Uso incorrecto de herramientas (tool calling)', 'NOT_IMPLEMENTED · 0 llamadas instrumentadas', 'NOT_EVALUATED'],
+      ['Alucinaciones', `${r.bonus.hallucinations.detectedTurns}/${m.validEvaluations} señaladas; ${r.bonus.hallucinations.demonstrablyFalse} falsas, ${r.bonus.hallucinations.unsupported} sin respaldo`, coverage('hallucination')],
+      ['Prompt injection', `${r.bonus.promptInjection.securityFailures} fallas de seguridad / ${r.bonus.promptInjection.evaluatedScenarioTurns} juicios del escenario`, coverage('promptInjection')],
+      ['Respuestas tóxicas', `${r.bonus.toxicity.detectedTurns}/${m.validEvaluations} señaladas`, coverage('toxicity')],
+      ['Pérdida de contexto / contexto irrelevante', `${r.bonus.context.materialContextFailures} señales explícitas / ${r.bonus.context.explicitDetectorCoverage} juicios explícitos`, coverage('contextLoss')],
+      ['Uso incorrecto de herramientas (tool calling)', `${r.bonus.toolCalling.status} · ${r.bonus.toolCalling.evaluatedCalls} llamadas LLM · ${r.bonus.toolCalling.httpActionsEvaluated ?? 'N/A'} acciones HTTP · ${r.bonus.toolCalling.detectedErrors ?? 'N/A'} hallazgos instrumentados totales`, 'Contrato de acciones HTTP; trazas internas de Botpress no observables'],
     ]), '',
-    'Cero señales significa que no se registraron, no que se demostró su ausencia. El conteo de prompt injection incluye el turno inicial benigno. Una puntuación de contexto menor de 100 no confirma por sí sola un defecto. No hay herramientas configuradas ni trazas de sus llamadas; esa dimensión nunca se cuenta como PASS. Se consolidan resultados de todos los ejercicios, pero la cobertura actual de los detectores semánticos procede únicamente del ejercicio LLM.', '',
+    'Cero señales significa que no se registraron, no que se demostró su ausencia. El conteo de prompt injection incluye el turno inicial benigno. Una puntuación de contexto menor de 100 no confirma por sí sola un defecto. Las herramientas de consulta del LLM y las acciones HTTP se instrumentan. No se infieren herramientas internas del bot externo. Cada detector declara la cobertura realmente disponible.', '',
+    'En API, la comparación factual corresponde al contrato y a la integridad de sus datos; no se atribuye al servicio una conversación LLM. Los controles de reglas no se incluyen en las métricas de ejecución real.', '',
     'Se agregan los juicios existentes sin nuevas llamadas al proveedor. Estas métricas no demuestran por sí solas la sensibilidad ni la tasa de falsos positivos del evaluador.', '',
+    ...(r.bonus.transverse ? ['### Cobertura de reglas acotadas por ejercicio', '', table(['Ámbito','Registros','Detector','Evaluados','Detectados','REVIEW','No aplica','Sin referencia/traza'],r.bonus.transverse.flatMap(s=>Object.entries(s.categories).map(([name,c])=>[s.scope,s.records,name,c.evaluated,c.detected,c.review,c.notApplicable,c.unavailable]))), ''] : []),
+    ...(r.bonus.detectorValidation ? ['### Controles de validación del motor bonus', '', `${r.bonus.detectorValidation.cases} controles fijos; ${r.bonus.detectorValidation.mismatches} discrepancias. Incluyen casos positivos y negativos. No son conversaciones reales ni calibración del juez LLM.`, ''] : []),
+    ...((r.bonus.records ?? []).some(record=>record.findings?.length) ? details('Evidencia de los hallazgos bonus', (r.bonus.records ?? []).flatMap(record=>(record.findings ?? []).map(f=>`- **${safe(record.scope)}/${safe(record.id)} · ${safe(f.category)} · ${safe(f.code)}:** ${safe(f.explanation)} Evidencia: ${safe(JSON.stringify(f.evidence))}`))) : []),
     '## Brechas de evidencia y seguimiento', '',
     ...(r.issues.length ? ['**Incidencias de ejecución (mensajes originales del código):**', ''] : []),
     ...r.issues.map(issue => `- ${safe(issue)}`),
@@ -322,5 +359,6 @@ export function main() {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) main();
+
 
 

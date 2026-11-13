@@ -61,7 +61,7 @@ export function inspectReport(report, execution) {
   }
 
   const hasFail = evaluations.some(
-    (turn) => turn.evaluation?.verdict === 'FAIL',
+    (turn) => turn.evaluation?.verdict === 'FAIL' || (turn.bonusAnalysis?.findings?.length ?? 0) > 0,
   );
 
   const allPass = evaluations.every(
@@ -103,4 +103,5 @@ export function evaluationCompleted(report, execution) {
     turn.evaluation_status === 'COMPLETED' && turn.evaluator_failure === null &&
     ['PASS', 'FAIL', 'REVIEW'].includes(turn.evaluation?.verdict));
 }
+
 

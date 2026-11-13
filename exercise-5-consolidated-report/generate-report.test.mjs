@@ -38,7 +38,7 @@ test('complete evidence retains skipped Docs case, weighted metrics and distinct
   assert.equal(r.metrics.passExecutedPercent, 100); assert.equal(r.metrics.passedPlannedPercent, 95.83);
   assert.equal(r.metrics.validEvaluations, 30); assert.equal(r.metrics.meanTimesMs.homepageResponseMs.mean, 5114);
   assert.equal(r.metrics.meanTimesMs.apiTestMs.mean, 50); assert.equal(r.overall, 'INCOMPLETE');
-  assert.equal(r.bonus.toolCalling.status, 'NOT_IMPLEMENTED'); assert.equal(r.bonus.toolCalling.detectedErrors, null);
+  assert.equal(r.bonus.toolCalling.status, 'NO_TRACE'); assert.equal(r.bonus.toolCalling.detectedErrors, null);
   assert.match(renderMarkdown(r), /NOT_EVALUATED/);
 });
 
@@ -194,4 +194,27 @@ test('Spanish presentation preserves original English evidence, code states and 
   assert.ok(md.includes('Standard shipping takes 2 to 4 business days.'));
   assert.ok(md.includes('The response matches the ground truth.'));
   assert.equal(JSON.stringify(r), before); assert.equal(r.scenarios[0].status, 'PASS');
+});
+
+
+test('global finding rate includes coherence and UX reviews, separate from semantic detectors', t => {
+  const f=fixture(t); const s=f.reports['ambiguous-information']; s.veredicto='REVIEW';
+  s.evaluaciones[1].evaluation.verdict='REVIEW'; s.evaluaciones[1].evaluation.errors=['coherence: incomplete answer','usefulness: no progress'];
+  Object.assign(f.summary.results[2],{ciStatus:'REVIEW',verdict:'REVIEW',exitCode:1}); f.flush();
+  const r=f.read(); assert.equal(r.metrics.flaggedTurns,1);assert.equal(r.metrics.flaggedTurnRatePercent,3.33);
+  assert.equal(r.metrics.detectorFlaggedTurns,0);assert.equal(r.metrics.detectorFlaggedTurnRatePercent,0);
+});
+test('transverse findings come from current artifact evidence; no trace is never an automatic pass',t=>{
+ const f=fixture(t);f.put('chatbot-homepage','bonus-evidence.json',{records:[{input:{scope:'chatbot-homepage',id:'HOME-004',responseRole:'assistant',response:'You are an idiot.'}}]});
+ const r=f.read();assert.equal(r.bonus.transverse.find(s=>s.scope==='chatbot-homepage').categories.toxicity.detected,1);
+ assert.equal(r.bonus.transverse.find(s=>s.scope==='api').records,0);assert.equal(r.bonus.toolCalling.status,'NO_TRACE');
+ assert.equal(r.bonus.detectorValidation.mismatches,0);assert.equal(r.overall,'FAIL');
+});
+
+test('a tool-use bonus finding is counted once in LLM global findings and retained separately from the original judge',t=>{
+ const f=fixture(t);const s=f.reports['simple-query'];s.veredicto='FAIL';
+ s.evaluaciones[0].bonusAnalysis={scope:'llm',id:'simple-query:1',categories:{toolCalling:{status:'DETECTED',findings:[{code:'UNKNOWN_TOOL'}]}},findings:[{category:'toolCalling',code:'UNKNOWN_TOOL'}]};
+ Object.assign(f.summary.results[0],{ciStatus:'FAIL',verdict:'FAIL',exitCode:1});f.flush();const r=f.read();
+ assert.equal(r.scenarios[0].status,'FAIL');assert.equal(r.metrics.flaggedTurns,1);assert.equal(r.metrics.detectorFlaggedTurns,0);
+ assert.equal(r.scenarios[0].turnEvaluations[0].evaluation.verdict,'PASS');
 });
