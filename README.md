@@ -1,105 +1,81 @@
 # Prueba técnica QA Engineer — NerdsAi
 
-Evaluación técnica de agentes conversacionales, pruebas de API y de interfaz de chatbot, CI/CD y generación de un reporte consolidado.
+Evaluación de agentes conversacionales, pruebas de API y chatbot web, CI/CD y reporte consolidado de resultados.
 
-## Estructura del proyecto
+El Ejercicio 1 admite **OpenAI, Anthropic, Groq, Gemini y Ollama**. Cada uno de sus tres roles puede usar un proveedor y modelo diferentes. Groq es la configuración de ejemplo de `.env.example` y el valor predeterminado del workflow actual; puedes cambiarlo siguiendo las instrucciones de ejecución local o CI.
 
-| Ruta | Propósito |
+## Estructura y entregables
+
+| Ruta | Contenido |
 | --- | --- |
-| `exercise-1-llm-evaluation/` | Evaluación conversacional con distintos proveedores de LLM |
-| `exercise-2-api-testing/` | Pruebas automatizadas de Goal Tracker API |
-| `exercise-3-chatbot-testing/` | Pruebas de los chatbots de Botpress Docs y de la página principal |
-| `exercise-4-cicd/` | Ejecutor de CI para los cinco escenarios de LLM |
-| `exercise-5-consolidated-report/` | Generador, pruebas y reportes consolidados conservados |
-| `.github/workflows/qa.yml` | Workflow de GitHub Actions |
-| `output/` | Entregables y evidencias agrupados por ejercicio, según el PDF |
+| `exercise-1-llm-evaluation/` | Escenarios, usuario simulado, asistente, juez y validación del evaluador |
+| `exercise-2-api-testing/` | Pruebas de Goal Tracker API |
+| `exercise-3-chatbot-testing/` | Pruebas de Botpress Docs y de la página principal |
+| `exercise-4-cicd/` | Ejecutores y validaciones de CI |
+| `exercise-5-consolidated-report/` | Generador del consolidado, detectores y publicación de evidencias |
+| `.github/workflows/qa.yml` | Pipeline de GitHub Actions |
+| `output/exercise1-JSON/` | Cinco JSON de escenarios; `ci/` contiene reportes, logs y resumen del ejecutor |
+| `output/exercise2API-Reports/` | Resultados y evidencias de API |
+| `output/exercise3-chatbot/` | Resultados de `docs/` y `homepage/`, capturas, videos, trazas y latencias |
+| `output/reporte-consolidado/` | Reportes JSON y Markdown en `lastRun/` y `LastSuccesfulrun/` |
+| `output/evidence-manifest.json` | Ejecución, commit, estado por suite y hashes de evidencias publicadas |
 
-Ejecuta todos los comandos desde la raíz del repositorio. Los ejemplos utilizan Bash en Linux o Ubuntu WSL. Los nombres de archivos, variables, comandos, campos JSON y estados del código se conservan en inglés.
-
-## Requisitos
-
-- Node.js 22 y npm.
-- Acceso a Internet para instalar dependencias y consultar los servicios externos.
-- Chromium instalado mediante Playwright para las pruebas de chatbot.
-- Credenciales y cuota suficiente de los proveedores elegidos para los escenarios de LLM.
-- Al utilizar Ollama, un servidor accesible con los modelos seleccionados instalados.
-
-Las pruebas de API y chatbot no requieren credenciales de proveedores de LLM.
+Ejecuta los comandos desde la raíz del repositorio. Los ejemplos utilizan Bash en Linux o Ubuntu WSL. La documentación está en español; comandos, variables, campos JSON y citas originales conservan su idioma.
 
 ## Instalación
 
-Clona el repositorio e instala las versiones fijadas de las dependencias:
+Requisitos: Node.js 22, npm y acceso a Internet. Las pruebas de navegador necesitan Chromium; el Ejercicio 1 requiere credenciales y cuota del proveedor seleccionado, o un servidor Ollama accesible con los modelos instalados.
 
 ```bash
 git clone https://github.com/marioRodriguez6/QA-engineer-technical-test.git
 cd QA-engineer-technical-test
 npm ci
-```
-
-Instala Chromium y sus dependencias del sistema:
-
-```bash
 npx playwright install --with-deps chromium
 ```
 
-Valida TypeScript y la sintaxis del ejecutor de CI:
+API y chatbot no requieren claves de proveedores LLM. Sus pruebas consultan servicios externos reales.
 
-```bash
-npx tsc --noEmit
-node --check exercise-4-cicd/run-llm-ci.mjs
-```
+## Ejercicio 1 — Evaluación conversacional
 
-## Ejercicio 1 — Evaluación conversacional de LLM
+El usuario simulado genera mensajes según el escenario y el historial; el asistente responde con la base de conocimiento de Nerds Store; el juez analiza cada respuesta con el historial acumulado. Algunos mensajes son fijos para asegurar que se prueben cambios de tema, memoria e intentos de manipulación.
 
-El ejercicio separa tres roles:
+Cada escenario tiene seis intercambios de usuario/asistente y una evaluación automática final obtenida de los juicios registrados. Los JSON incluyen conversación, evaluaciones, errores explícitos, métricas, tiempos y proveedor/modelo por rol.
 
-- **Usuario simulado (`Simulated User`):** genera los mensajes del escenario.
-- **Asistente (`Assistant`):** responde utilizando la base de conocimiento de Nerds Store.
-- **Evaluador (`Evaluator`):** analiza cada respuesta del asistente con el historial completo.
+### Proveedores y variables locales
 
-Cada rol puede utilizar OpenAI, Anthropic, Groq, Gemini u Ollama de forma independiente mediante la fábrica de proveedores.
-
-### Configuración del entorno
-
-Para la primera configuración, copia la plantilla:
+Copia la plantilla la primera vez; si ya tienes `.env`, edítalo sin sobrescribirlo:
 
 ```bash
 cp .env.example .env
 ```
 
-Si ya existe `.env`, edítalo sin sobrescribirlo. Configura los tres roles con esta estructura; sustituye `LLM-Preferido` por un proveedor admitido y `Modelo-Preferido` por un identificador válido. `.env.example` contiene un ejemplo concreto:
+Configura los seis valores `SIMULATED_USER_PROVIDER`, `SIMULATED_USER_MODEL`, `ASSISTANT_PROVIDER`, `ASSISTANT_MODEL`, `EVALUATOR_PROVIDER` y `EVALUATOR_MODEL`. Los modelos deben ser compatibles con el adaptador, estar disponibles en tu cuenta y admitir las funciones utilizadas, incluido tool calling para el asistente.
 
-```dotenv
-SIMULATED_USER_PROVIDER='LLM-Preferido'
-SIMULATED_USER_MODEL='Modelo-Preferido'
-
-ASSISTANT_PROVIDER='LLM-Preferido'
-ASSISTANT_MODEL='Modelo-Preferido'
-
-EVALUATOR_PROVIDER='LLM-Preferido'
-EVALUATOR_MODEL='Modelo-Preferido'
-
-GROQ_API_KEY=
-OPENAI_API_KEY=
-ANTHROPIC_API_KEY=
-GEMINI_API_KEY=
-
-OLLAMA_BASE_URL=http://localhost:11434/api
-```
-
-Agrega credenciales únicamente para los proveedores seleccionados:
-
-| Valor del proveedor | Configuración necesaria |
+| Valor de proveedor | Variable de clave / secret de Actions |
 | --- | --- |
 | `openai` | `OPENAI_API_KEY` |
 | `anthropic` | `ANTHROPIC_API_KEY` |
 | `groq` | `GROQ_API_KEY` |
 | `gemini` | `GEMINI_API_KEY` |
-| `ollama` | Servidor accesible y modelos instalados |
+| `ollama` | Sin clave en este adaptador; configura `OLLAMA_BASE_URL` (predeterminado: `http://localhost:11434/api`) |
 
-Configura los tres pares de proveedor/modelo. Los identificadores de modelo deben estar disponibles para el proveedor y la cuenta utilizados. No subas `.env` ni claves de API al repositorio.
+Ejemplo de los tres roles en Anthropic, con el modelo configurado también en el workflow:
 
-### Ejecutar un escenario individual
+```dotenv
+SIMULATED_USER_PROVIDER=anthropic
+SIMULATED_USER_MODEL=claude-haiku-5-5
+ASSISTANT_PROVIDER=anthropic
+ASSISTANT_MODEL=claude-haiku-5-5
+EVALUATOR_PROVIDER=anthropic
+EVALUATOR_MODEL=claude-haiku-5-5
+ANTHROPIC_API_KEY=your_private_key
+```
+
+Para combinar proveedores, cambia el par de variables del rol correspondiente y agrega su clave. Por ejemplo, puedes conservar usuario/asistente en Anthropic y configurar el juez con `EVALUATOR_PROVIDER=groq`, `EVALUATOR_MODEL=openai/gpt-oss-20b` y `GROQ_API_KEY`.
+
+Solo se utilizan las claves de los proveedores seleccionados. Los roles que comparten proveedor comparten la cuota de esa cuenta. No hay cambio automático a otro proveedor si se agota. No publiques `.env` ni claves reales. Un proveedor fuera de los cinco admitidos requiere implementar su adaptador.
+
+### Ejecución
 
 | Escenario | Identificador |
 | --- | --- |
@@ -109,334 +85,147 @@ Configura los tres pares de proveedor/modelo. Los identificadores de modelo debe
 | Memoria conversacional | `conversational-memory` |
 | Seguridad y prompt injection | `prompt-injection` |
 
-Utiliza el identificador correspondiente:
+Para un escenario, sustituye el identificador del ejemplo:
 
 ```bash
 npx tsx exercise-1-llm-evaluation/runner.ts simple-query
-npx tsx exercise-1-llm-evaluation/runner.ts topic-change
-npx tsx exercise-1-llm-evaluation/runner.ts ambiguous-information
-npx tsx exercise-1-llm-evaluation/runner.ts conversational-memory
-npx tsx exercise-1-llm-evaluation/runner.ts prompt-injection
 ```
 
-Cada escenario busca completar seis intercambios de usuario y asistente, conservando el historial. Su reporte se guarda en:
-
-```text
-output/exercise1-JSON/<scenario-id>.json
-```
-
-Volver a ejecutar un escenario reemplaza su reporte en esa ruta. Conserva copias de las evidencias anteriores si necesitas comparar ejecuciones.
-
-### Ejecutar los cinco escenarios
+Para los cinco escenarios, ejecutados secuencialmente:
 
 ```bash
 node exercise-4-cicd/run-llm-ci.mjs
 ```
 
-Los escenarios se ejecutan secuencialmente. Los reportes, registros y resumen quedan en `output/exercise1-JSON/ci/`; el resumen es `output/exercise1-JSON/ci/execution-summary.json`.
+El ejecutor individual escribe `output/exercise1-JSON/<scenario-id>.json`. El ejecutor de los cinco conserva además los JSON, logs y `execution-summary.json` en `output/exercise1-JSON/ci/`. Elimina el reporte previo de cada escenario antes de ejecutarlo para evitar reutilizar evidencia antigua.
 
-Antes de cada escenario, el ejecutor elimina el reporte previo para evitar aceptar resultados antiguos.
+### Estados y métricas
 
-### Interpretación de resultados
-
-| Estado del código | Significado |
+| Estado | Significado |
 | --- | --- |
-| `PASS` | Todas las evaluaciones esperadas aprobaron |
-| `FAIL` | Al menos una evaluación detectó un problema funcional |
-| `REVIEW` | No hubo un FAIL, pero existe un juicio que requiere revisión o falta una evaluación |
-| `BLOCKED` | Un error del proveedor o de infraestructura impidió completar el escenario |
+| `PASS` | Las evaluaciones esperadas no detectaron problemas materiales |
+| `FAIL` | Se registró un hallazgo funcional del juez o de las reglas bonus |
+| `REVIEW` | Un juicio requiere revisión o falta una evaluación; consulta la evidencia para distinguir ambos casos |
+| `BLOCKED` | Un error de proveedor o infraestructura impidió completar el escenario |
 
-Un `FAIL` funcional no detiene los turnos restantes. Una salida inválida del evaluador se registra como evaluación no disponible; los errores reconocidos de infraestructura pueden detener el escenario con `BLOCKED`.
+El proceso individual devuelve `0` para PASS, `1` para FAIL/REVIEW o un error inesperado y `2` para BLOCKED. El ejecutor conjunto devuelve `0` cuando los cinco escenarios tienen seis intercambios y seis juicios válidos disponibles, incluidos FAIL o REVIEW funcionales. Las respuestas o evaluaciones ausentes/inválidas y los bloqueos técnicos hacen fallar ese ejecutor.
 
-El ejecutor individual devuelve:
+Un FAIL funcional permite continuar los turnos y conserva el hallazgo. Cuota agotada, autenticación y timeout se documentan como errores técnicos. Las clasificaciones del juez pueden ser discutibles: contrástalas con la evidencia antes de tratarlas como defectos confirmados.
 
-- `0` para `PASS`.
-- `1` para `FAIL`, `REVIEW` o un error inesperado de ejecución.
-- `2` para `BLOCKED`.
-
-El ejecutor de los cinco escenarios distingue esos veredictos de la finalización técnica:
-
-| Situación | Resultado del job LLM |
+| Campo | Interpretación |
 | --- | --- |
-| Cinco escenarios con seis intercambios y seis juicios disponibles cada uno, sean `PASS`, `FAIL` o `REVIEW` | Exitoso, código `0` |
-| Cuota agotada, autenticación, timeout, respuestas o evaluaciones ausentes/inválidas, o errores de ejecución | Fallido, código `1` |
+| `coherence_score`, `context_retention` | Promedio de puntuaciones del juez sobre 100 |
+| `hallucination_rate` | Respuestas señaladas como alucinación, falsas o sin respaldo / juicios válidos |
+| `demonstrably_false_rate`, `unsupported_rate` | Proporciones clasificadas por el juez como falsas o sin respaldo |
+| `security_score` | Juicios válidos sin falla de seguridad; incluye turnos benignos |
+| `completed_conversation_rate` | 100 si se generaron seis respuestas, 0 si no se completaron |
+| `evaluation_coverage_rate` | Juicios válidos / respuestas generadas |
+| `usefulness_score` | Promedio de utilidad asignada por el juez |
 
-También se valida la consistencia entre reportes, veredictos y códigos de salida de los procesos individuales. Un `REVIEW` disponible es parte del flujo; un `REVIEW` causado por una evaluación ausente es una ejecución incompleta. Los veredictos originales nunca se convierten en PASS para conseguir un workflow verde. Las fallas de TypeScript, API o chatbot siguen haciendo fallar sus propios jobs.
+Cada juicio también registra necesidad y pertinencia de aclaraciones, error material de contexto y resolución acumulada (`resolved`, `partial`, `unresolved`, `not_applicable`). La resolución final considera el historial de los seis intercambios; `partial` es un resultado evaluado. Si falta el juicio final o la conversación está incompleta, queda `unknown`. Sin juicios válidos, las métricas de calidad son `null`.
 
-### Limitaciones de los proveedores
+### Validación del evaluador
 
-La ejecución depende de la disponibilidad del servicio, el acceso al modelo y la cuota de la cuenta. Un límite de peticiones o una cuota diaria agotada es un bloqueo técnico, no evidencia de mala calidad del asistente.
-
-Aumentar `maxOutputTokens` no recupera una cuota agotada. Revisa el error registrado antes de reintentar. Las respuestas y juicios pueden variar entre ejecuciones; contrasta los hallazgos con la base de conocimiento antes de considerarlos defectos confirmados.
-
-### Validación del evaluador y definición de métricas
-
-Los cinco escenarios reales de seis intercambios constituyen el ejercicio principal. Cada juicio nuevo registra utilidad de 0 a 100, necesidad y pertinencia de aclaraciones, una bandera explícita de error material de contexto, resolución acumulada de la necesidad del usuario (`resolved`, `partial`, `unresolved`, `not_applicable`) y una explicación de experiencia de usuario basada en evidencias.
-
-La síntesis final utiliza los juicios existentes con referencias a los turnos; no hace otra llamada al proveedor. Completar seis intercambios no significa resolver la necesidad del usuario. Si falta el juicio final o la ejecución está incompleta, la resolución queda como desconocida.
-
-| Campo del código | Definición |
-| --- | --- |
-| `hallucination_rate` | Respuestas señaladas por el juez o clasificadas como falsas/sin respaldo, divididas entre los juicios válidos |
-| `demonstrably_false_rate` | Respuestas que el juez clasifica como contradictorias con la base de conocimiento |
-| `unsupported_rate` | Respuestas con afirmaciones que el juez considera sin respaldo |
-| `security_score` | Porcentaje de juicios válidos sin una falla de seguridad; incluye turnos benignos |
-
-Sin evaluaciones válidas, las métricas de calidad son `null`. Los reportes históricos conservan sus definiciones y los campos de experiencia de usuario ausentes permanecen desconocidos.
-
-Ejecuta las pruebas deterministas de esquema, agregación y comparación de referencias, sin consumir tokens:
+Pruebas locales de esquema, métricas, referencias y herramientas, sin llamadas externas:
 
 ```bash
 npm run test:evaluator
 ```
 
-Ejecuta la calibración real del juez por separado cuando dispongas de credenciales y cuota:
+Validación real del juez contra diez casos con expectativas fijas:
 
 ```bash
 npm run validate:evaluator
 ```
 
-Este último comando consume tokens del evaluador. Utiliza diez casos fijos, con controles positivos y negativos de exactitud factual, memoria, seguridad y toxicidad. Las expectativas y justificaciones se definen antes de ejecutar en `exercise-1-llm-evaluation/tests/evaluator-cases.ts`. Estos casos validan al evaluador; no reemplazan las conversaciones reales ni exigen puntuaciones numéricas exactas.
+El segundo comando consume tokens del evaluador configurado. Escribe `validation-results.json` y `.md` en `output/exercise1-JSON/evaluator-validation/`, con discrepancias y conteos TP/TN/FP/FN. Se calculan FP/(FP+TN) y FN/(FN+TP); sin muestras válidas se usa `null`. Las expectativas se conservan y los bloqueos quedan registrados. Este conjunto pequeño no demuestra precisión universal.
 
-Los resultados quedan en `output/exercise1-JSON/evaluator-validation/validation-results.json` y `.md`. Conservan resultados esperados/observados, discrepancias, cobertura y conteos TP/TN/FP/FN por categoría. La tasa de falsos positivos es FP/(FP+TN) y la de falsos negativos FN/(FN+TP); sin muestras válidas se utiliza `null`. Un bloqueo del proveedor detiene las llamadas restantes y registra `NOT_RUN`, separado de una falla del detector. Este conjunto pequeño no demuestra sensibilidad o especificidad universales.
+CI ejecuta las pruebas locales de validación y, en otro job, las conversaciones reales del Ejercicio 1. La validación real contra referencias se inicia por separado.
 
-CI ejecuta automáticamente solo las pruebas sin llamadas al proveedor. La calibración real permanece separada para evitar consumo adicional y sus métricas no se mezclan con las de los cinco escenarios. Si una respuesta nueva del juez omite campos requeridos o contiene valores inválidos, la evaluación queda no disponible; no se inventan valores para cumplir el esquema.
+![Ejemplo de ejecución del Ejercicio 1](media/EXERCISE1_LLM.jpeg)
 
-### Ejemplo visual - Resultado esperado
-![Resultado esperado](media/EXERCISE1_LLM.jpeg)
+## Ejercicio 2 — API
 
-## Ejercicio 2 — Pruebas de API
-
-Servicio evaluado: https://goal-tracker-api.onrender.com
-
-La suite contiene once pruebas secuenciales: estado del servicio, registro, autenticación correcta e incorrecta, creación de dos objetivos, consulta e integridad de datos, listado y eliminación con verificación de que el objetivo eliminado ya no se puede consultar.
+Suite de once pruebas secuenciales contra [Goal Tracker API](https://goal-tracker-api.onrender.com): health check, registro, login válido e inválido, creación de dos objetivos, consulta, integridad, listado y eliminación verificada.
 
 ```bash
 npm run test:api
+npm run test:api:report
 ```
 
-Comando equivalente:
-
-```bash
-npx playwright test exercise-2-api-testing/tests/status.spec.ts
-```
-
-Para otra instancia compatible de la API:
+Para otra instancia compatible:
 
 ```bash
 GOAL_TRACKER_API_URL=https://your-api.example.com npm run test:api
 ```
 
-Las pruebas crean un usuario y datos nuevos en el servicio seleccionado. Comparten autenticación e identificadores de objetivos; ejecuta la suite completa para respetar esas dependencias.
+Las pruebas crean un usuario y objetivos nuevos y comparten autenticación e IDs; ejecuta la suite completa. Los resultados quedan en `output/exercise2API-Reports/results.json`, `html/` y `test-results/`.
 
-### Reportes de API
+![Ejemplo de ejecución del Ejercicio 2](media/EXERCISE2_API-REST-TEST.jpeg)
 
-Rutas predeterminadas:
+## Ejercicio 3 — Chatbot web
 
-```text
-output/exercise2API-Reports/html/
-output/exercise2API-Reports/results.json
-```
-
-Abre el reporte de Playwright:
-
-```bash
-npm run test:api:report
-```
-
-Para separar las evidencias de API:
-
-```bash
-QA_REPORT_DIR=output/exercise2API-Reports npx playwright test exercise-2-api-testing/tests/status.spec.ts
-npx playwright show-report output/exercise2API-Reports/html
-```
-
-Este HTML pertenece al ejercicio 2; no es el reporte consolidado del ejercicio 5.
-
-### Ejemplo visual - Resultado esperado
-![Resultado esperado](media/EXERCISE2_API-REST-TEST.jpeg)
-
-## Ejercicio 3 — Pruebas de chatbot
-
-El ejercicio contiene dos suites independientes:
-
-| Suite | Página | Cobertura |
+| Suite | Sitio | Cobertura |
 | --- | --- | --- |
-| `tests/botpress-docs/chatbot.spec.ts` | https://botpress.com/docs/ | Página propuesta: carga, apertura/cierre del panel, Hola y latencia; `CHATBOT-003` permanece omitido |
-| `tests/botpress-homepage/chatbot.spec.ts` | https://botpress.com/ | Cobertura adicional: botón flotante, apertura/cierre/reapertura, nombre Botpress, Hola y latencia |
-
-La página principal observada utiliza un Shadow DOM abierto, no un iframe de chat. Los localizadores de Playwright atraviesan esas raíces. El cargador comienza en `window.load`; la suite espera ese evento antes de comprobar el botón y registra ambos tiempos.
-
-### Ejecutar las suites
-
-Docs:
+| Docs | https://botpress.com/docs/ | Carga, widget, apertura/cierre, Hola, respuesta y latencia |
+| Homepage | https://botpress.com/ | Cobertura adicional: botón flotante, apertura/cierre/reapertura, nombre Botpress, Hola y latencia |
 
 ```bash
-QA_REPORT_DIR=output/exercise3-chatbot/docs npx playwright test exercise-3-chatbot-testing/tests/botpress-docs/
+npm run test:chatbot:docs
+npm run test:chatbot:homepage
 ```
 
-Página principal:
+Agrega `-- --headed` a un comando npm para ver el navegador. Cada prueba usa un contexto aislado. La homepage observada utiliza Shadow DOM abierto; la suite espera `window.load`, que inicia su cargador. Docs utiliza un panel integrado.
 
-```bash
-QA_REPORT_DIR=output/exercise3-chatbot/homepage npx playwright test exercise-3-chatbot-testing/tests/botpress-homepage/
-```
+`CHATBOT-003` permanece omitido porque Docs no expone un nombre de bot distintivo. Validarlo en la homepage es cobertura complementaria; la omisión de Docs permanece documentada.
 
-Agrega `--headed` para ver el navegador. Para ejecutar solamente el caso de apertura/cierre de Docs:
-
-```bash
-QA_REPORT_DIR=output/exercise3-chatbot/docs npx playwright test exercise-3-chatbot-testing/tests/botpress-docs/ --grep CHATBOT-002
-```
-
-Para reunir ambas suites en un reporte local:
-
-```bash
-QA_REPORT_DIR=output/exercise3-chatbot/combined npx playwright test exercise-3-chatbot-testing/tests/
-```
-
-No requieren credenciales de Groq. Cada prueba tiene un contexto aislado del navegador. `QA_REPORT_DIR` cambia las rutas de evidencias, no las aserciones.
-
-### Reportes y evidencias
-
-Cada directorio de Playwright contiene `html/`, `results.json` y `test-results/`:
-
-| Suite | Directorio |
-| --- | --- |
-| Docs | `output/exercise3-chatbot/docs/` |
-| Página principal | `output/exercise3-chatbot/homepage/` |
-| Ejecución local conjunta | `output/exercise3-chatbot/combined/` |
+Los resultados y evidencias quedan en `output/exercise3-chatbot/docs/` y `output/exercise3-chatbot/homepage/`. Para abrirlos:
 
 ```bash
 npx playwright show-report output/exercise3-chatbot/docs/html
 npx playwright show-report output/exercise3-chatbot/homepage/html
 ```
 
-Se conservan capturas, videos y trazas de las pruebas de navegador ejecutadas, independientemente del resultado. Las pruebas de API no generan videos de navegador. Para inspeccionar una traza, pasa su ruta real a `npx playwright show-trace`.
+Se guardan capturas, videos, trazas y JSON de latencia. Docs escribe `chatbot-response-time.json`; homepage adjunta `homepage-response-time.json` dentro del caso HOME-004. La latencia mide desde enviar Hola hasta el primer texto visible de una respuesta nueva e incluye sobrecarga de UI/aserciones. Se distingue del mensaje de bienvenida y de la duración completa de la prueba.
 
-La conversación de Docs también escribe `output/exercise3-chatbot/docs/chatbot-conversation.png` y `output/exercise3-chatbot/docs/chatbot-response-time.json`; estas rutas fijas se sobrescriben en ejecuciones posteriores.
-
-`HOME-004` guarda y adjunta `homepage-conversation.png` y `homepage-response-time.json` en su directorio de resultados. Espera el mensaje de bienvenida antes de establecer la línea base y exige un mensaje entrante nuevo después de Hola. La latencia llega hasta el primer texto visible de la nueva respuesta, incluye sobrecarga de interfaz/aserciones y no mide todos los mensajes posteriores ni impone un SLA no documentado.
-
-Una ejecución local verificada aprobó los cuatro casos de la página principal sin omisiones ni reintentos y registró 5.114 ms hasta la primera respuesta nueva. Ese valor describe únicamente aquella ejecución; conserva su evidencia por separado.
-
-### Limitación conocida de cobertura
-
-`CHATBOT-003` está omitido porque la interfaz de Docs inspeccionada no expone un nombre de bot distintivo. Validar el nombre en la página principal no sustituye ese requisito de Docs: es cobertura complementaria sobre otra página. La omisión permanece visible.
-
-Ambas suites dependen de páginas externas en vivo. Revisa cambios de interfaz o respuesta con sus evidencias antes de modificar las aserciones.
-
-### Ejemplo visual - Resultado esperado
-![Resultado esperado](media/EXERCISE3_CHATBOT.jpeg)
-
-## Ejercicio 4 — CI/CD
-
-Archivo: `.github/workflows/qa.yml`.
-
-Se ejecuta mediante push, pull request o inicio manual desde GitHub Actions. Los commits con `[skip ci]` omiten los eventos de push/pull request correspondientes.
-
-El flujo instala dependencias, valida TypeScript y las pruebas sin proveedor, ejecuta API, ambos chatbots y los cinco escenarios LLM, sube evidencias y genera el reporte consolidado incluso después de fallas previas.
-
-Después de TypeScript, los jobs de API, chatbot y LLM pueden ejecutarse independientemente. Dentro del job LLM, los cinco escenarios se ejecutan secuencialmente.
-
-### Proveedores y secrets de GitHub Actions
-
-La configuración local y la de GitHub son independientes:
-
-| Ejecución | Configuración de proveedor/modelo | Credenciales |
-| --- | --- | --- |
-| Terminal local | `.env` privado en la raíz | Claves dentro de ese `.env` |
-| GitHub Actions | Variables del workflow y entrada manual `llm_provider` | Secrets de Actions del repositorio |
-
-Clonar o crear un fork no copia los secrets. Para evaluar localmente basta con un `.env` propio. Para ejecutar Actions en un fork o copia, agrega tus propios secrets allí. Una persona autorizada para iniciar el workflow de este repositorio utiliza los secrets ya configurados en él.
-
-Agrega las claves en **Settings → Secrets and variables → Actions → New repository secret**:
-
-| Proveedor | Nombre del secret |
-| --- | --- |
-| Groq | `GROQ_API_KEY` |
-| Anthropic | `ANTHROPIC_API_KEY` |
-| OpenAI | `OPENAI_API_KEY` |
-| Gemini | `GEMINI_API_KEY` |
-| Ollama | Este adaptador no requiere clave; el ejecutor debe alcanzar el servidor y el modelo instalado |
-
-Solo necesitan credenciales los proveedores seleccionados. El workflow actual pasa las claves de Groq y Anthropic al paso LLM. Para otros proveedores también debes pasar su secret en el workflow; crearlo por sí solo no configura un rol.
-
-En **Run workflow**, selecciona `groq` o `anthropic` en `llm_provider`. Esa selección se aplica a los tres roles. Groq utiliza Qwen para usuario/asistente y GPT-OSS para evaluador; Anthropic utiliza Haiku 5.5 en los tres. Los eventos de push/pull request utilizan Groq por defecto. El selector actual no ofrece una combinación de proveedores.
-
-Pueden coexistir `GROQ_API_KEY` y `ANTHROPIC_API_KEY`: almacenar ambas no llama automáticamente a ambos servicios ni activa un proveedor de respaldo.
-
-### Dos proveedores en la misma ejecución
-
-La aplicación permite elegir proveedor/modelo por rol. Ejemplo: usuario y asistente en Groq, evaluador en Anthropic.
-
-```dotenv
-SIMULATED_USER_PROVIDER=groq
-SIMULATED_USER_MODEL=qwen/qwen3.8-27b
-ASSISTANT_PROVIDER=groq
-ASSISTANT_MODEL=qwen/qwen3.8-27b
-EVALUATOR_PROVIDER=anthropic
-EVALUATOR_MODEL=claude-haiku-5-5
-
-GROQ_API_KEY=your_private_groq_key
-ANTHROPIC_API_KEY=your_private_anthropic_key
-```
-
-Para ejecutar esa combinación localmente:
+Para cambiar el directorio de evidencias, usa `QA_REPORT_DIR`. Para reunir ambas suites en un reporte local:
 
 ```bash
-node exercise-4-cicd/run-llm-ci.mjs
-```
-
-Para usarla en GitHub Actions, modifica `.github/workflows/qa.yml` antes de iniciar:
-
-1. Agrega ambos secrets de Actions.
-2. Sustituye las seis variables de rol de `jobs.llm.env` por los valores explícitos del ejemplo, o implementa entradas independientes por rol. No deben depender todas del único selector `llm_provider`.
-3. Actualiza `Validate selected provider secret` para comprobar ambos proveedores. La comprobación actual del asistente presupone un mismo proveedor en los tres roles.
-4. Conserva ambos secrets en el paso de ejecución:
-
-```yaml
-env:
-  GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-  ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-```
-
-Estas instrucciones describen una personalización; no existe un modo mixto ya habilitado en el selector. No pegues claves reales en YAML. Cambiar `.env` local no cambia CI.
-
-En cada turno, el usuario configurado genera su mensaje, el asistente responde y el evaluador juzga con el historial. Cada rol usa la clave de su proveedor. Los roles que comparten proveedor también comparten la cuota de esa cuenta. No se ejecutan automáticamente dos proveedores para comparar ni se cambia a otro cuando se agota la cuota. Cada proveedor cobra su consumo por separado.
-
-Los reportes conservan proveedor/modelo de cada rol. Cuota o timeout en cualquiera de los servicios es un bloqueo técnico, no un defecto funcional del asistente.
-
-Los jobs LLM se omiten en pull requests originados en forks porque no tienen acceso a los secrets. El Ollama del equipo del evaluador no es accesible como `localhost` desde un ejecutor alojado por GitHub; utiliza un servidor accesible o un ejecutor propio adecuado.
-
-### Comprobaciones locales antes de publicar
-
-Sin llamadas a proveedores:
-
-```bash
-npx tsc --noEmit
-node --check exercise-4-cicd/run-llm-ci.mjs
-npm run test:evaluator
-node --test exercise-4-cicd/inspect-report.test.mjs exercise-5-consolidated-report/generate-report.test.mjs exercise-5-consolidated-report/publish-reports.test.mjs
-git diff --check
-```
-
-Pruebas de servicios externos:
-
-```bash
-QA_REPORT_DIR=output/exercise2API-Reports npx playwright test exercise-2-api-testing/tests/status.spec.ts
 QA_REPORT_DIR=output/exercise3-chatbot/combined npx playwright test exercise-3-chatbot-testing/tests/
 ```
 
-Escenarios LLM, con credenciales y cuota disponibles:
+![Ejemplo de ejecución del Ejercicio 3](media/EXERCISE3_CHATBOT.jpeg)
 
-```bash
-node exercise-4-cicd/run-llm-ci.mjs
-```
+## Ejercicio 4 — CI/CD
 
-Estos comandos comprueban componentes localmente. El workflow completo de GitHub Actions se ejecuta en GitHub.
+El workflow `.github/workflows/qa.yml` se ejecuta con push, pull request o inicio manual. Instala dependencias, valida TypeScript y las pruebas locales, ejecuta API, ambos chatbots y los cinco escenarios LLM, sube artefactos y genera el consolidado. API/UI y LLM pueden avanzar independientemente después de TypeScript.
 
-### Artefactos de CI
+### Proveedores en GitHub Actions
 
-Abre la ejecución en **Actions** y descarga sus artefactos:
+La configuración local y la de Actions son independientes: Actions utiliza variables del YAML y secrets del repositorio; no lee tu `.env` local.
+
+| Modalidad | Selección actual |
+| --- | --- |
+| Ejecución local | Cualquiera de los cinco proveedores admitidos, configurable por rol |
+| **Actions → Run workflow** | `groq` o `anthropic`; la selección se aplica a los tres roles |
+| Push o pull request | Groq por defecto, según el YAML actual |
+
+Groq usa `qwen/qwen3.8-27b` para usuario/asistente y `openai/gpt-oss-20b` para juez. Anthropic usa `claude-haiku-5-5` en los tres roles. Son los valores configurados actualmente; revisa disponibilidad y cuota para tu cuenta.
+
+Agrega las claves necesarias en **Settings → Secrets and variables → Actions → New repository secret**, usando los nombres de la tabla de proveedores del Ejercicio 1. Clonar o crear un fork no copia los secrets. Los PR de forks omiten el job LLM porque no reciben esas credenciales.
+
+Para usar OpenAI, Gemini, Ollama o una combinación de proveedores en CI:
+
+1. Configura los seis valores de proveedor/modelo en `jobs.llm.env`, de forma independiente por rol si mezclas proveedores.
+2. Pasa los secrets utilizados tanto a `Validate selected provider secret` como a `Run all five LLM scenarios`. El YAML actual pasa las claves de Groq y Anthropic.
+3. Adapta la validación de claves para comprobar todos los proveedores elegidos; actualmente presupone que los tres roles usan el proveedor del asistente.
+4. Si amplías el selector manual, actualiza también las expresiones que eligen modelos y proveedor predeterminado. Para Ollama, usa un servidor alcanzable desde el runner o un runner propio: su `localhost` es distinto del de tu equipo.
+
+Crear un secret por sí solo no selecciona un proveedor. Guardar varias claves tampoco activa comparaciones ni proveedores de respaldo.
+
+### Artefactos y estado del pipeline
+
+En cada ejecución de Actions se publican los artefactos disponibles, con retención de 30 días:
 
 ```text
 qa-api-<run-id>-<attempt>
@@ -446,196 +235,87 @@ qa-llm-<run-id>-<attempt>
 qa-consolidated-report-<run-id>-<attempt>
 ```
 
-La retención configurada es de 30 días. El artefacto LLM incluye reportes JSON individuales, registros por escenario y `execution-summary.json`.
+Un FAIL o REVIEW funcional del LLM con evaluación completa permite un job exitoso. Los errores técnicos y las fallas de TypeScript/API/UI hacen fallar los jobs correspondientes. Consulta sus logs y reportes para identificar la causa.
 
-Un workflow rojo puede indicar una aserción fallida de API/UI, una evaluación no disponible, un bloqueo del proveedor o un error de ejecución. Un veredicto funcional LLM `FAIL` o `REVIEW` disponible no lo vuelve rojo por sí solo. Revisa las evidencias del job correspondiente.
+## Ejercicio 5 — Reporte consolidado
 
-## Ejercicio 5 — Reporte consolidado automático
+El job `consolidated` usa `if: always()` para generar JSON y Markdown incluso cuando fallen u omitan jobs previos. Lee únicamente artefactos de la misma ejecución e intento; las descargas ausentes se registran sin reutilizar un PASS histórico. La generación depende de que GitHub pueda iniciar y completar el entorno del job.
 
-El job final `consolidated` depende de TypeScript, API/UI y LLM, y utiliza `if: always()`. Genera un reporte nuevo aunque los jobs previos fallen o se omitan. Lee solamente artefactos del identificador de ejecución e intento actuales; nunca utiliza reportes históricos como respaldo.
+El reporte muestra estado de ejecución y calidad observada, resumen de los cinco escenarios, API y ambos chatbots, PASS/FAIL global, cobertura, resolución de necesidades, tiempos, detecciones y evidencia. Las conversaciones y análisis extensos están en secciones desplegables. El texto de presentación está en español y las citas originales se conservan.
 
-Produce únicamente dos formatos de reporte:
+Los dos formatos se generan como `output/reporte-consolidado/consolidated-report.json` y `.md` y se suben al artefacto. Los snapshots publicados quedan en:
 
-- `output/reporte-consolidado/consolidated-report.md`: presentación en español, también visible en el resumen del job.
-- `output/reporte-consolidado/consolidated-report.json`: resultados estructurados, juicios originales y trazabilidad.
-
-Ambos se incluyen en `qa-consolidated-report-<run-id>-<attempt>`, con retención de 30 días. El ejercicio 5 no genera un reporte HTML. Los HTML de Playwright pertenecen a los ejercicios 2 y 3.
-
-### Contenido e interpretación
-
-El reporte comienza con estados separados de ejecución y calidad observada. Incluye:
-
-- Una tabla de los cinco escenarios LLM: coherencia, señales de alucinación, seguridad y completitud.
-- Resumen de API y de ambos chatbots, con resultados de cada caso desplegables.
-- Métricas globales de PASS/FAIL, cobertura de conversaciones y juicios, necesidades resueltas y tasa de turnos señalados.
-- Tiempos promedio separados de respuesta del asistente, evaluador y chatbot, y duración de pruebas.
-- Detección de alucinaciones, prompt injection, toxicidad, errores de contexto y estado de instrumentación de tool calling.
-- Hallazgos, errores técnicos, omisiones y fuentes de evidencia.
-
-Las conversaciones, justificaciones y análisis extensos se presentan en secciones desplegables. Las citas del código y las respuestas/juicios originales se conservan en su idioma para no alterar la evidencia. Los nombres de campos JSON y estados del código permanecen en inglés.
-
-Los estados `PASS`, `FAIL`, `REVIEW`, `BLOCKED`, `SKIPPED`, `FLAKY`, `MISSING` y `ERROR` son distintos. Un caso requerido omitido deja la evaluación de calidad incompleta aunque CI termine correctamente. Una evaluación ausente o inválida hace fallar la validación del reporte después de escribir los archivos, para permitir su subida como evidencia.
-
-Las métricas de calidad utilizan juicios válidos. Se separan afirmaciones falsas y sin respaldo. Una puntuación de contexto menor de 100 no demuestra por sí sola un defecto. El motor bonus compartido declara por ejercicio la evidencia realmente disponible. El asistente dispone de herramientas instrumentadas; API audita contratos HTTP e integridad, y chatbot audita texto e historial visibles. Las herramientas internas del bot externo no son observables. Sin referencia o traza se conserva NOT_EVALUATED/NOT_APPLICABLE, sin convertirlos en PASS.
-
-La consolidación no necesita credenciales, dependencias npm externas ni nuevas llamadas a LLM.
-
-### Conservación de reportes
-
-Después de subir el artefacto, el job publica las carpetas en la rama de origen con `[skip ci]`:
-
-| Carpeta | Política de actualización |
+| Directorio | Política |
 | --- | --- |
-| `output/reporte-consolidado/lastRun/` | Último reporte generado, incluso con fallas, bloqueos o evidencia incompleta |
-| `output/reporte-consolidado/LastSuccesfulrun/` | Última evaluación completa, incluso con veredictos funcionales `FAIL` o `REVIEW` disponibles; excluye bloqueos técnicos |
+| `output/reporte-consolidado/lastRun/` | Último reporte publicado, incluso con errores o evidencia incompleta |
+| `output/reporte-consolidado/LastSuccesfulrun/` | Última evaluación completa: cinco escenarios con seis respuestas y seis juicios válidos, TypeScript y API/UI correctos; admite FAIL/REVIEW funcionales |
 
-Cada carpeta contiene `consolidated-report.md`, `consolidated-report.json` y `publication.json`. Este último es metadato de auditoría, no otro formato de reporte: guarda número de ejecución, intento, commit y enlace. Se conserva intencionalmente la escritura `LastSuccesfulrun`.
+Se conserva intencionalmente el nombre `LastSuccesfulrun`. Cada snapshot incluye `publication.json` con ejecución, intento y commit, y `detector-validation.json` con los controles de reglas. Las omisiones explícitas siguen visibles aunque la ejecución sea elegible para ambos snapshots.
 
-Una ejecución completa exige cinco escenarios con seis respuestas y seis juicios disponibles cada uno. Un `FAIL` por alucinación/seguridad o un `REVIEW` disponible puede actualizar ambas carpetas sin cambiar el veredicto. Dentro del consolidado, cuota agotada, timeout, juicio ausente, conversación incompleta o evidencia inválida actualizan solo `lastRun`. Los resultados parciales de los otros ejercicios también se publican con su estado real. TypeScript y API/UI deben terminar correctamente. Las omisiones explícitas permanecen visibles y no equivalen a cubrir todos los requisitos.
+### Generación local desde artefactos
 
-El primer reporte histórico de `LastSuccesfulrun` correspondía a la ejecución 43268157726, anterior a la cobertura de la página principal y sin JSON generado. Las ejecuciones elegibles posteriores lo reemplazan con ambos formatos. Los reportes anteriores permanecen en el historial de Git y en sus artefactos durante la retención.
-
-La publicación utiliza push normal, sin forzarlo, y reintenta si la rama cambia concurrentemente. Número de ejecución e intento evitan que una ejecución antigua sustituya otra más reciente. El commit publica los resultados de los ejercicios 1, 2 y 3, el manifiesto de evidencias y los snapshots consolidados. No incluye código fuente ni archivos ajenos a los resultados. Los pull requests del mismo repositorio publican en su rama de origen; los de forks conservan únicamente artefactos porque su token no puede escribir allí. La protección de ramas o falta de permisos puede impedir publicar; primero se sube el artefacto y la falla de publicación queda visible.
-
-### Generación local desde artefactos descargados
-
-Extrae los artefactos de una misma ejecución e intento en estas rutas, conservando sus directorios internos:
-
-| Directorio de entrada | Contenido |
-| --- | --- |
-| `output/reporte-consolidado/inputs/llm/` | JSON de escenarios y `execution-summary.json` |
-| `output/reporte-consolidado/inputs/api/` | `results.json` de API y evidencias |
-| `output/reporte-consolidado/inputs/chatbot-docs/` | `results.json`, latencia y evidencias de Docs |
-| `output/reporte-consolidado/inputs/chatbot-homepage/` | `results.json`, latencia y evidencias de la página principal |
+Extrae los artefactos de una misma ejecución e intento en `output/reporte-consolidado/inputs/`, usando subdirectorios `llm/`, `api/`, `chatbot-docs/` y `chatbot-homepage/`. Conserva su estructura interna; el artefacto LLM debe contener los cinco JSON y `execution-summary.json`.
 
 ```bash
-node --test exercise-5-consolidated-report/generate-report.test.mjs exercise-5-consolidated-report/publish-reports.test.mjs
 node exercise-5-consolidated-report/generate-report.mjs output/reporte-consolidado/inputs output/reporte-consolidado
 ```
 
-El generador localiza JSON recursivamente e ignora copias adjuntas dentro de reportes HTML. Rechaza fuentes duplicadas o ambiguas. No combines artefactos de distintas ejecuciones. Un reintento parcial sin artefactos del intento actual se registra como evidencia ausente.
+El generador ignora las copias adjuntas del HTML y rechaza fuentes duplicadas o ambiguas. Consolidar resultados no requiere claves ni nuevas llamadas a proveedores. Los HTML de Playwright pertenecen a API/chatbot; el Ejercicio 5 genera únicamente JSON y Markdown.
 
-Los reportes consolidados publicados se conservan en `output/reporte-consolidado/lastRun/` y `output/reporte-consolidado/LastSuccesfulrun/`. Los reportes conservados no se utilizan como entradas del generador.
+### Bonus y cobertura
 
-No puede garantizarse la generación si GitHub no inicia el job, falla la preparación del entorno o se termina forzosamente el workflow. Un commit con `[skip ci]` no ejecuta este job.
+El asistente dispone de `lookup_policy`, `lookup_product` y `lookup_order`, que consultan la base local. Una consulta de pedido requiere que el usuario haya proporcionado su ID; es una política de prueba con datos ficticios. `inspect_http_request` interpreta GET/POST/DELETE sin ejecutar la petición. Se auditan herramientas, argumentos, resultados, intención y alcance. Las consultas iniciales de envío estándar exigen una llamada real; se permite un paso de herramientas y uno de respuesta por intento.
 
-## Ejecutar juntas las suites de Playwright
+API instrumenta sus acciones HTTP y comprueba contratos e integridad. Docs conserva el intercambio de Hola. La homepage añade tres sondas de nombre, recuerdo/producto e inyección; registra historial y respuestas en `bonus-probes.json`. Su duración está incluida en HOME-004 y se distingue de la latencia del saludo.
 
-```bash
-npm test
-npx playwright show-report output/exercise2API-Reports/html
-npx playwright show-report output/exercise3-chatbot/docs/html
-npx playwright show-report output/exercise3-chatbot/homepage/html
-```
-
-`npm test` ejecuta API, Docs y página principal por separado para mantener cada reporte en su subcarpeta de `/output`, y continúa con las suites restantes si una falla. Guarda el resumen de ejecución conjunta en `output/ci/playwright-execution.json`. `npm test` no ejecuta los cinco escenarios conversacionales LLM. Ejecútalos por separado con el ejecutor del ejercicio 1 o el del ejercicio 4.
-
-## Gestión de evidencias
-
-Una ejecución posterior puede sobrescribir reportes que usan la misma ruta. Para conservar varias, utiliza directorios únicos:
-
-```bash
-QA_REPORT_DIR=output/exercise3-chatbot/runs/chatbot-$(date -u +%Y%m%dT%H%M%SZ) npx playwright test exercise-3-chatbot-testing/tests/
-```
-
-La captura y el JSON de latencia de Docs se guardan en `QA_REPORT_DIR` cuando se especifica; sin esa variable utilizan `output/exercise3-chatbot/docs/`.
-
-Reporta resultados con evidencias de la ejecución correspondiente. Un reporte histórico aprobado no demuestra que una ejecución posterior fallida o bloqueada haya aprobado.
-
-## Anthropic: ejecución local y manual de CI
-
-Para utilizar Anthropic en los tres roles, configura tu `.env` privado:
-
-```dotenv
-ANTHROPIC_API_KEY=your_private_key
-SIMULATED_USER_PROVIDER=anthropic
-SIMULATED_USER_MODEL=claude-haiku-5-5
-ASSISTANT_PROVIDER=anthropic
-ASSISTANT_MODEL=claude-haiku-5-5
-EVALUATOR_PROVIDER=anthropic
-EVALUATOR_MODEL=claude-haiku-5-5
-```
-
-Usa `npm run validate:evaluator` para validar contra referencias o `node exercise-4-cicd/run-llm-ci.mjs` para los cinco escenarios reales. Ambos consumen crédito. No compartas ni publiques la clave.
-
-En Actions, agrega `ANTHROPIC_API_KEY` y selecciona `anthropic` en `llm_provider` desde **Run workflow**. La selección `groq` conserva la otra configuración. Push y pull request utilizan Groq por defecto. Actions no lee tu `.env` local.
-
-Para `claude-haiku-5-5`, las opciones del proveedor omiten parámetros de muestreo y desactivan explícitamente `thinking` para respetar presupuestos cortos de respuesta. Los demás proveedores conservan sus temperaturas. Esto no modifica veredictos ni elimina hallazgos. Revisa siempre la evidencia y el consumo de la ejecución concreta antes de asumir que otra configuración tendrá el mismo resultado.
-
-
-## Entregables generales en `/output`
-
-El PDF exige una carpeta `/output` en la raíz. Los resultados se agrupan así:
-
-| Carpeta | Contenido |
+| Campo del consolidado | Contenido |
 | --- | --- |
-| `output/exercise1-JSON/` | JSON de los cinco escenarios LLM; `history/` conserva evidencias anteriores y `ci/` guarda registros y resumen de ejecución |
-| `output/exercise2API-Reports/` | Reportes de API, `results.json`, HTML de Playwright y evidencia disponible |
-| `output/exercise3-chatbot/` | Reportes de Docs y página principal, capturas, videos, trazas y latencias; `history/` identifica ejecuciones anteriores |
-| `output/reporte-consolidado/` | Reporte único en JSON y Markdown, con `lastRun/` y `LastSuccesfulrun/` |
-| `output/ci/` | Resumen y reportes de ejecución conjunta del pipeline |
+| `bonus.transverse` | Cobertura conjunta por detector y ejercicio, con fuentes y discrepancias |
+| `bonus.assessments` | Juicio y regla por turno LLM, conclusión combinada y longitud del historial |
+| `bonus.rulesTransverse`, `bonus.records` | Cobertura y evidencia originales de las reglas auxiliares |
+| `bonus.disagreements` | Discrepancias entre juez y reglas, sin reescribir sus resultados |
 
-Las evidencias históricas se trasladaron sin alterar su contenido, incluidos los binarios y las rutas relativas internas del HTML. Las rutas antiguas citadas dentro de JSON/trazas se conservan como evidencia original. Un reporte histórico no representa la ejecución más reciente.
+Un extractor sin coincidencia no invalida un juicio LLM disponible. Se conservan las detecciones de cualquiera de las fuentes y las evaluaciones ausentes o no concluyentes. Prompt injection cuenta los ataques identificados con juicio válido; excluye turnos benignos. Para contexto se exige una bandera explícita del juez, no se infiere un defecto de una puntuación menor de 100.
 
-El código fuente permanece dentro de cada carpeta `exercise-*`. Los comandos, el workflow, la subida de artefactos y la publicación de snapshots utilizan las rutas de `/output`. Los archivos `publication.json` identifican la ejecución y el commit de cada consolidado publicado.
+API utiliza contratos e integridad, y chatbot utiliza texto e historial visibles; no se les atribuyen juicios LLM que no tienen. Sin referencia verificable o traza, las comprobaciones pueden quedar `NOT_EVALUATED` o `NOT_APPLICABLE`. Las herramientas internas de Botpress no son observables desde la UI.
 
-Cada ejecución publica automáticamente en Git los resultados vigentes de los ejercicios 1, 2 y 3 y el consolidado, además de subir los artefactos completos. No se ejecutan llamadas adicionales a LLM durante la publicación.
-
-`npm test` genera tres reportes separados. El comando directo `npx playwright test` sin una ruta seleccionada genera un reporte global en `output/ci/playwright-combined/`. `QA_REPORT_DIR` permite elegir explícitamente otra ubicación.
-
-### Actualización automática de todos los resultados
-
-El job final descarga las evidencias del mismo identificador de ejecución e intento y publica:
-
-- `output/exercise1-JSON/`: cinco reportes originales disponibles; `ci/` contiene el resumen y los logs.
-- `output/exercise2API-Reports/`: resultados, HTML, trazas y demás archivos del artefacto API.
-- `output/exercise3-chatbot/docs/` y `homepage/`: resultados, HTML, capturas, videos, trazas y mediciones disponibles.
-- `output/reporte-consolidado/lastRun/` y, cuando corresponde, `LastSuccesfulrun/`.
-- `output/evidence-manifest.json`: ejecución, intento, commits, estado por suite y hashes de los archivos originales y publicados.
-
-Los archivos vigentes anteriores se reemplazan, incluidas eliminaciones de capturas o resultados que ya no existen en el nuevo artefacto. Si una descarga falla o falta un reporte, `execution-status.json` registra `MISSING` o `PARTIAL` y elimina la evidencia vigente anterior de esa suite: no se conserva un PASS antiguo como si fuera actual. Los archivos disponibles y los veredictos FAIL/REVIEW no se convierten en aprobados.
-
-`history/` conserva ejecuciones históricas y `LastSuccesfulrun/` mantiene su regla de evaluación completa. La calibración manual en `evaluator-validation/` no se ejecuta ni se presenta como nueva automáticamente. Las ejecuciones locales conjuntas no sustituyen las evidencias separadas del pipeline.
-
-Las copias API que se suben a Git ocultan credenciales en JSON y trazas ZIP, incluidas cabeceras de autorización y contraseñas. Los artefactos originales de Actions permanecen intactos; el manifiesto indica qué archivos publicados difieren de su fuente. La publicación utiliza Python 3 y su biblioteca estándar de ZIP, disponibles en el ejecutor Ubuntu del workflow; no necesita instalar paquetes Python.
-
-Se utiliza un commit `[skip ci]`, push normal y controles por número de ejecución e intento para impedir que un workflow antiguo sobrescriba evidencias más recientes. Una protección de rama o un error de preparación/publicación puede impedir el commit; los artefactos se suben antes para conservar las evidencias.
-
-
-## Bonus de detección y métricas globales
-
-La tasa global de turnos LLM con hallazgos cuenta una vez cada turno con juicio válido y `errors` no vacío, `FAIL`, `REVIEW`, señal semántica o hallazgo bonus. Incluye coherencia y utilidad. Otra tasa separada cuenta únicamente los cuatro detectores semánticos originales del juez. La tasa de registros de reglas auxiliares usa su propio denominador y no mezcla controles sintéticos con conversaciones reales. La cobertura principal del LLM combina juicios válidos y reglas; sus fuentes se conservan por separado y un turno no se cuenta dos veces.
-
-El módulo `exercise-5-consolidated-report/detectors/` implementa reglas acotadas de hechos contra referencias explícitas, resistencia a inyección, insultos directos, contexto contra historial y uso incorrecto de herramientas. Cada hallazgo conserva código, evidencia y explicación. Los controles fijos positivos/negativos se ejecutan sin proveedores y se incluyen en el consolidado y en `detector-validation.json` de cada snapshot elegible; no calibran el juez LLM ni demuestran precisión semántica universal.
-
-### Herramientas reales del asistente
-
-`lookup_policy`, `lookup_product` y `lookup_order` consultan únicamente la base de conocimiento local. `lookup_order` deniega consultas cuyo ID no fue proporcionado por el usuario. Es una política del entorno de prueba con datos ficticios, no autenticación de clientes reales. `inspect_http_request` interpreta GET/POST/DELETE de Goal Tracker (acción, campos requeridos y autenticación); no ejecuta peticiones de red.
-
-El SDK ejecuta las herramientas solicitadas por el modelo y entrega sus resultados al paso final. Se registran nombre, argumentos, resultado, alcance y correspondencia con la referencia. El auditor detecta herramientas desconocidas, argumentos inválidos, selección contraria a una intención explícita, resultados incorrectos, resultados ausentes y alcance no autorizado. Los hallazgos bonus pueden dar FAIL al escenario sin modificar el juicio original almacenado en `evaluation`. Como cualquier FAIL funcional completo, no hacen fallar el job LLM.
-
-Las consultas iniciales de envío estándar exigen una llamada real; el modelo elige la herramienta y los argumentos. Se permite como máximo un paso de herramientas y un paso final de respuesta por intento; los reintentos técnicos existentes siguen aplicando. Esto puede añadir una petición de generación del asistente por turno con herramientas al ejecutar el pipeline; el límite por paso sigue siendo 250 tokens. Los tres roles utilizan cancelación a los 30 segundos. Ninguna calibración LLM adicional se inicia automáticamente.
-
-### API y chatbot
-
-API instrumenta sus peticiones reales y verifica método/ruta, campos, autenticación presente, código de respuesta e integridad respecto a las operaciones anteriores. Se registra `bonus-evidence.json` por caso, sin valores de contraseñas ni tokens. Estos son contratos e integridad de datos de una API tradicional, no supuestas conversaciones ni tool calls de un LLM. El texto almacenado por el usuario no se atribuye como toxicidad o cumplimiento de inyección del asistente.
-
-Docs adjunta evidencia del intercambio real de Hola. La página principal añade tres sondas al caso HOME-004: nombre de prueba, recuerdo y producto documentado, y resistencia a inyección. Conserva el historial, resultados parciales y errores técnicos en `bonus-probes.json`. Estas sondas añaden tres mensajes al chatbot externo; su tiempo forma parte de HOME-004 y no sustituye la latencia del saludo medida por separado. No se simula ni se infiere acceso al backend de Botpress. Si no hay afirmación comprobable, recuerdo explícito o trazas internas, esa dimensión queda no evaluada o para revisión.
+Los controles fijos positivos y negativos verifican las reglas, se publican en `detector-validation.json` y se ejecutan localmente con:
 
 ```bash
-npm run test:evaluator
 npm run test:bonus
 ```
 
-Los archivos de bonus viajan en los artefactos de cada suite, se consolidan sin nuevas llamadas al proveedor y se publican con el resto de `/output`. Las evidencias anteriores sin esos campos siguen identificadas como anteriores; no se les inventan herramientas o sondas retrospectivamente.
+Estos controles son distintos de la validación real del juez y no demuestran precisión semántica universal.
 
+### Métricas globales
 
-### Cobertura del juez y comprobaciones auxiliares
+Las unidades globales son los cinco escenarios LLM más los casos de API/UI. El denominador de unidades ejecutadas incluye PASS, FAIL, REVIEW y FLAKY; excluye SKIPPED, BLOCKED, MISSING y ERROR. También se presenta PASS sobre planificadas. Son unidades de distinta naturaleza y no equivalen a una puntuación única de calidad del producto.
 
-El consolidado reutiliza los juicios válidos existentes para alucinación, contexto y toxicidad. Cada juicio considera el historial acumulado hasta ese turno; el resultado del escenario conserva los seis intercambios y sus seis juicios. Una necesidad `partial` o `unresolved` es una conclusión evaluada y no se transforma en `unknown` por el mero hecho de que terminen los seis turnos.
+La tasa de turnos LLM con hallazgos cuenta una vez cada turno con juicio válido que tenga errores, FAIL, REVIEW, una señal semántica o un hallazgo bonus. La tasa de los cuatro detectores semánticos del juez y la tasa de registros de reglas auxiliares se muestran separadas, con sus propios denominadores. Los controles fijos no se mezclan con resultados reales. Los tiempos de asistente, juez, chatbot y pruebas API/UI se presentan por separado.
 
-`bonus.transverse` presenta la cobertura conjunta, con conteos por fuente (`judgeEvaluated`, `rulesEvaluated`) y discrepancias. `bonus.assessments` guarda por turno el juicio, la regla, el resultado combinado y la longitud del historial asociado. `bonus.rulesTransverse` y `bonus.records` conservan las comprobaciones auxiliares originales: un `NOT_EVALUATED` en un extractor no borra un juicio disponible. Si cualquiera de los dos mecanismos detecta un problema, se conserva; si difieren, se registra en `bonus.disagreements`. Los juicios y veredictos originales nunca se reescriben. Estas cifras representan cobertura y hallazgos, no precisión demostrada del evaluador.
+## Publicación y conservación de evidencias
 
-Prompt injection cuenta únicamente mensajes identificados como ataques con un juicio válido. Los turnos benignos quedan fuera de ese denominador. Las evaluaciones ausentes, inválidas o no concluyentes permanecen visibles; no se convierten en éxitos. Los reportes históricos sin bandera explícita de contexto no obtienen una evaluación de contexto inventada a partir de una puntuación.
+El job final publica en la rama de origen los resultados de los ejercicios 1, 2 y 3, el consolidado y el manifiesto. Reemplaza los archivos vigentes de cada suite y registra `MISSING` o `PARTIAL` si falta evidencia. `history/` conserva ejecuciones anteriores; la validación manual del juez no se presenta como recién ejecutada automáticamente.
 
-API y chatbot conservan sus comprobaciones instrumentadas. No se atribuyen juicios LLM a respuestas externas que no los tienen. Las herramientas internas de Botpress siguen sin ser observables desde la UI; la ausencia de trazas no prueba su uso correcto. Esta consolidación no hace nuevas llamadas a proveedores.
+Se publica mediante un commit `[skip ci]`, push normal y controles por número de ejecución/intento para evitar sobrescrituras por runs antiguos. Los artefactos se suben antes del commit; permisos o protección de rama pueden impedir la publicación. Los PR de forks conservan solo artefactos. Un commit con `[skip ci]` no inicia el pipeline por push/pull request.
+
+Las copias API publicadas en Git ocultan claves de autenticación y contraseñas en JSON y trazas ZIP; los artefactos originales de Actions permanecen intactos. El manifiesto registra hashes originales/publicados. Las rutas fijas de salida se sobrescriben en ejecuciones posteriores: para comparar runs utiliza su historial, sus artefactos o un `QA_REPORT_DIR` distinto.
+
+## Ejecución local conjunta y comprobaciones
+
+```bash
+npm test
+```
+
+Ejecuta API, Docs y homepage por separado, continúa si una suite falla y guarda el resumen en `output/ci/playwright-execution.json`. Los escenarios del Ejercicio 1 se ejecutan con su comando propio. El comando directo `npx playwright test` sin ruta seleccionada reúne las suites en `output/ci/playwright-combined/`.
+
+Para revisar componentes localmente sin proveedores:
+
+```bash
+npx tsc --noEmit
+npm run test:evaluator
+npm run test:bonus
+node --test exercise-5-consolidated-report/generate-report.test.mjs exercise-5-consolidated-report/publish-reports.test.mjs exercise-5-consolidated-report/publish-evidence.test.mjs
+```
+
+Las pruebas que consultan API, chatbot o LLM dependen del servicio y su disponibilidad. Conserva evidencia de la ejecución que presentes; un resultado histórico no representa automáticamente el estado actual.
