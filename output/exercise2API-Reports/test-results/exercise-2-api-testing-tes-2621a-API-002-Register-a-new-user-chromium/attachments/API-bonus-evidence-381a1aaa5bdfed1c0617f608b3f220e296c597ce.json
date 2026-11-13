@@ -22,8 +22,8 @@
           },
           {
             "field": "user.email",
-            "expected": "qa.test.1794531828888@example.com",
-            "actual": "qa.test.1794531828888@example.com",
+            "expected": "qa.test.1794532326087@example.com",
+            "actual": "qa.test.1794532326087@example.com",
             "source": "registration request"
           }
         ],

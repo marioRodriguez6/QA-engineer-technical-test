@@ -19,24 +19,24 @@
     "maxFailures": 0,
     "metadata": {
       "ci": {
-        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
-        "commitHash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
-        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341920622"
+        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/61e9161d7a172f38dd62e1f932421de85ee9a448",
+        "commitHash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
+        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43342991623"
       },
       "gitCommit": {
-        "shortHash": "9ca0bf1",
-        "hash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
-        "subject": "Add visual examples for expected results in README",
-        "body": "Add visual examples for expected results in README\n\nAdded visual examples for expected results in exercises 1, 2, and 3.",
+        "shortHash": "61e9161",
+        "hash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
+        "subject": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]",
+        "body": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]\n",
         "author": {
-          "name": "Mario Rodriguez",
-          "email": "54407177+marioRodriguez6@users.noreply.github.com",
-          "time": 1794531795000
+          "name": "github-actions[bot]",
+          "email": "41898282+github-actions[bot]@users.noreply.github.com",
+          "time": 1794531984000
         },
         "committer": {
-          "name": "GitHub",
-          "email": "noreply@github.com",
-          "time": 1794531795000
+          "name": "github-actions[bot]",
+          "email": "41898282+github-actions[bot]@users.noreply.github.com",
+          "time": 1794531984000
         },
         "branch": "master"
       },
@@ -50,24 +50,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
-            "commitHash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341920622"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/61e9161d7a172f38dd62e1f932421de85ee9a448",
+            "commitHash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43342991623"
           },
           "gitCommit": {
-            "shortHash": "9ca0bf1",
-            "hash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
-            "subject": "Add visual examples for expected results in README",
-            "body": "Add visual examples for expected results in README\n\nAdded visual examples for expected results in exercises 1, 2, and 3.",
+            "shortHash": "61e9161",
+            "hash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
+            "subject": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]",
+            "body": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]\n",
             "author": {
-              "name": "Mario Rodriguez",
-              "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794531795000
+              "name": "github-actions[bot]",
+              "email": "41898282+github-actions[bot]@users.noreply.github.com",
+              "time": 1794531984000
             },
             "committer": {
-              "name": "GitHub",
-              "email": "noreply@github.com",
-              "time": 1794531795000
+              "name": "github-actions[bot]",
+              "email": "41898282+github-actions[bot]@users.noreply.github.com",
+              "time": 1794531984000
             },
             "branch": "master"
           },
@@ -93,24 +93,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
-            "commitHash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341920622"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/61e9161d7a172f38dd62e1f932421de85ee9a448",
+            "commitHash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43342991623"
           },
           "gitCommit": {
-            "shortHash": "9ca0bf1",
-            "hash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
-            "subject": "Add visual examples for expected results in README",
-            "body": "Add visual examples for expected results in README\n\nAdded visual examples for expected results in exercises 1, 2, and 3.",
+            "shortHash": "61e9161",
+            "hash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
+            "subject": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]",
+            "body": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]\n",
             "author": {
-              "name": "Mario Rodriguez",
-              "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794531795000
+              "name": "github-actions[bot]",
+              "email": "41898282+github-actions[bot]@users.noreply.github.com",
+              "time": 1794531984000
             },
             "committer": {
-              "name": "GitHub",
-              "email": "noreply@github.com",
-              "time": 1794531795000
+              "name": "github-actions[bot]",
+              "email": "41898282+github-actions[bot]@users.noreply.github.com",
+              "time": 1794531984000
             },
             "branch": "master"
           },
@@ -219,12 +219,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 330,
+                      "duration": 335,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:03:48.912Z",
+                      "startTime": "2026-11-13T01:12:06.102Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -282,12 +282,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 382,
+                      "duration": 416,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:03:49.305Z",
+                      "startTime": "2026-11-13T01:12:06.507Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -345,12 +345,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 344,
+                      "duration": 352,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:03:49.716Z",
+                      "startTime": "2026-11-13T01:12:06.951Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -408,12 +408,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 340,
+                      "duration": 352,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:03:50.084Z",
+                      "startTime": "2026-11-13T01:12:07.326Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -471,12 +471,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 637,
+                      "duration": 601,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:03:50.447Z",
+                      "startTime": "2026-11-13T01:12:07.694Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -534,12 +534,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 275,
+                      "duration": 268,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:03:51.109Z",
+                      "startTime": "2026-11-13T01:12:08.314Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -597,12 +597,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 266,
+                      "duration": 260,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:03:51.401Z",
+                      "startTime": "2026-11-13T01:12:08.595Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -660,12 +660,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 261,
+                      "duration": 251,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:03:51.683Z",
+                      "startTime": "2026-11-13T01:12:08.868Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -723,12 +723,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 291,
+                      "duration": 265,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:03:51.961Z",
+                      "startTime": "2026-11-13T01:12:09.135Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -786,12 +786,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 269,
+                      "duration": 621,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:03:52.266Z",
+                      "startTime": "2026-11-13T01:12:09.413Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -849,12 +849,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 279,
+                      "duration": 276,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:03:52.550Z",
+                      "startTime": "2026-11-13T01:12:10.049Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -894,8 +894,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-13T01:03:48.241Z",
-    "duration": 4623.620999999999,
+    "startTime": "2026-11-13T01:12:05.503Z",
+    "duration": 4849.344,
     "expected": 11,
     "skipped": 0,
     "unexpected": 0,

@@ -245,6 +245,5 @@
       "observed": "CLEAR"
     }
   ],
-  "limitation": "Controles acotados positivos y negativos; no calibran el juez LLM ni garantizan detección semántica universal.",
-  "origin": "Validación local offline del nuevo motor; no corresponde a una llamada LLM de la ejecución original."
+  "limitation": "Controles acotados positivos y negativos; no calibran el juez LLM ni garantizan detección semántica universal."
 }

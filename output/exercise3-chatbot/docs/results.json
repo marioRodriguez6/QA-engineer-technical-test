@@ -19,24 +19,24 @@
     "maxFailures": 0,
     "metadata": {
       "ci": {
-        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
-        "commitHash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
-        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341920622"
+        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/61e9161d7a172f38dd62e1f932421de85ee9a448",
+        "commitHash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
+        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43342991623"
       },
       "gitCommit": {
-        "shortHash": "9ca0bf1",
-        "hash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
-        "subject": "Add visual examples for expected results in README",
-        "body": "Add visual examples for expected results in README\n\nAdded visual examples for expected results in exercises 1, 2, and 3.",
+        "shortHash": "61e9161",
+        "hash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
+        "subject": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]",
+        "body": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]\n",
         "author": {
-          "name": "Mario Rodriguez",
-          "email": "54407177+marioRodriguez6@users.noreply.github.com",
-          "time": 1794531795000
+          "name": "github-actions[bot]",
+          "email": "41898282+github-actions[bot]@users.noreply.github.com",
+          "time": 1794531984000
         },
         "committer": {
-          "name": "GitHub",
-          "email": "noreply@github.com",
-          "time": 1794531795000
+          "name": "github-actions[bot]",
+          "email": "41898282+github-actions[bot]@users.noreply.github.com",
+          "time": 1794531984000
         },
         "branch": "master"
       },
@@ -50,24 +50,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
-            "commitHash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341920622"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/61e9161d7a172f38dd62e1f932421de85ee9a448",
+            "commitHash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43342991623"
           },
           "gitCommit": {
-            "shortHash": "9ca0bf1",
-            "hash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
-            "subject": "Add visual examples for expected results in README",
-            "body": "Add visual examples for expected results in README\n\nAdded visual examples for expected results in exercises 1, 2, and 3.",
+            "shortHash": "61e9161",
+            "hash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
+            "subject": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]",
+            "body": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]\n",
             "author": {
-              "name": "Mario Rodriguez",
-              "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794531795000
+              "name": "github-actions[bot]",
+              "email": "41898282+github-actions[bot]@users.noreply.github.com",
+              "time": 1794531984000
             },
             "committer": {
-              "name": "GitHub",
-              "email": "noreply@github.com",
-              "time": 1794531795000
+              "name": "github-actions[bot]",
+              "email": "41898282+github-actions[bot]@users.noreply.github.com",
+              "time": 1794531984000
             },
             "branch": "master"
           },
@@ -93,24 +93,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
-            "commitHash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341920622"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/61e9161d7a172f38dd62e1f932421de85ee9a448",
+            "commitHash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43342991623"
           },
           "gitCommit": {
-            "shortHash": "9ca0bf1",
-            "hash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
-            "subject": "Add visual examples for expected results in README",
-            "body": "Add visual examples for expected results in README\n\nAdded visual examples for expected results in exercises 1, 2, and 3.",
+            "shortHash": "61e9161",
+            "hash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
+            "subject": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]",
+            "body": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]\n",
             "author": {
-              "name": "Mario Rodriguez",
-              "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794531795000
+              "name": "github-actions[bot]",
+              "email": "41898282+github-actions[bot]@users.noreply.github.com",
+              "time": 1794531984000
             },
             "committer": {
-              "name": "GitHub",
-              "email": "noreply@github.com",
-              "time": 1794531795000
+              "name": "github-actions[bot]",
+              "email": "41898282+github-actions[bot]@users.noreply.github.com",
+              "time": 1794531984000
             },
             "branch": "master"
           },
@@ -210,12 +210,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1327,
+                      "duration": 1141,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:04:02.774Z",
+                      "startTime": "2026-11-13T01:12:17.626Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -260,7 +260,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1488,
+                      "duration": 1396,
                       "errors": [],
                       "stdout": [
                         {
@@ -272,18 +272,18 @@
                       "steps": [
                         {
                           "title": "Establish a closed initial state",
-                          "duration": 250
+                          "duration": 289
                         },
                         {
                           "title": "Open the panel using Ask Docs",
-                          "duration": 115
+                          "duration": 101
                         },
                         {
                           "title": "Close the panel using Ask Docs",
-                          "duration": 83
+                          "duration": 76
                         }
                       ],
-                      "startTime": "2026-11-13T01:04:04.630Z",
+                      "startTime": "2026-11-13T01:12:19.173Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -342,7 +342,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:04:06.410Z",
+                      "startTime": "2026-11-13T01:12:20.801Z",
                       "annotations": [
                         {
                           "type": "skip",
@@ -380,19 +380,19 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2691,
+                      "duration": 2487,
                       "errors": [],
                       "stdout": [
                         {
                           "text": "Chatbot state: current=true, requested=true\n"
                         },
                         {
-                          "text": "CHATBOT-004 response time: 1126 ms\n"
+                          "text": "CHATBOT-004 response time: 1078 ms\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:04:06.411Z",
+                      "startTime": "2026-11-13T01:12:20.802Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -433,8 +433,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-13T01:04:02.175Z",
-    "duration": 7349.785,
+    "startTime": "2026-11-13T01:12:17.190Z",
+    "duration": 6429.227,
     "expected": 3,
     "skipped": 1,
     "unexpected": 0,

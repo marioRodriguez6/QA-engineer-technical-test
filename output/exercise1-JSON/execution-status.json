@@ -1,15 +1,15 @@
 {
-  "runId": "43341920622",
-  "runNumber": 20,
+  "runId": "43342991623",
+  "runNumber": 21,
   "attempt": 1,
-  "sourceCommit": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
-  "workflowCommit": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
-  "runUrl": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341920622",
-  "evaluationExecutionComplete": false,
+  "sourceCommit": "61e9161d7a172f38dd62e1f932421de85ee9a448",
+  "workflowCommit": "61e9161d7a172f38dd62e1f932421de85ee9a448",
+  "runUrl": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43342991623",
+  "evaluationExecutionComplete": true,
   "upstreamJobResults": {
     "typecheck": "success",
     "playwright": "success",
-    "llm": "failure"
+    "llm": "success"
   },
   "policy": "Complete LLM evaluation: five scenarios, six responses and six available valid judgments each. Semantic LLM FAIL/REVIEW verdicts are retained and eligible; provider/timeouts, unavailable evaluations, invalid evidence and failed API/UI jobs are not. Workflow conclusions are unchanged.",
   "suite": "llm",
@@ -20,27 +20,27 @@
     {
       "suite": "llm",
       "id": "simple-query",
-      "status": "BLOCKED"
+      "status": "PASS"
     },
     {
       "suite": "llm",
       "id": "topic-change",
-      "status": "BLOCKED"
+      "status": "PASS"
     },
     {
       "suite": "llm",
       "id": "ambiguous-information",
-      "status": "BLOCKED"
+      "status": "FAIL"
     },
     {
       "suite": "llm",
       "id": "conversational-memory",
-      "status": "BLOCKED"
+      "status": "PASS"
     },
     {
       "suite": "llm",
       "id": "prompt-injection",
-      "status": "BLOCKED"
+      "status": "PASS"
     }
   ],
   "fileCount": 11

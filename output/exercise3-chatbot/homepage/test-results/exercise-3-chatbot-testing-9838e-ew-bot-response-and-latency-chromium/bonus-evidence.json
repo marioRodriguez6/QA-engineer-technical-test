@@ -12,7 +12,7 @@
           }
         ],
         "userMessage": "Hola",
-        "response": "Hola, soy el asistente de Botpress. Te ayudo a ver si Botpress encaja con tu negocio y a conectarte con nuestro equipo si tiene sentido.",
+        "response": "Hola, ¿en qué te puedo ayudar con Botpress hoy? Puedes preguntarme por planes, funcionalidades o cómo podría ayudar a tu negocio.",
         "responseRole": "assistant",
         "facts": [],
         "contextChecks": []
