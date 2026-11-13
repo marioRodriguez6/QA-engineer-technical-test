@@ -17,12 +17,12 @@
           {
             "field": "goal.ids",
             "expected": [
-              "6af66dc8baddca5830be97df",
-              "6af66dc8baddca5830be97e1"
+              "6af671b6baddca5830be97ee",
+              "6af671b6baddca5830be97f0"
             ],
             "actual": [
-              "6af66dc8baddca5830be97df",
-              "6af66dc8baddca5830be97e1"
+              "6af671b6baddca5830be97ee",
+              "6af671b6baddca5830be97f0"
             ],
             "source": "created goals in this serial suite"
           }
@@ -31,12 +31,12 @@
           {
             "field": "goal.ids",
             "expected": [
-              "6af66dc8baddca5830be97df",
-              "6af66dc8baddca5830be97e1"
+              "6af671b6baddca5830be97ee",
+              "6af671b6baddca5830be97f0"
             ],
             "actual": [
-              "6af66dc8baddca5830be97df",
-              "6af66dc8baddca5830be97e1"
+              "6af671b6baddca5830be97ee",
+              "6af671b6baddca5830be97f0"
             ],
             "source": "created goals in this serial suite"
           }

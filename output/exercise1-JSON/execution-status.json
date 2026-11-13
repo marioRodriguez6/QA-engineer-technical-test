@@ -1,10 +1,10 @@
 {
-  "runId": "43348218399",
-  "runNumber": 23,
+  "runId": "43350233461",
+  "runNumber": 24,
   "attempt": 1,
-  "sourceCommit": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-  "workflowCommit": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-  "runUrl": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43348218399",
+  "sourceCommit": "356834022106d1848a4f9f0966ca2011180789b1",
+  "workflowCommit": "356834022106d1848a4f9f0966ca2011180789b1",
+  "runUrl": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43350233461",
   "evaluationExecutionComplete": true,
   "upstreamJobResults": {
     "typecheck": "success",
@@ -30,12 +30,12 @@
     {
       "suite": "llm",
       "id": "ambiguous-information",
-      "status": "PASS"
+      "status": "FAIL"
     },
     {
       "suite": "llm",
       "id": "conversational-memory",
-      "status": "FAIL"
+      "status": "PASS"
     },
     {
       "suite": "llm",

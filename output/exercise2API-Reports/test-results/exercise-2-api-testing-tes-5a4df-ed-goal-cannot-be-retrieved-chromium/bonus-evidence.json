@@ -18,7 +18,7 @@
         "contextChecks": [],
         "toolCalls": [
           {
-            "toolName": "HTTP GET /api/v1/goals/6af66dc8baddca5830be97df",
+            "toolName": "HTTP GET /api/v1/goals/6af671b6baddca5830be97ee",
             "allowed": true,
             "argumentsValid": true,
             "scopeAuthorized": true,

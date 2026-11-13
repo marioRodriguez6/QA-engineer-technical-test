@@ -12,7 +12,7 @@
           }
         ],
         "userMessage": "Hola",
-        "response": "Hola, encantado de verte por aquí. Soy el asistente de Botpress y te ayudo con todo lo relacionado con nuestros agentes de IA y el helpdesk de soporte.\n\n¿Qué te gustaría hacer con Botpress o en qué estás pensando usar agentes de IA para tu negocio?",
+        "response": "Hola, ¿en qué te puedo ayudar con Botpress hoy? Planes, demo o cómo usar la plataforma, tú eliges.",
         "responseRole": "assistant",
         "facts": [],
         "contextChecks": []

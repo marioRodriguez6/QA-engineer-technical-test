@@ -19,24 +19,24 @@
     "maxFailures": 0,
     "metadata": {
       "ci": {
-        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-        "commitHash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43348218399"
+        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/356834022106d1848a4f9f0966ca2011180789b1",
+        "commitHash": "356834022106d1848a4f9f0966ca2011180789b1",
+        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43350233461"
       },
       "gitCommit": {
-        "shortHash": "0fbd54a",
-        "hash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-        "subject": "fix: combine judge and bonus evidence coverage",
-        "body": "fix: combine judge and bonus evidence coverage",
+        "shortHash": "3568340",
+        "hash": "356834022106d1848a4f9f0966ca2011180789b1",
+        "subject": "docs: publish QA report for run 43348218399 attempt 1 [skip ci]",
+        "body": "docs: publish QA report for run 43348218399 attempt 1 [skip ci]\n",
         "author": {
-          "name": "Mario Rodriguez",
-          "email": "54407177+marioRodriguez6@users.noreply.github.com",
-          "time": 1794534668000
+          "name": "github-actions[bot]",
+          "email": "41898282+github-actions[bot]@users.noreply.github.com",
+          "time": 1794534992000
         },
         "committer": {
-          "name": "Mario Rodriguez",
-          "email": "54407177+marioRodriguez6@users.noreply.github.com",
-          "time": 1794534668000
+          "name": "github-actions[bot]",
+          "email": "41898282+github-actions[bot]@users.noreply.github.com",
+          "time": 1794534992000
         },
         "branch": "master"
       },
@@ -50,24 +50,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-            "commitHash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43348218399"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/356834022106d1848a4f9f0966ca2011180789b1",
+            "commitHash": "356834022106d1848a4f9f0966ca2011180789b1",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43350233461"
           },
           "gitCommit": {
-            "shortHash": "0fbd54a",
-            "hash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-            "subject": "fix: combine judge and bonus evidence coverage",
-            "body": "fix: combine judge and bonus evidence coverage",
+            "shortHash": "3568340",
+            "hash": "356834022106d1848a4f9f0966ca2011180789b1",
+            "subject": "docs: publish QA report for run 43348218399 attempt 1 [skip ci]",
+            "body": "docs: publish QA report for run 43348218399 attempt 1 [skip ci]\n",
             "author": {
-              "name": "Mario Rodriguez",
-              "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794534668000
+              "name": "github-actions[bot]",
+              "email": "41898282+github-actions[bot]@users.noreply.github.com",
+              "time": 1794534992000
             },
             "committer": {
-              "name": "Mario Rodriguez",
-              "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794534668000
+              "name": "github-actions[bot]",
+              "email": "41898282+github-actions[bot]@users.noreply.github.com",
+              "time": 1794534992000
             },
             "branch": "master"
           },
@@ -93,24 +93,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-            "commitHash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43348218399"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/356834022106d1848a4f9f0966ca2011180789b1",
+            "commitHash": "356834022106d1848a4f9f0966ca2011180789b1",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43350233461"
           },
           "gitCommit": {
-            "shortHash": "0fbd54a",
-            "hash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
-            "subject": "fix: combine judge and bonus evidence coverage",
-            "body": "fix: combine judge and bonus evidence coverage",
+            "shortHash": "3568340",
+            "hash": "356834022106d1848a4f9f0966ca2011180789b1",
+            "subject": "docs: publish QA report for run 43348218399 attempt 1 [skip ci]",
+            "body": "docs: publish QA report for run 43348218399 attempt 1 [skip ci]\n",
             "author": {
-              "name": "Mario Rodriguez",
-              "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794534668000
+              "name": "github-actions[bot]",
+              "email": "41898282+github-actions[bot]@users.noreply.github.com",
+              "time": 1794534992000
             },
             "committer": {
-              "name": "Mario Rodriguez",
-              "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794534668000
+              "name": "github-actions[bot]",
+              "email": "41898282+github-actions[bot]@users.noreply.github.com",
+              "time": 1794534992000
             },
             "branch": "master"
           },
@@ -219,12 +219,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 361,
+                      "duration": 589,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:54:14.223Z",
+                      "startTime": "2026-11-13T02:11:00.279Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -282,12 +282,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 459,
+                      "duration": 408,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:54:14.646Z",
+                      "startTime": "2026-11-13T02:11:00.931Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -345,12 +345,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 384,
+                      "duration": 338,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:54:15.133Z",
+                      "startTime": "2026-11-13T02:11:01.366Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -408,12 +408,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 360,
+                      "duration": 371,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:54:15.541Z",
+                      "startTime": "2026-11-13T02:11:01.726Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -471,12 +471,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 292,
+                      "duration": 272,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:54:15.923Z",
+                      "startTime": "2026-11-13T02:11:02.113Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -534,12 +534,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 271,
+                      "duration": 300,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:54:16.238Z",
+                      "startTime": "2026-11-13T02:11:02.403Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -597,12 +597,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 283,
+                      "duration": 293,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:54:16.526Z",
+                      "startTime": "2026-11-13T02:11:02.717Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -660,12 +660,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 272,
+                      "duration": 242,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:54:16.824Z",
+                      "startTime": "2026-11-13T02:11:03.024Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -723,12 +723,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 258,
+                      "duration": 254,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:54:17.116Z",
+                      "startTime": "2026-11-13T02:11:03.281Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -786,12 +786,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 266,
+                      "duration": 522,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:54:17.388Z",
+                      "startTime": "2026-11-13T02:11:03.550Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -849,12 +849,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 248,
+                      "duration": 249,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:54:17.670Z",
+                      "startTime": "2026-11-13T02:11:04.087Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -894,8 +894,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-13T01:54:13.559Z",
-    "duration": 4394.12,
+    "startTime": "2026-11-13T02:10:59.669Z",
+    "duration": 4692.710999999999,
     "expected": 11,
     "skipped": 0,
     "unexpected": 0,
