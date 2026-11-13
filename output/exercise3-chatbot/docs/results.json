@@ -19,24 +19,24 @@
     "maxFailures": 0,
     "metadata": {
       "ci": {
-        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
-        "commitHash": "0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
-        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43352766224"
+        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/506916c8acaa28c63a6d83d28c4a6d809e45a313",
+        "commitHash": "506916c8acaa28c63a6d83d28c4a6d809e45a313",
+        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43356497291"
       },
       "gitCommit": {
-        "shortHash": "0d4e115",
-        "hash": "0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
-        "subject": "Update README to clarify provider key usage",
-        "body": "Update README to clarify provider key usage\n\nRemoved a note about not publishing .env files or real keys.",
+        "shortHash": "506916c",
+        "hash": "506916c8acaa28c63a6d83d28c4a6d809e45a313",
+        "subject": "docs: guide evaluator setup and describe consolidated test cases [skip ci]",
+        "body": "docs: guide evaluator setup and describe consolidated test cases [skip ci]",
         "author": {
           "name": "Mario Rodriguez",
           "email": "54407177+marioRodriguez6@users.noreply.github.com",
-          "time": 1794537088000
+          "time": 1794538835000
         },
         "committer": {
-          "name": "GitHub",
-          "email": "noreply@github.com",
-          "time": 1794537088000
+          "name": "Mario Rodriguez",
+          "email": "54407177+marioRodriguez6@users.noreply.github.com",
+          "time": 1794538835000
         },
         "branch": "master"
       },
@@ -50,24 +50,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
-            "commitHash": "0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43352766224"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/506916c8acaa28c63a6d83d28c4a6d809e45a313",
+            "commitHash": "506916c8acaa28c63a6d83d28c4a6d809e45a313",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43356497291"
           },
           "gitCommit": {
-            "shortHash": "0d4e115",
-            "hash": "0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
-            "subject": "Update README to clarify provider key usage",
-            "body": "Update README to clarify provider key usage\n\nRemoved a note about not publishing .env files or real keys.",
+            "shortHash": "506916c",
+            "hash": "506916c8acaa28c63a6d83d28c4a6d809e45a313",
+            "subject": "docs: guide evaluator setup and describe consolidated test cases [skip ci]",
+            "body": "docs: guide evaluator setup and describe consolidated test cases [skip ci]",
             "author": {
               "name": "Mario Rodriguez",
               "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794537088000
+              "time": 1794538835000
             },
             "committer": {
-              "name": "GitHub",
-              "email": "noreply@github.com",
-              "time": 1794537088000
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794538835000
             },
             "branch": "master"
           },
@@ -93,24 +93,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
-            "commitHash": "0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43352766224"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/506916c8acaa28c63a6d83d28c4a6d809e45a313",
+            "commitHash": "506916c8acaa28c63a6d83d28c4a6d809e45a313",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43356497291"
           },
           "gitCommit": {
-            "shortHash": "0d4e115",
-            "hash": "0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
-            "subject": "Update README to clarify provider key usage",
-            "body": "Update README to clarify provider key usage\n\nRemoved a note about not publishing .env files or real keys.",
+            "shortHash": "506916c",
+            "hash": "506916c8acaa28c63a6d83d28c4a6d809e45a313",
+            "subject": "docs: guide evaluator setup and describe consolidated test cases [skip ci]",
+            "body": "docs: guide evaluator setup and describe consolidated test cases [skip ci]",
             "author": {
               "name": "Mario Rodriguez",
               "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794537088000
+              "time": 1794538835000
             },
             "committer": {
-              "name": "GitHub",
-              "email": "noreply@github.com",
-              "time": 1794537088000
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794538835000
             },
             "branch": "master"
           },
@@ -210,12 +210,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1068,
+                      "duration": 1193,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T02:32:29.185Z",
+                      "startTime": "2026-11-13T03:05:36.420Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -260,7 +260,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1311,
+                      "duration": 1488,
                       "errors": [],
                       "stdout": [
                         {
@@ -272,18 +272,18 @@
                       "steps": [
                         {
                           "title": "Establish a closed initial state",
-                          "duration": 299
+                          "duration": 302
                         },
                         {
                           "title": "Open the panel using Ask Docs",
-                          "duration": 74
+                          "duration": 99
                         },
                         {
                           "title": "Close the panel using Ask Docs",
-                          "duration": 78
+                          "duration": 99
                         }
                       ],
-                      "startTime": "2026-11-13T02:32:30.678Z",
+                      "startTime": "2026-11-13T03:05:38.129Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -342,7 +342,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T02:32:32.212Z",
+                      "startTime": "2026-11-13T03:05:39.915Z",
                       "annotations": [
                         {
                           "type": "skip",
@@ -380,19 +380,19 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2579,
+                      "duration": 3716,
                       "errors": [],
                       "stdout": [
                         {
                           "text": "Chatbot state: current=true, requested=true\n"
                         },
                         {
-                          "text": "CHATBOT-004 response time: 1195 ms\n"
+                          "text": "CHATBOT-004 response time: 2129 ms\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T02:32:32.212Z",
+                      "startTime": "2026-11-13T03:05:39.916Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -433,8 +433,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-13T02:32:28.752Z",
-    "duration": 6381.88,
+    "startTime": "2026-11-13T03:05:35.858Z",
+    "duration": 8203.502999999999,
     "expected": 3,
     "skipped": 1,
     "unexpected": 0,

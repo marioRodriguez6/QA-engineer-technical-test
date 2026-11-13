@@ -19,24 +19,24 @@
     "maxFailures": 0,
     "metadata": {
       "ci": {
-        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
-        "commitHash": "0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
-        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43352766224"
+        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/506916c8acaa28c63a6d83d28c4a6d809e45a313",
+        "commitHash": "506916c8acaa28c63a6d83d28c4a6d809e45a313",
+        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43356497291"
       },
       "gitCommit": {
-        "shortHash": "0d4e115",
-        "hash": "0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
-        "subject": "Update README to clarify provider key usage",
-        "body": "Update README to clarify provider key usage\n\nRemoved a note about not publishing .env files or real keys.",
+        "shortHash": "506916c",
+        "hash": "506916c8acaa28c63a6d83d28c4a6d809e45a313",
+        "subject": "docs: guide evaluator setup and describe consolidated test cases [skip ci]",
+        "body": "docs: guide evaluator setup and describe consolidated test cases [skip ci]",
         "author": {
           "name": "Mario Rodriguez",
           "email": "54407177+marioRodriguez6@users.noreply.github.com",
-          "time": 1794537088000
+          "time": 1794538835000
         },
         "committer": {
-          "name": "GitHub",
-          "email": "noreply@github.com",
-          "time": 1794537088000
+          "name": "Mario Rodriguez",
+          "email": "54407177+marioRodriguez6@users.noreply.github.com",
+          "time": 1794538835000
         },
         "branch": "master"
       },
@@ -50,24 +50,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
-            "commitHash": "0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43352766224"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/506916c8acaa28c63a6d83d28c4a6d809e45a313",
+            "commitHash": "506916c8acaa28c63a6d83d28c4a6d809e45a313",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43356497291"
           },
           "gitCommit": {
-            "shortHash": "0d4e115",
-            "hash": "0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
-            "subject": "Update README to clarify provider key usage",
-            "body": "Update README to clarify provider key usage\n\nRemoved a note about not publishing .env files or real keys.",
+            "shortHash": "506916c",
+            "hash": "506916c8acaa28c63a6d83d28c4a6d809e45a313",
+            "subject": "docs: guide evaluator setup and describe consolidated test cases [skip ci]",
+            "body": "docs: guide evaluator setup and describe consolidated test cases [skip ci]",
             "author": {
               "name": "Mario Rodriguez",
               "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794537088000
+              "time": 1794538835000
             },
             "committer": {
-              "name": "GitHub",
-              "email": "noreply@github.com",
-              "time": 1794537088000
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794538835000
             },
             "branch": "master"
           },
@@ -93,24 +93,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
-            "commitHash": "0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43352766224"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/506916c8acaa28c63a6d83d28c4a6d809e45a313",
+            "commitHash": "506916c8acaa28c63a6d83d28c4a6d809e45a313",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43356497291"
           },
           "gitCommit": {
-            "shortHash": "0d4e115",
-            "hash": "0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
-            "subject": "Update README to clarify provider key usage",
-            "body": "Update README to clarify provider key usage\n\nRemoved a note about not publishing .env files or real keys.",
+            "shortHash": "506916c",
+            "hash": "506916c8acaa28c63a6d83d28c4a6d809e45a313",
+            "subject": "docs: guide evaluator setup and describe consolidated test cases [skip ci]",
+            "body": "docs: guide evaluator setup and describe consolidated test cases [skip ci]",
             "author": {
               "name": "Mario Rodriguez",
               "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794537088000
+              "time": 1794538835000
             },
             "committer": {
-              "name": "GitHub",
-              "email": "noreply@github.com",
-              "time": 1794537088000
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794538835000
             },
             "branch": "master"
           },
@@ -219,12 +219,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 343,
+                      "duration": 442,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T02:32:05.966Z",
+                      "startTime": "2026-11-13T03:05:17.618Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -282,12 +282,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 750,
+                      "duration": 337,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T02:32:06.382Z",
+                      "startTime": "2026-11-13T03:05:18.116Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -345,12 +345,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 362,
+                      "duration": 452,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T02:32:07.162Z",
+                      "startTime": "2026-11-13T03:05:18.484Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -408,12 +408,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 361,
+                      "duration": 283,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T02:32:07.549Z",
+                      "startTime": "2026-11-13T03:05:18.956Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -471,12 +471,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 255,
+                      "duration": 373,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T02:32:07.934Z",
+                      "startTime": "2026-11-13T03:05:19.260Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -534,12 +534,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 278,
+                      "duration": 220,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T02:32:08.214Z",
+                      "startTime": "2026-11-13T03:05:19.655Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -597,12 +597,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 267,
+                      "duration": 186,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T02:32:08.510Z",
+                      "startTime": "2026-11-13T03:05:19.892Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -660,12 +660,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 247,
+                      "duration": 186,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T02:32:08.793Z",
+                      "startTime": "2026-11-13T03:05:20.092Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -723,12 +723,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 536,
+                      "duration": 216,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T02:32:09.058Z",
+                      "startTime": "2026-11-13T03:05:20.294Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -786,12 +786,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 553,
+                      "duration": 211,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T02:32:09.609Z",
+                      "startTime": "2026-11-13T03:05:20.524Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -849,12 +849,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 250,
+                      "duration": 183,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T02:32:10.180Z",
+                      "startTime": "2026-11-13T03:05:20.749Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -894,8 +894,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-13T02:32:05.290Z",
-    "duration": 5175.697,
+    "startTime": "2026-11-13T03:05:16.990Z",
+    "duration": 3975.6410000000005,
     "expected": 11,
     "skipped": 0,
     "unexpected": 0,

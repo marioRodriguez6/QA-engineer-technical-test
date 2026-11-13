@@ -1,0 +1,11 @@
+{
+  "testId": "HOME-004",
+  "pageUrl": "https://botpress.com/",
+  "widgetStructure": "Shadow DOM",
+  "botName": "Botpress",
+  "userMessage": "Hola",
+  "assistantResponse": "Hola, encantado de verte por aquí.",
+  "responseTimeMs": 3776,
+  "measuredAt": "2026-11-13T03:06:41.994Z",
+  "measurement": "From immediately before pressing Enter until a new, loaded bot message with visible text is observed. Includes UI and assertion overhead."
+}

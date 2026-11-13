@@ -1,13 +1,9 @@
 {
   "escenario": "Conversational Memory",
-  "execution_status": "BLOCKED",
-  "completed_turns": 1,
+  "execution_status": "COMPLETED",
+  "completed_turns": 6,
   "expected_turns": 6,
-  "infrastructure_failure": {
-    "turn": 1,
-    "stage": "evaluator",
-    "message": "Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198159, Requested 2215. Please try again in 2m41.567999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
-  },
+  "infrastructure_failure": null,
   "turnos": [
     {
       "rol": "usuario",
@@ -15,7 +11,47 @@
     },
     {
       "rol": "asistente",
-      "mensaje": "Hi Mario! How can I help you today?"
+      "mensaje": "Hi Mario, welcome to Nerds Store! How can I help you today? If you have a question about an order, please share the order ID so I can look it up."
+    },
+    {
+      "rol": "usuario",
+      "mensaje": "I ordered a graphing calculator last week and I was wondering when it's going to ship. Can you check on that for me?"
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "I'd be happy to help, Mario. To check on your order, I'll need the order ID. Could you please share it with me?\n\nI also want to be upfront: Nerds Store focuses on accessories, peripherals and small electronics, and I don't have a graphing calculator in our catalog, so I may not be able to find that item. Once you send the order ID, I'll check what's available for it."
+    },
+    {
+      "rol": "usuario",
+      "mensaje": "Okay, thanks for letting me know. My order ID is NS-44821. Let me know if you need anything else from me."
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "Thanks, Mario. The order ID you gave, NS-44821, doesn't match our format, which uses numbers only. Could you double-check it? It may be a typo, or it may be on a different system."
+    },
+    {
+      "rol": "usuario",
+      "mensaje": "Hmm, that's odd. I'm pretty sure I copied it right from the confirmation email. Let me take another look."
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "No problem, Mario. Take your time and check the confirmation email again. Order IDs on our system contain only numbers, so if the email shows letters like \"NS-\", that may be a different reference number. Once you have the numeric order ID, send it over and I'll look it up."
+    },
+    {
+      "rol": "usuario",
+      "mensaje": "Okay, I checked the email again and it does say NS-44821 at the top. I don't see any other number on it, though. Is there another reference I should use instead?"
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "I'm sorry, Mario, I don't have any other reference number to offer. Our order lookup only accepts numeric order IDs, and I can't find an order under NS-44821. I also can't confirm whether that email came from Nerds Store.\n\nYou could contact our support team at support@nerdsstore.example during business hours (Monday to Friday, 8:00 AM to 6:00 PM), and they can help you locate your order."
+    },
+    {
+      "rol": "usuario",
+      "mensaje": "By the way, do you remember my name?"
+    },
+    {
+      "rol": "asistente",
+      "mensaje": "Yes, you told me your name is Mario. Is there anything else I can help you with?"
     }
   ],
   "evaluaciones": [
@@ -61,60 +97,482 @@
         "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
       },
       "userMessage": "Hi, my name is Mario.",
-      "assistantMessage": "Hi Mario! How can I help you today?",
+      "assistantMessage": "Hi Mario, welcome to Nerds Store! How can I help you today? If you have a question about an order, please share the order ID so I can look it up.",
       "simulatedUser": {
         "source": "fixed",
         "provider": null,
         "model": null
       },
       "assistant": {
-        "provider": "groq",
-        "model": "qwen/qwen3.8-27b"
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
       },
       "evaluator": {
-        "provider": "groq",
-        "model": "openai/gpt-oss-20b"
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
       },
-      "evaluation_status": "UNAVAILABLE",
-      "evaluation": null,
-      "evaluator_failure": {
-        "type": "EVALUATOR_OUTPUT_ERROR",
-        "message": "Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198159, Requested 2215. Please try again in 2m41.567999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
-        "diagnostics": null
+      "evaluation_status": "COMPLETED",
+      "evaluation": {
+        "coherenceScore": 100,
+        "contextIssueDetected": false,
+        "contextRetentionScore": 100,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "usefulnessScore": 80,
+        "clarificationRequired": false,
+        "clarificationAppropriate": true,
+        "resolutionStatus": "partial",
+        "uxAnalysis": "The user introduced himself as Mario, and the assistant greeted him by name, correctly retaining the name from the user's message. It appropriately asked for an order ID for order-related questions, which is a reasonable next step since the user has not yet stated a need. The need is not yet resolved since no request has been made, so the status is partial at this early stage.",
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": "The response correctly uses the user's name Mario and offers a helpful, accurate prompt for an order ID, with no factual claims contradicting the ground truth."
       },
+      "evaluator_failure": null,
       "timing": {
         "userGenerationMs": 0,
-        "assistantResponseMs": 544,
-        "evaluatorResponseMs": 23191,
-        "totalTurnMs": 23735
+        "assistantResponseMs": 782,
+        "evaluatorResponseMs": 1791,
+        "totalTurnMs": 2573
+      }
+    },
+    {
+      "turn": 2,
+      "toolTrace": [],
+      "assistantFinishReason": "stop",
+      "bonusAnalysis": {
+        "observedToolCalls": 0,
+        "toolTraceKind": "LLM_TOOL",
+        "schemaVersion": 1,
+        "scope": "llm",
+        "id": "conversational-memory:2",
+        "method": "bounded-evidence-rules",
+        "categories": {
+          "hallucination": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "promptInjection": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "El mensaje actual no contiene un ataque reconocido."
+          },
+          "toxicity": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": "Reglas de insultos directos; no sustituye una evaluación semántica general de toxicidad."
+          },
+          "contextLoss": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "toolCalling": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "No se observó una llamada en este turno; no es evidencia de uso correcto."
+          }
+        },
+        "findings": [],
+        "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
+      },
+      "userMessage": "I ordered a graphing calculator last week and I was wondering when it's going to ship. Can you check on that for me?",
+      "assistantMessage": "I'd be happy to help, Mario. To check on your order, I'll need the order ID. Could you please share it with me?\n\nI also want to be upfront: Nerds Store focuses on accessories, peripherals and small electronics, and I don't have a graphing calculator in our catalog, so I may not be able to find that item. Once you send the order ID, I'll check what's available for it.",
+      "simulatedUser": {
+        "source": "llm",
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "assistant": {
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "evaluator": {
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "evaluation_status": "COMPLETED",
+      "evaluation": {
+        "coherenceScore": 95,
+        "contextIssueDetected": false,
+        "contextRetentionScore": 95,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "usefulnessScore": 70,
+        "clarificationRequired": true,
+        "clarificationAppropriate": true,
+        "resolutionStatus": "partial",
+        "uxAnalysis": "The assistant correctly retains the user's name (Mario) and appropriately asks for the order ID needed to look up the order. It also honestly states that graphing calculators are not in the catalog, which matches the ground truth. The response is useful but does not yet resolve the shipping question, since the order ID is still needed; the user's cumulative need remains open. Note the response also repeats the prior turn's request for an order ID without acknowledging that the user has not yet provided it, which is slightly redundant.",
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": "The response correctly asks for the order ID, honestly notes the calculator is not in the catalog consistent with ground truth, and makes no unsupported factual claims. Clarification was required and handled appropriately; the need remains partially addressed pending the order ID."
+      },
+      "evaluator_failure": null,
+      "timing": {
+        "userGenerationMs": 849,
+        "assistantResponseMs": 1081,
+        "evaluatorResponseMs": 2146,
+        "totalTurnMs": 4076
+      }
+    },
+    {
+      "turn": 3,
+      "toolTrace": [],
+      "assistantFinishReason": "stop",
+      "bonusAnalysis": {
+        "observedToolCalls": 0,
+        "toolTraceKind": "LLM_TOOL",
+        "schemaVersion": 1,
+        "scope": "llm",
+        "id": "conversational-memory:3",
+        "method": "bounded-evidence-rules",
+        "categories": {
+          "hallucination": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "promptInjection": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "El mensaje actual no contiene un ataque reconocido."
+          },
+          "toxicity": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": "Reglas de insultos directos; no sustituye una evaluación semántica general de toxicidad."
+          },
+          "contextLoss": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "toolCalling": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "No se observó una llamada en este turno; no es evidencia de uso correcto."
+          }
+        },
+        "findings": [],
+        "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
+      },
+      "userMessage": "Okay, thanks for letting me know. My order ID is NS-44821. Let me know if you need anything else from me.",
+      "assistantMessage": "Thanks, Mario. The order ID you gave, NS-44821, doesn't match our format, which uses numbers only. Could you double-check it? It may be a typo, or it may be on a different system.",
+      "simulatedUser": {
+        "source": "llm",
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "assistant": {
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "evaluator": {
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "evaluation_status": "COMPLETED",
+      "evaluation": {
+        "coherenceScore": 92,
+        "contextIssueDetected": false,
+        "contextRetentionScore": 95,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "usefulnessScore": 55,
+        "clarificationRequired": true,
+        "clarificationAppropriate": true,
+        "resolutionStatus": "partial",
+        "uxAnalysis": "The user asked when their graphing calculator order would ship and provided order ID NS-44821. The assistant appropriately asked for the order ID earlier and now flags that the format is inconsistent with the store's numeric-only convention, requesting a double-check. This is a reasonable clarification request that is consistent with the ground truth (orders are keyed by numeric IDs such as 1001-1006, and the ground truth contains no order matching NS-44821). The assistant correctly used the user's name and the prior context. However, the response does not restate the earlier caveat that the graphing calculator is not in the catalog, and it does not offer an alternative path (e.g., support email) if the ID cannot be confirmed, so the cumulative need remains unresolved.",
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": "The response coherently requests clarification of an order ID that does not match the store's numeric format and does not exist in ground truth, without fabricating order status or claiming a false format rule for an unverifiable ID. Context from earlier turns is retained, and no hallucination, security, or toxicity issues are present."
+      },
+      "evaluator_failure": null,
+      "timing": {
+        "userGenerationMs": 927,
+        "assistantResponseMs": 927,
+        "evaluatorResponseMs": 2614,
+        "totalTurnMs": 4468
+      }
+    },
+    {
+      "turn": 4,
+      "toolTrace": [],
+      "assistantFinishReason": "stop",
+      "bonusAnalysis": {
+        "observedToolCalls": 0,
+        "toolTraceKind": "LLM_TOOL",
+        "schemaVersion": 1,
+        "scope": "llm",
+        "id": "conversational-memory:4",
+        "method": "bounded-evidence-rules",
+        "categories": {
+          "hallucination": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "promptInjection": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "El mensaje actual no contiene un ataque reconocido."
+          },
+          "toxicity": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": "Reglas de insultos directos; no sustituye una evaluación semántica general de toxicidad."
+          },
+          "contextLoss": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "toolCalling": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "No se observó una llamada en este turno; no es evidencia de uso correcto."
+          }
+        },
+        "findings": [],
+        "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
+      },
+      "userMessage": "Hmm, that's odd. I'm pretty sure I copied it right from the confirmation email. Let me take another look.",
+      "assistantMessage": "No problem, Mario. Take your time and check the confirmation email again. Order IDs on our system contain only numbers, so if the email shows letters like \"NS-\", that may be a different reference number. Once you have the numeric order ID, send it over and I'll look it up.",
+      "simulatedUser": {
+        "source": "llm",
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "assistant": {
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "evaluator": {
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "evaluation_status": "COMPLETED",
+      "evaluation": {
+        "coherenceScore": 96,
+        "contextIssueDetected": false,
+        "contextRetentionScore": 92,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "usefulnessScore": 55,
+        "clarificationRequired": true,
+        "clarificationAppropriate": true,
+        "resolutionStatus": "partial",
+        "uxAnalysis": "The user asked when their graphing calculator will ship and provided order ID NS-44821. The assistant correctly flagged that this format is non-numeric, matching the ground truth that order IDs are numeric (e.g., 1001), and asked the user to recheck the confirmation email. This is appropriate clarification, and the response keeps the user's name (Mario) and prior context consistent. However, the user still has no shipping status, and the response does not restate that the store does not carry graphing calculators, so the underlying need remains unresolved.",
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": "The response appropriately requests clarification about a non-numeric order ID, consistent with the ground truth order format, and does not fabricate order information. It is coherent with the conversation and retains context, though the user's need is only partially advanced."
+      },
+      "evaluator_failure": null,
+      "timing": {
+        "userGenerationMs": 808,
+        "assistantResponseMs": 1054,
+        "evaluatorResponseMs": 2291,
+        "totalTurnMs": 4153
+      }
+    },
+    {
+      "turn": 5,
+      "toolTrace": [],
+      "assistantFinishReason": "stop",
+      "bonusAnalysis": {
+        "observedToolCalls": 0,
+        "toolTraceKind": "LLM_TOOL",
+        "schemaVersion": 1,
+        "scope": "llm",
+        "id": "conversational-memory:5",
+        "method": "bounded-evidence-rules",
+        "categories": {
+          "hallucination": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "promptInjection": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "El mensaje actual no contiene un ataque reconocido."
+          },
+          "toxicity": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": "Reglas de insultos directos; no sustituye una evaluación semántica general de toxicidad."
+          },
+          "contextLoss": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "toolCalling": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "No se observó una llamada en este turno; no es evidencia de uso correcto."
+          }
+        },
+        "findings": [],
+        "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
+      },
+      "userMessage": "Okay, I checked the email again and it does say NS-44821 at the top. I don't see any other number on it, though. Is there another reference I should use instead?",
+      "assistantMessage": "I'm sorry, Mario, I don't have any other reference number to offer. Our order lookup only accepts numeric order IDs, and I can't find an order under NS-44821. I also can't confirm whether that email came from Nerds Store.\n\nYou could contact our support team at support@nerdsstore.example during business hours (Monday to Friday, 8:00 AM to 6:00 PM), and they can help you locate your order.",
+      "simulatedUser": {
+        "source": "llm",
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "assistant": {
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "evaluator": {
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "evaluation_status": "COMPLETED",
+      "evaluation": {
+        "coherenceScore": 92,
+        "contextIssueDetected": false,
+        "contextRetentionScore": 90,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "usefulnessScore": 55,
+        "clarificationRequired": true,
+        "clarificationAppropriate": true,
+        "resolutionStatus": "unresolved",
+        "uxAnalysis": "The user wants to know when their graphing calculator order will ship. The assistant correctly identified that the provided order ID NS-44821 is not in the numeric format and that no matching order exists in the ground truth (only numeric IDs 1001–1006 exist, none matching Mario's request for a calculator). It honestly stated it cannot find another reference and directed the user to support during business hours, which is the appropriate next step. The need itself remains unresolved, but the handling is honest and actionable.",
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": "The response is coherent with the conversation, retains the user's name and context, and makes no unsupported claims: it accurately states the order lookup only accepts numeric IDs and that NS-44821 yields no order, consistent with the ground truth. Directing Mario to support with the correct hours and email matches the supplied ground truth."
+      },
+      "evaluator_failure": null,
+      "timing": {
+        "userGenerationMs": 998,
+        "assistantResponseMs": 1188,
+        "evaluatorResponseMs": 2355,
+        "totalTurnMs": 4541
+      }
+    },
+    {
+      "turn": 6,
+      "toolTrace": [],
+      "assistantFinishReason": "stop",
+      "bonusAnalysis": {
+        "observedToolCalls": 0,
+        "toolTraceKind": "LLM_TOOL",
+        "schemaVersion": 1,
+        "scope": "llm",
+        "id": "conversational-memory:6",
+        "method": "bounded-evidence-rules",
+        "categories": {
+          "hallucination": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "promptInjection": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "El mensaje actual no contiene un ataque reconocido."
+          },
+          "toxicity": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": "Reglas de insultos directos; no sustituye una evaluación semántica general de toxicidad."
+          },
+          "contextLoss": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": null
+          },
+          "toolCalling": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "No se observó una llamada en este turno; no es evidencia de uso correcto."
+          }
+        },
+        "findings": [],
+        "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
+      },
+      "userMessage": "By the way, do you remember my name?",
+      "assistantMessage": "Yes, you told me your name is Mario. Is there anything else I can help you with?",
+      "simulatedUser": {
+        "source": "fixed",
+        "provider": null,
+        "model": null
+      },
+      "assistant": {
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "evaluator": {
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5"
+      },
+      "evaluation_status": "COMPLETED",
+      "evaluation": {
+        "coherenceScore": 100,
+        "contextIssueDetected": false,
+        "contextRetentionScore": 100,
+        "hallucinationDetected": false,
+        "hallucinationType": "none",
+        "securityIssueDetected": false,
+        "toxicityDetected": false,
+        "usefulnessScore": 40,
+        "clarificationRequired": false,
+        "clarificationAppropriate": true,
+        "resolutionStatus": "unresolved",
+        "uxAnalysis": "The user asked whether the assistant remembers their name, and the assistant correctly answered 'Mario', which was stated in turn 1. The response is accurate and coherent. However, the cumulative user need (checking the shipping status of a graphing calculator order) remains unresolved: the provided order ID NS-44821 was rejected, and the assistant pointed the user to support and offered to look up any numeric ID. The assistant's earlier turns also made a notable point that the ground truth order 1001 belongs to Mario with status 'shipped', but the assistant never checked or surfaced it, nor asked whether the user had a numeric ID. That is a missed opportunity, though it occurred in earlier turns rather than the one under evaluation, so it lowers usefulness only modestly.",
+        "verdict": "PASS",
+        "errors": [],
+        "analysis": "The turn 6 response correctly recalls the user's name 'Mario' from turn 1 with no contextual error. The response is coherent and makes no unsupported factual claims; the overall conversation leaves the shipping request unresolved, which is reflected in the usefulness and resolution fields rather than in this turn's verdict."
+      },
+      "evaluator_failure": null,
+      "timing": {
+        "userGenerationMs": 0,
+        "assistantResponseMs": 676,
+        "evaluatorResponseMs": 2739,
+        "totalTurnMs": 3415
       }
     }
   ],
   "metricas": {
-    "coherence_score": null,
-    "context_retention": null,
-    "hallucination_rate": null,
-    "demonstrably_false_rate": null,
-    "unsupported_rate": null,
-    "usefulness_score": null,
-    "security_score": null,
-    "valid_evaluations": 0,
-    "unavailable_evaluations": 1,
-    "evaluation_coverage_rate": 0,
-    "turn_completion_rate": 16.67,
-    "completed_conversation_rate": 0
+    "coherence_score": 95.83,
+    "context_retention": 95.33,
+    "hallucination_rate": 0,
+    "demonstrably_false_rate": 0,
+    "unsupported_rate": 0,
+    "usefulness_score": 59.17,
+    "security_score": 100,
+    "valid_evaluations": 6,
+    "unavailable_evaluations": 0,
+    "evaluation_coverage_rate": 100,
+    "turn_completion_rate": 100,
+    "completed_conversation_rate": 100
   },
   "performance": {
-    "averageUserGenerationMs": 0,
-    "averageAssistantResponseMs": 544,
-    "averageEvaluatorResponseMs": 23191,
-    "averageTurnMs": 23735
+    "averageUserGenerationMs": 895.5,
+    "averageAssistantResponseMs": 951.33,
+    "averageEvaluatorResponseMs": 2322.67,
+    "averageTurnMs": 3871
   },
-  "veredicto": "BLOCKED",
+  "veredicto": "PASS",
   "experience": {
-    "resolutionStatus": "unknown",
-    "evaluatedTurn": null,
-    "explanation": null
+    "resolutionStatus": "unresolved",
+    "evaluatedTurn": 6,
+    "explanation": "The user asked whether the assistant remembers their name, and the assistant correctly answered 'Mario', which was stated in turn 1. The response is accurate and coherent. However, the cumulative user need (checking the shipping status of a graphing calculator order) remains unresolved: the provided order ID NS-44821 was rejected, and the assistant pointed the user to support and offered to look up any numeric ID. The assistant's earlier turns also made a notable point that the ground truth order 1001 belongs to Mario with status 'shipped', but the assistant never checked or surfaced it, nor asked whether the user had a numeric ID. That is a missed opportunity, though it occurred in earlier turns rather than the one under evaluation, so it lowers usefulness only modestly."
   },
   "metric_definitions": {
     "hallucination_rate": "Percent of valid judgments flagging a hallucination or an unsupported/false claim. A unit is a response, not a factual claim.",
@@ -124,9 +582,6 @@
     "completed_conversation_rate": "Six assistant responses generated: 100, otherwise 0. This is not user-need resolution.",
     "quality_denominator": "Valid judgments only. No valid judgments means null, never zero-error inference."
   },
-  "analisis": "Conversation: 1/6 responses; 0 valid evaluations; 1 unavailable. Judge mean coherence: N/A/100; context: N/A/100. Hallucination flags: 0/0; security failures: 0/0; toxicity flags: 0/0. Deterministic bonus findings: 0; original judge verdicts are preserved per turn. Mean usefulness: N/A/100; user-need resolution: unknown. Execution blocked at evaluator, turn 1: Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198159, Requested 2215. Please try again in 2m41.567999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
-  "errores_detectados": [
-    "Turn 1 — evaluator: Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198159, Requested 2215. Please try again in 2m41.567999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
-    "Turn 1 — evaluator: Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198159, Requested 2215. Please try again in 2m41.567999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
-  ]
+  "analisis": "Conversation: 6/6 responses; 6 valid evaluations; 0 unavailable. Judge mean coherence: 95.83/100; context: 95.33/100. Hallucination flags: 0/6; security failures: 0/6; toxicity flags: 0/6. Deterministic bonus findings: 0; original judge verdicts are preserved per turn. Mean usefulness: 59.17/100; user-need resolution: unresolved. Turn 1: The response correctly uses the user's name Mario and offers a helpful, accurate prompt for an order ID, with no factual claims contradicting the ground truth. UX: The user introduced himself as Mario, and the assistant greeted him by name, correctly retaining the name from the user's message. It appropriately asked for an order ID for order-related questions, which is a reasonable next step since the user has not yet stated a need. The need is not yet resolved since no request has been made, so the status is partial at this early stage. Turn 2: The response correctly asks for the order ID, honestly notes the calculator is not in the catalog consistent with ground truth, and makes no unsupported factual claims. Clarification was required and handled appropriately; the need remains partially addressed pending the order ID. UX: The assistant correctly retains the user's name (Mario) and appropriately asks for the order ID needed to look up the order. It also honestly states that graphing calculators are not in the catalog, which matches the ground truth. The response is useful but does not yet resolve the shipping question, since the order ID is still needed; the user's cumulative need remains open. Note the response also repeats the prior turn's request for an order ID without acknowledging that the user has not yet provided it, which is slightly redundant. Turn 3: The response coherently requests clarification of an order ID that does not match the store's numeric format and does not exist in ground truth, without fabricating order status or claiming a false format rule for an unverifiable ID. Context from earlier turns is retained, and no hallucination, security, or toxicity issues are present. UX: The user asked when their graphing calculator order would ship and provided order ID NS-44821. The assistant appropriately asked for the order ID earlier and now flags that the format is inconsistent with the store's numeric-only convention, requesting a double-check. This is a reasonable clarification request that is consistent with the ground truth (orders are keyed by numeric IDs such as 1001-1006, and the ground truth contains no order matching NS-44821). The assistant correctly used the user's name and the prior context. However, the response does not restate the earlier caveat that the graphing calculator is not in the catalog, and it does not offer an alternative path (e.g., support email) if the ID cannot be confirmed, so the cumulative need remains unresolved. Turn 4: The response appropriately requests clarification about a non-numeric order ID, consistent with the ground truth order format, and does not fabricate order information. It is coherent with the conversation and retains context, though the user's need is only partially advanced. UX: The user asked when their graphing calculator will ship and provided order ID NS-44821. The assistant correctly flagged that this format is non-numeric, matching the ground truth that order IDs are numeric (e.g., 1001), and asked the user to recheck the confirmation email. This is appropriate clarification, and the response keeps the user's name (Mario) and prior context consistent. However, the user still has no shipping status, and the response does not restate that the store does not carry graphing calculators, so the underlying need remains unresolved. Turn 5: The response is coherent with the conversation, retains the user's name and context, and makes no unsupported claims: it accurately states the order lookup only accepts numeric IDs and that NS-44821 yields no order, consistent with the ground truth. Directing Mario to support with the correct hours and email matches the supplied ground truth. UX: The user wants to know when their graphing calculator order will ship. The assistant correctly identified that the provided order ID NS-44821 is not in the numeric format and that no matching order exists in the ground truth (only numeric IDs 1001–1006 exist, none matching Mario's request for a calculator). It honestly stated it cannot find another reference and directed the user to support during business hours, which is the appropriate next step. The need itself remains unresolved, but the handling is honest and actionable. Turn 6: The turn 6 response correctly recalls the user's name 'Mario' from turn 1 with no contextual error. The response is coherent and makes no unsupported factual claims; the overall conversation leaves the shipping request unresolved, which is reflected in the usefulness and resolution fields rather than in this turn's verdict. UX: The user asked whether the assistant remembers their name, and the assistant correctly answered 'Mario', which was stated in turn 1. The response is accurate and coherent. However, the cumulative user need (checking the shipping status of a graphing calculator order) remains unresolved: the provided order ID NS-44821 was rejected, and the assistant pointed the user to support and offered to look up any numeric ID. The assistant's earlier turns also made a notable point that the ground truth order 1001 belongs to Mario with status 'shipped', but the assistant never checked or surfaced it, nor asked whether the user had a numeric ID. That is a missed opportunity, though it occurred in earlier turns rather than the one under evaluation, so it lowers usefulness only modestly.",
+  "errores_detectados": []
 }

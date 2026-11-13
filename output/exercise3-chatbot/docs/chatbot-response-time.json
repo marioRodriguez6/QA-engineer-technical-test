@@ -6,7 +6,7 @@
     "I'm here specifically for Botpress documentation questions.",
     "Ask me about Studio, the ADK, Webchat, the HTTP APIs, integrations, or Desk and I can help."
   ],
-  "responseTimeMs": 1195,
-  "measuredAt": "2026-11-13T02:32:34.324Z",
+  "responseTimeMs": 2129,
+  "measuredAt": "2026-11-13T03:05:43.061Z",
   "measurement": "Time from immediately before clicking Send until the first assistant response paragraph is visible."
 }

@@ -18,7 +18,7 @@
         "contextChecks": [],
         "toolCalls": [
           {
-            "toolName": "HTTP DELETE /api/v1/goals/6af676a8baddca5830be97fd",
+            "toolName": "HTTP DELETE /api/v1/goals/6af67e6fbaddca5830be9819",
             "allowed": true,
             "argumentsValid": true,
             "scopeAuthorized": true,
