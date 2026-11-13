@@ -37,6 +37,12 @@ test('complete evidence retains skipped Docs case, weighted metrics and distinct
   assert.equal(r.plannedUnits, 24); assert.equal(r.counts.PASS, 23); assert.equal(r.counts.SKIPPED, 1);
   assert.equal(r.metrics.passExecutedPercent, 100); assert.equal(r.metrics.passedPlannedPercent, 95.83);
   assert.equal(r.metrics.validEvaluations, 30); assert.equal(r.metrics.meanTimesMs.homepageResponseMs.mean, 5114);
+  assert.equal(r.suites[0].tests[0].title, 'API-001: Case');
+  assert.equal(r.suites[0].tests[0].description, 'Comprobar que la API está operativa');
+  assert.match(renderMarkdown(r), /API-002 \| Registrar un usuario y verificar su nombre y correo/);
+  assert.match(renderMarkdown(r), /HOME-002 \| Abrir, cerrar y volver a abrir el chatbot/);
+  assert.match(renderMarkdown(r), /CHATBOT-003 \| Validar el nombre del bot en Docs \| SKIPPED/);
+
   assert.equal(r.metrics.meanTimesMs.apiTestMs.mean, 50); assert.equal(r.overall, 'INCOMPLETE');
   assert.equal(r.bonus.toolCalling.status, 'NO_TRACE'); assert.equal(r.bonus.toolCalling.detectedErrors, null);
   assert.match(renderMarkdown(r), /NOT_EVALUATED/);

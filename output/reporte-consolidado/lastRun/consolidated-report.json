@@ -971,7 +971,8 @@
           "status": "PASS",
           "durationMs": 343,
           "attempts": 1,
-          "errors": []
+          "errors": [],
+          "description": "Comprobar que la API está operativa"
         },
         {
           "id": "API-002",
@@ -979,7 +980,8 @@
           "status": "PASS",
           "durationMs": 750,
           "attempts": 1,
-          "errors": []
+          "errors": [],
+          "description": "Registrar un usuario y verificar su nombre y correo"
         },
         {
           "id": "API-003",
@@ -987,7 +989,8 @@
           "status": "PASS",
           "durationMs": 362,
           "attempts": 1,
-          "errors": []
+          "errors": [],
+          "description": "Iniciar sesión con credenciales válidas y obtener un token"
         },
         {
           "id": "API-004",
@@ -995,7 +998,8 @@
           "status": "PASS",
           "durationMs": 361,
           "attempts": 1,
-          "errors": []
+          "errors": [],
+          "description": "Rechazar un inicio de sesión con credenciales incorrectas"
         },
         {
           "id": "API-005",
@@ -1003,7 +1007,8 @@
           "status": "PASS",
           "durationMs": 255,
           "attempts": 1,
-          "errors": []
+          "errors": [],
+          "description": "Crear el primer objetivo y validar sus datos, ID y fecha"
         },
         {
           "id": "API-006",
@@ -1011,7 +1016,8 @@
           "status": "PASS",
           "durationMs": 278,
           "attempts": 1,
-          "errors": []
+          "errors": [],
+          "description": "Crear un segundo objetivo con un ID diferente"
         },
         {
           "id": "API-007",
@@ -1019,7 +1025,8 @@
           "status": "PASS",
           "durationMs": 267,
           "attempts": 1,
-          "errors": []
+          "errors": [],
+          "description": "Consultar el primer objetivo y comprobar la integridad de sus datos"
         },
         {
           "id": "API-008",
@@ -1027,7 +1034,8 @@
           "status": "PASS",
           "durationMs": 247,
           "attempts": 1,
-          "errors": []
+          "errors": [],
+          "description": "Consultar el segundo objetivo y comprobar la integridad de sus datos"
         },
         {
           "id": "API-009",
@@ -1035,7 +1043,8 @@
           "status": "PASS",
           "durationMs": 536,
           "attempts": 1,
-          "errors": []
+          "errors": [],
+          "description": "Listar los objetivos y comprobar la cantidad y los IDs creados"
         },
         {
           "id": "API-010",
@@ -1043,7 +1052,8 @@
           "status": "PASS",
           "durationMs": 553,
           "attempts": 1,
-          "errors": []
+          "errors": [],
+          "description": "Eliminar el primer objetivo"
         },
         {
           "id": "API-011",
@@ -1051,7 +1061,8 @@
           "status": "PASS",
           "durationMs": 250,
           "attempts": 1,
-          "errors": []
+          "errors": [],
+          "description": "Comprobar que el objetivo eliminado ya no se puede consultar"
         }
       ]
     },
@@ -1065,7 +1076,8 @@
           "status": "PASS",
           "durationMs": 1068,
           "attempts": 1,
-          "errors": []
+          "errors": [],
+          "description": "Cargar Botpress Docs y comprobar que el widget está disponible"
         },
         {
           "id": "CHATBOT-002",
@@ -1073,7 +1085,8 @@
           "status": "PASS",
           "durationMs": 1311,
           "attempts": 1,
-          "errors": []
+          "errors": [],
+          "description": "Abrir y cerrar el panel de chat de Docs"
         },
         {
           "id": "CHATBOT-003",
@@ -1081,7 +1094,8 @@
           "status": "SKIPPED",
           "durationMs": null,
           "attempts": 1,
-          "errors": []
+          "errors": [],
+          "description": "Validar el nombre del bot en Docs"
         },
         {
           "id": "CHATBOT-004",
@@ -1089,7 +1103,8 @@
           "status": "PASS",
           "durationMs": 2579,
           "attempts": 1,
-          "errors": []
+          "errors": [],
+          "description": "Enviar Hola en Docs, comprobar la respuesta y medir su tiempo"
         }
       ]
     },
@@ -1103,7 +1118,8 @@
           "status": "PASS",
           "durationMs": 6458,
           "attempts": 1,
-          "errors": []
+          "errors": [],
+          "description": "Cargar la página principal y comprobar el botón flotante"
         },
         {
           "id": "HOME-002",
@@ -1111,7 +1127,8 @@
           "status": "PASS",
           "durationMs": 10022,
           "attempts": 1,
-          "errors": []
+          "errors": [],
+          "description": "Abrir, cerrar y volver a abrir el chatbot de la página principal"
         },
         {
           "id": "HOME-003",
@@ -1119,7 +1136,8 @@
           "status": "PASS",
           "durationMs": 7725,
           "attempts": 1,
-          "errors": []
+          "errors": [],
+          "description": "Validar el nombre que muestra el chatbot de la página principal"
         },
         {
           "id": "HOME-004",
@@ -1127,7 +1145,8 @@
           "status": "PASS",
           "durationMs": 20719,
           "attempts": 1,
-          "errors": []
+          "errors": [],
+          "description": "Enviar Hola en la página principal, comprobar la respuesta y medir su tiempo"
         }
       ]
     }
@@ -3398,5 +3417,9 @@
       null,
       "unknown"
     ]
-  ]
+  ],
+  "presentationRevision": {
+    "updatedAt": "2026-11-13T02:59:23.986Z",
+    "note": "Se añadieron descripciones en español a los casos API/UI usando los resultados guardados. Esta actualización no ejecutó pruebas ni cambió métricas, estados o juicios."
+  }
 }

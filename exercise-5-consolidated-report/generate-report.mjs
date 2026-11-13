@@ -7,6 +7,28 @@ import { pathToFileURL } from 'node:url';
 
 export const scenarioIds = ['simple-query', 'topic-change', 'ambiguous-information', 'conversational-memory', 'prompt-injection'];
 const inventories = { api: ['API', 11], 'chatbot-docs': ['CHATBOT', 4], 'chatbot-homepage': ['HOME', 4] };
+const caseDescriptions = {
+  "API-001": "Comprobar que la API está operativa",
+  "API-002": "Registrar un usuario y verificar su nombre y correo",
+  "API-003": "Iniciar sesión con credenciales válidas y obtener un token",
+  "API-004": "Rechazar un inicio de sesión con credenciales incorrectas",
+  "API-005": "Crear el primer objetivo y validar sus datos, ID y fecha",
+  "API-006": "Crear un segundo objetivo con un ID diferente",
+  "API-007": "Consultar el primer objetivo y comprobar la integridad de sus datos",
+  "API-008": "Consultar el segundo objetivo y comprobar la integridad de sus datos",
+  "API-009": "Listar los objetivos y comprobar la cantidad y los IDs creados",
+  "API-010": "Eliminar el primer objetivo",
+  "API-011": "Comprobar que el objetivo eliminado ya no se puede consultar",
+  "CHATBOT-001": "Cargar Botpress Docs y comprobar que el widget está disponible",
+  "CHATBOT-002": "Abrir y cerrar el panel de chat de Docs",
+  "CHATBOT-003": "Validar el nombre del bot en Docs",
+  "CHATBOT-004": "Enviar Hola en Docs, comprobar la respuesta y medir su tiempo",
+  "HOME-001": "Cargar la página principal y comprobar el botón flotante",
+  "HOME-002": "Abrir, cerrar y volver a abrir el chatbot de la página principal",
+  "HOME-003": "Validar el nombre que muestra el chatbot de la página principal",
+  "HOME-004": "Enviar Hola en la página principal, comprobar la respuesta y medir su tiempo"
+};
+const describeCase = test => caseDescriptions[test.id] ?? test.title ?? test.id;
 const states = ['PASS', 'FAIL', 'REVIEW', 'BLOCKED', 'SKIPPED', 'MISSING', 'ERROR', 'FLAKY'];
 const mean = values => values.length ? Number((values.reduce((a, b) => a + b, 0) / values.length).toFixed(2)) : null;
 const pct = (n, d) => d ? Number((100 * n / d).toFixed(2)) : null;
@@ -167,7 +189,7 @@ export function buildReport(inputRoot, metadata = {}) {
       const errors = [...new Set(attempts.flatMap(attempt => (attempt.errors ?? []).map(error => error.message ?? String(error))))];
       const durationMs = last && last.status !== 'skipped' && numeric(last.duration) ? last.duration : null;
       if (durationMs !== null) timing[suite === 'api' ? 'apiTestMs' : suite === 'chatbot-docs' ? 'docsTestMs' : 'homepageTestMs'].push(durationMs);
-      rows.push({ id, title: test?.title ?? id, status, durationMs, attempts: attempts.length, errors });
+      rows.push({ id, title: test?.title ?? id, description: caseDescriptions[id] ?? test?.title ?? id, status, durationMs, attempts: attempts.length, errors });
       units.push({ suite, id, status });
     }
     for (const test of tests) if (!expectedIds.some(id => test.title?.startsWith(`${id}:`))) issues.push(`${suite}: unexpected test inventory entry ${cell(test.title)}; review the configured inventory.`);
@@ -256,6 +278,7 @@ export function renderMarkdown(r) {
     `Ejecución: ${r.metadata.runUrl ?? 'Entrada local'} · Intento: ${r.metadata.attempt ?? 'N/A'}`, '',
     `Commit: \`${r.metadata.commit ?? 'No suministrado'}\` · Generado: ${r.generatedAt}`, '',
     ...(r.metricRevision ? [`Revisión de métricas: ${r.metricRevision.note}`, ''] : []),
+    ...(r.presentationRevision ? [`Presentación actualizada: ${safe(r.presentationRevision.note)}`, ''] : []),
     '## Resumen general', '',
     `**${r.counts.PASS} PASS · ${r.counts.FAIL} FAIL · ${r.counts.SKIPPED} SKIPPED** en ${r.plannedUnits} unidades planificadas.`, '',
     `${r.counts.BLOCKED} bloqueadas, ${r.counts.REVIEW} para revisión, ${r.counts.FLAKY} inestables, ${r.counts.MISSING} ausentes y ${r.counts.ERROR} inválidas/con error.`, '',
@@ -310,8 +333,8 @@ export function renderMarkdown(r) {
     const n = state => suite.tests.filter(t => t.status === state).length;
     lines.push(`### ${scope[suite.suite]}`, '', `**${n('PASS')} PASS · ${n('FAIL')} FAIL · ${n('SKIPPED')} SKIPPED** · ${suite.tests.length} casos planificados.`, '');
     lines.push(...details('Revisar resultados por caso y evidencia de aserciones', [
-      table(['Caso', 'Resultado', 'Duración ms', 'Intentos'], suite.tests.map(t => [t.id, t.status, t.durationMs, t.attempts])), '',
-      ...suite.tests.flatMap(t => t.errors.map(e => `- **${t.id}:** ${safe(e)}`)),
+      table(['Caso', 'Descripción', 'Resultado', 'Duración ms', 'Intentos'], suite.tests.map(t => [t.id, safe(describeCase(t)), t.status, t.durationMs, t.attempts])), '',
+      ...suite.tests.flatMap(t => t.errors.map(e => `- **${t.id} · ${safe(describeCase(t))}:** ${safe(e)}`)),
     ]));
   }
   const timingLabels = { llmAssistantMs: 'Respuesta del asistente LLM', llmEvaluatorMs: 'Respuesta del juez LLM', apiTestMs: 'Prueba API (preparación y aserciones)', docsTestMs: 'Prueba UI de Docs', homepageTestMs: 'Prueba UI de la página principal', docsResponseMs: 'Primera respuesta visible de Docs', homepageResponseMs: 'Primera respuesta visible de la página principal' };

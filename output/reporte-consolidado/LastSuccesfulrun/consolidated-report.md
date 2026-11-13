@@ -6,6 +6,8 @@ Ejecución: https://github.com/marioRodriguez6/QA-engineer-technical-test/action
 
 Commit: `356834022106d1848a4f9f0966ca2011180789b1` · Generado: 2026-11-13T02:13:25.128Z
 
+Presentación actualizada: Se añadieron descripciones en español a los casos API/UI usando los resultados guardados. Esta actualización no ejecutó pruebas ni cambió métricas, estados o juicios.
+
 ## Resumen general
 
 **22 PASS · 1 FAIL · 1 SKIPPED** en 24 unidades planificadas.
@@ -475,19 +477,19 @@ Conversation: 6/6 responses; 6 valid evaluations; 0 unavailable. Judge mean cohe
 <details>
 <summary>Revisar resultados por caso y evidencia de aserciones</summary>
 
-| Caso | Resultado | Duración ms | Intentos |
-| --- | --- | --- | --- |
-| API-001 | PASS | 589 | 1 |
-| API-002 | PASS | 408 | 1 |
-| API-003 | PASS | 338 | 1 |
-| API-004 | PASS | 371 | 1 |
-| API-005 | PASS | 272 | 1 |
-| API-006 | PASS | 300 | 1 |
-| API-007 | PASS | 293 | 1 |
-| API-008 | PASS | 242 | 1 |
-| API-009 | PASS | 254 | 1 |
-| API-010 | PASS | 522 | 1 |
-| API-011 | PASS | 249 | 1 |
+| Caso | Descripción | Resultado | Duración ms | Intentos |
+| --- | --- | --- | --- | --- |
+| API-001 | Comprobar que la API está operativa | PASS | 589 | 1 |
+| API-002 | Registrar un usuario y verificar su nombre y correo | PASS | 408 | 1 |
+| API-003 | Iniciar sesión con credenciales válidas y obtener un token | PASS | 338 | 1 |
+| API-004 | Rechazar un inicio de sesión con credenciales incorrectas | PASS | 371 | 1 |
+| API-005 | Crear el primer objetivo y validar sus datos, ID y fecha | PASS | 272 | 1 |
+| API-006 | Crear un segundo objetivo con un ID diferente | PASS | 300 | 1 |
+| API-007 | Consultar el primer objetivo y comprobar la integridad de sus datos | PASS | 293 | 1 |
+| API-008 | Consultar el segundo objetivo y comprobar la integridad de sus datos | PASS | 242 | 1 |
+| API-009 | Listar los objetivos y comprobar la cantidad y los IDs creados | PASS | 254 | 1 |
+| API-010 | Eliminar el primer objetivo | PASS | 522 | 1 |
+| API-011 | Comprobar que el objetivo eliminado ya no se puede consultar | PASS | 249 | 1 |
 
 
 </details>
@@ -499,12 +501,12 @@ Conversation: 6/6 responses; 6 valid evaluations; 0 unavailable. Judge mean cohe
 <details>
 <summary>Revisar resultados por caso y evidencia de aserciones</summary>
 
-| Caso | Resultado | Duración ms | Intentos |
-| --- | --- | --- | --- |
-| CHATBOT-001 | PASS | 1283 | 1 |
-| CHATBOT-002 | PASS | 1487 | 1 |
-| CHATBOT-003 | SKIPPED | N/A | 1 |
-| CHATBOT-004 | PASS | 2786 | 1 |
+| Caso | Descripción | Resultado | Duración ms | Intentos |
+| --- | --- | --- | --- | --- |
+| CHATBOT-001 | Cargar Botpress Docs y comprobar que el widget está disponible | PASS | 1283 | 1 |
+| CHATBOT-002 | Abrir y cerrar el panel de chat de Docs | PASS | 1487 | 1 |
+| CHATBOT-003 | Validar el nombre del bot en Docs | SKIPPED | N/A | 1 |
+| CHATBOT-004 | Enviar Hola en Docs, comprobar la respuesta y medir su tiempo | PASS | 2786 | 1 |
 
 
 </details>
@@ -516,12 +518,12 @@ Conversation: 6/6 responses; 6 valid evaluations; 0 unavailable. Judge mean cohe
 <details>
 <summary>Revisar resultados por caso y evidencia de aserciones</summary>
 
-| Caso | Resultado | Duración ms | Intentos |
-| --- | --- | --- | --- |
-| HOME-001 | PASS | 5912 | 1 |
-| HOME-002 | PASS | 10208 | 1 |
-| HOME-003 | PASS | 7359 | 1 |
-| HOME-004 | PASS | 21310 | 1 |
+| Caso | Descripción | Resultado | Duración ms | Intentos |
+| --- | --- | --- | --- | --- |
+| HOME-001 | Cargar la página principal y comprobar el botón flotante | PASS | 5912 | 1 |
+| HOME-002 | Abrir, cerrar y volver a abrir el chatbot de la página principal | PASS | 10208 | 1 |
+| HOME-003 | Validar el nombre que muestra el chatbot de la página principal | PASS | 7359 | 1 |
+| HOME-004 | Enviar Hola en la página principal, comprobar la respuesta y medir su tiempo | PASS | 21310 | 1 |
 
 
 </details>
@@ -649,3 +651,4 @@ Solo se lee el directorio de entrada de esta ejecución e intento. Nunca se util
 - chatbot-homepage/test-results/exercise-3-chatbot-testing-9838e-ew-bot-response-and-latency-chromium/homepage-response-time.json
 
 </details>
+
