@@ -202,6 +202,9 @@ Los resultados quedan en `output/exercise1-JSON/evaluator-validation/validation-
 
 CI ejecuta automáticamente solo las pruebas sin llamadas al proveedor. La calibración real permanece separada para evitar consumo adicional y sus métricas no se mezclan con las de los cinco escenarios. Si una respuesta nueva del juez omite campos requeridos o contiene valores inválidos, la evaluación queda no disponible; no se inventan valores para cumplir el esquema.
 
+### Ejemplo visual - Resultado esperado
+![Resultado esperado](media/EXERCISE1_LLM.jpeg)
+
 ## Ejercicio 2 — Pruebas de API
 
 Servicio evaluado: https://goal-tracker-api.onrender.com
@@ -249,6 +252,9 @@ npx playwright show-report output/exercise2API-Reports/html
 ```
 
 Este HTML pertenece al ejercicio 2; no es el reporte consolidado del ejercicio 5.
+
+### Ejemplo visual - Resultado esperado
+![Resultado esperado](media/EXERCISE2_API-REST-TEST.jpeg)
 
 ## Ejercicio 3 — Pruebas de chatbot
 
@@ -317,6 +323,9 @@ Una ejecución local verificada aprobó los cuatro casos de la página principal
 `CHATBOT-003` está omitido porque la interfaz de Docs inspeccionada no expone un nombre de bot distintivo. Validar el nombre en la página principal no sustituye ese requisito de Docs: es cobertura complementaria sobre otra página. La omisión permanece visible.
 
 Ambas suites dependen de páginas externas en vivo. Revisa cambios de interfaz o respuesta con sus evidencias antes de modificar las aserciones.
+
+### Ejemplo visual - Resultado esperado
+![Resultado esperado](media/EXERCISE3_CHATBOT.jpeg)
 
 ## Ejercicio 4 — CI/CD
 
