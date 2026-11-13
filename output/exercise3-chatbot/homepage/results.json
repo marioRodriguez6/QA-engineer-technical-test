@@ -19,24 +19,24 @@
     "maxFailures": 0,
     "metadata": {
       "ci": {
-        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/61e9161d7a172f38dd62e1f932421de85ee9a448",
-        "commitHash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
-        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43342991623"
+        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
+        "commitHash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
+        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43347955954"
       },
       "gitCommit": {
-        "shortHash": "61e9161",
-        "hash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
-        "subject": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]",
-        "body": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]\n",
+        "shortHash": "0fbd54a",
+        "hash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
+        "subject": "fix: combine judge and bonus evidence coverage",
+        "body": "fix: combine judge and bonus evidence coverage",
         "author": {
-          "name": "github-actions[bot]",
-          "email": "41898282+github-actions[bot]@users.noreply.github.com",
-          "time": 1794531984000
+          "name": "Mario Rodriguez",
+          "email": "54407177+marioRodriguez6@users.noreply.github.com",
+          "time": 1794534668000
         },
         "committer": {
-          "name": "github-actions[bot]",
-          "email": "41898282+github-actions[bot]@users.noreply.github.com",
-          "time": 1794531984000
+          "name": "Mario Rodriguez",
+          "email": "54407177+marioRodriguez6@users.noreply.github.com",
+          "time": 1794534668000
         },
         "branch": "master"
       },
@@ -50,24 +50,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/61e9161d7a172f38dd62e1f932421de85ee9a448",
-            "commitHash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43342991623"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
+            "commitHash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43347955954"
           },
           "gitCommit": {
-            "shortHash": "61e9161",
-            "hash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
-            "subject": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]",
-            "body": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]\n",
+            "shortHash": "0fbd54a",
+            "hash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
+            "subject": "fix: combine judge and bonus evidence coverage",
+            "body": "fix: combine judge and bonus evidence coverage",
             "author": {
-              "name": "github-actions[bot]",
-              "email": "41898282+github-actions[bot]@users.noreply.github.com",
-              "time": 1794531984000
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794534668000
             },
             "committer": {
-              "name": "github-actions[bot]",
-              "email": "41898282+github-actions[bot]@users.noreply.github.com",
-              "time": 1794531984000
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794534668000
             },
             "branch": "master"
           },
@@ -93,24 +93,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/61e9161d7a172f38dd62e1f932421de85ee9a448",
-            "commitHash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43342991623"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
+            "commitHash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43347955954"
           },
           "gitCommit": {
-            "shortHash": "61e9161",
-            "hash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
-            "subject": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]",
-            "body": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]\n",
+            "shortHash": "0fbd54a",
+            "hash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
+            "subject": "fix: combine judge and bonus evidence coverage",
+            "body": "fix: combine judge and bonus evidence coverage",
             "author": {
-              "name": "github-actions[bot]",
-              "email": "41898282+github-actions[bot]@users.noreply.github.com",
-              "time": 1794531984000
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794534668000
             },
             "committer": {
-              "name": "github-actions[bot]",
-              "email": "41898282+github-actions[bot]@users.noreply.github.com",
-              "time": 1794531984000
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794534668000
             },
             "branch": "master"
           },
@@ -210,17 +210,17 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 6676,
+                      "duration": 7106,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "Homepage DOM ready after 1719 ms\n"
+                          "text": "Homepage DOM ready after 1935 ms\n"
                         },
                         {
-                          "text": "Homepage load event observed after 4395 ms\n"
+                          "text": "Homepage load event observed after 4704 ms\n"
                         },
                         {
-                          "text": "Chatbot launcher visible 1105 ms after load\n"
+                          "text": "Chatbot launcher visible 1113 ms after load\n"
                         }
                       ],
                       "stderr": [],
@@ -228,14 +228,14 @@
                       "steps": [
                         {
                           "title": "Wait for window.load, which starts the webchat loader",
-                          "duration": 2676
+                          "duration": 2767
                         },
                         {
                           "title": "Wait for the floating launcher after page load",
-                          "duration": 1104
+                          "duration": 1113
                         }
                       ],
-                      "startTime": "2026-11-13T01:12:31.130Z",
+                      "startTime": "2026-11-13T01:52:22.478Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -280,17 +280,17 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 11062,
+                      "duration": 12790,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "Homepage DOM ready after 1821 ms\n"
+                          "text": "Homepage DOM ready after 2619 ms\n"
                         },
                         {
-                          "text": "Homepage load event observed after 4289 ms\n"
+                          "text": "Homepage load event observed after 5184 ms\n"
                         },
                         {
-                          "text": "Chatbot launcher visible 993 ms after load\n"
+                          "text": "Chatbot launcher visible 1255 ms after load\n"
                         }
                       ],
                       "stderr": [],
@@ -298,22 +298,22 @@
                       "steps": [
                         {
                           "title": "Wait for window.load, which starts the webchat loader",
-                          "duration": 2462
+                          "duration": 2564
                         },
                         {
                           "title": "Wait for the floating launcher after page load",
-                          "duration": 993
+                          "duration": 1254
                         },
                         {
                           "title": "Close using the real header control",
-                          "duration": 1569
+                          "duration": 1378
                         },
                         {
                           "title": "Reopen using the floating launcher",
-                          "duration": 1399
+                          "duration": 1592
                         }
                       ],
-                      "startTime": "2026-11-13T01:12:38.629Z",
+                      "startTime": "2026-11-13T01:52:32.628Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -358,17 +358,17 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 7614,
+                      "duration": 7502,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "Homepage DOM ready after 1390 ms\n"
+                          "text": "Homepage DOM ready after 1393 ms\n"
                         },
                         {
-                          "text": "Homepage load event observed after 3912 ms\n"
+                          "text": "Homepage load event observed after 3929 ms\n"
                         },
                         {
-                          "text": "Chatbot launcher visible 857 ms after load\n"
+                          "text": "Chatbot launcher visible 1017 ms after load\n"
                         }
                       ],
                       "stderr": [],
@@ -376,14 +376,14 @@
                       "steps": [
                         {
                           "title": "Wait for window.load, which starts the webchat loader",
-                          "duration": 2521
+                          "duration": 2534
                         },
                         {
                           "title": "Wait for the floating launcher after page load",
-                          "duration": 856
+                          "duration": 1016
                         }
                       ],
-                      "startTime": "2026-11-13T01:12:50.288Z",
+                      "startTime": "2026-11-13T01:52:46.096Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -428,20 +428,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 23075,
+                      "duration": 23929,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "Homepage DOM ready after 1334 ms\n"
+                          "text": "Homepage DOM ready after 1357 ms\n"
                         },
                         {
-                          "text": "Homepage load event observed after 4253 ms\n"
+                          "text": "Homepage load event observed after 4028 ms\n"
                         },
                         {
-                          "text": "Chatbot launcher visible 960 ms after load\n"
+                          "text": "Chatbot launcher visible 963 ms after load\n"
                         },
                         {
-                          "text": "{\"testId\":\"HOME-004\",\"pageUrl\":\"https://botpress.com/\",\"widgetStructure\":\"Shadow DOM\",\"botName\":\"Botpress\",\"userMessage\":\"Hola\",\"assistantResponse\":\"Hola, ¿en qué te puedo ayudar con Botpress hoy? Puedes preguntarme por planes, funcionalidades o cómo podría ayudar a tu negocio.\",\"responseTimeMs\":4142,\"measuredAt\":\"2026-11-13T01:13:09.860Z\",\"measurement\":\"From immediately before pressing Enter until a new, loaded bot message with visible text is observed. Includes UI and assertion overhead.\"}\n"
+                          "text": "{\"testId\":\"HOME-004\",\"pageUrl\":\"https://botpress.com/\",\"widgetStructure\":\"Shadow DOM\",\"botName\":\"Botpress\",\"userMessage\":\"Hola\",\"assistantResponse\":\"Hola, encantado de hablar contigo. ¿Qué te gustaría lograr con Botpress: automatizar soporte, reservar demos o algo diferente?\",\"responseTimeMs\":4221,\"measuredAt\":\"2026-11-13T01:53:05.893Z\",\"measurement\":\"From immediately before pressing Enter until a new, loaded bot message with visible text is observed. Includes UI and assertion overhead.\"}\n"
                         }
                       ],
                       "stderr": [],
@@ -449,14 +449,14 @@
                       "steps": [
                         {
                           "title": "Wait for window.load, which starts the webchat loader",
-                          "duration": 2919
+                          "duration": 2668
                         },
                         {
                           "title": "Wait for the floating launcher after page load",
-                          "duration": 956
+                          "duration": 963
                         }
                       ],
-                      "startTime": "2026-11-13T01:12:58.366Z",
+                      "startTime": "2026-11-13T01:52:54.104Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -512,8 +512,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-13T01:12:30.531Z",
-    "duration": 52065.911,
+    "startTime": "2026-11-13T01:52:21.891Z",
+    "duration": 57364.371,
     "expected": 4,
     "skipped": 0,
     "unexpected": 0,

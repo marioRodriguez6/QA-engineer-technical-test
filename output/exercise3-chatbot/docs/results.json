@@ -19,24 +19,24 @@
     "maxFailures": 0,
     "metadata": {
       "ci": {
-        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/61e9161d7a172f38dd62e1f932421de85ee9a448",
-        "commitHash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
-        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43342991623"
+        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
+        "commitHash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
+        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43347955954"
       },
       "gitCommit": {
-        "shortHash": "61e9161",
-        "hash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
-        "subject": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]",
-        "body": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]\n",
+        "shortHash": "0fbd54a",
+        "hash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
+        "subject": "fix: combine judge and bonus evidence coverage",
+        "body": "fix: combine judge and bonus evidence coverage",
         "author": {
-          "name": "github-actions[bot]",
-          "email": "41898282+github-actions[bot]@users.noreply.github.com",
-          "time": 1794531984000
+          "name": "Mario Rodriguez",
+          "email": "54407177+marioRodriguez6@users.noreply.github.com",
+          "time": 1794534668000
         },
         "committer": {
-          "name": "github-actions[bot]",
-          "email": "41898282+github-actions[bot]@users.noreply.github.com",
-          "time": 1794531984000
+          "name": "Mario Rodriguez",
+          "email": "54407177+marioRodriguez6@users.noreply.github.com",
+          "time": 1794534668000
         },
         "branch": "master"
       },
@@ -50,24 +50,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/61e9161d7a172f38dd62e1f932421de85ee9a448",
-            "commitHash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43342991623"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
+            "commitHash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43347955954"
           },
           "gitCommit": {
-            "shortHash": "61e9161",
-            "hash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
-            "subject": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]",
-            "body": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]\n",
+            "shortHash": "0fbd54a",
+            "hash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
+            "subject": "fix: combine judge and bonus evidence coverage",
+            "body": "fix: combine judge and bonus evidence coverage",
             "author": {
-              "name": "github-actions[bot]",
-              "email": "41898282+github-actions[bot]@users.noreply.github.com",
-              "time": 1794531984000
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794534668000
             },
             "committer": {
-              "name": "github-actions[bot]",
-              "email": "41898282+github-actions[bot]@users.noreply.github.com",
-              "time": 1794531984000
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794534668000
             },
             "branch": "master"
           },
@@ -93,24 +93,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/61e9161d7a172f38dd62e1f932421de85ee9a448",
-            "commitHash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43342991623"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
+            "commitHash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43347955954"
           },
           "gitCommit": {
-            "shortHash": "61e9161",
-            "hash": "61e9161d7a172f38dd62e1f932421de85ee9a448",
-            "subject": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]",
-            "body": "docs: publish QA report for run 43341920622 attempt 1 [skip ci]\n",
+            "shortHash": "0fbd54a",
+            "hash": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
+            "subject": "fix: combine judge and bonus evidence coverage",
+            "body": "fix: combine judge and bonus evidence coverage",
             "author": {
-              "name": "github-actions[bot]",
-              "email": "41898282+github-actions[bot]@users.noreply.github.com",
-              "time": 1794531984000
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794534668000
             },
             "committer": {
-              "name": "github-actions[bot]",
-              "email": "41898282+github-actions[bot]@users.noreply.github.com",
-              "time": 1794531984000
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794534668000
             },
             "branch": "master"
           },
@@ -210,12 +210,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1141,
+                      "duration": 1146,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:12:17.626Z",
+                      "startTime": "2026-11-13T01:52:16.023Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -260,7 +260,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1396,
+                      "duration": 1685,
                       "errors": [],
                       "stdout": [
                         {
@@ -272,18 +272,18 @@
                       "steps": [
                         {
                           "title": "Establish a closed initial state",
-                          "duration": 289
+                          "duration": 427
                         },
                         {
                           "title": "Open the panel using Ask Docs",
-                          "duration": 101
+                          "duration": 85
                         },
                         {
                           "title": "Close the panel using Ask Docs",
-                          "duration": 76
+                          "duration": 66
                         }
                       ],
-                      "startTime": "2026-11-13T01:12:19.173Z",
+                      "startTime": "2026-11-13T01:52:19.754Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -342,7 +342,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:12:20.801Z",
+                      "startTime": "2026-11-13T01:52:21.715Z",
                       "annotations": [
                         {
                           "type": "skip",
@@ -380,19 +380,19 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2487,
+                      "duration": 3597,
                       "errors": [],
                       "stdout": [
                         {
                           "text": "Chatbot state: current=true, requested=true\n"
                         },
                         {
-                          "text": "CHATBOT-004 response time: 1078 ms\n"
+                          "text": "CHATBOT-004 response time: 2188 ms\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:12:20.802Z",
+                      "startTime": "2026-11-13T01:52:21.715Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -433,8 +433,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-13T01:12:17.190Z",
-    "duration": 6429.227,
+    "startTime": "2026-11-13T01:52:15.591Z",
+    "duration": 10099.692,
     "expected": 3,
     "skipped": 1,
     "unexpected": 0,

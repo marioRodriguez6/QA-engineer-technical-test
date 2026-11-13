@@ -40,14 +40,14 @@
           },
           {
             "field": "goal._id",
-            "expected": "6af663e8baddca5830be97c3",
-            "actual": "6af663e8baddca5830be97c3",
+            "expected": "6af66d42baddca5830be97d2",
+            "actual": "6af66d42baddca5830be97d2",
             "source": "previous create request/response"
           },
           {
             "field": "goal.createdAt",
-            "expected": "2026-11-13T01:12:08.459Z",
-            "actual": "2026-11-13T01:12:08.459Z",
+            "expected": "2026-11-13T01:52:02.680Z",
+            "actual": "2026-11-13T01:52:02.680Z",
             "source": "previous create request/response"
           }
         ],
@@ -78,20 +78,20 @@
           },
           {
             "field": "goal._id",
-            "expected": "6af663e8baddca5830be97c3",
-            "actual": "6af663e8baddca5830be97c3",
+            "expected": "6af66d42baddca5830be97d2",
+            "actual": "6af66d42baddca5830be97d2",
             "source": "previous create request/response"
           },
           {
             "field": "goal.createdAt",
-            "expected": "2026-11-13T01:12:08.459Z",
-            "actual": "2026-11-13T01:12:08.459Z",
+            "expected": "2026-11-13T01:52:02.680Z",
+            "actual": "2026-11-13T01:52:02.680Z",
             "source": "previous create request/response"
           }
         ],
         "toolCalls": [
           {
-            "toolName": "HTTP GET /api/v1/goals/6af663e8baddca5830be97c3",
+            "toolName": "HTTP GET /api/v1/goals/6af66d42baddca5830be97d2",
             "allowed": true,
             "argumentsValid": true,
             "scopeAuthorized": true,

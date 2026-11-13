@@ -1,15 +1,15 @@
 {
-  "runId": "43342991623",
-  "runNumber": 21,
+  "runId": "43347955954",
+  "runNumber": 22,
   "attempt": 1,
-  "sourceCommit": "61e9161d7a172f38dd62e1f932421de85ee9a448",
-  "workflowCommit": "61e9161d7a172f38dd62e1f932421de85ee9a448",
-  "runUrl": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43342991623",
-  "evaluationExecutionComplete": true,
+  "sourceCommit": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
+  "workflowCommit": "0fbd54a313dfe1c8413d325ca35e7d807d1c3b47",
+  "runUrl": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43347955954",
+  "evaluationExecutionComplete": false,
   "upstreamJobResults": {
     "typecheck": "success",
     "playwright": "success",
-    "llm": "success"
+    "llm": "cancelled"
   },
   "policy": "Complete LLM evaluation: five scenarios, six responses and six available valid judgments each. Semantic LLM FAIL/REVIEW verdicts are retained and eligible; provider/timeouts, unavailable evaluations, invalid evidence and failed API/UI jobs are not. Workflow conclusions are unchanged.",
   "suite": "chatbot-docs",
