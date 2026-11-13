@@ -12,7 +12,7 @@
           }
         ],
         "userMessage": "Hola",
-        "response": "Hola, soy el asistente de Botpress. Botpress es una plataforma para crear agentes de soporte con IA y un helpdesk completo para tu equipo de atención al cliente.\n¿En qué te gustaría que te ayude con Botpress ahora mismo?",
+        "response": "Hola, soy el asistente de Botpress. Te ayudo a ver si Botpress encaja con tu negocio y a conectarte con nuestro equipo si tiene sentido.",
         "responseRole": "assistant",
         "facts": [],
         "contextChecks": []

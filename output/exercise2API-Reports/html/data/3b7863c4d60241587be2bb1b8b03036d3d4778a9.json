@@ -1,0 +1,141 @@
+{
+  "scope": "api",
+  "id": "API-007",
+  "records": [
+    {
+      "input": {
+        "scope": "api",
+        "id": "API-007",
+        "responseRole": "api-data",
+        "facts": [
+          {
+            "field": "http.status",
+            "expected": 200,
+            "actual": 200,
+            "source": "Goal Tracker API contract and test case"
+          },
+          {
+            "field": "goal.title",
+            "expected": "Complete QA technical assessment",
+            "actual": "Complete QA technical assessment",
+            "source": "previous create request/response"
+          },
+          {
+            "field": "goal.description",
+            "expected": "Finish the API testing exercise.",
+            "actual": "Finish the API testing exercise.",
+            "source": "previous create request/response"
+          },
+          {
+            "field": "goal.status",
+            "expected": "to-do",
+            "actual": "to-do",
+            "source": "previous create request/response"
+          },
+          {
+            "field": "goal.priority",
+            "expected": "high",
+            "actual": "high",
+            "source": "previous create request/response"
+          },
+          {
+            "field": "goal._id",
+            "expected": "6af661f6baddca5830be97b2",
+            "actual": "6af661f6baddca5830be97b2",
+            "source": "previous create request/response"
+          },
+          {
+            "field": "goal.createdAt",
+            "expected": "2026-11-13T01:03:50.957Z",
+            "actual": "2026-11-13T01:03:50.957Z",
+            "source": "previous create request/response"
+          }
+        ],
+        "contextChecks": [
+          {
+            "field": "goal.title",
+            "expected": "Complete QA technical assessment",
+            "actual": "Complete QA technical assessment",
+            "source": "previous create request/response"
+          },
+          {
+            "field": "goal.description",
+            "expected": "Finish the API testing exercise.",
+            "actual": "Finish the API testing exercise.",
+            "source": "previous create request/response"
+          },
+          {
+            "field": "goal.status",
+            "expected": "to-do",
+            "actual": "to-do",
+            "source": "previous create request/response"
+          },
+          {
+            "field": "goal.priority",
+            "expected": "high",
+            "actual": "high",
+            "source": "previous create request/response"
+          },
+          {
+            "field": "goal._id",
+            "expected": "6af661f6baddca5830be97b2",
+            "actual": "6af661f6baddca5830be97b2",
+            "source": "previous create request/response"
+          },
+          {
+            "field": "goal.createdAt",
+            "expected": "2026-11-13T01:03:50.957Z",
+            "actual": "2026-11-13T01:03:50.957Z",
+            "source": "previous create request/response"
+          }
+        ],
+        "toolCalls": [
+          {
+            "toolName": "HTTP GET /api/v1/goals/6af661f6baddca5830be97b2",
+            "allowed": true,
+            "argumentsValid": true,
+            "scopeAuthorized": true,
+            "executionStatus": "COMPLETED"
+          }
+        ]
+      },
+      "analysis": {
+        "observedToolCalls": 1,
+        "toolTraceKind": "HTTP_ACTION",
+        "schemaVersion": 1,
+        "scope": "api",
+        "id": "API-007",
+        "method": "bounded-evidence-rules",
+        "categories": {
+          "hallucination": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": null
+          },
+          "promptInjection": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "Una respuesta REST con datos no ejecuta instrucciones de un asistente."
+          },
+          "toxicity": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "Los datos almacenados por el usuario no se atribuyen como discurso del asistente."
+          },
+          "contextLoss": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": null
+          },
+          "toolCalling": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": "Se auditan llamadas instrumentadas, argumentos, alcance y resultado."
+          }
+        },
+        "findings": [],
+        "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
+      }
+    }
+  ]
+}

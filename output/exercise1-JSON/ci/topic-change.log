@@ -5,7 +5,7 @@ Scenario: Topic Change
 --- Turn 1 ---
 USER: How long does standard shipping usually take?
 USER MODEL: fixed message
-[timer] groq Assistant: 0s / 30s[timer] groq Assistant: 1s / 30s[timer] groq Assistant: 2s / 30s[timer] groq Assistant: 3s / 30s[timer] groq Assistant: 3.59s - completed
+[timer] groq Assistant: 0s / 30s[timer] groq Assistant: 1s / 30s[timer] groq Assistant: 1.17s - completed
 ASSISTANT: Standard shipping at Nerds Store typically takes 2 to 4 business days.
 ASSISTANT MODEL: groq / qwen/qwen3.8-27b
 [timer] groq Evaluator - Turn 1: 0s / 30s[timer] groq Evaluator - Turn 1: 1s / 30s[timer] groq Evaluator - Turn 1: 2s / 30s[timer] groq Evaluator - Turn 1: 3s / 30s[timer] groq Evaluator - Turn 1: 4s / 30s[timer] groq Evaluator - Turn 1: 5s / 30s[timer] groq Evaluator - Turn 1: 6s / 30s[timer] groq Evaluator - Turn 1: 6s - stopped
@@ -13,7 +13,7 @@ ASSISTANT MODEL: groq / qwen/qwen3.8-27b
 [timer] groq Evaluator - Turn 1: 0s / 30s[timer] groq Evaluator - Turn 1: 1s / 30s[timer] groq Evaluator - Turn 1: 2s / 30s[timer] groq Evaluator - Turn 1: 3s / 30s[timer] groq Evaluator - Turn 1: 4s / 30s[timer] groq Evaluator - Turn 1: 5s / 30s[timer] groq Evaluator - Turn 1: 6s / 30s[timer] groq Evaluator - Turn 1: 6s - stopped
 EVALUATOR: UNAVAILABLE
 EVALUATOR MODEL: groq / openai/gpt-oss-20b
-TIMING: user=0ms | assistant=3588ms | evaluator=23127ms | total=26715ms
+TIMING: user=0ms | assistant=1175ms | evaluator=23057ms | total=24232ms
 
 Result saved to output/exercise1-JSON/topic-change.json
 Execution status: BLOCKED

@@ -19,24 +19,24 @@
     "maxFailures": 0,
     "metadata": {
       "ci": {
-        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/ded5be55812a446986d3382596735bf02a2edf8e",
-        "commitHash": "ded5be55812a446986d3382596735bf02a2edf8e",
-        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341399681"
+        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
+        "commitHash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
+        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341920622"
       },
       "gitCommit": {
-        "shortHash": "ded5be5",
-        "hash": "ded5be55812a446986d3382596735bf02a2edf8e",
-        "subject": "Add files via upload",
-        "body": "Add files via upload",
+        "shortHash": "9ca0bf1",
+        "hash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
+        "subject": "Add visual examples for expected results in README",
+        "body": "Add visual examples for expected results in README\n\nAdded visual examples for expected results in exercises 1, 2, and 3.",
         "author": {
           "name": "Mario Rodriguez",
           "email": "54407177+marioRodriguez6@users.noreply.github.com",
-          "time": 1794531559000
+          "time": 1794531795000
         },
         "committer": {
           "name": "GitHub",
           "email": "noreply@github.com",
-          "time": 1794531559000
+          "time": 1794531795000
         },
         "branch": "master"
       },
@@ -50,24 +50,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/ded5be55812a446986d3382596735bf02a2edf8e",
-            "commitHash": "ded5be55812a446986d3382596735bf02a2edf8e",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341399681"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
+            "commitHash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341920622"
           },
           "gitCommit": {
-            "shortHash": "ded5be5",
-            "hash": "ded5be55812a446986d3382596735bf02a2edf8e",
-            "subject": "Add files via upload",
-            "body": "Add files via upload",
+            "shortHash": "9ca0bf1",
+            "hash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
+            "subject": "Add visual examples for expected results in README",
+            "body": "Add visual examples for expected results in README\n\nAdded visual examples for expected results in exercises 1, 2, and 3.",
             "author": {
               "name": "Mario Rodriguez",
               "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794531559000
+              "time": 1794531795000
             },
             "committer": {
               "name": "GitHub",
               "email": "noreply@github.com",
-              "time": 1794531559000
+              "time": 1794531795000
             },
             "branch": "master"
           },
@@ -93,24 +93,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/ded5be55812a446986d3382596735bf02a2edf8e",
-            "commitHash": "ded5be55812a446986d3382596735bf02a2edf8e",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341399681"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
+            "commitHash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341920622"
           },
           "gitCommit": {
-            "shortHash": "ded5be5",
-            "hash": "ded5be55812a446986d3382596735bf02a2edf8e",
-            "subject": "Add files via upload",
-            "body": "Add files via upload",
+            "shortHash": "9ca0bf1",
+            "hash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
+            "subject": "Add visual examples for expected results in README",
+            "body": "Add visual examples for expected results in README\n\nAdded visual examples for expected results in exercises 1, 2, and 3.",
             "author": {
               "name": "Mario Rodriguez",
               "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794531559000
+              "time": 1794531795000
             },
             "committer": {
               "name": "GitHub",
               "email": "noreply@github.com",
-              "time": 1794531559000
+              "time": 1794531795000
             },
             "branch": "master"
           },
@@ -210,17 +210,17 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 7629,
+                      "duration": 7156,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "Homepage DOM ready after 2136 ms\n"
+                          "text": "Homepage DOM ready after 1843 ms\n"
                         },
                         {
-                          "text": "Homepage load event observed after 4726 ms\n"
+                          "text": "Homepage load event observed after 4229 ms\n"
                         },
                         {
-                          "text": "Chatbot launcher visible 1651 ms after load\n"
+                          "text": "Chatbot launcher visible 1624 ms after load\n"
                         }
                       ],
                       "stderr": [],
@@ -228,14 +228,14 @@
                       "steps": [
                         {
                           "title": "Wait for window.load, which starts the webchat loader",
-                          "duration": 2589
+                          "duration": 2384
                         },
                         {
                           "title": "Wait for the floating launcher after page load",
-                          "duration": 1650
+                          "duration": 1623
                         }
                       ],
-                      "startTime": "2026-11-13T01:00:24.556Z",
+                      "startTime": "2026-11-13T01:04:05.129Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -280,17 +280,17 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 12251,
+                      "duration": 11143,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "Homepage DOM ready after 1917 ms\n"
+                          "text": "Homepage DOM ready after 1576 ms\n"
                         },
                         {
-                          "text": "Homepage load event observed after 4343 ms\n"
+                          "text": "Homepage load event observed after 4175 ms\n"
                         },
                         {
-                          "text": "Chatbot launcher visible 1136 ms after load\n"
+                          "text": "Chatbot launcher visible 1059 ms after load\n"
                         }
                       ],
                       "stderr": [],
@@ -298,22 +298,22 @@
                       "steps": [
                         {
                           "title": "Wait for window.load, which starts the webchat loader",
-                          "duration": 2425
+                          "duration": 2597
                         },
                         {
                           "title": "Wait for the floating launcher after page load",
-                          "duration": 1135
+                          "duration": 1059
                         },
                         {
                           "title": "Close using the real header control",
-                          "duration": 1360
+                          "duration": 1506
                         },
                         {
                           "title": "Reopen using the floating launcher",
-                          "duration": 1673
+                          "duration": 1362
                         }
                       ],
-                      "startTime": "2026-11-13T01:00:34.418Z",
+                      "startTime": "2026-11-13T01:04:13.037Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -358,17 +358,17 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 9028,
+                      "duration": 7704,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "Homepage DOM ready after 1943 ms\n"
+                          "text": "Homepage DOM ready after 1187 ms\n"
                         },
                         {
-                          "text": "Homepage load event observed after 4373 ms\n"
+                          "text": "Homepage load event observed after 3680 ms\n"
                         },
                         {
-                          "text": "Chatbot launcher visible 1611 ms after load\n"
+                          "text": "Chatbot launcher visible 1005 ms after load\n"
                         }
                       ],
                       "stderr": [],
@@ -376,14 +376,14 @@
                       "steps": [
                         {
                           "title": "Wait for window.load, which starts the webchat loader",
-                          "duration": 2429
+                          "duration": 2492
                         },
                         {
                           "title": "Wait for the floating launcher after page load",
-                          "duration": 1609
+                          "duration": 1004
                         }
                       ],
-                      "startTime": "2026-11-13T01:00:47.401Z",
+                      "startTime": "2026-11-13T01:04:24.765Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -428,20 +428,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 27558,
+                      "duration": 20380,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "Homepage DOM ready after 1766 ms\n"
+                          "text": "Homepage DOM ready after 1511 ms\n"
                         },
                         {
-                          "text": "Homepage load event observed after 4258 ms\n"
+                          "text": "Homepage load event observed after 3870 ms\n"
                         },
                         {
-                          "text": "Chatbot launcher visible 1676 ms after load\n"
+                          "text": "Chatbot launcher visible 1055 ms after load\n"
                         },
                         {
-                          "text": "{\"testId\":\"HOME-004\",\"pageUrl\":\"https://botpress.com/\",\"widgetStructure\":\"Shadow DOM\",\"botName\":\"Botpress\",\"userMessage\":\"Hola\",\"assistantResponse\":\"Hola, soy el asistente de Botpress. Botpress es una plataforma para crear agentes de soporte con IA y un helpdesk completo para tu equipo de atención al cliente.\\n¿En qué te gustaría que te ayude con Botpress ahora mismo?\",\"responseTimeMs\":4465,\"measuredAt\":\"2026-11-13T01:01:10.195Z\",\"measurement\":\"From immediately before pressing Enter until a new, loaded bot message with visible text is observed. Includes UI and assertion overhead.\"}\n"
+                          "text": "{\"testId\":\"HOME-004\",\"pageUrl\":\"https://botpress.com/\",\"widgetStructure\":\"Shadow DOM\",\"botName\":\"Botpress\",\"userMessage\":\"Hola\",\"assistantResponse\":\"Hola, soy el asistente de Botpress. Te ayudo a ver si Botpress encaja con tu negocio y a conectarte con nuestro equipo si tiene sentido.\",\"responseTimeMs\":2778,\"measuredAt\":\"2026-11-13T01:04:42.912Z\",\"measurement\":\"From immediately before pressing Enter until a new, loaded bot message with visible text is observed. Includes UI and assertion overhead.\"}\n"
                         }
                       ],
                       "stderr": [],
@@ -449,14 +449,14 @@
                       "steps": [
                         {
                           "title": "Wait for window.load, which starts the webchat loader",
-                          "duration": 2491
+                          "duration": 2357
                         },
                         {
                           "title": "Wait for the floating launcher after page load",
-                          "duration": 1676
+                          "duration": 1054
                         }
                       ],
-                      "startTime": "2026-11-13T01:00:56.997Z",
+                      "startTime": "2026-11-13T01:04:32.936Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -512,8 +512,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-13T01:00:23.977Z",
-    "duration": 61968.854999999996,
+    "startTime": "2026-11-13T01:04:04.573Z",
+    "duration": 49781.060999999994,
     "expected": 4,
     "skipped": 0,
     "unexpected": 0,

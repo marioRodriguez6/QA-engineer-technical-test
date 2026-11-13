@@ -19,24 +19,24 @@
     "maxFailures": 0,
     "metadata": {
       "ci": {
-        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/ded5be55812a446986d3382596735bf02a2edf8e",
-        "commitHash": "ded5be55812a446986d3382596735bf02a2edf8e",
-        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341399681"
+        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
+        "commitHash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
+        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341920622"
       },
       "gitCommit": {
-        "shortHash": "ded5be5",
-        "hash": "ded5be55812a446986d3382596735bf02a2edf8e",
-        "subject": "Add files via upload",
-        "body": "Add files via upload",
+        "shortHash": "9ca0bf1",
+        "hash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
+        "subject": "Add visual examples for expected results in README",
+        "body": "Add visual examples for expected results in README\n\nAdded visual examples for expected results in exercises 1, 2, and 3.",
         "author": {
           "name": "Mario Rodriguez",
           "email": "54407177+marioRodriguez6@users.noreply.github.com",
-          "time": 1794531559000
+          "time": 1794531795000
         },
         "committer": {
           "name": "GitHub",
           "email": "noreply@github.com",
-          "time": 1794531559000
+          "time": 1794531795000
         },
         "branch": "master"
       },
@@ -50,24 +50,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/ded5be55812a446986d3382596735bf02a2edf8e",
-            "commitHash": "ded5be55812a446986d3382596735bf02a2edf8e",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341399681"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
+            "commitHash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341920622"
           },
           "gitCommit": {
-            "shortHash": "ded5be5",
-            "hash": "ded5be55812a446986d3382596735bf02a2edf8e",
-            "subject": "Add files via upload",
-            "body": "Add files via upload",
+            "shortHash": "9ca0bf1",
+            "hash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
+            "subject": "Add visual examples for expected results in README",
+            "body": "Add visual examples for expected results in README\n\nAdded visual examples for expected results in exercises 1, 2, and 3.",
             "author": {
               "name": "Mario Rodriguez",
               "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794531559000
+              "time": 1794531795000
             },
             "committer": {
               "name": "GitHub",
               "email": "noreply@github.com",
-              "time": 1794531559000
+              "time": 1794531795000
             },
             "branch": "master"
           },
@@ -93,24 +93,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/ded5be55812a446986d3382596735bf02a2edf8e",
-            "commitHash": "ded5be55812a446986d3382596735bf02a2edf8e",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341399681"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
+            "commitHash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341920622"
           },
           "gitCommit": {
-            "shortHash": "ded5be5",
-            "hash": "ded5be55812a446986d3382596735bf02a2edf8e",
-            "subject": "Add files via upload",
-            "body": "Add files via upload",
+            "shortHash": "9ca0bf1",
+            "hash": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
+            "subject": "Add visual examples for expected results in README",
+            "body": "Add visual examples for expected results in README\n\nAdded visual examples for expected results in exercises 1, 2, and 3.",
             "author": {
               "name": "Mario Rodriguez",
               "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794531559000
+              "time": 1794531795000
             },
             "committer": {
               "name": "GitHub",
               "email": "noreply@github.com",
-              "time": 1794531559000
+              "time": 1794531795000
             },
             "branch": "master"
           },
@@ -210,12 +210,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1280,
+                      "duration": 1327,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:00:03.447Z",
+                      "startTime": "2026-11-13T01:04:02.774Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -260,7 +260,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1308,
+                      "duration": 1488,
                       "errors": [],
                       "stdout": [
                         {
@@ -272,18 +272,18 @@
                       "steps": [
                         {
                           "title": "Establish a closed initial state",
-                          "duration": 325
+                          "duration": 250
                         },
                         {
                           "title": "Open the panel using Ask Docs",
-                          "duration": 93
+                          "duration": 115
                         },
                         {
                           "title": "Close the panel using Ask Docs",
-                          "duration": 79
+                          "duration": 83
                         }
                       ],
-                      "startTime": "2026-11-13T01:00:05.159Z",
+                      "startTime": "2026-11-13T01:04:04.630Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -342,7 +342,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:00:06.700Z",
+                      "startTime": "2026-11-13T01:04:06.410Z",
                       "annotations": [
                         {
                           "type": "skip",
@@ -380,19 +380,19 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2871,
+                      "duration": 2691,
                       "errors": [],
                       "stdout": [
                         {
                           "text": "Chatbot state: current=true, requested=true\n"
                         },
                         {
-                          "text": "CHATBOT-004 response time: 1487 ms\n"
+                          "text": "CHATBOT-004 response time: 1126 ms\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-13T01:00:06.700Z",
+                      "startTime": "2026-11-13T01:04:06.411Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -433,8 +433,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-13T01:00:03.018Z",
-    "duration": 6871.474,
+    "startTime": "2026-11-13T01:04:02.175Z",
+    "duration": 7349.785,
     "expected": 3,
     "skipped": 1,
     "unexpected": 0,

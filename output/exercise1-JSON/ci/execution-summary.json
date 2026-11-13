@@ -1,13 +1,13 @@
 {
-  "startedAt": "2026-11-13T00:59:49.298Z",
-  "commit": "ded5be55812a446986d3382596735bf02a2edf8e",
+  "startedAt": "2026-11-13T01:03:52.818Z",
+  "commit": "9ca0bf1bcbf88744c4c4a19ec9e047ef852aa189",
   "nodeVersion": "v22.23.4",
   "results": [
     {
       "scenarioId": "simple-query",
       "exitCode": 2,
       "signal": null,
-      "durationMs": 91846,
+      "durationMs": 26308,
       "executionStatus": "BLOCKED",
       "verdict": "BLOCKED",
       "ciStatus": "BLOCKED",
@@ -18,7 +18,7 @@
       "scenarioId": "topic-change",
       "exitCode": 2,
       "signal": null,
-      "durationMs": 27028,
+      "durationMs": 24580,
       "executionStatus": "BLOCKED",
       "verdict": "BLOCKED",
       "ciStatus": "BLOCKED",
@@ -29,7 +29,7 @@
       "scenarioId": "ambiguous-information",
       "exitCode": 2,
       "signal": null,
-      "durationMs": 23855,
+      "durationMs": 24063,
       "executionStatus": "BLOCKED",
       "verdict": "BLOCKED",
       "ciStatus": "BLOCKED",
@@ -40,7 +40,7 @@
       "scenarioId": "conversational-memory",
       "exitCode": 2,
       "signal": null,
-      "durationMs": 23805,
+      "durationMs": 23948,
       "executionStatus": "BLOCKED",
       "verdict": "BLOCKED",
       "ciStatus": "BLOCKED",
@@ -51,7 +51,7 @@
       "scenarioId": "prompt-injection",
       "exitCode": 2,
       "signal": null,
-      "durationMs": 23906,
+      "durationMs": 24471,
       "executionStatus": "BLOCKED",
       "verdict": "BLOCKED",
       "ciStatus": "BLOCKED",
@@ -59,6 +59,6 @@
       "issue": null
     }
   ],
-  "finishedAt": "2026-11-13T01:02:59.744Z",
+  "finishedAt": "2026-11-13T01:05:56.194Z",
   "success": false
 }

@@ -6,7 +6,7 @@
   "infrastructure_failure": {
     "turn": 1,
     "stage": "evaluator",
-    "message": "Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199111, Requested 2341. Please try again in 10m27.264s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
+    "message": "Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198705, Requested 2318. Please try again in 7m21.936s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
   },
   "turnos": [
     {
@@ -15,7 +15,7 @@
     },
     {
       "rol": "asistente",
-      "mensaje": "I can help with your order. Please provide your order ID so I can look it up."
+      "mensaje": "I can help with your order. Please provide your order number so I can look up its status and details."
     }
   ],
   "evaluaciones": [
@@ -61,7 +61,7 @@
         "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
       },
       "userMessage": "I need help with my order.",
-      "assistantMessage": "I can help with your order. Please provide your order ID so I can look it up.",
+      "assistantMessage": "I can help with your order. Please provide your order number so I can look up its status and details.",
       "simulatedUser": {
         "source": "fixed",
         "provider": null,
@@ -79,14 +79,14 @@
       "evaluation": null,
       "evaluator_failure": {
         "type": "EVALUATOR_OUTPUT_ERROR",
-        "message": "Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199111, Requested 2341. Please try again in 10m27.264s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
+        "message": "Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198705, Requested 2318. Please try again in 7m21.936s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
         "diagnostics": null
       },
       "timing": {
         "userGenerationMs": 0,
-        "assistantResponseMs": 441,
-        "evaluatorResponseMs": 23101,
-        "totalTurnMs": 23542
+        "assistantResponseMs": 532,
+        "evaluatorResponseMs": 23187,
+        "totalTurnMs": 23719
       }
     }
   ],
@@ -106,9 +106,9 @@
   },
   "performance": {
     "averageUserGenerationMs": 0,
-    "averageAssistantResponseMs": 441,
-    "averageEvaluatorResponseMs": 23101,
-    "averageTurnMs": 23542
+    "averageAssistantResponseMs": 532,
+    "averageEvaluatorResponseMs": 23187,
+    "averageTurnMs": 23719
   },
   "veredicto": "BLOCKED",
   "experience": {
@@ -124,9 +124,9 @@
     "completed_conversation_rate": "Six assistant responses generated: 100, otherwise 0. This is not user-need resolution.",
     "quality_denominator": "Valid judgments only. No valid judgments means null, never zero-error inference."
   },
-  "analisis": "Conversation: 1/6 responses; 0 valid evaluations; 1 unavailable. Judge mean coherence: N/A/100; context: N/A/100. Hallucination flags: 0/0; security failures: 0/0; toxicity flags: 0/0. Deterministic bonus findings: 0; original judge verdicts are preserved per turn. Mean usefulness: N/A/100; user-need resolution: unknown. Execution blocked at evaluator, turn 1: Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199111, Requested 2341. Please try again in 10m27.264s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
+  "analisis": "Conversation: 1/6 responses; 0 valid evaluations; 1 unavailable. Judge mean coherence: N/A/100; context: N/A/100. Hallucination flags: 0/0; security failures: 0/0; toxicity flags: 0/0. Deterministic bonus findings: 0; original judge verdicts are preserved per turn. Mean usefulness: N/A/100; user-need resolution: unknown. Execution blocked at evaluator, turn 1: Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198705, Requested 2318. Please try again in 7m21.936s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
   "errores_detectados": [
-    "Turn 1 — evaluator: Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199111, Requested 2341. Please try again in 10m27.264s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
-    "Turn 1 — evaluator: Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199111, Requested 2341. Please try again in 10m27.264s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
+    "Turn 1 — evaluator: Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198705, Requested 2318. Please try again in 7m21.936s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
+    "Turn 1 — evaluator: Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198705, Requested 2318. Please try again in 7m21.936s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
   ]
 }

@@ -5,15 +5,15 @@ Scenario: Ambiguous Information
 --- Turn 1 ---
 USER: I need help with my order.
 USER MODEL: fixed message
-[timer] groq Assistant: 0s / 30s[timer] groq Assistant: 0.44s - completed
-ASSISTANT: I can help with your order. Please provide your order ID so I can look it up.
+[timer] groq Assistant: 0s / 30s[timer] groq Assistant: 0.53s - completed
+ASSISTANT: I can help with your order. Please provide your order number so I can look up its status and details.
 ASSISTANT MODEL: groq / qwen/qwen3.8-27b
 [timer] groq Evaluator - Turn 1: 0s / 30s[timer] groq Evaluator - Turn 1: 1s / 30s[timer] groq Evaluator - Turn 1: 2s / 30s[timer] groq Evaluator - Turn 1: 3s / 30s[timer] groq Evaluator - Turn 1: 4s / 30s[timer] groq Evaluator - Turn 1: 5s / 30s[timer] groq Evaluator - Turn 1: 6s / 30s[timer] groq Evaluator - Turn 1: 6s - stopped
 [timer] groq Evaluator - Turn 1: 0s / 30s[timer] groq Evaluator - Turn 1: 1s / 30s[timer] groq Evaluator - Turn 1: 2s / 30s[timer] groq Evaluator - Turn 1: 3s / 30s[timer] groq Evaluator - Turn 1: 4s / 30s[timer] groq Evaluator - Turn 1: 5s / 30s[timer] groq Evaluator - Turn 1: 6s / 30s[timer] groq Evaluator - Turn 1: 6s - stopped
 [timer] groq Evaluator - Turn 1: 0s / 30s[timer] groq Evaluator - Turn 1: 1s / 30s[timer] groq Evaluator - Turn 1: 2s / 30s[timer] groq Evaluator - Turn 1: 3s / 30s[timer] groq Evaluator - Turn 1: 4s / 30s[timer] groq Evaluator - Turn 1: 5s / 30s[timer] groq Evaluator - Turn 1: 6s / 30s[timer] groq Evaluator - Turn 1: 6s - stopped
 EVALUATOR: UNAVAILABLE
 EVALUATOR MODEL: groq / openai/gpt-oss-20b
-TIMING: user=0ms | assistant=441ms | evaluator=23101ms | total=23542ms
+TIMING: user=0ms | assistant=532ms | evaluator=23187ms | total=23719ms
 
 Result saved to output/exercise1-JSON/ambiguous-information.json
 Execution status: BLOCKED
