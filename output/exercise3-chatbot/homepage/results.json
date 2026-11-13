@@ -19,24 +19,24 @@
     "maxFailures": 0,
     "metadata": {
       "ci": {
-        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/356834022106d1848a4f9f0966ca2011180789b1",
-        "commitHash": "356834022106d1848a4f9f0966ca2011180789b1",
-        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43350233461"
+        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
+        "commitHash": "0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
+        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43352766224"
       },
       "gitCommit": {
-        "shortHash": "3568340",
-        "hash": "356834022106d1848a4f9f0966ca2011180789b1",
-        "subject": "docs: publish QA report for run 43348218399 attempt 1 [skip ci]",
-        "body": "docs: publish QA report for run 43348218399 attempt 1 [skip ci]\n",
+        "shortHash": "0d4e115",
+        "hash": "0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
+        "subject": "Update README to clarify provider key usage",
+        "body": "Update README to clarify provider key usage\n\nRemoved a note about not publishing .env files or real keys.",
         "author": {
-          "name": "github-actions[bot]",
-          "email": "41898282+github-actions[bot]@users.noreply.github.com",
-          "time": 1794534992000
+          "name": "Mario Rodriguez",
+          "email": "54407177+marioRodriguez6@users.noreply.github.com",
+          "time": 1794537088000
         },
         "committer": {
-          "name": "github-actions[bot]",
-          "email": "41898282+github-actions[bot]@users.noreply.github.com",
-          "time": 1794534992000
+          "name": "GitHub",
+          "email": "noreply@github.com",
+          "time": 1794537088000
         },
         "branch": "master"
       },
@@ -50,24 +50,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/356834022106d1848a4f9f0966ca2011180789b1",
-            "commitHash": "356834022106d1848a4f9f0966ca2011180789b1",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43350233461"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
+            "commitHash": "0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43352766224"
           },
           "gitCommit": {
-            "shortHash": "3568340",
-            "hash": "356834022106d1848a4f9f0966ca2011180789b1",
-            "subject": "docs: publish QA report for run 43348218399 attempt 1 [skip ci]",
-            "body": "docs: publish QA report for run 43348218399 attempt 1 [skip ci]\n",
+            "shortHash": "0d4e115",
+            "hash": "0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
+            "subject": "Update README to clarify provider key usage",
+            "body": "Update README to clarify provider key usage\n\nRemoved a note about not publishing .env files or real keys.",
             "author": {
-              "name": "github-actions[bot]",
-              "email": "41898282+github-actions[bot]@users.noreply.github.com",
-              "time": 1794534992000
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794537088000
             },
             "committer": {
-              "name": "github-actions[bot]",
-              "email": "41898282+github-actions[bot]@users.noreply.github.com",
-              "time": 1794534992000
+              "name": "GitHub",
+              "email": "noreply@github.com",
+              "time": 1794537088000
             },
             "branch": "master"
           },
@@ -93,24 +93,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/356834022106d1848a4f9f0966ca2011180789b1",
-            "commitHash": "356834022106d1848a4f9f0966ca2011180789b1",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43350233461"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
+            "commitHash": "0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43352766224"
           },
           "gitCommit": {
-            "shortHash": "3568340",
-            "hash": "356834022106d1848a4f9f0966ca2011180789b1",
-            "subject": "docs: publish QA report for run 43348218399 attempt 1 [skip ci]",
-            "body": "docs: publish QA report for run 43348218399 attempt 1 [skip ci]\n",
+            "shortHash": "0d4e115",
+            "hash": "0d4e1153f2719972c2d0f5a882f8452d9d37bd54",
+            "subject": "Update README to clarify provider key usage",
+            "body": "Update README to clarify provider key usage\n\nRemoved a note about not publishing .env files or real keys.",
             "author": {
-              "name": "github-actions[bot]",
-              "email": "41898282+github-actions[bot]@users.noreply.github.com",
-              "time": 1794534992000
+              "name": "Mario Rodriguez",
+              "email": "54407177+marioRodriguez6@users.noreply.github.com",
+              "time": 1794537088000
             },
             "committer": {
-              "name": "github-actions[bot]",
-              "email": "41898282+github-actions[bot]@users.noreply.github.com",
-              "time": 1794534992000
+              "name": "GitHub",
+              "email": "noreply@github.com",
+              "time": 1794537088000
             },
             "branch": "master"
           },
@@ -210,17 +210,17 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 5912,
+                      "duration": 6458,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "Homepage DOM ready after 1849 ms\n"
+                          "text": "Homepage DOM ready after 1471 ms\n"
                         },
                         {
-                          "text": "Homepage load event observed after 3696 ms\n"
+                          "text": "Homepage load event observed after 3746 ms\n"
                         },
                         {
-                          "text": "Chatbot launcher visible 1424 ms after load\n"
+                          "text": "Chatbot launcher visible 1854 ms after load\n"
                         }
                       ],
                       "stderr": [],
@@ -228,14 +228,14 @@
                       "steps": [
                         {
                           "title": "Wait for window.load, which starts the webchat loader",
-                          "duration": 1845
+                          "duration": 2274
                         },
                         {
                           "title": "Wait for the floating launcher after page load",
-                          "duration": 1424
+                          "duration": 1853
                         }
                       ],
-                      "startTime": "2026-11-13T02:11:12.474Z",
+                      "startTime": "2026-11-13T02:32:43.021Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -280,17 +280,17 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 10208,
+                      "duration": 10022,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "Homepage DOM ready after 1238 ms\n"
+                          "text": "Homepage DOM ready after 1139 ms\n"
                         },
                         {
-                          "text": "Homepage load event observed after 2913 ms\n"
+                          "text": "Homepage load event observed after 3101 ms\n"
                         },
                         {
-                          "text": "Chatbot launcher visible 1362 ms after load\n"
+                          "text": "Chatbot launcher visible 1395 ms after load\n"
                         }
                       ],
                       "stderr": [],
@@ -298,22 +298,22 @@
                       "steps": [
                         {
                           "title": "Wait for window.load, which starts the webchat loader",
-                          "duration": 1673
+                          "duration": 1960
                         },
                         {
                           "title": "Wait for the floating launcher after page load",
-                          "duration": 1361
+                          "duration": 1394
                         },
                         {
                           "title": "Close using the real header control",
-                          "duration": 1350
+                          "duration": 1513
                         },
                         {
                           "title": "Reopen using the floating launcher",
-                          "duration": 1450
+                          "duration": 1330
                         }
                       ],
-                      "startTime": "2026-11-13T02:11:18.919Z",
+                      "startTime": "2026-11-13T02:32:53.381Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -358,17 +358,17 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 7359,
+                      "duration": 7725,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "Homepage DOM ready after 1402 ms\n"
+                          "text": "Homepage DOM ready after 1187 ms\n"
                         },
                         {
-                          "text": "Homepage load event observed after 3123 ms\n"
+                          "text": "Homepage load event observed after 3408 ms\n"
                         },
                         {
-                          "text": "Chatbot launcher visible 1408 ms after load\n"
+                          "text": "Chatbot launcher visible 1428 ms after load\n"
                         }
                       ],
                       "stderr": [],
@@ -376,14 +376,14 @@
                       "steps": [
                         {
                           "title": "Wait for window.load, which starts the webchat loader",
-                          "duration": 1720
+                          "duration": 2220
                         },
                         {
                           "title": "Wait for the floating launcher after page load",
-                          "duration": 1408
+                          "duration": 1428
                         }
                       ],
-                      "startTime": "2026-11-13T02:11:29.648Z",
+                      "startTime": "2026-11-13T02:33:03.989Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -428,20 +428,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 21310,
+                      "duration": 20719,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "Homepage DOM ready after 1266 ms\n"
+                          "text": "Homepage DOM ready after 1979 ms\n"
                         },
                         {
-                          "text": "Homepage load event observed after 3179 ms\n"
+                          "text": "Homepage load event observed after 3829 ms\n"
                         },
                         {
-                          "text": "Chatbot launcher visible 900 ms after load\n"
+                          "text": "Chatbot launcher visible 1333 ms after load\n"
                         },
                         {
-                          "text": "{\"testId\":\"HOME-004\",\"pageUrl\":\"https://botpress.com/\",\"widgetStructure\":\"Shadow DOM\",\"botName\":\"Botpress\",\"userMessage\":\"Hola\",\"assistantResponse\":\"Hola, ¿en qué te puedo ayudar con Botpress hoy? Planes, demo o cómo usar la plataforma, tú eliges.\",\"responseTimeMs\":3595,\"measuredAt\":\"2026-11-13T02:11:47.313Z\",\"measurement\":\"From immediately before pressing Enter until a new, loaded bot message with visible text is observed. Includes UI and assertion overhead.\"}\n"
+                          "text": "{\"testId\":\"HOME-004\",\"pageUrl\":\"https://botpress.com/\",\"widgetStructure\":\"Shadow DOM\",\"botName\":\"Botpress\",\"userMessage\":\"Hola\",\"assistantResponse\":\"Hola, encantado de verte por aquí.\\n¿En qué puedo ayudarte con Botpress: planes, funcionalidades o cómo podría encajar en tu negocio?\",\"responseTimeMs\":2801,\"measuredAt\":\"2026-11-13T02:33:22.459Z\",\"measurement\":\"From immediately before pressing Enter until a new, loaded bot message with visible text is observed. Includes UI and assertion overhead.\"}\n"
                         }
                       ],
                       "stderr": [],
@@ -449,14 +449,14 @@
                       "steps": [
                         {
                           "title": "Wait for window.load, which starts the webchat loader",
-                          "duration": 1913
+                          "duration": 1846
                         },
                         {
                           "title": "Wait for the floating launcher after page load",
-                          "duration": 899
+                          "duration": 1333
                         }
                       ],
-                      "startTime": "2026-11-13T02:11:37.374Z",
+                      "startTime": "2026-11-13T02:33:12.154Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -512,8 +512,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-13T02:11:12.022Z",
-    "duration": 47614.433,
+    "startTime": "2026-11-13T02:32:42.624Z",
+    "duration": 51305.559,
     "expected": 4,
     "skipped": 0,
     "unexpected": 0,

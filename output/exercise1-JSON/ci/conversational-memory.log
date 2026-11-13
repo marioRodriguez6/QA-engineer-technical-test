@@ -5,79 +5,24 @@ Scenario: Conversational Memory
 --- Turn 1 ---
 USER: Hi, my name is Mario.
 USER MODEL: fixed message
-[timer] anthropic Assistant: 0s / 30s[timer] anthropic Assistant: 0.82s - completed
-ASSISTANT: Hi Mario, welcome to Nerds Store! How can I help you today? If you have a question about an order, please share the order ID, and I'll look it up for you.
-ASSISTANT MODEL: anthropic / claude-haiku-5-5
-[timer] anthropic Evaluator - Turn 1: 0s / 30s[timer] anthropic Evaluator - Turn 1: 0s / 30s[timer] anthropic Evaluator - Turn 1: 2s / 30s[timer] anthropic Evaluator - Turn 1: 2.00s - completed
-EVALUATOR: PASS
-EVALUATOR MODEL: anthropic / claude-haiku-5-5
-TIMING: user=0ms | assistant=821ms | evaluator=2005ms | total=2826ms
-
---- Turn 2 ---
-[timer] anthropic Simulated User - Turn 2: 0s / 30s[timer] anthropic Simulated User - Turn 2: 0.77s - completed
-USER: I ordered a graphing calculator from you last week, and I wanted to know when it's expected to ship.
-USER MODEL: anthropic / claude-haiku-5-5
-[timer] anthropic Assistant: 0s / 30s[timer] anthropic Assistant: 0.93s - completed
-ASSISTANT: I'm sorry, but I can't look up that order yet. To check it, I need the order ID, which you can share with me. I also don't see graphing calculators in our catalog, so I may not be able to find it by product name. Could you please send me your order ID?
-ASSISTANT MODEL: anthropic / claude-haiku-5-5
-[timer] anthropic Evaluator - Turn 2: 0s / 30s[timer] anthropic Evaluator - Turn 2: 1s / 30s[timer] anthropic Evaluator - Turn 2: 1s / 30s[timer] anthropic Evaluator - Turn 2: 2.21s - completed
-EVALUATOR: PASS
-EVALUATOR MODEL: anthropic / claude-haiku-5-5
-TIMING: user=771ms | assistant=932ms | evaluator=2210ms | total=3913ms
-
---- Turn 3 ---
-[timer] anthropic Simulated User - Turn 3: 0s / 30s[timer] anthropic Simulated User - Turn 3: 0.90s - completed
-USER: I don't have the order ID handy right now. Can you look it up using my email address instead? It should be under the same account I used for the order last week.
-USER MODEL: anthropic / claude-haiku-5-5
-[timer] anthropic Assistant: 0s / 30s[timer] anthropic Assistant: 0.96s - completed
-ASSISTANT: I'm sorry, but I can't look up orders by email address. I can only check an order when you provide its order ID. You can find the ID in your order confirmation email, or you can contact our support team at support@nerdsstore.example during business hours (Monday to Friday, 8:00 AM to 6:00 PM). Once you have the ID, I'll be glad to check the shipping status for you.
-ASSISTANT MODEL: anthropic / claude-haiku-5-5
-[timer] anthropic Evaluator - Turn 3: 0s / 30s[timer] anthropic Evaluator - Turn 3: 1s / 30s[timer] anthropic Evaluator - Turn 3: 2s / 30s[timer] anthropic Evaluator - Turn 3: 2.63s - completed
-EVALUATOR: PASS
-EVALUATOR MODEL: anthropic / claude-haiku-5-5
-TIMING: user=896ms | assistant=961ms | evaluator=2632ms | total=4489ms
-
---- Turn 4 ---
-[timer] anthropic Simulated User - Turn 4: 0s / 30s[timer] anthropic Simulated User - Turn 4: 0.92s - completed
-USER: Okay, thanks. I'll check my confirmation email for the order ID. Before I go, do you remember my name?
-USER MODEL: anthropic / claude-haiku-5-5
-[timer] anthropic Assistant: 0s / 30s[timer] anthropic Assistant: 0.71s - completed
-ASSISTANT: Yes, you told me your name is Mario. Once you find your order ID, I'll be glad to help you check its shipping status.
-ASSISTANT MODEL: anthropic / claude-haiku-5-5
-[timer] anthropic Evaluator - Turn 4: 0s / 30s[timer] anthropic Evaluator - Turn 4: 1s / 30s[timer] anthropic Evaluator - Turn 4: 1s / 30s[timer] anthropic Evaluator - Turn 4: 2.16s - completed
-EVALUATOR: PASS
-EVALUATOR MODEL: anthropic / claude-haiku-5-5
-TIMING: user=915ms | assistant=712ms | evaluator=2163ms | total=3790ms
-
---- Turn 5 ---
-[timer] anthropic Simulated User - Turn 5: 0s / 30s[timer] anthropic Simulated User - Turn 5: 0.65s - completed
-USER: Great, thanks! I'll dig out that confirmation email now. Talk soon.
-USER MODEL: anthropic / claude-haiku-5-5
-[timer] anthropic Assistant: 0s / 30s[timer] anthropic Assistant: 0.66s - completed
-ASSISTANT: You're welcome, Mario! Once you have your order ID, feel free to reach out anytime. Have a great day!
-ASSISTANT MODEL: anthropic / claude-haiku-5-5
-[timer] anthropic Evaluator - Turn 5: 0s / 30s[timer] anthropic Evaluator - Turn 5: 0s / 30s[timer] anthropic Evaluator - Turn 5: 2s / 30s[timer] anthropic Evaluator - Turn 5: 2.49s - completed
-EVALUATOR: PASS
-EVALUATOR MODEL: anthropic / claude-haiku-5-5
-TIMING: user=650ms | assistant=656ms | evaluator=2489ms | total=3795ms
-
---- Turn 6 ---
-USER: By the way, do you remember my name?
-USER MODEL: fixed message
-[timer] anthropic Assistant: 0s / 30s[timer] anthropic Assistant: 0.72s - completed
-ASSISTANT: Yes, your name is Mario. Is there anything else I can help you with?
-ASSISTANT MODEL: anthropic / claude-haiku-5-5
-[timer] anthropic Evaluator - Turn 6: 0s / 30s[timer] anthropic Evaluator - Turn 6: 0s / 30s[timer] anthropic Evaluator - Turn 6: 2s / 30s[timer] anthropic Evaluator - Turn 6: 2.30s - completed
-EVALUATOR: PASS
-EVALUATOR MODEL: anthropic / claude-haiku-5-5
-TIMING: user=0ms | assistant=720ms | evaluator=2299ms | total=3019ms
+[timer] groq Assistant: 0s / 30s[timer] groq Assistant: 0.54s - completed
+ASSISTANT: Hi Mario! How can I help you today?
+ASSISTANT MODEL: groq / qwen/qwen3.8-27b
+[timer] groq Evaluator - Turn 1: 0s / 30s[timer] groq Evaluator - Turn 1: 1s / 30s[timer] groq Evaluator - Turn 1: 2s / 30s[timer] groq Evaluator - Turn 1: 3s / 30s[timer] groq Evaluator - Turn 1: 4s / 30s[timer] groq Evaluator - Turn 1: 5s / 30s[timer] groq Evaluator - Turn 1: 6s / 30s[timer] groq Evaluator - Turn 1: 6s - stopped
+[timer] groq Evaluator - Turn 1: 0s / 30s[timer] groq Evaluator - Turn 1: 1s / 30s[timer] groq Evaluator - Turn 1: 2s / 30s[timer] groq Evaluator - Turn 1: 3s / 30s[timer] groq Evaluator - Turn 1: 4s / 30s[timer] groq Evaluator - Turn 1: 5s / 30s[timer] groq Evaluator - Turn 1: 6s / 30s[timer] groq Evaluator - Turn 1: 6s - stopped
+[timer] groq Evaluator - Turn 1: 0s / 30s[timer] groq Evaluator - Turn 1: 1s / 30s[timer] groq Evaluator - Turn 1: 2s / 30s[timer] groq Evaluator - Turn 1: 3s / 30s[timer] groq Evaluator - Turn 1: 4s / 30s[timer] groq Evaluator - Turn 1: 5s / 30s[timer] groq Evaluator - Turn 1: 6s / 30s[timer] groq Evaluator - Turn 1: 6s - stopped
+EVALUATOR: UNAVAILABLE
+EVALUATOR MODEL: groq / openai/gpt-oss-20b
+TIMING: user=0ms | assistant=544ms | evaluator=23191ms | total=23735ms
 
 Result saved to output/exercise1-JSON/conversational-memory.json
-Execution status: COMPLETED
-Completed turns: 6/6
-Final verdict: PASS
+Execution status: BLOCKED
+Completed turns: 1/6
+Final verdict: BLOCKED
 
 STDERR:
+[retry] groq Evaluator - Turn 1 failed on attempt 1/3. Retrying in 1500ms...
+[retry] groq Evaluator - Turn 1 failed on attempt 2/3. Retrying in 3000ms...
 
 PROCESS ERROR:
 none

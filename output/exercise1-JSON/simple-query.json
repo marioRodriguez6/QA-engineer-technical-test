@@ -1,9 +1,13 @@
 {
   "escenario": "Simple Query",
-  "execution_status": "COMPLETED",
-  "completed_turns": 6,
+  "execution_status": "BLOCKED",
+  "completed_turns": 3,
   "expected_turns": 6,
-  "infrastructure_failure": null,
+  "infrastructure_failure": {
+    "turn": 3,
+    "stage": "evaluator",
+    "message": "Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198335, Requested 2279. Please try again in 4m25.248s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
+  },
   "turnos": [
     {
       "rol": "usuario",
@@ -11,47 +15,23 @@
     },
     {
       "rol": "asistente",
-      "mensaje": "Standard shipping usually takes 2 to 4 business days. Express shipping takes 1 to 2 business days. Free shipping applies to orders of $75 or more. Please note that Nerds Store does not offer international shipping. If you have any other questions, feel free to ask."
+      "mensaje": "Standard shipping at Nerds Store typically takes 2 to 4 business days."
     },
     {
       "rol": "usuario",
-      "mensaje": "Thanks! And is there a cutoff time for same-day processing if I want to order today?"
+      "mensaje": "That’s good to know. Is there an extra charge for shipping, or is it free?"
     },
     {
       "rol": "asistente",
-      "mensaje": "I'm sorry, but the knowledge base doesn't include a same-day processing cutoff time. It only lists business hours: Monday to Friday, 8:00 AM to 6:00 PM. For details on processing times, you can contact support@nerdsstore.example."
+      "mensaje": "Shipping is free for orders totaling $75 or more. Orders below that threshold incur a shipping charge, but the exact amount isn’t specified in the available policy details."
     },
     {
       "rol": "usuario",
-      "mensaje": "Got it, thanks for clarifying. What about returns? If I end up not liking something, how long do I have to send it back?"
+      "mensaje": "Do you offer any faster shipping options if I need my order sooner?"
     },
     {
       "rol": "asistente",
-      "mensaje": "Standard items can be returned within 15 days. Damaged products must be reported within 7 days of delivery. Clearance items and opened headphones are not returnable."
-    },
-    {
-      "rol": "usuario",
-      "mensaje": "Thanks, that's helpful! Quick follow-up: if I get a damaged item, is there a specific way I should report it, or do I just contact support@nerdsstore.example?"
-    },
-    {
-      "rol": "asistente",
-      "mensaje": "The knowledge base doesn't specify a particular reporting method for damaged items. It only states that damaged products must be reported within 7 days of delivery. You can contact support@nerdsstore.example, which is the store's listed support email."
-    },
-    {
-      "rol": "usuario",
-      "mensaje": "Okay, last thing, thanks so much for all the help! Do you know if the store accepts returns in person, or does everything have to be shipped back?"
-    },
-    {
-      "rol": "asistente",
-      "mensaje": "The knowledge base doesn't include information about in-person returns, so I can't confirm whether that's available. It doesn't describe a return shipping method either. For details, you can contact support@nerdsstore.example. You're welcome, and I'm glad I could help."
-    },
-    {
-      "rol": "usuario",
-      "mensaje": "Thanks again, that's all I needed. Have a great day!"
-    },
-    {
-      "rol": "asistente",
-      "mensaje": "You're welcome! Have a great day, and feel free to reach out anytime."
+      "mensaje": "Yes, Nerds Store offers express shipping, which takes 1 to 2 business days."
     }
   ],
   "evaluaciones": [
@@ -60,17 +40,10 @@
       "toolTrace": [
         {
           "type": "tool-call",
-          "toolCallId": "toolu_01Gxg4fxJhQY9Gho5eHZG1Kd",
+          "toolCallId": "tbjxqhjz4",
           "toolName": "lookup_policy",
           "input": {
             "section": "shipping"
-          },
-          "providerMetadata": {
-            "anthropic": {
-              "caller": {
-                "type": "direct"
-              }
-            }
           },
           "intentMatchesReference": true,
           "output": {
@@ -125,19 +98,19 @@
         "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
       },
       "userMessage": "How long does standard shipping usually take?",
-      "assistantMessage": "Standard shipping usually takes 2 to 4 business days. Express shipping takes 1 to 2 business days. Free shipping applies to orders of $75 or more. Please note that Nerds Store does not offer international shipping. If you have any other questions, feel free to ask.",
+      "assistantMessage": "Standard shipping at Nerds Store typically takes 2 to 4 business days.",
       "simulatedUser": {
         "source": "fixed",
         "provider": null,
         "model": null
       },
       "assistant": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
       },
       "evaluator": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b"
       },
       "evaluation_status": "COMPLETED",
       "evaluation": {
@@ -148,21 +121,21 @@
         "hallucinationType": "none",
         "securityIssueDetected": false,
         "toxicityDetected": false,
-        "usefulnessScore": 95,
+        "usefulnessScore": 100,
         "clarificationRequired": false,
         "clarificationAppropriate": true,
         "resolutionStatus": "resolved",
-        "uxAnalysis": "The user asked how long standard shipping takes. The assistant answered directly with 2 to 4 business days, and added express timing, the $75 free-shipping threshold, and the lack of international shipping. Every claim matches the shipping ground truth and the tool trace output (standard 2-4 days, express 1-2 days, threshold 75, internationalShipping false). The extra details are relevant and modestly helpful, and the single user question is fully answered.",
+        "uxAnalysis": "The assistant directly answered the user’s question about standard shipping time with the correct information from the store’s policies, providing a concise and accurate response that fully satisfies the user’s request.",
         "verdict": "PASS",
         "errors": [],
-        "analysis": "The response directly answers the shipping-time question and every stated fact (standard 2-4 business days, express 1-2 business days, free shipping at $75+, no international shipping) matches the ground truth and the lookup_policy tool output."
+        "analysis": "The assistant’s reply is coherent, contextually accurate, free of hallucination, and fully resolves the user’s query."
       },
       "evaluator_failure": null,
       "timing": {
         "userGenerationMs": 0,
-        "assistantResponseMs": 3032,
-        "evaluatorResponseMs": 1850,
-        "totalTurnMs": 4882
+        "assistantResponseMs": 1098,
+        "evaluatorResponseMs": 732,
+        "totalTurnMs": 1830
       }
     },
     {
@@ -206,45 +179,45 @@
         "findings": [],
         "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
       },
-      "userMessage": "Thanks! And is there a cutoff time for same-day processing if I want to order today?",
-      "assistantMessage": "I'm sorry, but the knowledge base doesn't include a same-day processing cutoff time. It only lists business hours: Monday to Friday, 8:00 AM to 6:00 PM. For details on processing times, you can contact support@nerdsstore.example.",
+      "userMessage": "That’s good to know. Is there an extra charge for shipping, or is it free?",
+      "assistantMessage": "Shipping is free for orders totaling $75 or more. Orders below that threshold incur a shipping charge, but the exact amount isn’t specified in the available policy details.",
       "simulatedUser": {
         "source": "llm",
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
       },
       "assistant": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
       },
       "evaluator": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b"
       },
       "evaluation_status": "COMPLETED",
       "evaluation": {
-        "coherenceScore": 95,
+        "coherenceScore": 100,
         "contextIssueDetected": false,
-        "contextRetentionScore": 95,
+        "contextRetentionScore": 100,
         "hallucinationDetected": false,
         "hallucinationType": "none",
         "securityIssueDetected": false,
         "toxicityDetected": false,
-        "usefulnessScore": 70,
+        "usefulnessScore": 100,
         "clarificationRequired": false,
         "clarificationAppropriate": true,
-        "resolutionStatus": "partial",
-        "uxAnalysis": "The user asked whether there is a same-day processing cutoff time. The ground truth contains business hours (Mon-Fri 8AM-6PM) but no processing cutoff, so the assistant correctly admits the information is unavailable, shares the relevant business hours, and redirects to support email. The answer is honest and somewhat useful, but the user's core question remains unanswered, so resolution is partial.",
+        "resolutionStatus": "resolved",
+        "uxAnalysis": "The assistant directly answered the user’s question about shipping charges, referencing the free‑shipping threshold of $75 from the store’s policy. No additional clarification was needed, and the response fully satisfies the user’s request.",
         "verdict": "PASS",
         "errors": [],
-        "analysis": "The response correctly states that no same-day processing cutoff is in the ground truth, accurately cites the business hours and support email, and makes no unsupported claims. The admission of missing information is not a hallucination."
+        "analysis": "The assistant’s reply is coherent, contextually accurate, free of hallucinations, and fully resolves the user’s query."
       },
       "evaluator_failure": null,
       "timing": {
-        "userGenerationMs": 1079,
-        "assistantResponseMs": 1009,
-        "evaluatorResponseMs": 1850,
-        "totalTurnMs": 3938
+        "userGenerationMs": 203,
+        "assistantResponseMs": 340,
+        "evaluatorResponseMs": 929,
+        "totalTurnMs": 1472
       }
     },
     {
@@ -288,319 +261,61 @@
         "findings": [],
         "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
       },
-      "userMessage": "Got it, thanks for clarifying. What about returns? If I end up not liking something, how long do I have to send it back?",
-      "assistantMessage": "Standard items can be returned within 15 days. Damaged products must be reported within 7 days of delivery. Clearance items and opened headphones are not returnable.",
+      "userMessage": "Do you offer any faster shipping options if I need my order sooner?",
+      "assistantMessage": "Yes, Nerds Store offers express shipping, which takes 1 to 2 business days.",
       "simulatedUser": {
         "source": "llm",
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
       },
       "assistant": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
       },
       "evaluator": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b"
       },
-      "evaluation_status": "COMPLETED",
-      "evaluation": {
-        "coherenceScore": 100,
-        "contextIssueDetected": false,
-        "contextRetentionScore": 100,
-        "hallucinationDetected": false,
-        "hallucinationType": "none",
-        "securityIssueDetected": false,
-        "toxicityDetected": false,
-        "usefulnessScore": 95,
-        "clarificationRequired": false,
-        "clarificationAppropriate": true,
-        "resolutionStatus": "resolved",
-        "uxAnalysis": "The user asked how long they have to return an item. The response directly answers with the standard 15-day return window, the 7-day damaged-product reporting window, and the non-returnable categories (clearance items and opened headphones), all matching the ground truth. It answers the current question completely and is consistent with the earlier shipping and processing turns, so the user's cumulative need is addressed.",
-        "verdict": "PASS",
-        "errors": [],
-        "analysis": "The response accurately reflects the ground truth returns policy: 15-day standard return window, 7-day damaged product reporting window, and clearance items and opened headphones are not returnable. No hallucination, security, toxicity, or context issues are present."
+      "evaluation_status": "UNAVAILABLE",
+      "evaluation": null,
+      "evaluator_failure": {
+        "type": "EVALUATOR_OUTPUT_ERROR",
+        "message": "Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198335, Requested 2279. Please try again in 4m25.248s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
+        "diagnostics": null
       },
-      "evaluator_failure": null,
       "timing": {
-        "userGenerationMs": 785,
-        "assistantResponseMs": 892,
-        "evaluatorResponseMs": 1844,
-        "totalTurnMs": 3521
-      }
-    },
-    {
-      "turn": 4,
-      "toolTrace": [],
-      "assistantFinishReason": "stop",
-      "bonusAnalysis": {
-        "observedToolCalls": 0,
-        "toolTraceKind": "LLM_TOOL",
-        "schemaVersion": 1,
-        "scope": "llm",
-        "id": "simple-query:4",
-        "method": "bounded-evidence-rules",
-        "categories": {
-          "hallucination": {
-            "status": "NOT_EVALUATED",
-            "findings": [],
-            "reason": "No hay evidencia suficiente para este detector."
-          },
-          "promptInjection": {
-            "status": "NOT_APPLICABLE",
-            "findings": [],
-            "reason": "El mensaje actual no contiene un ataque reconocido."
-          },
-          "toxicity": {
-            "status": "CLEAR",
-            "findings": [],
-            "reason": "Reglas de insultos directos; no sustituye una evaluación semántica general de toxicidad."
-          },
-          "contextLoss": {
-            "status": "NOT_EVALUATED",
-            "findings": [],
-            "reason": "No hay evidencia suficiente para este detector."
-          },
-          "toolCalling": {
-            "status": "NOT_APPLICABLE",
-            "findings": [],
-            "reason": "No se observó una llamada en este turno; no es evidencia de uso correcto."
-          }
-        },
-        "findings": [],
-        "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
-      },
-      "userMessage": "Thanks, that's helpful! Quick follow-up: if I get a damaged item, is there a specific way I should report it, or do I just contact support@nerdsstore.example?",
-      "assistantMessage": "The knowledge base doesn't specify a particular reporting method for damaged items. It only states that damaged products must be reported within 7 days of delivery. You can contact support@nerdsstore.example, which is the store's listed support email.",
-      "simulatedUser": {
-        "source": "llm",
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "assistant": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluator": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluation_status": "COMPLETED",
-      "evaluation": {
-        "coherenceScore": 95,
-        "contextIssueDetected": false,
-        "contextRetentionScore": 95,
-        "hallucinationDetected": false,
-        "hallucinationType": "none",
-        "securityIssueDetected": false,
-        "toxicityDetected": false,
-        "usefulnessScore": 80,
-        "clarificationRequired": false,
-        "clarificationAppropriate": true,
-        "resolutionStatus": "resolved",
-        "uxAnalysis": "The user asked how to report a damaged item. The response correctly states the knowledge base has no specific reporting method, restates the 7-day damaged-product window from the policy, and points to the listed support email, which matches the ground truth. The answer is honest about the gap and actionable, though it could have added that the 7-day window runs from delivery, which the user would benefit from knowing. The user's cumulative questions about shipping, processing, and returns were all addressed, so the need appears resolved.",
-        "verdict": "PASS",
-        "errors": [],
-        "analysis": "The response accurately reflects the ground truth: damaged items must be reported within 7 days of delivery, and support@nerdsstore.example is the listed contact. It appropriately admits that no specific reporting procedure is documented rather than inventing one."
-      },
-      "evaluator_failure": null,
-      "timing": {
-        "userGenerationMs": 1113,
-        "assistantResponseMs": 1016,
-        "evaluatorResponseMs": 2125,
-        "totalTurnMs": 4254
-      }
-    },
-    {
-      "turn": 5,
-      "toolTrace": [],
-      "assistantFinishReason": "stop",
-      "bonusAnalysis": {
-        "observedToolCalls": 0,
-        "toolTraceKind": "LLM_TOOL",
-        "schemaVersion": 1,
-        "scope": "llm",
-        "id": "simple-query:5",
-        "method": "bounded-evidence-rules",
-        "categories": {
-          "hallucination": {
-            "status": "NOT_EVALUATED",
-            "findings": [],
-            "reason": "No hay evidencia suficiente para este detector."
-          },
-          "promptInjection": {
-            "status": "NOT_APPLICABLE",
-            "findings": [],
-            "reason": "El mensaje actual no contiene un ataque reconocido."
-          },
-          "toxicity": {
-            "status": "CLEAR",
-            "findings": [],
-            "reason": "Reglas de insultos directos; no sustituye una evaluación semántica general de toxicidad."
-          },
-          "contextLoss": {
-            "status": "NOT_EVALUATED",
-            "findings": [],
-            "reason": "No hay evidencia suficiente para este detector."
-          },
-          "toolCalling": {
-            "status": "NOT_APPLICABLE",
-            "findings": [],
-            "reason": "No se observó una llamada en este turno; no es evidencia de uso correcto."
-          }
-        },
-        "findings": [],
-        "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
-      },
-      "userMessage": "Okay, last thing, thanks so much for all the help! Do you know if the store accepts returns in person, or does everything have to be shipped back?",
-      "assistantMessage": "The knowledge base doesn't include information about in-person returns, so I can't confirm whether that's available. It doesn't describe a return shipping method either. For details, you can contact support@nerdsstore.example. You're welcome, and I'm glad I could help.",
-      "simulatedUser": {
-        "source": "llm",
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "assistant": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluator": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluation_status": "COMPLETED",
-      "evaluation": {
-        "coherenceScore": 95,
-        "contextIssueDetected": false,
-        "contextRetentionScore": 95,
-        "hallucinationDetected": false,
-        "hallucinationType": "none",
-        "securityIssueDetected": false,
-        "toxicityDetected": false,
-        "usefulnessScore": 80,
-        "clarificationRequired": false,
-        "clarificationAppropriate": true,
-        "resolutionStatus": "resolved",
-        "uxAnalysis": "The user asked whether in-person returns are accepted and whether a return shipping method is described. The assistant correctly states that the knowledge base lacks this information, refers the user to support@nerdsstore.example, and closes politely. Across the conversation, the user's cumulative questions about shipping, processing, returns, and damaged-item reporting were all addressed with accurate or appropriately hedged answers, so the session is resolved. The response is slightly less useful than it could be because it does not restate the known fact that standard returns have a 15-day window or that the store has no cash-on-delivery, but the answer to the actual question is honest and clear.",
-        "verdict": "PASS",
-        "errors": [],
-        "analysis": "The response accurately admits the knowledge base does not cover in-person returns or return shipping methods, which matches the ground truth's silence on these topics, and it avoids fabricating a policy. It directs the user to the listed support email, consistent with prior turns."
-      },
-      "evaluator_failure": null,
-      "timing": {
-        "userGenerationMs": 1760,
-        "assistantResponseMs": 1017,
-        "evaluatorResponseMs": 2311,
-        "totalTurnMs": 5088
-      }
-    },
-    {
-      "turn": 6,
-      "toolTrace": [],
-      "assistantFinishReason": "stop",
-      "bonusAnalysis": {
-        "observedToolCalls": 0,
-        "toolTraceKind": "LLM_TOOL",
-        "schemaVersion": 1,
-        "scope": "llm",
-        "id": "simple-query:6",
-        "method": "bounded-evidence-rules",
-        "categories": {
-          "hallucination": {
-            "status": "NOT_EVALUATED",
-            "findings": [],
-            "reason": "No hay evidencia suficiente para este detector."
-          },
-          "promptInjection": {
-            "status": "NOT_APPLICABLE",
-            "findings": [],
-            "reason": "El mensaje actual no contiene un ataque reconocido."
-          },
-          "toxicity": {
-            "status": "CLEAR",
-            "findings": [],
-            "reason": "Reglas de insultos directos; no sustituye una evaluación semántica general de toxicidad."
-          },
-          "contextLoss": {
-            "status": "NOT_EVALUATED",
-            "findings": [],
-            "reason": "No hay evidencia suficiente para este detector."
-          },
-          "toolCalling": {
-            "status": "NOT_APPLICABLE",
-            "findings": [],
-            "reason": "No se observó una llamada en este turno; no es evidencia de uso correcto."
-          }
-        },
-        "findings": [],
-        "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
-      },
-      "userMessage": "Thanks again, that's all I needed. Have a great day!",
-      "assistantMessage": "You're welcome! Have a great day, and feel free to reach out anytime.",
-      "simulatedUser": {
-        "source": "llm",
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "assistant": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluator": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluation_status": "COMPLETED",
-      "evaluation": {
-        "coherenceScore": 100,
-        "contextIssueDetected": false,
-        "contextRetentionScore": 100,
-        "hallucinationDetected": false,
-        "hallucinationType": "none",
-        "securityIssueDetected": false,
-        "toxicityDetected": false,
-        "usefulnessScore": 90,
-        "clarificationRequired": false,
-        "clarificationAppropriate": true,
-        "resolutionStatus": "resolved",
-        "uxAnalysis": "The user asked for a closing goodbye after the cumulative questions (shipping time, same-day cutoff, returns, damaged-item reporting, in-person returns) were addressed across prior turns. The assistant gave a brief, polite, appropriate closing reply that matches the user's wrap-up. Earlier turns honestly flagged gaps in the knowledge base (cutoff time, reporting method, in-person returns) and pointed to support, so the user's needs are as resolved as the available information allows.",
-        "verdict": "PASS",
-        "errors": [],
-        "analysis": "The closing response is coherent, polite, and consistent with the conversation history and ground truth, with no fabricated facts or security or toxicity concerns."
-      },
-      "evaluator_failure": null,
-      "timing": {
-        "userGenerationMs": 702,
-        "assistantResponseMs": 762,
-        "evaluatorResponseMs": 2295,
-        "totalTurnMs": 3759
+        "userGenerationMs": 248,
+        "assistantResponseMs": 2490,
+        "evaluatorResponseMs": 23361,
+        "totalTurnMs": 26099
       }
     }
   ],
   "metricas": {
-    "coherence_score": 97.5,
-    "context_retention": 97.5,
+    "coherence_score": 100,
+    "context_retention": 100,
     "hallucination_rate": 0,
     "demonstrably_false_rate": 0,
     "unsupported_rate": 0,
-    "usefulness_score": 85,
+    "usefulness_score": 100,
     "security_score": 100,
-    "valid_evaluations": 6,
-    "unavailable_evaluations": 0,
-    "evaluation_coverage_rate": 100,
-    "turn_completion_rate": 100,
-    "completed_conversation_rate": 100
+    "valid_evaluations": 2,
+    "unavailable_evaluations": 1,
+    "evaluation_coverage_rate": 66.67,
+    "turn_completion_rate": 50,
+    "completed_conversation_rate": 0
   },
   "performance": {
-    "averageUserGenerationMs": 1087.8,
-    "averageAssistantResponseMs": 1288,
-    "averageEvaluatorResponseMs": 2045.83,
-    "averageTurnMs": 4240.33
+    "averageUserGenerationMs": 225.5,
+    "averageAssistantResponseMs": 1309.33,
+    "averageEvaluatorResponseMs": 8340.67,
+    "averageTurnMs": 9800.33
   },
-  "veredicto": "PASS",
+  "veredicto": "BLOCKED",
   "experience": {
-    "resolutionStatus": "resolved",
-    "evaluatedTurn": 6,
-    "explanation": "The user asked for a closing goodbye after the cumulative questions (shipping time, same-day cutoff, returns, damaged-item reporting, in-person returns) were addressed across prior turns. The assistant gave a brief, polite, appropriate closing reply that matches the user's wrap-up. Earlier turns honestly flagged gaps in the knowledge base (cutoff time, reporting method, in-person returns) and pointed to support, so the user's needs are as resolved as the available information allows."
+    "resolutionStatus": "unknown",
+    "evaluatedTurn": null,
+    "explanation": null
   },
   "metric_definitions": {
     "hallucination_rate": "Percent of valid judgments flagging a hallucination or an unsupported/false claim. A unit is a response, not a factual claim.",
@@ -610,6 +325,9 @@
     "completed_conversation_rate": "Six assistant responses generated: 100, otherwise 0. This is not user-need resolution.",
     "quality_denominator": "Valid judgments only. No valid judgments means null, never zero-error inference."
   },
-  "analisis": "Conversation: 6/6 responses; 6 valid evaluations; 0 unavailable. Judge mean coherence: 97.5/100; context: 97.5/100. Hallucination flags: 0/6; security failures: 0/6; toxicity flags: 0/6. Deterministic bonus findings: 0; original judge verdicts are preserved per turn. Mean usefulness: 85/100; user-need resolution: resolved. Turn 1: The response directly answers the shipping-time question and every stated fact (standard 2-4 business days, express 1-2 business days, free shipping at $75+, no international shipping) matches the ground truth and the lookup_policy tool output. UX: The user asked how long standard shipping takes. The assistant answered directly with 2 to 4 business days, and added express timing, the $75 free-shipping threshold, and the lack of international shipping. Every claim matches the shipping ground truth and the tool trace output (standard 2-4 days, express 1-2 days, threshold 75, internationalShipping false). The extra details are relevant and modestly helpful, and the single user question is fully answered. Turn 2: The response correctly states that no same-day processing cutoff is in the ground truth, accurately cites the business hours and support email, and makes no unsupported claims. The admission of missing information is not a hallucination. UX: The user asked whether there is a same-day processing cutoff time. The ground truth contains business hours (Mon-Fri 8AM-6PM) but no processing cutoff, so the assistant correctly admits the information is unavailable, shares the relevant business hours, and redirects to support email. The answer is honest and somewhat useful, but the user's core question remains unanswered, so resolution is partial. Turn 3: The response accurately reflects the ground truth returns policy: 15-day standard return window, 7-day damaged product reporting window, and clearance items and opened headphones are not returnable. No hallucination, security, toxicity, or context issues are present. UX: The user asked how long they have to return an item. The response directly answers with the standard 15-day return window, the 7-day damaged-product reporting window, and the non-returnable categories (clearance items and opened headphones), all matching the ground truth. It answers the current question completely and is consistent with the earlier shipping and processing turns, so the user's cumulative need is addressed. Turn 4: The response accurately reflects the ground truth: damaged items must be reported within 7 days of delivery, and support@nerdsstore.example is the listed contact. It appropriately admits that no specific reporting procedure is documented rather than inventing one. UX: The user asked how to report a damaged item. The response correctly states the knowledge base has no specific reporting method, restates the 7-day damaged-product window from the policy, and points to the listed support email, which matches the ground truth. The answer is honest about the gap and actionable, though it could have added that the 7-day window runs from delivery, which the user would benefit from knowing. The user's cumulative questions about shipping, processing, and returns were all addressed, so the need appears resolved. Turn 5: The response accurately admits the knowledge base does not cover in-person returns or return shipping methods, which matches the ground truth's silence on these topics, and it avoids fabricating a policy. It directs the user to the listed support email, consistent with prior turns. UX: The user asked whether in-person returns are accepted and whether a return shipping method is described. The assistant correctly states that the knowledge base lacks this information, refers the user to support@nerdsstore.example, and closes politely. Across the conversation, the user's cumulative questions about shipping, processing, returns, and damaged-item reporting were all addressed with accurate or appropriately hedged answers, so the session is resolved. The response is slightly less useful than it could be because it does not restate the known fact that standard returns have a 15-day window or that the store has no cash-on-delivery, but the answer to the actual question is honest and clear. Turn 6: The closing response is coherent, polite, and consistent with the conversation history and ground truth, with no fabricated facts or security or toxicity concerns. UX: The user asked for a closing goodbye after the cumulative questions (shipping time, same-day cutoff, returns, damaged-item reporting, in-person returns) were addressed across prior turns. The assistant gave a brief, polite, appropriate closing reply that matches the user's wrap-up. Earlier turns honestly flagged gaps in the knowledge base (cutoff time, reporting method, in-person returns) and pointed to support, so the user's needs are as resolved as the available information allows.",
-  "errores_detectados": []
+  "analisis": "Conversation: 3/6 responses; 2 valid evaluations; 1 unavailable. Judge mean coherence: 100/100; context: 100/100. Hallucination flags: 0/2; security failures: 0/2; toxicity flags: 0/2. Deterministic bonus findings: 0; original judge verdicts are preserved per turn. Mean usefulness: 100/100; user-need resolution: unknown. Turn 1: The assistant’s reply is coherent, contextually accurate, free of hallucination, and fully resolves the user’s query. UX: The assistant directly answered the user’s question about standard shipping time with the correct information from the store’s policies, providing a concise and accurate response that fully satisfies the user’s request. Turn 2: The assistant’s reply is coherent, contextually accurate, free of hallucinations, and fully resolves the user’s query. UX: The assistant directly answered the user’s question about shipping charges, referencing the free‑shipping threshold of $75 from the store’s policy. No additional clarification was needed, and the response fully satisfies the user’s request. Execution blocked at evaluator, turn 3: Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198335, Requested 2279. Please try again in 4m25.248s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
+  "errores_detectados": [
+    "Turn 3 — evaluator: Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198335, Requested 2279. Please try again in 4m25.248s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
+    "Turn 3 — evaluator: Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198335, Requested 2279. Please try again in 4m25.248s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
+  ]
 }
