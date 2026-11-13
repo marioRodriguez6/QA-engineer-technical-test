@@ -19,24 +19,24 @@
     "maxFailures": 0,
     "metadata": {
       "ci": {
-        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-        "commitHash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43332618484"
+        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/ded5be55812a446986d3382596735bf02a2edf8e",
+        "commitHash": "ded5be55812a446986d3382596735bf02a2edf8e",
+        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341399681"
       },
       "gitCommit": {
-        "shortHash": "f4b0a17",
-        "hash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-        "subject": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
-        "body": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+        "shortHash": "ded5be5",
+        "hash": "ded5be55812a446986d3382596735bf02a2edf8e",
+        "subject": "Add files via upload",
+        "body": "Add files via upload",
         "author": {
           "name": "Mario Rodriguez",
           "email": "54407177+marioRodriguez6@users.noreply.github.com",
-          "time": 1794527464000
+          "time": 1794531559000
         },
         "committer": {
-          "name": "Mario Rodriguez",
-          "email": "54407177+marioRodriguez6@users.noreply.github.com",
-          "time": 1794527464000
+          "name": "GitHub",
+          "email": "noreply@github.com",
+          "time": 1794531559000
         },
         "branch": "master"
       },
@@ -50,24 +50,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-            "commitHash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43332618484"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/ded5be55812a446986d3382596735bf02a2edf8e",
+            "commitHash": "ded5be55812a446986d3382596735bf02a2edf8e",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341399681"
           },
           "gitCommit": {
-            "shortHash": "f4b0a17",
-            "hash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-            "subject": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
-            "body": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+            "shortHash": "ded5be5",
+            "hash": "ded5be55812a446986d3382596735bf02a2edf8e",
+            "subject": "Add files via upload",
+            "body": "Add files via upload",
             "author": {
               "name": "Mario Rodriguez",
               "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794527464000
+              "time": 1794531559000
             },
             "committer": {
-              "name": "Mario Rodriguez",
-              "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794527464000
+              "name": "GitHub",
+              "email": "noreply@github.com",
+              "time": 1794531559000
             },
             "branch": "master"
           },
@@ -93,24 +93,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-            "commitHash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43332618484"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/ded5be55812a446986d3382596735bf02a2edf8e",
+            "commitHash": "ded5be55812a446986d3382596735bf02a2edf8e",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341399681"
           },
           "gitCommit": {
-            "shortHash": "f4b0a17",
-            "hash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-            "subject": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
-            "body": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+            "shortHash": "ded5be5",
+            "hash": "ded5be55812a446986d3382596735bf02a2edf8e",
+            "subject": "Add files via upload",
+            "body": "Add files via upload",
             "author": {
               "name": "Mario Rodriguez",
               "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794527464000
+              "time": 1794531559000
             },
             "committer": {
-              "name": "Mario Rodriguez",
-              "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794527464000
+              "name": "GitHub",
+              "email": "noreply@github.com",
+              "time": 1794531559000
             },
             "branch": "master"
           },
@@ -191,7 +191,7 @@
         {
           "title": "Exercise 3 - Botpress Docs chatbot",
           "file": "exercise-3-chatbot-testing/tests/botpress-docs/chatbot.spec.ts",
-          "line": 176,
+          "line": 177,
           "column": 6,
           "specs": [
             {
@@ -210,12 +210,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1271,
+                      "duration": 1280,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:54:18.800Z",
+                      "startTime": "2026-11-13T01:00:03.447Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -241,7 +241,7 @@
               ],
               "id": "5279d8c0b366e846c917-bb02db9a3553db7c06bb",
               "file": "exercise-3-chatbot-testing/tests/botpress-docs/chatbot.spec.ts",
-              "line": 179,
+              "line": 180,
               "column": 5
             },
             {
@@ -260,7 +260,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1491,
+                      "duration": 1308,
                       "errors": [],
                       "stdout": [
                         {
@@ -272,18 +272,18 @@
                       "steps": [
                         {
                           "title": "Establish a closed initial state",
-                          "duration": 263
+                          "duration": 325
                         },
                         {
                           "title": "Open the panel using Ask Docs",
-                          "duration": 96
+                          "duration": 93
                         },
                         {
                           "title": "Close the panel using Ask Docs",
-                          "duration": 78
+                          "duration": 79
                         }
                       ],
-                      "startTime": "2026-11-12T23:54:20.595Z",
+                      "startTime": "2026-11-13T01:00:05.159Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -309,7 +309,7 @@
               ],
               "id": "5279d8c0b366e846c917-f044e93e0ebc96883291",
               "file": "exercise-3-chatbot-testing/tests/botpress-docs/chatbot.spec.ts",
-              "line": 186,
+              "line": 187,
               "column": 5
             },
             {
@@ -324,7 +324,7 @@
                       "type": "skip",
                       "location": {
                         "file": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/exercise-3-chatbot-testing/tests/botpress-docs/chatbot.spec.ts",
-                        "line": 216,
+                        "line": 217,
                         "column": 10
                       }
                     }
@@ -342,13 +342,13 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:54:22.381Z",
+                      "startTime": "2026-11-13T01:00:06.700Z",
                       "annotations": [
                         {
                           "type": "skip",
                           "location": {
                             "file": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/exercise-3-chatbot-testing/tests/botpress-docs/chatbot.spec.ts",
-                            "line": 216,
+                            "line": 217,
                             "column": 10
                           }
                         }
@@ -361,7 +361,7 @@
               ],
               "id": "5279d8c0b366e846c917-d097c48dae67d996ab2f",
               "file": "exercise-3-chatbot-testing/tests/botpress-docs/chatbot.spec.ts",
-              "line": 216,
+              "line": 217,
               "column": 10
             },
             {
@@ -380,21 +380,26 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2915,
+                      "duration": 2871,
                       "errors": [],
                       "stdout": [
                         {
                           "text": "Chatbot state: current=true, requested=true\n"
                         },
                         {
-                          "text": "CHATBOT-004 response time: 1099 ms\n"
+                          "text": "CHATBOT-004 response time: 1487 ms\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:54:22.382Z",
+                      "startTime": "2026-11-13T01:00:06.700Z",
                       "annotations": [],
                       "attachments": [
+                        {
+                          "name": "Docs bonus evidence",
+                          "contentType": "application/json",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/docs/test-results/exercise-3-chatbot-testing-4e104-esponse-and-measure-latency-chromium/attachments/Docs-bonus-evidence-54da1c07fc668a7f604d347ce55bda5a94b4f936.json"
+                        },
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
@@ -418,7 +423,7 @@
               ],
               "id": "5279d8c0b366e846c917-7e8373af69549b6bb327",
               "file": "exercise-3-chatbot-testing/tests/botpress-docs/chatbot.spec.ts",
-              "line": 229,
+              "line": 230,
               "column": 5
             }
           ]
@@ -428,8 +433,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-12T23:54:18.293Z",
-    "duration": 7428.880999999999,
+    "startTime": "2026-11-13T01:00:03.018Z",
+    "duration": 6871.474,
     "expected": 3,
     "skipped": 1,
     "unexpected": 0,

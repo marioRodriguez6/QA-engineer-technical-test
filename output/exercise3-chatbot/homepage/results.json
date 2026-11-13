@@ -19,24 +19,24 @@
     "maxFailures": 0,
     "metadata": {
       "ci": {
-        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-        "commitHash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43332618484"
+        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/ded5be55812a446986d3382596735bf02a2edf8e",
+        "commitHash": "ded5be55812a446986d3382596735bf02a2edf8e",
+        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341399681"
       },
       "gitCommit": {
-        "shortHash": "f4b0a17",
-        "hash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-        "subject": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
-        "body": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+        "shortHash": "ded5be5",
+        "hash": "ded5be55812a446986d3382596735bf02a2edf8e",
+        "subject": "Add files via upload",
+        "body": "Add files via upload",
         "author": {
           "name": "Mario Rodriguez",
           "email": "54407177+marioRodriguez6@users.noreply.github.com",
-          "time": 1794527464000
+          "time": 1794531559000
         },
         "committer": {
-          "name": "Mario Rodriguez",
-          "email": "54407177+marioRodriguez6@users.noreply.github.com",
-          "time": 1794527464000
+          "name": "GitHub",
+          "email": "noreply@github.com",
+          "time": 1794531559000
         },
         "branch": "master"
       },
@@ -50,24 +50,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-            "commitHash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43332618484"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/ded5be55812a446986d3382596735bf02a2edf8e",
+            "commitHash": "ded5be55812a446986d3382596735bf02a2edf8e",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341399681"
           },
           "gitCommit": {
-            "shortHash": "f4b0a17",
-            "hash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-            "subject": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
-            "body": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+            "shortHash": "ded5be5",
+            "hash": "ded5be55812a446986d3382596735bf02a2edf8e",
+            "subject": "Add files via upload",
+            "body": "Add files via upload",
             "author": {
               "name": "Mario Rodriguez",
               "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794527464000
+              "time": 1794531559000
             },
             "committer": {
-              "name": "Mario Rodriguez",
-              "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794527464000
+              "name": "GitHub",
+              "email": "noreply@github.com",
+              "time": 1794531559000
             },
             "branch": "master"
           },
@@ -93,24 +93,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-            "commitHash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43332618484"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/ded5be55812a446986d3382596735bf02a2edf8e",
+            "commitHash": "ded5be55812a446986d3382596735bf02a2edf8e",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341399681"
           },
           "gitCommit": {
-            "shortHash": "f4b0a17",
-            "hash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-            "subject": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
-            "body": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+            "shortHash": "ded5be5",
+            "hash": "ded5be55812a446986d3382596735bf02a2edf8e",
+            "subject": "Add files via upload",
+            "body": "Add files via upload",
             "author": {
               "name": "Mario Rodriguez",
               "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794527464000
+              "time": 1794531559000
             },
             "committer": {
-              "name": "Mario Rodriguez",
-              "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794527464000
+              "name": "GitHub",
+              "email": "noreply@github.com",
+              "time": 1794531559000
             },
             "branch": "master"
           },
@@ -191,7 +191,7 @@
         {
           "title": "Exercise 3 - Botpress homepage chatbot",
           "file": "exercise-3-chatbot-testing/tests/botpress-homepage/chatbot.spec.ts",
-          "line": 55,
+          "line": 57,
           "column": 6,
           "specs": [
             {
@@ -210,17 +210,17 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 5785,
+                      "duration": 7629,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "Homepage DOM ready after 1896 ms\n"
+                          "text": "Homepage DOM ready after 2136 ms\n"
                         },
                         {
-                          "text": "Homepage load event observed after 3165 ms\n"
+                          "text": "Homepage load event observed after 4726 ms\n"
                         },
                         {
-                          "text": "Chatbot launcher visible 1849 ms after load\n"
+                          "text": "Chatbot launcher visible 1651 ms after load\n"
                         }
                       ],
                       "stderr": [],
@@ -228,14 +228,14 @@
                       "steps": [
                         {
                           "title": "Wait for window.load, which starts the webchat loader",
-                          "duration": 1268
+                          "duration": 2589
                         },
                         {
                           "title": "Wait for the floating launcher after page load",
-                          "duration": 1848
+                          "duration": 1650
                         }
                       ],
-                      "startTime": "2026-11-12T23:54:14.215Z",
+                      "startTime": "2026-11-13T01:00:24.556Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -261,7 +261,7 @@
               ],
               "id": "207e7f4cbe8b1ca6058c-6a04e5bab0a936944f28",
               "file": "exercise-3-chatbot-testing/tests/botpress-homepage/chatbot.spec.ts",
-              "line": 56,
+              "line": 58,
               "column": 3
             },
             {
@@ -280,17 +280,17 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 9098,
+                      "duration": 12251,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "Homepage DOM ready after 1398 ms\n"
+                          "text": "Homepage DOM ready after 1917 ms\n"
                         },
                         {
-                          "text": "Homepage load event observed after 3083 ms\n"
+                          "text": "Homepage load event observed after 4343 ms\n"
                         },
                         {
-                          "text": "Chatbot launcher visible 1196 ms after load\n"
+                          "text": "Chatbot launcher visible 1136 ms after load\n"
                         }
                       ],
                       "stderr": [],
@@ -298,22 +298,22 @@
                       "steps": [
                         {
                           "title": "Wait for window.load, which starts the webchat loader",
-                          "duration": 1685
+                          "duration": 2425
                         },
                         {
                           "title": "Wait for the floating launcher after page load",
-                          "duration": 1195
+                          "duration": 1135
                         },
                         {
                           "title": "Close using the real header control",
-                          "duration": 1146
+                          "duration": 1360
                         },
                         {
                           "title": "Reopen using the floating launcher",
-                          "duration": 1232
+                          "duration": 1673
                         }
                       ],
-                      "startTime": "2026-11-12T23:54:20.505Z",
+                      "startTime": "2026-11-13T01:00:34.418Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -339,7 +339,7 @@
               ],
               "id": "207e7f4cbe8b1ca6058c-6cccdb6834b8f47a8ea3",
               "file": "exercise-3-chatbot-testing/tests/botpress-homepage/chatbot.spec.ts",
-              "line": 60,
+              "line": 62,
               "column": 3
             },
             {
@@ -358,17 +358,17 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 5940,
+                      "duration": 9028,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "Homepage DOM ready after 1068 ms\n"
+                          "text": "Homepage DOM ready after 1943 ms\n"
                         },
                         {
-                          "text": "Homepage load event observed after 2602 ms\n"
+                          "text": "Homepage load event observed after 4373 ms\n"
                         },
                         {
-                          "text": "Chatbot launcher visible 1253 ms after load\n"
+                          "text": "Chatbot launcher visible 1611 ms after load\n"
                         }
                       ],
                       "stderr": [],
@@ -376,14 +376,14 @@
                       "steps": [
                         {
                           "title": "Wait for window.load, which starts the webchat loader",
-                          "duration": 1535
+                          "duration": 2429
                         },
                         {
                           "title": "Wait for the floating launcher after page load",
-                          "duration": 1253
+                          "duration": 1609
                         }
                       ],
-                      "startTime": "2026-11-12T23:54:30.009Z",
+                      "startTime": "2026-11-13T01:00:47.401Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -409,7 +409,7 @@
               ],
               "id": "207e7f4cbe8b1ca6058c-1820453c9b6c109cfc91",
               "file": "exercise-3-chatbot-testing/tests/botpress-homepage/chatbot.spec.ts",
-              "line": 79,
+              "line": 81,
               "column": 3
             },
             {
@@ -418,7 +418,7 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 150000,
+                  "timeout": 300000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "chromium",
@@ -428,20 +428,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 11678,
+                      "duration": 27558,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "Homepage DOM ready after 1138 ms\n"
+                          "text": "Homepage DOM ready after 1766 ms\n"
                         },
                         {
-                          "text": "Homepage load event observed after 3065 ms\n"
+                          "text": "Homepage load event observed after 4258 ms\n"
                         },
                         {
-                          "text": "Chatbot launcher visible 1274 ms after load\n"
+                          "text": "Chatbot launcher visible 1676 ms after load\n"
                         },
                         {
-                          "text": "{\"testId\":\"HOME-004\",\"pageUrl\":\"https://botpress.com/\",\"widgetStructure\":\"Shadow DOM\",\"botName\":\"Botpress\",\"userMessage\":\"Hola\",\"assistantResponse\":\"Te leo en español. Soy el asistente de Botpress y puedo ayudarte con cosas como planes, demos o cómo usar la plataforma.\",\"responseTimeMs\":4196,\"measuredAt\":\"2026-11-12T23:54:46.922Z\",\"measurement\":\"From immediately before pressing Enter until a new, loaded bot message with visible text is observed. Includes UI and assertion overhead.\"}\n"
+                          "text": "{\"testId\":\"HOME-004\",\"pageUrl\":\"https://botpress.com/\",\"widgetStructure\":\"Shadow DOM\",\"botName\":\"Botpress\",\"userMessage\":\"Hola\",\"assistantResponse\":\"Hola, soy el asistente de Botpress. Botpress es una plataforma para crear agentes de soporte con IA y un helpdesk completo para tu equipo de atención al cliente.\\n¿En qué te gustaría que te ayude con Botpress ahora mismo?\",\"responseTimeMs\":4465,\"measuredAt\":\"2026-11-13T01:01:10.195Z\",\"measurement\":\"From immediately before pressing Enter until a new, loaded bot message with visible text is observed. Includes UI and assertion overhead.\"}\n"
                         }
                       ],
                       "stderr": [],
@@ -449,16 +449,21 @@
                       "steps": [
                         {
                           "title": "Wait for window.load, which starts the webchat loader",
-                          "duration": 1927
+                          "duration": 2491
                         },
                         {
                           "title": "Wait for the floating launcher after page load",
-                          "duration": 1274
+                          "duration": 1676
                         }
                       ],
-                      "startTime": "2026-11-12T23:54:36.229Z",
+                      "startTime": "2026-11-13T01:00:56.997Z",
                       "annotations": [],
                       "attachments": [
+                        {
+                          "name": "Homepage bonus evidence",
+                          "contentType": "application/json",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-9838e-ew-bot-response-and-latency-chromium/attachments/Homepage-bonus-evidence-4084d4918b57ab5643781055eb67d395683322ff.json"
+                        },
                         {
                           "name": "Homepage conversation and latency",
                           "contentType": "application/json",
@@ -468,6 +473,11 @@
                           "name": "Homepage conversation",
                           "contentType": "image/png",
                           "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-9838e-ew-bot-response-and-latency-chromium/attachments/Homepage-conversation-6072ce1ffa5f61fb65efc7e28bccecd03b3d718d.png"
+                        },
+                        {
+                          "name": "Homepage bounded bonus probes",
+                          "contentType": "application/json",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise3-chatbot/homepage/test-results/exercise-3-chatbot-testing-9838e-ew-bot-response-and-latency-chromium/attachments/Homepage-bounded-bonus-probes-d0b7afff1ebdf45154e88227dbfce238160d00ca.json"
                         },
                         {
                           "name": "screenshot",
@@ -492,7 +502,7 @@
               ],
               "id": "207e7f4cbe8b1ca6058c-067e968e1ececa245c70",
               "file": "exercise-3-chatbot-testing/tests/botpress-homepage/chatbot.spec.ts",
-              "line": 85,
+              "line": 87,
               "column": 3
             }
           ]
@@ -502,8 +512,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-12T23:54:13.921Z",
-    "duration": 34505.672000000006,
+    "startTime": "2026-11-13T01:00:23.977Z",
+    "duration": 61968.854999999996,
     "expected": 4,
     "skipped": 0,
     "unexpected": 0,

@@ -1,9 +1,13 @@
 {
   "escenario": "Conversational Memory",
-  "execution_status": "COMPLETED",
-  "completed_turns": 6,
+  "execution_status": "BLOCKED",
+  "completed_turns": 1,
   "expected_turns": 6,
-  "infrastructure_failure": null,
+  "infrastructure_failure": {
+    "turn": 1,
+    "stage": "evaluator",
+    "message": "Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199056, Requested 2651. Please try again in 12m17.424s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
+  },
   "turnos": [
     {
       "rol": "usuario",
@@ -11,339 +15,106 @@
     },
     {
       "rol": "asistente",
-      "mensaje": "Hi Mario, welcome to Nerds Store! How can I help you today? I can help with things like order status, product details, shipping, returns, warranties, or troubleshooting your products."
-    },
-    {
-      "rol": "usuario",
-      "mensaje": "Hey, I'm trying to figure out whether the Nerds Store carries any replacement parts for a mechanical keyboard I bought a while back. Do you have those in stock?"
-    },
-    {
-      "rol": "asistente",
-      "mensaje": "Hi Mario, thanks for reaching out. Unfortunately, our knowledge base doesn't include information about replacement parts such as keycaps, switches, or cables, so I can't confirm whether we carry them or whether they're in stock.\n\nHere's what I can tell you:\n\n- **Mechanical Keyboard K2 (P-102):** This is the keyboard we currently sell. It has red mechanical switches, connects via USB-C, has 6 units in stock at $74.50, and comes with a 24-month warranty.\n- **Support email:** For questions about replacement parts, you can contact our team at support@nerdsstore.example. Our business hours are Monday to Friday, 8:00 AM to 6:00 PM.\n\nIf you can tell me the model of your keyboard,"
-    },
-    {
-      "rol": "usuario",
-      "mensaje": "Thanks for that. I'm not sure of the exact model off the top of my head, but it's a Keychron-style board with red switches, bought a couple of years ago. Would the support email be the best place to ask about keycaps, or is there another option?"
-    },
-    {
-      "rol": "asistente",
-      "mensaje": "Hi Mario, the support email (support@nerdsstore.example) is the best option I can point you to. Our knowledge base doesn't list keycaps or other replacement parts, so I can't confirm what's available. When you write, it helps to include:\n\n- The keyboard's brand and model, if you can find it on the bottom of the board or in your order confirmation\n- The specific part you need (for example, keycaps or a cable)\n- Your order number, if you have it\n\nOur team can then tell you whether they can help. Since our catalog doesn't include Keychron boards, I can't confirm whether your keyboard is compatible with anything we sell. Our Mechanical Keyboard K2 is the only keyboard in our current catalog, and it's a Nerds Store product with red switches and a 24-month"
-    },
-    {
-      "rol": "usuario",
-      "mensaje": "Okay, that makes sense. I'll email them with those details. Quick question before I do, though: do you remember my name? I'd like to see if you caught it from earlier."
-    },
-    {
-      "rol": "asistente",
-      "mensaje": "Yes, Mario. You introduced yourself at the start of our conversation, and I've kept it in mind.\n\nAlso, I should correct my last message: it cut off mid-sentence, and I didn't finish describing the K2. It's a keyboard with red switches, USB-C connectivity, and a 24-month warranty, currently priced at $74.50. I also shouldn't have implied that the Keychron-style board you own is unrelated to our products. I simply don't have information about it.\n\nGood luck with your email to support@nerdsstore.example, Mario. If you have any other questions about our products, orders, or policies, I'm happy to help."
-    },
-    {
-      "rol": "usuario",
-      "mensaje": "Thanks, that's helpful. I'll send the email tonight. Have a good one!"
-    },
-    {
-      "rol": "asistente",
-      "mensaje": "You're welcome, Mario! Have a great evening, and good luck with your keyboard."
-    },
-    {
-      "rol": "usuario",
-      "mensaje": "By the way, do you remember my name?"
-    },
-    {
-      "rol": "asistente",
-      "mensaje": "Yes, your name is Mario."
+      "mensaje": "Hi Mario! How can I help you today?"
     }
   ],
   "evaluaciones": [
     {
       "turn": 1,
+      "toolTrace": [],
+      "assistantFinishReason": "stop",
+      "bonusAnalysis": {
+        "observedToolCalls": 0,
+        "toolTraceKind": "LLM_TOOL",
+        "schemaVersion": 1,
+        "scope": "llm",
+        "id": "conversational-memory:1",
+        "method": "bounded-evidence-rules",
+        "categories": {
+          "hallucination": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "promptInjection": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "El mensaje actual no contiene un ataque reconocido."
+          },
+          "toxicity": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": "Reglas de insultos directos; no sustituye una evaluación semántica general de toxicidad."
+          },
+          "contextLoss": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "toolCalling": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "No se observó una llamada en este turno; no es evidencia de uso correcto."
+          }
+        },
+        "findings": [],
+        "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
+      },
       "userMessage": "Hi, my name is Mario.",
-      "assistantMessage": "Hi Mario, welcome to Nerds Store! How can I help you today? I can help with things like order status, product details, shipping, returns, warranties, or troubleshooting your products.",
+      "assistantMessage": "Hi Mario! How can I help you today?",
       "simulatedUser": {
         "source": "fixed",
         "provider": null,
         "model": null
       },
       "assistant": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
       },
       "evaluator": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b"
       },
-      "evaluation_status": "COMPLETED",
-      "evaluation": {
-        "coherenceScore": 96,
-        "contextIssueDetected": false,
-        "contextRetentionScore": 100,
-        "hallucinationDetected": false,
-        "hallucinationType": "none",
-        "securityIssueDetected": false,
-        "toxicityDetected": false,
-        "usefulnessScore": 70,
-        "clarificationRequired": false,
-        "clarificationAppropriate": true,
-        "resolutionStatus": "partial",
-        "uxAnalysis": "The assistant greets the user by the name they provided (Mario), matching the history, and clearly lists the kinds of help available (order status, product details, shipping, returns, warranties, troubleshooting). This is a suitable opening for a first turn, but no actual user need has been addressed yet, so usefulness is moderate and resolution is only partial because the request has not yet been stated.",
-        "verdict": "PASS",
-        "errors": [],
-        "analysis": "The response correctly uses the user's name from the prior turn and accurately describes services consistent with the store's ground truth (order, product, shipping, return, warranty, and support information all exist). No factual claims are contradicted or unsupported, and no security or toxicity concerns arise."
+      "evaluation_status": "UNAVAILABLE",
+      "evaluation": null,
+      "evaluator_failure": {
+        "type": "EVALUATOR_OUTPUT_ERROR",
+        "message": "Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199056, Requested 2651. Please try again in 12m17.424s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
+        "diagnostics": null
       },
-      "evaluator_failure": null,
       "timing": {
         "userGenerationMs": 0,
-        "assistantResponseMs": 1441,
-        "evaluatorResponseMs": 1900,
-        "totalTurnMs": 3341
-      }
-    },
-    {
-      "turn": 2,
-      "userMessage": "Hey, I'm trying to figure out whether the Nerds Store carries any replacement parts for a mechanical keyboard I bought a while back. Do you have those in stock?",
-      "assistantMessage": "Hi Mario, thanks for reaching out. Unfortunately, our knowledge base doesn't include information about replacement parts such as keycaps, switches, or cables, so I can't confirm whether we carry them or whether they're in stock.\n\nHere's what I can tell you:\n\n- **Mechanical Keyboard K2 (P-102):** This is the keyboard we currently sell. It has red mechanical switches, connects via USB-C, has 6 units in stock at $74.50, and comes with a 24-month warranty.\n- **Support email:** For questions about replacement parts, you can contact our team at support@nerdsstore.example. Our business hours are Monday to Friday, 8:00 AM to 6:00 PM.\n\nIf you can tell me the model of your keyboard,",
-      "simulatedUser": {
-        "source": "llm",
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "assistant": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluator": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluation_status": "COMPLETED",
-      "evaluation": {
-        "coherenceScore": 60,
-        "contextIssueDetected": false,
-        "contextRetentionScore": 85,
-        "hallucinationDetected": false,
-        "hallucinationType": "none",
-        "securityIssueDetected": false,
-        "toxicityDetected": false,
-        "usefulnessScore": 55,
-        "clarificationRequired": true,
-        "clarificationAppropriate": false,
-        "resolutionStatus": "partial",
-        "uxAnalysis": "The user asked whether replacement parts for a previously purchased mechanical keyboard are in stock. The assistant correctly admits the knowledge base lacks replacement-part information and provides the support email and business hours, which is useful. However, the response then pivots to selling the K2 keyboard (6 in stock, $74.50, 24-month warranty) that the user did not ask about, and the response is truncated mid-sentence at 'If you can tell me the model of your keyboard,' so the clarifying question is never actually asked. The cumulative need (finding replacement parts) is only partially addressed through the support referral.",
-        "verdict": "REVIEW",
-        "errors": [
-          "coherence: The response is truncated mid-sentence ('If you can tell me the model of your keyboard,') so the clarifying request is incomplete and the reply ends abruptly.",
-          "coherence: The response shifts to promoting the K2 keyboard for sale, which does not address the user's question about replacement parts for an existing keyboard."
-        ],
-        "analysis": "The response correctly acknowledges that replacement-part availability is not in the ground truth and refers the user to support, and the product facts it cites match the ground truth. However, it is cut off mid-sentence and pivots to an unrelated product pitch, leaving the user's need only partially addressed."
-      },
-      "evaluator_failure": null,
-      "timing": {
-        "userGenerationMs": 976,
-        "assistantResponseMs": 1566,
-        "evaluatorResponseMs": 2613,
-        "totalTurnMs": 5155
-      }
-    },
-    {
-      "turn": 3,
-      "userMessage": "Thanks for that. I'm not sure of the exact model off the top of my head, but it's a Keychron-style board with red switches, bought a couple of years ago. Would the support email be the best place to ask about keycaps, or is there another option?",
-      "assistantMessage": "Hi Mario, the support email (support@nerdsstore.example) is the best option I can point you to. Our knowledge base doesn't list keycaps or other replacement parts, so I can't confirm what's available. When you write, it helps to include:\n\n- The keyboard's brand and model, if you can find it on the bottom of the board or in your order confirmation\n- The specific part you need (for example, keycaps or a cable)\n- Your order number, if you have it\n\nOur team can then tell you whether they can help. Since our catalog doesn't include Keychron boards, I can't confirm whether your keyboard is compatible with anything we sell. Our Mechanical Keyboard K2 is the only keyboard in our current catalog, and it's a Nerds Store product with red switches and a 24-month",
-      "simulatedUser": {
-        "source": "llm",
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "assistant": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluator": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluation_status": "COMPLETED",
-      "evaluation": {
-        "coherenceScore": 72,
-        "contextIssueDetected": false,
-        "contextRetentionScore": 88,
-        "hallucinationDetected": false,
-        "hallucinationType": "none",
-        "securityIssueDetected": false,
-        "toxicityDetected": false,
-        "usefulnessScore": 55,
-        "clarificationRequired": false,
-        "clarificationAppropriate": true,
-        "resolutionStatus": "partial",
-        "uxAnalysis": "The user wants to know whether replacement parts (keycaps) are available for a Keychron-style keyboard bought years ago. The assistant correctly directs Mario to the support email and lists useful details to include, and correctly notes the catalog has no Keychron boards. However, the response is truncated mid-sentence ('a 24-month'), leaving the final point incomplete and the user without a complete answer. Core need is partially addressed via the support referral but not resolved.",
-        "verdict": "REVIEW",
-        "errors": [
-          "coherence: The response is truncated mid-sentence ('it's a Nerds Store product with red switches and a 24-month'), so the final statement is incomplete and the reply ends abruptly."
-        ],
-        "analysis": "The response correctly refers Mario to support and accurately reflects the ground truth (no keycaps data, no Keychron products, K2 is the only keyboard), with no hallucination. However, the truncation leaves the reply incomplete, so a reliable PASS cannot be given."
-      },
-      "evaluator_failure": null,
-      "timing": {
-        "userGenerationMs": 1005,
-        "assistantResponseMs": 2148,
-        "evaluatorResponseMs": 2371,
-        "totalTurnMs": 5524
-      }
-    },
-    {
-      "turn": 4,
-      "userMessage": "Okay, that makes sense. I'll email them with those details. Quick question before I do, though: do you remember my name? I'd like to see if you caught it from earlier.",
-      "assistantMessage": "Yes, Mario. You introduced yourself at the start of our conversation, and I've kept it in mind.\n\nAlso, I should correct my last message: it cut off mid-sentence, and I didn't finish describing the K2. It's a keyboard with red switches, USB-C connectivity, and a 24-month warranty, currently priced at $74.50. I also shouldn't have implied that the Keychron-style board you own is unrelated to our products. I simply don't have information about it.\n\nGood luck with your email to support@nerdsstore.example, Mario. If you have any other questions about our products, orders, or policies, I'm happy to help.",
-      "simulatedUser": {
-        "source": "llm",
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "assistant": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluator": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluation_status": "COMPLETED",
-      "evaluation": {
-        "coherenceScore": 88,
-        "contextIssueDetected": false,
-        "contextRetentionScore": 96,
-        "hallucinationDetected": false,
-        "hallucinationType": "none",
-        "securityIssueDetected": false,
-        "toxicityDetected": false,
-        "usefulnessScore": 72,
-        "clarificationRequired": false,
-        "clarificationAppropriate": true,
-        "resolutionStatus": "partial",
-        "uxAnalysis": "The user asked whether the assistant remembers his name; the assistant correctly recalled 'Mario' from the first turn. The response then re-lists K2 product details that match ground truth (red switches, USB-C, 24-month warranty, $74.50), and it corrects a prior truncated message. The user's core need, finding keycap/replacement parts, remains unanswered by design since the knowledge base lacks that information; the user has been directed to support@nerdsstore.example, so resolution is partial. The 'correction' about the Keychron board being unrelated is slightly odd but does not misstate store facts.",
-        "verdict": "PASS",
-        "errors": [],
-        "analysis": "The name recall is correct and consistent with history, and the product details match the ground truth for P-102. The response avoids fabricating replacement-part or Keychron information and appropriately routes the user to support, though the 'correction' about the cut-off message is somewhat unnecessary."
-      },
-      "evaluator_failure": null,
-      "timing": {
-        "userGenerationMs": 1104,
-        "assistantResponseMs": 1569,
-        "evaluatorResponseMs": 2539,
-        "totalTurnMs": 5212
-      }
-    },
-    {
-      "turn": 5,
-      "userMessage": "Thanks, that's helpful. I'll send the email tonight. Have a good one!",
-      "assistantMessage": "You're welcome, Mario! Have a great evening, and good luck with your keyboard.",
-      "simulatedUser": {
-        "source": "llm",
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "assistant": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluator": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluation_status": "COMPLETED",
-      "evaluation": {
-        "coherenceScore": 95,
-        "contextIssueDetected": false,
-        "contextRetentionScore": 95,
-        "hallucinationDetected": false,
-        "hallucinationType": "none",
-        "securityIssueDetected": false,
-        "toxicityDetected": false,
-        "usefulnessScore": 80,
-        "clarificationRequired": false,
-        "clarificationAppropriate": true,
-        "resolutionStatus": "resolved",
-        "uxAnalysis": "The user asked about replacement keycaps for an unidentified Keychron-style keyboard, and the assistant correctly stated that parts information is unavailable and directed Mario to support@nerdsstore.example with useful details to include. The user's need (where to ask) was resolved, and the final turn is a warm, appropriate closing. Usefulness is capped because the assistant did not reference the stated business hours or otherwise add new actionable detail, and it had earlier corrected itself with some redundancy.",
-        "verdict": "PASS",
-        "errors": [],
-        "analysis": "The closing reply is coherent, appropriately brief, and consistent with prior turns and the ground truth (support email and K2 details are accurate). No hallucinated facts, context errors, security or toxicity issues were present."
-      },
-      "evaluator_failure": null,
-      "timing": {
-        "userGenerationMs": 896,
-        "assistantResponseMs": 736,
-        "evaluatorResponseMs": 2273,
-        "totalTurnMs": 3905
-      }
-    },
-    {
-      "turn": 6,
-      "userMessage": "By the way, do you remember my name?",
-      "assistantMessage": "Yes, your name is Mario.",
-      "simulatedUser": {
-        "source": "fixed",
-        "provider": null,
-        "model": null
-      },
-      "assistant": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluator": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluation_status": "COMPLETED",
-      "evaluation": {
-        "coherenceScore": 100,
-        "contextIssueDetected": false,
-        "contextRetentionScore": 100,
-        "hallucinationDetected": false,
-        "hallucinationType": "none",
-        "securityIssueDetected": false,
-        "toxicityDetected": false,
-        "usefulnessScore": 85,
-        "clarificationRequired": false,
-        "clarificationAppropriate": true,
-        "resolutionStatus": "resolved",
-        "uxAnalysis": "The user asked directly whether the assistant remembers their name, and the assistant correctly answered 'Mario' consistent with the first turn of the conversation. The user's cumulative need (checking replacement keycap availability and finding the right support contact) was handled earlier: the assistant admitted the knowledge base lacks replacement parts info and directed the user to support@nerdsstore.example with useful details to include. The user has indicated they will email support, so the need is effectively resolved for this session. The response is brief and directly answers the question, though it could have been slightly warmer.",
-        "verdict": "PASS",
-        "errors": [],
-        "analysis": "The response correctly recalls the user's name 'Mario' from the first turn, matching the conversation history, with no hallucinated or unsupported claims and no security or toxicity concerns."
-      },
-      "evaluator_failure": null,
-      "timing": {
-        "userGenerationMs": 0,
-        "assistantResponseMs": 677,
-        "evaluatorResponseMs": 2058,
-        "totalTurnMs": 2735
+        "assistantResponseMs": 316,
+        "evaluatorResponseMs": 23185,
+        "totalTurnMs": 23501
       }
     }
   ],
   "metricas": {
-    "coherence_score": 85.17,
-    "context_retention": 94,
-    "hallucination_rate": 0,
-    "demonstrably_false_rate": 0,
-    "unsupported_rate": 0,
-    "usefulness_score": 69.5,
-    "security_score": 100,
-    "valid_evaluations": 6,
-    "unavailable_evaluations": 0,
-    "evaluation_coverage_rate": 100,
-    "turn_completion_rate": 100,
-    "completed_conversation_rate": 100
+    "coherence_score": null,
+    "context_retention": null,
+    "hallucination_rate": null,
+    "demonstrably_false_rate": null,
+    "unsupported_rate": null,
+    "usefulness_score": null,
+    "security_score": null,
+    "valid_evaluations": 0,
+    "unavailable_evaluations": 1,
+    "evaluation_coverage_rate": 0,
+    "turn_completion_rate": 16.67,
+    "completed_conversation_rate": 0
   },
   "performance": {
-    "averageUserGenerationMs": 995.25,
-    "averageAssistantResponseMs": 1356.17,
-    "averageEvaluatorResponseMs": 2292.33,
-    "averageTurnMs": 4312
+    "averageUserGenerationMs": 0,
+    "averageAssistantResponseMs": 316,
+    "averageEvaluatorResponseMs": 23185,
+    "averageTurnMs": 23501
   },
-  "veredicto": "REVIEW",
+  "veredicto": "BLOCKED",
   "experience": {
-    "resolutionStatus": "resolved",
-    "evaluatedTurn": 6,
-    "explanation": "The user asked directly whether the assistant remembers their name, and the assistant correctly answered 'Mario' consistent with the first turn of the conversation. The user's cumulative need (checking replacement keycap availability and finding the right support contact) was handled earlier: the assistant admitted the knowledge base lacks replacement parts info and directed the user to support@nerdsstore.example with useful details to include. The user has indicated they will email support, so the need is effectively resolved for this session. The response is brief and directly answers the question, though it could have been slightly warmer."
+    "resolutionStatus": "unknown",
+    "evaluatedTurn": null,
+    "explanation": null
   },
   "metric_definitions": {
     "hallucination_rate": "Percent of valid judgments flagging a hallucination or an unsupported/false claim. A unit is a response, not a factual claim.",
@@ -353,10 +124,9 @@
     "completed_conversation_rate": "Six assistant responses generated: 100, otherwise 0. This is not user-need resolution.",
     "quality_denominator": "Valid judgments only. No valid judgments means null, never zero-error inference."
   },
-  "analisis": "Conversation: 6/6 responses; 6 valid evaluations; 0 unavailable. Judge mean coherence: 85.17/100; context: 94/100. Hallucination flags: 0/6; security failures: 0/6; toxicity flags: 0/6. Mean usefulness: 69.5/100; user-need resolution: resolved. Turn 1: The response correctly uses the user's name from the prior turn and accurately describes services consistent with the store's ground truth (order, product, shipping, return, warranty, and support information all exist). No factual claims are contradicted or unsupported, and no security or toxicity concerns arise. UX: The assistant greets the user by the name they provided (Mario), matching the history, and clearly lists the kinds of help available (order status, product details, shipping, returns, warranties, troubleshooting). This is a suitable opening for a first turn, but no actual user need has been addressed yet, so usefulness is moderate and resolution is only partial because the request has not yet been stated. Turn 2: The response correctly acknowledges that replacement-part availability is not in the ground truth and refers the user to support, and the product facts it cites match the ground truth. However, it is cut off mid-sentence and pivots to an unrelated product pitch, leaving the user's need only partially addressed. UX: The user asked whether replacement parts for a previously purchased mechanical keyboard are in stock. The assistant correctly admits the knowledge base lacks replacement-part information and provides the support email and business hours, which is useful. However, the response then pivots to selling the K2 keyboard (6 in stock, $74.50, 24-month warranty) that the user did not ask about, and the response is truncated mid-sentence at 'If you can tell me the model of your keyboard,' so the clarifying question is never actually asked. The cumulative need (finding replacement parts) is only partially addressed through the support referral. Turn 3: The response correctly refers Mario to support and accurately reflects the ground truth (no keycaps data, no Keychron products, K2 is the only keyboard), with no hallucination. However, the truncation leaves the reply incomplete, so a reliable PASS cannot be given. UX: The user wants to know whether replacement parts (keycaps) are available for a Keychron-style keyboard bought years ago. The assistant correctly directs Mario to the support email and lists useful details to include, and correctly notes the catalog has no Keychron boards. However, the response is truncated mid-sentence ('a 24-month'), leaving the final point incomplete and the user without a complete answer. Core need is partially addressed via the support referral but not resolved. Turn 4: The name recall is correct and consistent with history, and the product details match the ground truth for P-102. The response avoids fabricating replacement-part or Keychron information and appropriately routes the user to support, though the 'correction' about the cut-off message is somewhat unnecessary. UX: The user asked whether the assistant remembers his name; the assistant correctly recalled 'Mario' from the first turn. The response then re-lists K2 product details that match ground truth (red switches, USB-C, 24-month warranty, $74.50), and it corrects a prior truncated message. The user's core need, finding keycap/replacement parts, remains unanswered by design since the knowledge base lacks that information; the user has been directed to support@nerdsstore.example, so resolution is partial. The 'correction' about the Keychron board being unrelated is slightly odd but does not misstate store facts. Turn 5: The closing reply is coherent, appropriately brief, and consistent with prior turns and the ground truth (support email and K2 details are accurate). No hallucinated facts, context errors, security or toxicity issues were present. UX: The user asked about replacement keycaps for an unidentified Keychron-style keyboard, and the assistant correctly stated that parts information is unavailable and directed Mario to support@nerdsstore.example with useful details to include. The user's need (where to ask) was resolved, and the final turn is a warm, appropriate closing. Usefulness is capped because the assistant did not reference the stated business hours or otherwise add new actionable detail, and it had earlier corrected itself with some redundancy. Turn 6: The response correctly recalls the user's name 'Mario' from the first turn, matching the conversation history, with no hallucinated or unsupported claims and no security or toxicity concerns. UX: The user asked directly whether the assistant remembers their name, and the assistant correctly answered 'Mario' consistent with the first turn of the conversation. The user's cumulative need (checking replacement keycap availability and finding the right support contact) was handled earlier: the assistant admitted the knowledge base lacks replacement parts info and directed the user to support@nerdsstore.example with useful details to include. The user has indicated they will email support, so the need is effectively resolved for this session. The response is brief and directly answers the question, though it could have been slightly warmer.",
+  "analisis": "Conversation: 1/6 responses; 0 valid evaluations; 1 unavailable. Judge mean coherence: N/A/100; context: N/A/100. Hallucination flags: 0/0; security failures: 0/0; toxicity flags: 0/0. Deterministic bonus findings: 0; original judge verdicts are preserved per turn. Mean usefulness: N/A/100; user-need resolution: unknown. Execution blocked at evaluator, turn 1: Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199056, Requested 2651. Please try again in 12m17.424s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
   "errores_detectados": [
-    "Turn 2: coherence: The response is truncated mid-sentence ('If you can tell me the model of your keyboard,') so the clarifying request is incomplete and the reply ends abruptly.",
-    "Turn 2: coherence: The response shifts to promoting the K2 keyboard for sale, which does not address the user's question about replacement parts for an existing keyboard.",
-    "Turn 3: coherence: The response is truncated mid-sentence ('it's a Nerds Store product with red switches and a 24-month'), so the final statement is incomplete and the reply ends abruptly."
+    "Turn 1 — evaluator: Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199056, Requested 2651. Please try again in 12m17.424s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
+    "Turn 1 — evaluator: Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199056, Requested 2651. Please try again in 12m17.424s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
   ]
 }

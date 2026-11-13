@@ -5,96 +5,24 @@ Scenario: Conversational Memory
 --- Turn 1 ---
 USER: Hi, my name is Mario.
 USER MODEL: fixed message
-[timer] anthropic Assistant: 0s / 30s[timer] anthropic Assistant: 1s / 30s[timer] anthropic Assistant: 1.44s - completed
-ASSISTANT: Hi Mario, welcome to Nerds Store! How can I help you today? I can help with things like order status, product details, shipping, returns, warranties, or troubleshooting your products.
-ASSISTANT MODEL: anthropic / claude-haiku-5-5
-[timer] anthropic Evaluator - Turn 1: 0s / 30s[timer] anthropic Evaluator - Turn 1: 1s / 30s[timer] anthropic Evaluator - Turn 1: 1.90s - completed
-EVALUATOR: PASS
-EVALUATOR MODEL: anthropic / claude-haiku-5-5
-TIMING: user=0ms | assistant=1441ms | evaluator=1900ms | total=3341ms
-
---- Turn 2 ---
-[timer] anthropic Simulated User - Turn 2: 0s / 30s[timer] anthropic Simulated User - Turn 2: 0.97s - completed
-USER: Hey, I'm trying to figure out whether the Nerds Store carries any replacement parts for a mechanical keyboard I bought a while back. Do you have those in stock?
-USER MODEL: anthropic / claude-haiku-5-5
-[timer] anthropic Assistant: 0s / 30s[timer] anthropic Assistant: 1s / 30s[timer] anthropic Assistant: 1.57s - completed
-ASSISTANT: Hi Mario, thanks for reaching out. Unfortunately, our knowledge base doesn't include information about replacement parts such as keycaps, switches, or cables, so I can't confirm whether we carry them or whether they're in stock.
-
-Here's what I can tell you:
-
-- **Mechanical Keyboard K2 (P-102):** This is the keyboard we currently sell. It has red mechanical switches, connects via USB-C, has 6 units in stock at $74.50, and comes with a 24-month warranty.
-- **Support email:** For questions about replacement parts, you can contact our team at support@nerdsstore.example. Our business hours are Monday to Friday, 8:00 AM to 6:00 PM.
-
-If you can tell me the model of your keyboard,
-ASSISTANT MODEL: anthropic / claude-haiku-5-5
-[timer] anthropic Evaluator - Turn 2: 0s / 30s[timer] anthropic Evaluator - Turn 2: 0s / 30s[timer] anthropic Evaluator - Turn 2: 2s / 30s[timer] anthropic Evaluator - Turn 2: 2.61s - completed
-EVALUATOR: REVIEW
-EVALUATOR MODEL: anthropic / claude-haiku-5-5
-TIMING: user=976ms | assistant=1566ms | evaluator=2613ms | total=5155ms
-
---- Turn 3 ---
-[timer] anthropic Simulated User - Turn 3: 0s / 30s[timer] anthropic Simulated User - Turn 3: 1s / 30s[timer] anthropic Simulated User - Turn 3: 1.00s - completed
-USER: Thanks for that. I'm not sure of the exact model off the top of my head, but it's a Keychron-style board with red switches, bought a couple of years ago. Would the support email be the best place to ask about keycaps, or is there another option?
-USER MODEL: anthropic / claude-haiku-5-5
-[timer] anthropic Assistant: 0s / 30s[timer] anthropic Assistant: 1s / 30s[timer] anthropic Assistant: 2s / 30s[timer] anthropic Assistant: 2.15s - completed
-ASSISTANT: Hi Mario, the support email (support@nerdsstore.example) is the best option I can point you to. Our knowledge base doesn't list keycaps or other replacement parts, so I can't confirm what's available. When you write, it helps to include:
-
-- The keyboard's brand and model, if you can find it on the bottom of the board or in your order confirmation
-- The specific part you need (for example, keycaps or a cable)
-- Your order number, if you have it
-
-Our team can then tell you whether they can help. Since our catalog doesn't include Keychron boards, I can't confirm whether your keyboard is compatible with anything we sell. Our Mechanical Keyboard K2 is the only keyboard in our current catalog, and it's a Nerds Store product with red switches and a 24-month
-ASSISTANT MODEL: anthropic / claude-haiku-5-5
-[timer] anthropic Evaluator - Turn 3: 0s / 30s[timer] anthropic Evaluator - Turn 3: 1s / 30s[timer] anthropic Evaluator - Turn 3: 2s / 30s[timer] anthropic Evaluator - Turn 3: 2.37s - completed
-EVALUATOR: REVIEW
-EVALUATOR MODEL: anthropic / claude-haiku-5-5
-TIMING: user=1005ms | assistant=2148ms | evaluator=2371ms | total=5524ms
-
---- Turn 4 ---
-[timer] anthropic Simulated User - Turn 4: 0s / 30s[timer] anthropic Simulated User - Turn 4: 1s / 30s[timer] anthropic Simulated User - Turn 4: 1.10s - completed
-USER: Okay, that makes sense. I'll email them with those details. Quick question before I do, though: do you remember my name? I'd like to see if you caught it from earlier.
-USER MODEL: anthropic / claude-haiku-5-5
-[timer] anthropic Assistant: 0s / 30s[timer] anthropic Assistant: 1s / 30s[timer] anthropic Assistant: 1.57s - completed
-ASSISTANT: Yes, Mario. You introduced yourself at the start of our conversation, and I've kept it in mind.
-
-Also, I should correct my last message: it cut off mid-sentence, and I didn't finish describing the K2. It's a keyboard with red switches, USB-C connectivity, and a 24-month warranty, currently priced at $74.50. I also shouldn't have implied that the Keychron-style board you own is unrelated to our products. I simply don't have information about it.
-
-Good luck with your email to support@nerdsstore.example, Mario. If you have any other questions about our products, orders, or policies, I'm happy to help.
-ASSISTANT MODEL: anthropic / claude-haiku-5-5
-[timer] anthropic Evaluator - Turn 4: 0s / 30s[timer] anthropic Evaluator - Turn 4: 1s / 30s[timer] anthropic Evaluator - Turn 4: 2s / 30s[timer] anthropic Evaluator - Turn 4: 2.54s - completed
-EVALUATOR: PASS
-EVALUATOR MODEL: anthropic / claude-haiku-5-5
-TIMING: user=1104ms | assistant=1569ms | evaluator=2539ms | total=5212ms
-
---- Turn 5 ---
-[timer] anthropic Simulated User - Turn 5: 0s / 30s[timer] anthropic Simulated User - Turn 5: 0.90s - completed
-USER: Thanks, that's helpful. I'll send the email tonight. Have a good one!
-USER MODEL: anthropic / claude-haiku-5-5
-[timer] anthropic Assistant: 0s / 30s[timer] anthropic Assistant: 0.74s - completed
-ASSISTANT: You're welcome, Mario! Have a great evening, and good luck with your keyboard.
-ASSISTANT MODEL: anthropic / claude-haiku-5-5
-[timer] anthropic Evaluator - Turn 5: 0s / 30s[timer] anthropic Evaluator - Turn 5: 0s / 30s[timer] anthropic Evaluator - Turn 5: 2s / 30s[timer] anthropic Evaluator - Turn 5: 2.27s - completed
-EVALUATOR: PASS
-EVALUATOR MODEL: anthropic / claude-haiku-5-5
-TIMING: user=896ms | assistant=736ms | evaluator=2273ms | total=3905ms
-
---- Turn 6 ---
-USER: By the way, do you remember my name?
-USER MODEL: fixed message
-[timer] anthropic Assistant: 0s / 30s[timer] anthropic Assistant: 0.68s - completed
-ASSISTANT: Yes, your name is Mario.
-ASSISTANT MODEL: anthropic / claude-haiku-5-5
-[timer] anthropic Evaluator - Turn 6: 0s / 30s[timer] anthropic Evaluator - Turn 6: 1s / 30s[timer] anthropic Evaluator - Turn 6: 2s / 30s[timer] anthropic Evaluator - Turn 6: 2.06s - completed
-EVALUATOR: PASS
-EVALUATOR MODEL: anthropic / claude-haiku-5-5
-TIMING: user=0ms | assistant=677ms | evaluator=2058ms | total=2735ms
+[timer] groq Assistant: 0s / 30s[timer] groq Assistant: 0.32s - completed
+ASSISTANT: Hi Mario! How can I help you today?
+ASSISTANT MODEL: groq / qwen/qwen3.8-27b
+[timer] groq Evaluator - Turn 1: 0s / 30s[timer] groq Evaluator - Turn 1: 1s / 30s[timer] groq Evaluator - Turn 1: 2s / 30s[timer] groq Evaluator - Turn 1: 3s / 30s[timer] groq Evaluator - Turn 1: 4s / 30s[timer] groq Evaluator - Turn 1: 5s / 30s[timer] groq Evaluator - Turn 1: 6s / 30s[timer] groq Evaluator - Turn 1: 6s - stopped
+[timer] groq Evaluator - Turn 1: 0s / 30s[timer] groq Evaluator - Turn 1: 1s / 30s[timer] groq Evaluator - Turn 1: 2s / 30s[timer] groq Evaluator - Turn 1: 3s / 30s[timer] groq Evaluator - Turn 1: 4s / 30s[timer] groq Evaluator - Turn 1: 5s / 30s[timer] groq Evaluator - Turn 1: 6s / 30s[timer] groq Evaluator - Turn 1: 6s - stopped
+[timer] groq Evaluator - Turn 1: 0s / 30s[timer] groq Evaluator - Turn 1: 1s / 30s[timer] groq Evaluator - Turn 1: 2s / 30s[timer] groq Evaluator - Turn 1: 3s / 30s[timer] groq Evaluator - Turn 1: 4s / 30s[timer] groq Evaluator - Turn 1: 5s / 30s[timer] groq Evaluator - Turn 1: 6s / 30s[timer] groq Evaluator - Turn 1: 6s - stopped
+EVALUATOR: UNAVAILABLE
+EVALUATOR MODEL: groq / openai/gpt-oss-20b
+TIMING: user=0ms | assistant=316ms | evaluator=23185ms | total=23501ms
 
 Result saved to output/exercise1-JSON/conversational-memory.json
-Execution status: COMPLETED
-Completed turns: 6/6
-Final verdict: REVIEW
+Execution status: BLOCKED
+Completed turns: 1/6
+Final verdict: BLOCKED
 
 STDERR:
+[retry] groq Evaluator - Turn 1 failed on attempt 1/3. Retrying in 1500ms...
+[retry] groq Evaluator - Turn 1 failed on attempt 2/3. Retrying in 3000ms...
 
 PROCESS ERROR:
 none

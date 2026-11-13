@@ -1,0 +1,104 @@
+{
+  "scope": "api",
+  "id": "API-005",
+  "records": [
+    {
+      "input": {
+        "scope": "api",
+        "id": "API-005",
+        "responseRole": "api-data",
+        "facts": [
+          {
+            "field": "http.status",
+            "expected": 201,
+            "actual": 201,
+            "source": "Goal Tracker API contract and test case"
+          },
+          {
+            "field": "goal.title",
+            "expected": "Complete QA technical assessment",
+            "actual": "Complete QA technical assessment",
+            "source": "create request"
+          },
+          {
+            "field": "goal.description",
+            "expected": "Finish the API testing exercise.",
+            "actual": "Finish the API testing exercise.",
+            "source": "create request"
+          },
+          {
+            "field": "goal.status",
+            "expected": "to-do",
+            "actual": "to-do",
+            "source": "create request"
+          },
+          {
+            "field": "goal.priority",
+            "expected": "high",
+            "actual": "high",
+            "source": "create request"
+          },
+          {
+            "field": "goal.id.present",
+            "expected": true,
+            "actual": true,
+            "source": "API contract"
+          },
+          {
+            "field": "goal.createdAt.valid",
+            "expected": true,
+            "actual": true,
+            "source": "API contract"
+          }
+        ],
+        "contextChecks": [],
+        "toolCalls": [
+          {
+            "toolName": "HTTP POST /api/v1/goals",
+            "allowed": true,
+            "argumentsValid": true,
+            "scopeAuthorized": true,
+            "executionStatus": "COMPLETED"
+          }
+        ]
+      },
+      "analysis": {
+        "observedToolCalls": 1,
+        "toolTraceKind": "HTTP_ACTION",
+        "schemaVersion": 1,
+        "scope": "api",
+        "id": "API-005",
+        "method": "bounded-evidence-rules",
+        "categories": {
+          "hallucination": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": null
+          },
+          "promptInjection": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "Una respuesta REST con datos no ejecuta instrucciones de un asistente."
+          },
+          "toxicity": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "Los datos almacenados por el usuario no se atribuyen como discurso del asistente."
+          },
+          "contextLoss": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "toolCalling": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": "Se auditan llamadas instrumentadas, argumentos, alcance y resultado."
+          }
+        },
+        "findings": [],
+        "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
+      }
+    }
+  ]
+}

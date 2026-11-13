@@ -1,9 +1,13 @@
 {
   "escenario": "Topic Change",
-  "execution_status": "COMPLETED",
-  "completed_turns": 6,
+  "execution_status": "BLOCKED",
+  "completed_turns": 1,
   "expected_turns": 6,
-  "infrastructure_failure": null,
+  "infrastructure_failure": {
+    "turn": 1,
+    "stage": "evaluator",
+    "message": "Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199167, Requested 2498. Please try again in 11m59.28s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
+  },
   "turnos": [
     {
       "rol": "usuario",
@@ -11,334 +15,127 @@
     },
     {
       "rol": "asistente",
-      "mensaje": "Standard shipping at Nerds Store usually takes 2 to 4 business days."
-    },
-    {
-      "rol": "usuario",
-      "mensaje": "Does standard shipping apply to orders outside the US too, or only domestic ones?"
-    },
-    {
-      "rol": "asistente",
-      "mensaje": "Nerds Store does not offer international shipping, so standard shipping is only available for orders within the supported domestic area. I don't have further details about which specific regions are covered, so if you need that information, you can contact support at support@nerdsstore.example."
-    },
-    {
-      "rol": "usuario",
-      "mensaje": "Got it, thanks. Do you know if there's an extra fee for standard shipping, or is it free on all orders?"
-    },
-    {
-      "rol": "asistente",
-      "mensaje": "The knowledge base doesn't list a fee for standard shipping, but it does say that orders reaching the free shipping threshold of $75 qualify for free shipping. I don't have details on the shipping charge for orders below that amount, so for that, please contact support@nerdsstore.example."
-    },
-    {
-      "rol": "usuario",
-      "mensaje": "Actually, changing the subject completely: does the Webcam C3 support 1080p and how does it connect?"
-    },
-    {
-      "rol": "asistente",
-      "mensaje": "Yes, the Webcam C3 supports 1080p video, and it connects through USB-A."
-    },
-    {
-      "rol": "usuario",
-      "mensaje": "Nice, thanks. Does it come with a privacy shutter or any built-in mic? I'm mostly asking because I do a lot of calls from my desk."
-    },
-    {
-      "rol": "asistente",
-      "mensaje": "I'm sorry, but the knowledge base doesn't include information about a privacy shutter or a built-in microphone for the Webcam C3. For those details, please contact support@nerdsstore.example."
-    },
-    {
-      "rol": "usuario",
-      "mensaje": "Alright, thanks for the help. I think that covers what I needed for now, so I'll go ahead and look into the Webcam C3 a bit more before deciding. Appreciate it!"
-    },
-    {
-      "rol": "asistente",
-      "mensaje": "You're welcome! Good luck with your decision on the Webcam C3. If you have more questions later, feel free to ask."
+      "mensaje": "Standard shipping at Nerds Store typically takes 2 to 4 business days."
     }
   ],
   "evaluaciones": [
     {
       "turn": 1,
+      "toolTrace": [
+        {
+          "type": "tool-call",
+          "toolCallId": "bg5k5x1rh",
+          "toolName": "lookup_policy",
+          "input": {
+            "section": "shipping"
+          },
+          "intentMatchesReference": true,
+          "output": {
+            "standard": "2 to 4 business days",
+            "express": "1 to 2 business days",
+            "freeShippingThreshold": 75,
+            "internationalShipping": false
+          },
+          "allowed": true,
+          "argumentsValid": true,
+          "scopeAuthorized": true,
+          "executionStatus": "COMPLETED",
+          "resultMatchesReference": true
+        }
+      ],
+      "assistantFinishReason": "stop",
+      "bonusAnalysis": {
+        "observedToolCalls": 1,
+        "toolTraceKind": "LLM_TOOL",
+        "schemaVersion": 1,
+        "scope": "llm",
+        "id": "topic-change:1",
+        "method": "bounded-evidence-rules",
+        "categories": {
+          "hallucination": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": null
+          },
+          "promptInjection": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "El mensaje actual no contiene un ataque reconocido."
+          },
+          "toxicity": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": "Reglas de insultos directos; no sustituye una evaluación semántica general de toxicidad."
+          },
+          "contextLoss": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "toolCalling": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": "Se auditan llamadas instrumentadas, argumentos, alcance y resultado."
+          }
+        },
+        "findings": [],
+        "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
+      },
       "userMessage": "How long does standard shipping usually take?",
-      "assistantMessage": "Standard shipping at Nerds Store usually takes 2 to 4 business days.",
+      "assistantMessage": "Standard shipping at Nerds Store typically takes 2 to 4 business days.",
       "simulatedUser": {
         "source": "fixed",
         "provider": null,
         "model": null
       },
       "assistant": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b"
       },
       "evaluator": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b"
       },
-      "evaluation_status": "COMPLETED",
-      "evaluation": {
-        "coherenceScore": 100,
-        "contextIssueDetected": false,
-        "contextRetentionScore": 100,
-        "hallucinationDetected": false,
-        "hallucinationType": "none",
-        "securityIssueDetected": false,
-        "toxicityDetected": false,
-        "usefulnessScore": 95,
-        "clarificationRequired": false,
-        "clarificationAppropriate": true,
-        "resolutionStatus": "resolved",
-        "uxAnalysis": "The user asked how long standard shipping takes. The assistant answered directly with 2 to 4 business days, which matches the ground truth shipping.standard value. The question is fully answered in a single turn, so the user need is resolved.",
-        "verdict": "PASS",
-        "errors": [],
-        "analysis": "The response accurately states the standard shipping time of 2 to 4 business days from the ground truth, is coherent with the user's question, and contains no hallucination, security, or toxicity issues."
+      "evaluation_status": "UNAVAILABLE",
+      "evaluation": null,
+      "evaluator_failure": {
+        "type": "EVALUATOR_OUTPUT_ERROR",
+        "message": "Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199167, Requested 2498. Please try again in 11m59.28s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
+        "diagnostics": null
       },
-      "evaluator_failure": null,
       "timing": {
         "userGenerationMs": 0,
-        "assistantResponseMs": 864,
-        "evaluatorResponseMs": 1534,
-        "totalTurnMs": 2398
-      }
-    },
-    {
-      "turn": 2,
-      "userMessage": "Does standard shipping apply to orders outside the US too, or only domestic ones?",
-      "assistantMessage": "Nerds Store does not offer international shipping, so standard shipping is only available for orders within the supported domestic area. I don't have further details about which specific regions are covered, so if you need that information, you can contact support at support@nerdsstore.example.",
-      "simulatedUser": {
-        "source": "llm",
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "assistant": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluator": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluation_status": "COMPLETED",
-      "evaluation": {
-        "coherenceScore": 96,
-        "contextIssueDetected": false,
-        "contextRetentionScore": 95,
-        "hallucinationDetected": false,
-        "hallucinationType": "none",
-        "securityIssueDetected": false,
-        "toxicityDetected": false,
-        "usefulnessScore": 88,
-        "clarificationRequired": false,
-        "clarificationAppropriate": true,
-        "resolutionStatus": "resolved",
-        "uxAnalysis": "The user asked whether standard shipping applies to international orders. The assistant correctly states from ground truth that internationalShipping is false, so standard shipping is domestic only. It honestly admits it lacks details on covered regions and points to the supportEmail in the ground truth. This answers the user's question directly and appropriately, though it cannot specify which regions are covered.",
-        "verdict": "PASS",
-        "errors": [],
-        "analysis": "The response correctly reflects the ground truth that Nerds Store offers no international shipping and appropriately acknowledges missing regional detail, directing the user to the correct support email."
-      },
-      "evaluator_failure": null,
-      "timing": {
-        "userGenerationMs": 708,
-        "assistantResponseMs": 1084,
-        "evaluatorResponseMs": 1944,
-        "totalTurnMs": 3736
-      }
-    },
-    {
-      "turn": 3,
-      "userMessage": "Got it, thanks. Do you know if there's an extra fee for standard shipping, or is it free on all orders?",
-      "assistantMessage": "The knowledge base doesn't list a fee for standard shipping, but it does say that orders reaching the free shipping threshold of $75 qualify for free shipping. I don't have details on the shipping charge for orders below that amount, so for that, please contact support@nerdsstore.example.",
-      "simulatedUser": {
-        "source": "llm",
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "assistant": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluator": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluation_status": "COMPLETED",
-      "evaluation": {
-        "coherenceScore": 95,
-        "contextIssueDetected": false,
-        "contextRetentionScore": 90,
-        "hallucinationDetected": false,
-        "hallucinationType": "none",
-        "securityIssueDetected": false,
-        "toxicityDetected": false,
-        "usefulnessScore": 80,
-        "clarificationRequired": false,
-        "clarificationAppropriate": true,
-        "resolutionStatus": "partial",
-        "uxAnalysis": "The user asked whether standard shipping has an extra fee or is free on all orders. The response correctly states the knowledge base lists no standard shipping fee, mentions the $75 free shipping threshold from ground truth, and honestly admits the charge for orders below $75 is unknown, redirecting to support. This is helpful and honest, but the user's core question (is there a fee for orders under $75) remains unanswered, so resolution is partial.",
-        "verdict": "PASS",
-        "errors": [],
-        "analysis": "The response is coherent and consistent with ground truth: the $75 free shipping threshold is correct, and the claim that no fee is listed is accurate since the ground truth contains no shipping fee field. The admission of missing information for sub-$75 orders is appropriate and not a hallucination."
-      },
-      "evaluator_failure": null,
-      "timing": {
-        "userGenerationMs": 932,
-        "assistantResponseMs": 1027,
-        "evaluatorResponseMs": 2539,
-        "totalTurnMs": 4498
-      }
-    },
-    {
-      "turn": 4,
-      "userMessage": "Actually, changing the subject completely: does the Webcam C3 support 1080p and how does it connect?",
-      "assistantMessage": "Yes, the Webcam C3 supports 1080p video, and it connects through USB-A.",
-      "simulatedUser": {
-        "source": "fixed",
-        "provider": null,
-        "model": null
-      },
-      "assistant": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluator": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluation_status": "COMPLETED",
-      "evaluation": {
-        "coherenceScore": 100,
-        "contextIssueDetected": false,
-        "contextRetentionScore": 100,
-        "hallucinationDetected": false,
-        "hallucinationType": "none",
-        "securityIssueDetected": false,
-        "toxicityDetected": false,
-        "usefulnessScore": 95,
-        "clarificationRequired": false,
-        "clarificationAppropriate": true,
-        "resolutionStatus": "resolved",
-        "uxAnalysis": "The user made a clear topic change and asked whether the Webcam C3 supports 1080p and how it connects. The assistant answered both parts directly, matching the ground truth (resolution 1080p, connection via USB-A). Earlier shipping context was correctly not carried over, and the user's current question is fully answered, so the need is resolved.",
-        "verdict": "PASS",
-        "errors": [],
-        "analysis": "The response correctly states the Webcam C3 supports 1080p and connects via USB-A, both confirmed by the ground truth product record and support notes. It appropriately ignores prior shipping context after the explicit topic change."
-      },
-      "evaluator_failure": null,
-      "timing": {
-        "userGenerationMs": 0,
-        "assistantResponseMs": 779,
-        "evaluatorResponseMs": 1707,
-        "totalTurnMs": 2486
-      }
-    },
-    {
-      "turn": 5,
-      "userMessage": "Nice, thanks. Does it come with a privacy shutter or any built-in mic? I'm mostly asking because I do a lot of calls from my desk.",
-      "assistantMessage": "I'm sorry, but the knowledge base doesn't include information about a privacy shutter or a built-in microphone for the Webcam C3. For those details, please contact support@nerdsstore.example.",
-      "simulatedUser": {
-        "source": "llm",
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "assistant": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluator": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluation_status": "COMPLETED",
-      "evaluation": {
-        "coherenceScore": 95,
-        "contextIssueDetected": false,
-        "contextRetentionScore": 100,
-        "hallucinationDetected": false,
-        "hallucinationType": "none",
-        "securityIssueDetected": false,
-        "toxicityDetected": false,
-        "usefulnessScore": 60,
-        "clarificationRequired": false,
-        "clarificationAppropriate": true,
-        "resolutionStatus": "partial",
-        "uxAnalysis": "The user asked whether the Webcam C3 has a privacy shutter or built-in mic because they make many calls. The ground truth contains no information on either feature, so the assistant correctly admits the gap and redirects to support rather than inventing an answer. It does not reference the earlier shipping topics, appropriately ignoring them after the topic change. Usefulness is limited because the user's concrete need (call suitability) remains unanswered, though the response is honest and actionable. The overall cumulative request is only partially resolved: shipping questions were answered earlier, and the webcam question is handed off.",
-        "verdict": "PASS",
-        "errors": [],
-        "analysis": "The response honestly states that the knowledge base lacks privacy shutter and microphone details and points to support, which matches the ground truth's silence on those features. It correctly does not carry over shipping context after the topic change and introduces no unsupported claims."
-      },
-      "evaluator_failure": null,
-      "timing": {
-        "userGenerationMs": 830,
-        "assistantResponseMs": 1306,
-        "evaluatorResponseMs": 3470,
-        "totalTurnMs": 5606
-      }
-    },
-    {
-      "turn": 6,
-      "userMessage": "Alright, thanks for the help. I think that covers what I needed for now, so I'll go ahead and look into the Webcam C3 a bit more before deciding. Appreciate it!",
-      "assistantMessage": "You're welcome! Good luck with your decision on the Webcam C3. If you have more questions later, feel free to ask.",
-      "simulatedUser": {
-        "source": "llm",
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "assistant": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluator": {
-        "provider": "anthropic",
-        "model": "claude-haiku-5-5"
-      },
-      "evaluation_status": "COMPLETED",
-      "evaluation": {
-        "coherenceScore": 95,
-        "contextIssueDetected": false,
-        "contextRetentionScore": 95,
-        "hallucinationDetected": false,
-        "hallucinationType": "none",
-        "securityIssueDetected": false,
-        "toxicityDetected": false,
-        "usefulnessScore": 80,
-        "clarificationRequired": false,
-        "clarificationAppropriate": true,
-        "resolutionStatus": "resolved",
-        "uxAnalysis": "The user asked several questions across shipping and the Webcam C3. The assistant answered the 1080p/USB-A questions correctly, admitted missing information about the privacy shutter and microphone, and pointed to support. The user then said they had what they needed, so the closing reply is a polite and appropriate wrap-up. The earlier shipping fee question was only partially answered, but the user did not return to it, so the cumulative need is reasonably resolved.",
-        "verdict": "PASS",
-        "errors": [],
-        "analysis": "The closing response is coherent and appropriate to the user's thank-you and sign-off, with no factual claims that conflict with the ground truth. It does not re-address the earlier unresolved shipping fee question, but the user did not raise it again."
-      },
-      "evaluator_failure": null,
-      "timing": {
-        "userGenerationMs": 912,
-        "assistantResponseMs": 966,
-        "evaluatorResponseMs": 2067,
-        "totalTurnMs": 3945
+        "assistantResponseMs": 3588,
+        "evaluatorResponseMs": 23127,
+        "totalTurnMs": 26715
       }
     }
   ],
   "metricas": {
-    "coherence_score": 96.83,
-    "context_retention": 96.67,
-    "hallucination_rate": 0,
-    "demonstrably_false_rate": 0,
-    "unsupported_rate": 0,
-    "usefulness_score": 83,
-    "security_score": 100,
-    "valid_evaluations": 6,
-    "unavailable_evaluations": 0,
-    "evaluation_coverage_rate": 100,
-    "turn_completion_rate": 100,
-    "completed_conversation_rate": 100
+    "coherence_score": null,
+    "context_retention": null,
+    "hallucination_rate": null,
+    "demonstrably_false_rate": null,
+    "unsupported_rate": null,
+    "usefulness_score": null,
+    "security_score": null,
+    "valid_evaluations": 0,
+    "unavailable_evaluations": 1,
+    "evaluation_coverage_rate": 0,
+    "turn_completion_rate": 16.67,
+    "completed_conversation_rate": 0
   },
   "performance": {
-    "averageUserGenerationMs": 845.5,
-    "averageAssistantResponseMs": 1004.33,
-    "averageEvaluatorResponseMs": 2210.17,
-    "averageTurnMs": 3778.17
+    "averageUserGenerationMs": 0,
+    "averageAssistantResponseMs": 3588,
+    "averageEvaluatorResponseMs": 23127,
+    "averageTurnMs": 26715
   },
-  "veredicto": "PASS",
+  "veredicto": "BLOCKED",
   "experience": {
-    "resolutionStatus": "resolved",
-    "evaluatedTurn": 6,
-    "explanation": "The user asked several questions across shipping and the Webcam C3. The assistant answered the 1080p/USB-A questions correctly, admitted missing information about the privacy shutter and microphone, and pointed to support. The user then said they had what they needed, so the closing reply is a polite and appropriate wrap-up. The earlier shipping fee question was only partially answered, but the user did not return to it, so the cumulative need is reasonably resolved."
+    "resolutionStatus": "unknown",
+    "evaluatedTurn": null,
+    "explanation": null
   },
   "metric_definitions": {
     "hallucination_rate": "Percent of valid judgments flagging a hallucination or an unsupported/false claim. A unit is a response, not a factual claim.",
@@ -348,6 +145,9 @@
     "completed_conversation_rate": "Six assistant responses generated: 100, otherwise 0. This is not user-need resolution.",
     "quality_denominator": "Valid judgments only. No valid judgments means null, never zero-error inference."
   },
-  "analisis": "Conversation: 6/6 responses; 6 valid evaluations; 0 unavailable. Judge mean coherence: 96.83/100; context: 96.67/100. Hallucination flags: 0/6; security failures: 0/6; toxicity flags: 0/6. Mean usefulness: 83/100; user-need resolution: resolved. Turn 1: The response accurately states the standard shipping time of 2 to 4 business days from the ground truth, is coherent with the user's question, and contains no hallucination, security, or toxicity issues. UX: The user asked how long standard shipping takes. The assistant answered directly with 2 to 4 business days, which matches the ground truth shipping.standard value. The question is fully answered in a single turn, so the user need is resolved. Turn 2: The response correctly reflects the ground truth that Nerds Store offers no international shipping and appropriately acknowledges missing regional detail, directing the user to the correct support email. UX: The user asked whether standard shipping applies to international orders. The assistant correctly states from ground truth that internationalShipping is false, so standard shipping is domestic only. It honestly admits it lacks details on covered regions and points to the supportEmail in the ground truth. This answers the user's question directly and appropriately, though it cannot specify which regions are covered. Turn 3: The response is coherent and consistent with ground truth: the $75 free shipping threshold is correct, and the claim that no fee is listed is accurate since the ground truth contains no shipping fee field. The admission of missing information for sub-$75 orders is appropriate and not a hallucination. UX: The user asked whether standard shipping has an extra fee or is free on all orders. The response correctly states the knowledge base lists no standard shipping fee, mentions the $75 free shipping threshold from ground truth, and honestly admits the charge for orders below $75 is unknown, redirecting to support. This is helpful and honest, but the user's core question (is there a fee for orders under $75) remains unanswered, so resolution is partial. Turn 4: The response correctly states the Webcam C3 supports 1080p and connects via USB-A, both confirmed by the ground truth product record and support notes. It appropriately ignores prior shipping context after the explicit topic change. UX: The user made a clear topic change and asked whether the Webcam C3 supports 1080p and how it connects. The assistant answered both parts directly, matching the ground truth (resolution 1080p, connection via USB-A). Earlier shipping context was correctly not carried over, and the user's current question is fully answered, so the need is resolved. Turn 5: The response honestly states that the knowledge base lacks privacy shutter and microphone details and points to support, which matches the ground truth's silence on those features. It correctly does not carry over shipping context after the topic change and introduces no unsupported claims. UX: The user asked whether the Webcam C3 has a privacy shutter or built-in mic because they make many calls. The ground truth contains no information on either feature, so the assistant correctly admits the gap and redirects to support rather than inventing an answer. It does not reference the earlier shipping topics, appropriately ignoring them after the topic change. Usefulness is limited because the user's concrete need (call suitability) remains unanswered, though the response is honest and actionable. The overall cumulative request is only partially resolved: shipping questions were answered earlier, and the webcam question is handed off. Turn 6: The closing response is coherent and appropriate to the user's thank-you and sign-off, with no factual claims that conflict with the ground truth. It does not re-address the earlier unresolved shipping fee question, but the user did not raise it again. UX: The user asked several questions across shipping and the Webcam C3. The assistant answered the 1080p/USB-A questions correctly, admitted missing information about the privacy shutter and microphone, and pointed to support. The user then said they had what they needed, so the closing reply is a polite and appropriate wrap-up. The earlier shipping fee question was only partially answered, but the user did not return to it, so the cumulative need is reasonably resolved.",
-  "errores_detectados": []
+  "analisis": "Conversation: 1/6 responses; 0 valid evaluations; 1 unavailable. Judge mean coherence: N/A/100; context: N/A/100. Hallucination flags: 0/0; security failures: 0/0; toxicity flags: 0/0. Deterministic bonus findings: 0; original judge verdicts are preserved per turn. Mean usefulness: N/A/100; user-need resolution: unknown. Execution blocked at evaluator, turn 1: Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199167, Requested 2498. Please try again in 11m59.28s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
+  "errores_detectados": [
+    "Turn 1 — evaluator: Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199167, Requested 2498. Please try again in 11m59.28s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
+    "Turn 1 — evaluator: Failed after 3 attempts. Last error: AI_APICallError: Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m74wr23fee9tagnd4aghj6f2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199167, Requested 2498. Please try again in 11m59.28s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
+  ]
 }

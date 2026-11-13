@@ -19,24 +19,24 @@
     "maxFailures": 0,
     "metadata": {
       "ci": {
-        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-        "commitHash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43332618484"
+        "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/ded5be55812a446986d3382596735bf02a2edf8e",
+        "commitHash": "ded5be55812a446986d3382596735bf02a2edf8e",
+        "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341399681"
       },
       "gitCommit": {
-        "shortHash": "f4b0a17",
-        "hash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-        "subject": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
-        "body": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+        "shortHash": "ded5be5",
+        "hash": "ded5be55812a446986d3382596735bf02a2edf8e",
+        "subject": "Add files via upload",
+        "body": "Add files via upload",
         "author": {
           "name": "Mario Rodriguez",
           "email": "54407177+marioRodriguez6@users.noreply.github.com",
-          "time": 1794527464000
+          "time": 1794531559000
         },
         "committer": {
-          "name": "Mario Rodriguez",
-          "email": "54407177+marioRodriguez6@users.noreply.github.com",
-          "time": 1794527464000
+          "name": "GitHub",
+          "email": "noreply@github.com",
+          "time": 1794531559000
         },
         "branch": "master"
       },
@@ -50,24 +50,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-            "commitHash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43332618484"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/ded5be55812a446986d3382596735bf02a2edf8e",
+            "commitHash": "ded5be55812a446986d3382596735bf02a2edf8e",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341399681"
           },
           "gitCommit": {
-            "shortHash": "f4b0a17",
-            "hash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-            "subject": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
-            "body": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+            "shortHash": "ded5be5",
+            "hash": "ded5be55812a446986d3382596735bf02a2edf8e",
+            "subject": "Add files via upload",
+            "body": "Add files via upload",
             "author": {
               "name": "Mario Rodriguez",
               "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794527464000
+              "time": 1794531559000
             },
             "committer": {
-              "name": "Mario Rodriguez",
-              "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794527464000
+              "name": "GitHub",
+              "email": "noreply@github.com",
+              "time": 1794531559000
             },
             "branch": "master"
           },
@@ -93,24 +93,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-            "commitHash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43332618484"
+            "commitHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/commit/ded5be55812a446986d3382596735bf02a2edf8e",
+            "commitHash": "ded5be55812a446986d3382596735bf02a2edf8e",
+            "buildHref": "https://github.com/marioRodriguez6/QA-engineer-technical-test/actions/runs/43341399681"
           },
           "gitCommit": {
-            "shortHash": "f4b0a17",
-            "hash": "f4b0a17a6cedb20ebb1e162e5846f1de6b56bb03",
-            "subject": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
-            "body": "ci: publicar resultados de todos los ejercicios y manifiesto por ejecución [skip ci]",
+            "shortHash": "ded5be5",
+            "hash": "ded5be55812a446986d3382596735bf02a2edf8e",
+            "subject": "Add files via upload",
+            "body": "Add files via upload",
             "author": {
               "name": "Mario Rodriguez",
               "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794527464000
+              "time": 1794531559000
             },
             "committer": {
-              "name": "Mario Rodriguez",
-              "email": "54407177+marioRodriguez6@users.noreply.github.com",
-              "time": 1794527464000
+              "name": "GitHub",
+              "email": "noreply@github.com",
+              "time": 1794531559000
             },
             "branch": "master"
           },
@@ -219,12 +219,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 318,
+                      "duration": 301,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:54:06.210Z",
+                      "startTime": "2026-11-13T00:59:49.807Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -236,6 +236,11 @@
                         }
                       ],
                       "attachments": [
+                        {
+                          "name": "API bonus evidence",
+                          "contentType": "application/json",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-d7a01-rify-API-operational-status-chromium/attachments/API-bonus-evidence-342b802960743ab40ee6b1585fd4f8e4b3cd3ae9.json"
+                        },
                         {
                           "name": "trace",
                           "contentType": "application/zip",
@@ -277,12 +282,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 769,
+                      "duration": 386,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:54:06.586Z",
+                      "startTime": "2026-11-13T00:59:50.151Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -294,6 +299,11 @@
                         }
                       ],
                       "attachments": [
+                        {
+                          "name": "API bonus evidence",
+                          "contentType": "application/json",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-2621a-API-002-Register-a-new-user-chromium/attachments/API-bonus-evidence-381a1aaa5bdfed1c0617f608b3f220e296c597ce.json"
+                        },
                         {
                           "name": "trace",
                           "contentType": "application/zip",
@@ -335,12 +345,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 344,
+                      "duration": 374,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:54:07.385Z",
+                      "startTime": "2026-11-13T00:59:50.552Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -352,6 +362,11 @@
                         }
                       ],
                       "attachments": [
+                        {
+                          "name": "API bonus evidence",
+                          "contentType": "application/json",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-44801-ogin-with-valid-credentials-chromium/attachments/API-bonus-evidence-e40ca418ec3a92120b4de9079c96e003fc2f449b.json"
+                        },
                         {
                           "name": "trace",
                           "contentType": "application/zip",
@@ -393,12 +408,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 333,
+                      "duration": 350,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:54:07.748Z",
+                      "startTime": "2026-11-13T00:59:50.937Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -410,6 +425,11 @@
                         }
                       ],
                       "attachments": [
+                        {
+                          "name": "API bonus evidence",
+                          "contentType": "application/json",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-22eb1-in-with-invalid-credentials-chromium/attachments/API-bonus-evidence-9924e10884e40d9856c2efcd80909afd6057c02f.json"
+                        },
                         {
                           "name": "trace",
                           "contentType": "application/zip",
@@ -451,12 +471,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 254,
+                      "duration": 370,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:54:08.100Z",
+                      "startTime": "2026-11-13T00:59:51.297Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -468,6 +488,11 @@
                         }
                       ],
                       "attachments": [
+                        {
+                          "name": "API bonus evidence",
+                          "contentType": "application/json",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-bdf16-I-005-Create-the-first-goal-chromium/attachments/API-bonus-evidence-3c3cb967e3b77f65f6a452cb82bc5fa10cc283b3.json"
+                        },
                         {
                           "name": "trace",
                           "contentType": "application/zip",
@@ -509,12 +534,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 248,
+                      "duration": 242,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:54:08.371Z",
+                      "startTime": "2026-11-13T00:59:51.678Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -526,6 +551,11 @@
                         }
                       ],
                       "attachments": [
+                        {
+                          "name": "API bonus evidence",
+                          "contentType": "application/json",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-07d6a-nd-goal-with-a-different-ID-chromium/attachments/API-bonus-evidence-c5b17f0e91e55adb310559e7fbe4d7040994eb6a.json"
+                        },
                         {
                           "name": "trace",
                           "contentType": "application/zip",
@@ -567,12 +597,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 269,
+                      "duration": 262,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:54:08.637Z",
+                      "startTime": "2026-11-13T00:59:51.928Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -584,6 +614,11 @@
                         }
                       ],
                       "attachments": [
+                        {
+                          "name": "API bonus evidence",
+                          "contentType": "application/json",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-b0782-trieve-the-first-goal-by-ID-chromium/attachments/API-bonus-evidence-14423ea555124a00202053115c8f9bc6079b894b.json"
+                        },
                         {
                           "name": "trace",
                           "contentType": "application/zip",
@@ -625,12 +660,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 233,
+                      "duration": 232,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:54:08.921Z",
+                      "startTime": "2026-11-13T00:59:52.198Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -642,6 +677,11 @@
                         }
                       ],
                       "attachments": [
+                        {
+                          "name": "API bonus evidence",
+                          "contentType": "application/json",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-4d0bb-rieve-the-second-goal-by-ID-chromium/attachments/API-bonus-evidence-c75279644c42b7dd82c31dc12417f2ce5498f19c.json"
+                        },
                         {
                           "name": "trace",
                           "contentType": "application/zip",
@@ -683,12 +723,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 255,
+                      "duration": 236,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:54:09.170Z",
+                      "startTime": "2026-11-13T00:59:52.440Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -700,6 +740,11 @@
                         }
                       ],
                       "attachments": [
+                        {
+                          "name": "API bonus evidence",
+                          "contentType": "application/json",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-16379-plete-list-of-created-goals-chromium/attachments/API-bonus-evidence-2cc7e56d71108b5ebbe8e8208da1676a0b45134a.json"
+                        },
                         {
                           "name": "trace",
                           "contentType": "application/zip",
@@ -741,12 +786,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 261,
+                      "duration": 274,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:54:09.441Z",
+                      "startTime": "2026-11-13T00:59:52.684Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -758,6 +803,11 @@
                         }
                       ],
                       "attachments": [
+                        {
+                          "name": "API bonus evidence",
+                          "contentType": "application/json",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-7706e-I-010-Delete-the-first-goal-chromium/attachments/API-bonus-evidence-66a0a1dc7fdd0f3b096a1bbb90b92901c88c8368.json"
+                        },
                         {
                           "name": "trace",
                           "contentType": "application/zip",
@@ -799,12 +849,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 533,
+                      "duration": 552,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-11-12T23:54:09.716Z",
+                      "startTime": "2026-11-13T00:59:52.966Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -816,6 +866,11 @@
                         }
                       ],
                       "attachments": [
+                        {
+                          "name": "API bonus evidence",
+                          "contentType": "application/json",
+                          "path": "/home/runner/work/QA-engineer-technical-test/QA-engineer-technical-test/output/exercise2API-Reports/test-results/exercise-2-api-testing-tes-5a4df-ed-goal-cannot-be-retrieved-chromium/attachments/API-bonus-evidence-a98a6722f3a0658c66f5a07009e62953c870127a.json"
+                        },
                         {
                           "name": "trace",
                           "contentType": "application/zip",
@@ -839,8 +894,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-12T23:54:05.631Z",
-    "duration": 4654.329,
+    "startTime": "2026-11-13T00:59:49.441Z",
+    "duration": 4100.609,
     "expected": 11,
     "skipped": 0,
     "unexpected": 0,

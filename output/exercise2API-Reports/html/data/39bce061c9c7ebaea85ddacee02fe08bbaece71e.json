@@ -1,0 +1,74 @@
+{
+  "scope": "api",
+  "id": "API-004",
+  "records": [
+    {
+      "input": {
+        "scope": "api",
+        "id": "API-004",
+        "responseRole": "api-data",
+        "facts": [
+          {
+            "field": "http.status",
+            "expected": 401,
+            "actual": 401,
+            "source": "Goal Tracker API contract and test case"
+          },
+          {
+            "field": "error.msg",
+            "expected": "Invalid Credentials",
+            "actual": "Invalid Credentials",
+            "source": "negative login contract"
+          }
+        ],
+        "contextChecks": [],
+        "toolCalls": [
+          {
+            "toolName": "HTTP POST /api/v1/auth/login",
+            "allowed": true,
+            "argumentsValid": true,
+            "scopeAuthorized": true,
+            "executionStatus": "COMPLETED"
+          }
+        ]
+      },
+      "analysis": {
+        "observedToolCalls": 1,
+        "toolTraceKind": "HTTP_ACTION",
+        "schemaVersion": 1,
+        "scope": "api",
+        "id": "API-004",
+        "method": "bounded-evidence-rules",
+        "categories": {
+          "hallucination": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": null
+          },
+          "promptInjection": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "Una respuesta REST con datos no ejecuta instrucciones de un asistente."
+          },
+          "toxicity": {
+            "status": "NOT_APPLICABLE",
+            "findings": [],
+            "reason": "Los datos almacenados por el usuario no se atribuyen como discurso del asistente."
+          },
+          "contextLoss": {
+            "status": "NOT_EVALUATED",
+            "findings": [],
+            "reason": "No hay evidencia suficiente para este detector."
+          },
+          "toolCalling": {
+            "status": "CLEAR",
+            "findings": [],
+            "reason": "Se auditan llamadas instrumentadas, argumentos, alcance y resultado."
+          }
+        },
+        "findings": [],
+        "limitations": "Solo se evalúan contratos, hechos y patrones explícitos disponibles. CLEAR se limita a esas reglas; ausencia de evidencia no equivale a ausencia de defectos."
+      }
+    }
+  ]
+}
