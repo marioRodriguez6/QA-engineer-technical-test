@@ -1,4 +1,5 @@
 import { detectBonus } from './detectors/bonus.mjs';
+import { reconcileLlmTurn, summarizeCoverage } from './detectors/coverage.mjs';
 import { validateDetectors } from './detectors/validation.mjs';
 import { existsSync, readdirSync, readFileSync, mkdirSync, writeFileSync, appendFileSync } from 'node:fs';
 import { resolve, join, relative, basename } from 'node:path';
@@ -39,6 +40,7 @@ export function buildReport(inputRoot, metadata = {}) {
   const units = [];
   const validTurns = [];
   const bonusRecords = [];
+  const assessmentRecords = [];
   const timing = { llmAssistantMs: [], llmEvaluatorMs: [], apiTestMs: [], docsTestMs: [], homepageTestMs: [], docsResponseMs: [], homepageResponseMs: [] };
   const llmRows = [];
   const scenarioReports = [];
@@ -105,7 +107,12 @@ export function buildReport(inputRoot, metadata = {}) {
       if (Array.isArray(data.errores_detectados)) findings.push(...data.errores_detectados.map(String));
       if (data.infrastructure_failure?.message) findings.push(String(data.infrastructure_failure.message));
       validTurns.push(...evaluations.map(e => ({ scenario: id, ...e, bonusFindings: turns.find(t=>t.evaluation===e)?.bonusAnalysis?.findings.length ?? 0 })));
-      for (const turn of turns) if (turn.bonusAnalysis) bonusRecords.push(turn.bonusAnalysis);
+      for (const turn of turns) {
+        if (!turn || !Number.isInteger(turn.turn) || turn.turn < 1 || turn.turn > 6) continue;
+        if (turn.bonusAnalysis) bonusRecords.push(turn.bonusAnalysis);
+        assessmentRecords.push(reconcileLlmTurn({ scenarioId: id, turn,
+          history: (data.turnos ?? []).slice(0, turn.turn * 2), judgmentValid: status !== 'ERROR' && evaluations.includes(turn.evaluation) }));
+      }
       for (const turn of turns) {
         if (!turn || typeof turn !== 'object') continue;
         if (numeric(turn.timing?.assistantResponseMs)) timing.llmAssistantMs.push(turn.timing.assistantResponseMs);
@@ -189,22 +196,24 @@ export function buildReport(inputRoot, metadata = {}) {
   const httpActions = bonusRecords.filter(r=>r.scope==='api').reduce((n,r)=>n+(r.observedToolCalls ?? 0),0);
   const eligibleBonusRecords = bonusRecords.filter(r=>Object.values(r.categories).some(c=>['CLEAR','DETECTED'].includes(c.status)));
   const toolCalls = scenarioReports.flatMap(s => s.turnEvaluations ?? []).flatMap(t => t.toolTrace ?? []);
-  const transverse = ['llm',...Object.keys(inventories)].map(scope => ({ scope, records: bonusRecords.filter(r=>r.scope===scope).length, categories: Object.fromEntries(['hallucination','promptInjection','toxicity','contextLoss','toolCalling'].map(c => { const entries=bonusRecords.filter(r=>r.scope===scope).map(r=>r.categories[c]).filter(Boolean); return [c,{ evaluated:entries.filter(e=>['CLEAR','DETECTED'].includes(e.status)).length,detected:entries.filter(e=>e.status==='DETECTED').length,review:entries.filter(e=>e.status==='REVIEW').length,notApplicable:entries.filter(e=>e.status==='NOT_APPLICABLE').length,unavailable:entries.filter(e=>e.status==='NOT_EVALUATED').length }]; })) }));
-  const injections = validTurns.filter(e => e.scenario === 'prompt-injection');
+  const rulesTransverse = summarizeCoverage(bonusRecords);
+  const transverse = summarizeCoverage([...assessmentRecords, ...bonusRecords.filter(r => r.scope !== 'llm')]);
+  const injections = assessmentRecords.filter(r => r.attackIdentified && r.judgmentAvailable);
+  const disagreements = assessmentRecords.flatMap(r => Object.entries(r.categories).filter(([, c]) => c.disagreement).map(([category, c]) => ({ id: r.id, category, judgment: c.judgment, rule: c.rule })));
   const scoreDeviations = validTurns.filter(e => e.contextRetentionScore < 100);
   const bonus = {
     hallucinations: { evaluatedTurns: validTurns.length, detectedTurns: validTurns.filter(e => e.hallucinationDetected || e.hallucinationType !== 'none').length,
       demonstrablyFalse: validTurns.filter(e => e.hallucinationType === 'demonstrably_false').length,
       unsupported: validTurns.filter(e => e.hallucinationType === 'unsupported').length },
-    promptInjection: { evaluatedScenarioTurns: injections.length, securityFailures: injections.filter(e => e.securityIssueDetected).length,
-      limitation: 'Cuenta fallas de seguridad en el escenario de inyección, incluido su primer turno benigno; no es una tasa de éxito por ataque.' },
+    promptInjection: { evaluatedScenarioTurns: validTurns.filter(e => e.scenario === 'prompt-injection').length, identifiedAttacks: assessmentRecords.filter(r => r.attackIdentified).length, evaluatedAttacks: injections.length, securityFailures: injections.filter(r => r.categories.promptInjection.judgment?.status === 'DETECTED').length,
+      limitation: 'Se cuentan ataques identificados en el mensaje, con juicio válido; los turnos benignos se excluyen del denominador de ataques.' },
     toxicity: { evaluatedTurns: validTurns.length, detectedTurns: validTurns.filter(e => e.toxicityDetected).length },
     context: { materialContextFailures: validTurns.filter(e => e.contextIssueDetected === true).length, explicitDetectorCoverage: validTurns.filter(e => typeof e.contextIssueDetected === 'boolean').length, evaluatedTurns: validTurns.length, meanScore: mean(validTurns.map(e => e.contextRetentionScore)), scoreDeviations: scoreDeviations.length,
       limitation: 'Una puntuación menor de 100 es una señal de revisión, no un defecto de contexto confirmado automáticamente. Se conservan los análisis y errores del juez por turno.' },
     toolCalling: { implementation: 'AVAILABLE', status: toolRecords.some(r=>['CLEAR','DETECTED'].includes(r.status)) ? 'EVALUATED' : 'NO_TRACE', evaluatedCalls: toolCalls.length, httpActionsEvaluated: httpActions,
       detectedErrors: toolRecords.some(r=>['CLEAR','DETECTED'].includes(r.status)) ? toolRecords.reduce((n,r)=>n+r.findings.length,0) : null, limitation: 'Se auditan trazas instrumentadas. Las llamadas HTTP de API se identifican por separado; las herramientas internas de Botpress no son observables desde la UI.' },
-    transverse, records: bonusRecords, detectorValidation: validateDetectors(),
-    apiAndUi: 'Motor compartido de reglas acotadas. API: contrato HTTP e integridad, no conversación LLM. Chatbot: texto/historial visibles y sondas; el backend cerrado no expone tool calls. Sin hechos de referencia o trazas se informa NOT_EVALUATED/NOT_APPLICABLE.',
+    transverse, rulesTransverse, assessments: assessmentRecords, disagreements, records: bonusRecords, detectorValidation: validateDetectors(),
+    apiAndUi: 'LLM: juicios válidos con historial y reglas complementarias, con fuentes y discrepancias separadas. API: contratos HTTP e integridad. Chatbot: reglas sobre texto e historial visibles; las herramientas internas de Botpress no son observables desde la UI.',
     calibration: 'Se agregan los juicios LLM existentes sin nuevas llamadas a proveedores. Estas métricas no demuestran la sensibilidad ni la tasa de falsos positivos del detector.',
   };
   const jobs = Object.fromEntries(Object.entries(metadata.needs ?? {}).map(([name, job]) => [name, job.result]));
@@ -263,7 +272,7 @@ export function renderMarkdown(r) {
       ['Juicios LLM disponibles', `${m.validEvaluations}/30 (${value(m.llmEvaluationCoveragePercent, '%')})`],
       ['Turnos LLM con hallazgos (juez o bonus, incluye REVIEW)', `${m.flaggedTurns}/${m.validEvaluations} (${value(m.flaggedTurnRatePercent, '%')})`],
       ['Turnos señalados por los cuatro detectores semánticos del juez', `${m.detectorFlaggedTurns ?? 'N/A'}/${m.validEvaluations} (${value(m.detectorFlaggedTurnRatePercent, '%')})`],
-      ['Registros bonus con hallazgos / registros evaluables', `${m.bonusDetectedRecords ?? 'N/A'}/${m.bonusRecords ?? 'N/A'} (${value(m.bonusFindingRecordRatePercent, '%')})`],
+      ['Registros de reglas auxiliares con hallazgos / evaluables', `${m.bonusDetectedRecords ?? 'N/A'}/${m.bonusRecords ?? 'N/A'} (${value(m.bonusFindingRecordRatePercent, '%')})`],
       ['Promedio de coherencia / contexto / utilidad', `${value(m.meanCoherence)} / ${value(m.meanContext)} / ${value(m.meanUsefulness)} sobre 100`],
       ['Resolución de la necesidad del usuario', `${m.resolution.resolved} resueltas · ${m.resolution.partial} parciales · ${m.resolution.unresolved} sin resolver · ${m.resolution.notApplicable} no aplican · ${m.resolution.unknown} desconocidas`],
     ]), '',
@@ -311,15 +320,22 @@ export function renderMarkdown(r) {
     '## Detección automática · Cobertura entre ejercicios', '',
     table(['Detector', 'Evidencia LLM', 'Cobertura API / chatbot'], [
       ['Alucinaciones', `${r.bonus.hallucinations.detectedTurns}/${m.validEvaluations} señaladas; ${r.bonus.hallucinations.demonstrablyFalse} falsas, ${r.bonus.hallucinations.unsupported} sin respaldo`, coverage('hallucination')],
-      ['Prompt injection', `${r.bonus.promptInjection.securityFailures} fallas de seguridad / ${r.bonus.promptInjection.evaluatedScenarioTurns} juicios del escenario`, coverage('promptInjection')],
+      ['Prompt injection', `${r.bonus.promptInjection.securityFailures} fallas de seguridad / ${r.bonus.promptInjection.evaluatedAttacks ?? 'N/A'} ataques con juicio válido`, coverage('promptInjection')],
       ['Respuestas tóxicas', `${r.bonus.toxicity.detectedTurns}/${m.validEvaluations} señaladas`, coverage('toxicity')],
       ['Pérdida de contexto / contexto irrelevante', `${r.bonus.context.materialContextFailures} señales explícitas / ${r.bonus.context.explicitDetectorCoverage} juicios explícitos`, coverage('contextLoss')],
       ['Uso incorrecto de herramientas (tool calling)', `${r.bonus.toolCalling.status} · ${r.bonus.toolCalling.evaluatedCalls} llamadas LLM · ${r.bonus.toolCalling.httpActionsEvaluated ?? 'N/A'} acciones HTTP · ${r.bonus.toolCalling.detectedErrors ?? 'N/A'} hallazgos instrumentados totales`, 'Contrato de acciones HTTP; trazas internas de Botpress no observables'],
     ]), '',
-    'Cero señales significa que no se registraron, no que se demostró su ausencia. El conteo de prompt injection incluye el turno inicial benigno. Una puntuación de contexto menor de 100 no confirma por sí sola un defecto. Las herramientas de consulta del LLM y las acciones HTTP se instrumentan. No se infieren herramientas internas del bot externo. Cada detector declara la cobertura realmente disponible.', '',
+    'Cero señales significa que no se registraron, no que se demostró su ausencia. El denominador de prompt injection incluye solo ataques identificados con juicio válido. Una puntuación de contexto menor de 100 no confirma por sí sola un defecto. Las herramientas de consulta del LLM y las acciones HTTP se instrumentan. No se infieren herramientas internas del bot externo. Cada detector declara la cobertura realmente disponible.', '',
     'En API, la comparación factual corresponde al contrato y a la integridad de sus datos; no se atribuye al servicio una conversación LLM. Los controles de reglas no se incluyen en las métricas de ejecución real.', '',
     'Se agregan los juicios existentes sin nuevas llamadas al proveedor. Estas métricas no demuestran por sí solas la sensibilidad ni la tasa de falsos positivos del evaluador.', '',
-    ...(r.bonus.transverse ? ['### Cobertura de reglas acotadas por ejercicio', '', table(['Ámbito','Registros','Detector','Evaluados','Detectados','REVIEW','No aplica','Sin referencia/traza'],r.bonus.transverse.flatMap(s=>Object.entries(s.categories).map(([name,c])=>[s.scope,s.records,name,c.evaluated,c.detected,c.review,c.notApplicable,c.unavailable]))), ''] : []),
+    ...(r.bonus.transverse ? ['### Cobertura de evaluación por ejercicio', '',
+      'En LLM se reutilizan los juicios válidos con historial acumulado y las comprobaciones adicionales. Un extractor sin coincidencia no invalida un juicio disponible. Las fuentes pueden coincidir en un mismo turno y no se suman como evaluaciones distintas. Los veredictos originales se conservan.', '',
+      table(['Ámbito','Registros','Detector','Evaluados','Detectados','REVIEW','No aplica','Sin evaluación','Juez','Reglas','Discrepancias'],r.bonus.transverse.flatMap(s=>Object.entries(s.categories).map(([name,c])=>[s.scope,s.records,name,c.evaluated,c.detected,c.review,c.notApplicable,c.unavailable,c.judgeEvaluated ?? 0,c.rulesEvaluated ?? 0,c.disagreements ?? 0]))), ''] : []),
+    ...(r.bonus.rulesTransverse ? details('Cobertura independiente de las reglas auxiliares', [
+      'Esta tabla solo describe extractores y reglas; sus omisiones no indican que falte la evaluación del juez.', '',
+      table(['Ámbito','Registros','Detector','Evaluados','Detectados','REVIEW','No aplica','Sin referencia/traza'],r.bonus.rulesTransverse.flatMap(s=>Object.entries(s.categories).map(([name,c])=>[s.scope,s.records,name,c.evaluated,c.detected,c.review,c.notApplicable,c.unavailable]))),
+    ]) : []),
+    ...((r.bonus.disagreements ?? []).length ? details('Discrepancias entre juez y reglas', (r.bonus.disagreements ?? []).map(d => `- **${safe(d.id)} · ${safe(d.category)}:** juez ${safe(d.judgment.status)}, regla ${safe(d.rule.status)}. Evidencia: ${safe(JSON.stringify(d))}`)) : []),
     ...(r.bonus.detectorValidation ? ['### Controles de validación del motor bonus', '', `${r.bonus.detectorValidation.cases} controles fijos; ${r.bonus.detectorValidation.mismatches} discrepancias. Incluyen casos positivos y negativos. No son conversaciones reales ni calibración del juez LLM.`, ''] : []),
     ...((r.bonus.records ?? []).some(record=>record.findings?.length) ? details('Evidencia de los hallazgos bonus', (r.bonus.records ?? []).flatMap(record=>(record.findings ?? []).map(f=>`- **${safe(record.scope)}/${safe(record.id)} · ${safe(f.category)} · ${safe(f.code)}:** ${safe(f.explanation)} Evidencia: ${safe(JSON.stringify(f.evidence))}`))) : []),
     '## Brechas de evidencia y seguimiento', '',

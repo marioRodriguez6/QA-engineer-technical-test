@@ -604,7 +604,7 @@ Se utiliza un commit `[skip ci]`, push normal y controles por número de ejecuci
 
 ## Bonus de detección y métricas globales
 
-La tasa global de turnos LLM con hallazgos cuenta una vez cada turno con juicio válido y `errors` no vacío, `FAIL`, `REVIEW`, señal semántica o hallazgo bonus. Incluye coherencia y utilidad. Otra tasa separada cuenta únicamente los cuatro detectores semánticos originales del juez. La tasa de registros bonus usa su propio denominador y no mezcla controles sintéticos con conversaciones reales.
+La tasa global de turnos LLM con hallazgos cuenta una vez cada turno con juicio válido y `errors` no vacío, `FAIL`, `REVIEW`, señal semántica o hallazgo bonus. Incluye coherencia y utilidad. Otra tasa separada cuenta únicamente los cuatro detectores semánticos originales del juez. La tasa de registros de reglas auxiliares usa su propio denominador y no mezcla controles sintéticos con conversaciones reales. La cobertura principal del LLM combina juicios válidos y reglas; sus fuentes se conservan por separado y un turno no se cuenta dos veces.
 
 El módulo `exercise-5-consolidated-report/detectors/` implementa reglas acotadas de hechos contra referencias explícitas, resistencia a inyección, insultos directos, contexto contra historial y uso incorrecto de herramientas. Cada hallazgo conserva código, evidencia y explicación. Los controles fijos positivos/negativos se ejecutan sin proveedores y se incluyen en el consolidado y en `detector-validation.json` de cada snapshot elegible; no calibran el juez LLM ni demuestran precisión semántica universal.
 
@@ -628,3 +628,14 @@ npm run test:bonus
 ```
 
 Los archivos de bonus viajan en los artefactos de cada suite, se consolidan sin nuevas llamadas al proveedor y se publican con el resto de `/output`. Las evidencias anteriores sin esos campos siguen identificadas como anteriores; no se les inventan herramientas o sondas retrospectivamente.
+
+
+### Cobertura del juez y comprobaciones auxiliares
+
+El consolidado reutiliza los juicios válidos existentes para alucinación, contexto y toxicidad. Cada juicio considera el historial acumulado hasta ese turno; el resultado del escenario conserva los seis intercambios y sus seis juicios. Una necesidad `partial` o `unresolved` es una conclusión evaluada y no se transforma en `unknown` por el mero hecho de que terminen los seis turnos.
+
+`bonus.transverse` presenta la cobertura conjunta, con conteos por fuente (`judgeEvaluated`, `rulesEvaluated`) y discrepancias. `bonus.assessments` guarda por turno el juicio, la regla, el resultado combinado y la longitud del historial asociado. `bonus.rulesTransverse` y `bonus.records` conservan las comprobaciones auxiliares originales: un `NOT_EVALUATED` en un extractor no borra un juicio disponible. Si cualquiera de los dos mecanismos detecta un problema, se conserva; si difieren, se registra en `bonus.disagreements`. Los juicios y veredictos originales nunca se reescriben. Estas cifras representan cobertura y hallazgos, no precisión demostrada del evaluador.
+
+Prompt injection cuenta únicamente mensajes identificados como ataques con un juicio válido. Los turnos benignos quedan fuera de ese denominador. Las evaluaciones ausentes, inválidas o no concluyentes permanecen visibles; no se convierten en éxitos. Los reportes históricos sin bandera explícita de contexto no obtienen una evaluación de contexto inventada a partir de una puntuación.
+
+API y chatbot conservan sus comprobaciones instrumentadas. No se atribuyen juicios LLM a respuestas externas que no los tienen. Las herramientas internas de Botpress siguen sin ser observables desde la UI; la ausencia de trazas no prueba su uso correcto. Esta consolidación no hace nuevas llamadas a proveedores.
