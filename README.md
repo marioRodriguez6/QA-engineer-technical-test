@@ -73,7 +73,7 @@ ANTHROPIC_API_KEY=your_private_key
 
 Para combinar proveedores, cambia el par de variables del rol correspondiente y agrega su clave. Por ejemplo, puedes conservar usuario/asistente en Anthropic y configurar el juez con `EVALUATOR_PROVIDER=groq`, `EVALUATOR_MODEL=openai/gpt-oss-20b` y `GROQ_API_KEY`.
 
-Solo se utilizan las claves de los proveedores seleccionados. Los roles que comparten proveedor comparten la cuota de esa cuenta. No hay cambio automático a otro proveedor si se agota. No publiques `.env` ni claves reales. Un proveedor fuera de los cinco admitidos requiere implementar su adaptador.
+Solo se utilizan las claves de los proveedores seleccionados. Los roles que comparten proveedor comparten la cuota de esa cuenta. No hay cambio automático a otro proveedor si se agota. Un proveedor fuera de los cinco admitidos requiere implementar su adaptador.
 
 ### Ejecución
 
